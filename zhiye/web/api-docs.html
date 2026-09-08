@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>知野 · API 契约</title><style>
+body{margin:0;background:#f3f1e6;color:#203f42;font:15px/1.8 system-ui,sans-serif}main{max-width:1050px;margin:60px auto;padding:0 25px}h1{font:38px serif}a{color:#426f62}section{margin:16px 0;border:1px solid #ced8c5;padding:18px 22px;border-radius:8px}summary{cursor:pointer;overflow-wrap:anywhere}b{display:inline-block;min-width:70px;color:#51795a}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#e6eadf;padding:18px;border-radius:6px;font:12px/1.8 monospace}.note{color:#6c7f72;font-size:13px}h2{font:25px serif}
+</style></head><body><main><a href="/">← 返回知野</a><h1>知野 · API 契约</h1><p class="note">从本应用 OpenAPI 自动读取，无外部 CDN。不在此页面执行写入或展示密钥。公开与私有数据的访问仍由服务端校验。</p><p><a href="/api/openapi.json">查看原始 OpenAPI JSON</a></p><div id="routes">正在读取契约…</div><h2>数据模型</h2><div id="models"></div></main><script>
+function node(tag,text){const e=document.createElement(tag);if(text!==undefined)e.textContent=text;return e;}
+fetch('/api/openapi.json').then(r=>{if(!r.ok)throw Error('契约加载失败');return r.json();}).then(data=>{
+const root=document.querySelector('#routes');root.replaceChildren();
+for(const [path,methods] of Object.entries(data.paths||{}))for(const [method,spec]of Object.entries(methods)){
+if(!['get','put','post','delete','patch','head','options'].includes(method))continue;
+const section=node('section'),details=node('details'),summary=node('summary');summary.append(node('b',method.toUpperCase()),document.createTextNode(path+' — '+(spec.summary||'')));details.append(summary,node('pre',JSON.stringify(spec,null,2)));section.append(details);root.append(section);}
+const models=document.querySelector('#models');for(const[name,schema]of Object.entries(data.components?.schemas||{})){const section=node('section'),details=node('details');details.append(node('summary',name),node('pre',JSON.stringify(schema,null,2)));section.append(details);models.append(section);}
+}).catch(e=>document.querySelector('#routes').textContent=e.message);
+</script></body></html>

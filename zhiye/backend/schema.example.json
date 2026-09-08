@@ -1,0 +1,8 @@
+{
+  "_notice": "这是映射格式示例，不是已核验的官方 beta 响应；以下载到的官方 Skill 为准。删除不存在的路径。",
+  "items": "Data.Items",
+  "title": "Title",
+  "url": "Url",
+  "summary": "Summary",
+  "author": "Author.Name"
+}

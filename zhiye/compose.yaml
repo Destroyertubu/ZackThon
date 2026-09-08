@@ -1,0 +1,15 @@
+services:
+  zhiye:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    env_file: .env
+    environment:
+      ZHIYE_DB: /app/data/zhiye.sqlite3
+    volumes:
+      - zhiye-data:/app/data
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+volumes:
+  zhiye-data:

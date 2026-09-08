@@ -1,0 +1,22 @@
+{
+  "name": "zhiye-knowledge-world",
+  "version": "1.0.0",
+  "private": true,
+  "description": "知野 · 问题生成世界，探索留下心路。",
+  "type": "module",
+  "scripts": {
+    "start": "python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000",
+    "test": "node --test tests/core.test.mjs",
+    "check": "node scripts/check.mjs",
+    "preview:bundle": "node scripts/bundle-preview.cjs"
+  },
+  "dependencies": {
+    "three": "0.180.0"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "devDependencies": {
+    "typescript": "5.8.3"
+  }
+}
