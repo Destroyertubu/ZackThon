@@ -1,3 +1,5 @@
+name: zhiye
+
 services:
   zhiye:
     build: .
