@@ -29,7 +29,7 @@
 ### macOS / Linux
 
 ```bash
-cd zhiye
+cd 漫知录
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
@@ -46,7 +46,7 @@ python run.py
 ### Windows PowerShell
 
 ```powershell
-cd zhiye
+cd 漫知录
 py -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 Copy-Item .env.example .env
@@ -97,7 +97,7 @@ docker compose up --build
 ## 3. 项目结构
 
 ```text
-zhiye/
+漫知录/
 ├── README.md
 ├── run.py                         # 跨平台启动器
 ├── package.json                   # Three.js 0.180.0；浏览器原生 ESM
