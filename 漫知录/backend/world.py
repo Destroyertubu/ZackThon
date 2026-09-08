@@ -6,6 +6,7 @@ an exploration proposal, not an evidence-backed entailment.
 import hashlib
 import math
 import re
+import secrets
 import unicodedata
 
 PALETTE = ['#e5bd83', '#9ec5a9', '#a1c8de', '#d5abc2', '#b4b1de', '#dfac92', '#afd3c3']
@@ -46,6 +47,10 @@ def hash_id(*parts):
 
 def make_world(seed):
     seed = normalized(seed)
+    if not seed:
+        subject=secrets.choice(['热爱','人工智能','旅行','记忆','阅读','星空','音乐','城市','自然','友谊','艺术','科学'])
+        lens=secrets.choice(['好奇心','日常生活','另一个人','未来','一次偶然','童年','时间','一个问题','梦想','勇气'])
+        seed=normalized(f'从{subject}出发，沿着{lens}去发现新的可能')
     themes = AI if re.search(r'AI|人工智能|记忆|大模型|[Aa]gent|[Ll][Ll][Mm]', seed) else LOVE if re.search('热爱|人生|生活|自己|选择|意义', seed) else GENERAL
     root_label = '热爱的形状' if themes is LOVE else '记忆的边界' if themes is AI else '问题的原点'
     wid = hash_id(seed, 'world-v1')
@@ -104,7 +109,11 @@ def public_projection(journey, world, alias):
     """Allowlist only. Never publish private thoughts, fragments or continuous trace."""
     ids = set(journey.get('visited',[]))
     nodes = [dict(id=n['id'],title=n['title'],category=n['category'],x=n['x'],z=n['z'],color=n['color']) for n in world['nodes'] if n['id'] in ids]
-    edges = [dict(source=e['source'],target=e['target'],kind=e['kind']) for e in world['edges'] if e['source'] in ids and e['target'] in ids]
+    valid={n['id'] for n in nodes}
+    kinds={(e['source'],e['target']):e['kind'] for e in world['edges']}
+    visited=[nid for nid in journey.get('visited',[]) if nid in valid]
+    pairs=dict.fromkeys((a,b) for a,b in zip(visited,visited[1:]) if a!=b)
+    edges=[dict(source=a,target=b,kind=kinds.get((a,b),'walk')) for a,b in pairs]
     return dict(alias=alias,seed=world['seed'],nodes=nodes,edges=edges,visitedCount=len(nodes))
 
 
@@ -118,3 +127,37 @@ def similarity(a, b):
         return len(x&y)/len(x|y) if x|y else 0.
     common = sorted(labels(a)&labels(b))
     return round(.65*jaccard(labels(a),labels(b))+.35*jaccard(edge_labels(a),edge_labels(b)),4), common
+
+
+def aggregate_trails(projections):
+    """Count each public route once per topic or directed edge, using only its allowlist."""
+    nodes,edges={},{}
+    for projection in projections:
+        labels={n['id']:normalized(n['title']) for n in projection.get('nodes',[])}
+        seen=set()
+        for node in projection.get('nodes',[]):
+            title=labels[node['id']]
+            if title in seen: continue
+            seen.add(title)
+            nid=hash_id('trail-topic',title)
+            if nid not in nodes:
+                nodes[nid]=dict(id=nid,title=title,category=node.get('category','话题'),color=node.get('color',PALETTE[0]),x=node.get('x',0),z=node.get('z',0),pathCount=0)
+            nodes[nid]['pathCount']+=1
+        seen=set()
+        for edge in projection.get('edges',[]):
+            source,target=labels.get(edge.get('source')),labels.get(edge.get('target'))
+            if not source or not target or source==target or (source,target) in seen: continue
+            seen.add((source,target))
+            a,b=hash_id('trail-topic',source),hash_id('trail-topic',target)
+            eid=hash_id('trail-edge',a,b)
+            if eid not in edges:
+                edges[eid]=dict(id=eid,source=a,target=b,kind=edge.get('kind','walk'),pathCount=0)
+            edges[eid]['pathCount']+=1
+    # Coordinates from separate worlds can overlap. Lay out the combined graph once.
+    ordered=sorted(nodes.values(),key=lambda n:(-n['pathCount'],n['title']))
+    for i,node in enumerate(ordered):
+        radius=0 if i==0 else 32+20*((i-1)//10)
+        angle=(i-1)*math.tau/max(1,min(10,len(ordered)-1))
+        node.update(x=round(math.sin(angle)*radius,3),z=round(math.cos(angle)*radius,3),heat=node['pathCount'])
+    for edge in edges.values(): edge['heat']=edge['pathCount']
+    return dict(nodes=ordered,edges=sorted(edges.values(),key=lambda e:(-e['pathCount'],e['id'])),pathCount=len(projections))

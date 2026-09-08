@@ -1,30 +1,31 @@
-# 知野 ZHIYE
+# 漫知录 · v1.1.0
 
 > 把问题，走成自己的路。问题是世界的种子；行囊里的知识，应该彼此相遇。
 
-一个可以本地运行的三维知识探索原型。包含前端、后端、数据库、原创程序化场景、双渲染器、知乎搜索适配、存档、知识组合、想法锚点、个人画布、公开路线及同频匹配，以及测试和部署文件。不是仅有界面截图的静态概念稿。
+一个以问题、困惑或话题词为种子的第一人称 3D 词云探索游戏。自由飞行，进入文章场域，收纳观点，留下想法，再把旅程带回精神家园。版本 1.1.0 按更新后的玩法文档实现，沿用 SQLite 存档与真实访客间的公开路线匹配。
 
-![知野实际界面：软件三维兼容模式](previews/01-landing.png)
+![漫知录 · 精神家园](previews/v11/04-home.png)
 
-## 0. 先明确交付边界
+## 0. 当前可玩的功能
 
-| 项目 | 本次交付状态 |
+| 玩法 | 行为 |
 | --- | --- |
-| 三维漫游、问题种子、稳定扩图、阅读卡片、行囊组合、锚点、存档、画布 | 已实现 |
-| 真正的服务器持久化、多访客隔离、公开路线、撤回、真实访客之间的匹配 | 已实现；不是虚构“同频用户”列表 |
-| Three.js 增强渲染器 | 完整源码已提供，依赖固定为 `0.180.0`；本次环境未能下载 npm 依赖，**未实机验证该 GPU 路径** |
-| 软件三维兼容渲染器 | 已实现并完成 Chromium 交互检查；截图均来自此路径 |
-| 知乎真实 HTTP 搜索适配 | 按官方公开文档的 URL、Bearer、秒级时间戳实现；没有真实密钥，**未完成鉴权联调，beta 响应字段仍须对照 Skill 核验** |
-| 官方 Skill ZIP | 本次下载未成功；提供原始地址、安全下载脚本与字段映射方案；不伪称已安装 |
-| 知乎 OAuth、关注流、故事、知识、热榜、直答 Agent | **本版没有接通这些接口**；不伪造端点、成功登录或回答 |
-| 刘看山、外部商用模型、HDRI、字体包 | **未包含**；已提供原创场景及素材台账，没有未经授权的资源 |
-| 部署 | 提供本地运行与 Docker 文件；**没有替你部署线上服务，Docker 构建尚未执行验证** |
+| 自由探索 | WASD 移动，Shift 上升、Ctrl 下降，鼠标视角，滚轮缩放；空白种子可随机出发 |
+| 准星交互 | 话题周围浮现文章片段；左键阅读，E 收纳选中的片段，F 进入文章场域，V 自动追踪话题 |
+| 文章场域 | 按已有文本顺序组织子地图；Q 或返回按钮恢复主世界原位置、视角与缩放，子地图移动不污染主世界存档 |
+| 精神家园 | 思维合成台、同频电话亭、漫行者日志、想法收纳柜；跨旅程归类、搜索、回顾与合成 |
+| 共鸣与评论 | 首次跨用户阅读 +1；每人每锚点最多三次连鸣，支持评论与持久化通知；分发按共鸣排序 |
+| 词云小径 | 我的足迹／同频人足迹／全员热门小径；公开路线叠加数量决定连线亮度与粗细 |
+| 保存与恢复 | 原生 IndexedDB 本地备份、SQLite 服务端存档、乐观版本校验、Markdown/JSON 导出；兼容旧版无高度的存档 |
+| 知乎接入 | `python run.py --live` 使用官方 CLI 的系统凭据；搜索结果写入本地 SQLite，默认不过期，重复查询不消耗额度 |
 
-默认 `demo` 模式只使用本项目原创示例文字，明显标为“原创演示 · 未连接知乎”。切换 `live` 后，真实接口失败会显示错误，不会悄悄用演示文字冒充知乎结果。
+[版本更新记录](CHANGELOG.md) · [本次实现与验证记录](docs/RELEASE_1_1.md) · [实时模式启动](docs/LIVE_START.md)
+
+默认使用明确标记的原创演示内容。实时搜索失败会展示错误，不混入演示数据。文章场域组织的是接口实际返回的文本；搜索摘要不会被标记为全文或逐字金句。公开锚点沿用审核流程，热门路线仅统计主动公开的快照。当前身份仍是浏览器访客；知乎 OAuth、完整关注流、故事/知识 API 尚未接入作品。
 
 ## 1. 快速启动
 
-建议 Python 3.11+；本次后端检查环境为 Python 3.13。Three.js 路径需要 Node.js 20.19+ 或 22；纯软件兼容模式不需要 Node。不要双击 `index.html`：需要通过服务器访问。
+建议 Python 3.11+；本次后端检查环境为 Python 3.12。Three.js 路径需要 Node.js 20.19+；本次检查使用 Node.js 24；纯软件兼容模式不需要 Node。不要双击 `index.html`：需要通过服务器访问。
 
 ### macOS / Linux
 
@@ -33,10 +34,9 @@ cd 漫知录
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
-cp .env.example .env
 
 # 推荐：安装 Three.js，开启增强渲染。外网可用时执行。
-npm install
+npm ci
 
 python run.py
 ```
@@ -49,8 +49,7 @@ python run.py
 cd 漫知录
 py -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
-Copy-Item .env.example .env
-npm install
+npm ci
 .\.venv\Scripts\python.exe run.py
 ```
 
@@ -67,15 +66,15 @@ cp .env.example .env
 docker compose up --build
 ```
 
-默认仅映射到本机回环地址，不会主动暴露到公网。数据库在命名卷 `zhiye-data` 中。构建需要联网安装依赖。正式发布应审计并固定传递依赖锁文件；本包未生成未经安装验证的 `package-lock.json`。
+默认仅映射到本机回环地址，不会主动暴露到公网。数据库在命名卷 `zhiye-data` 中。构建需要联网安装依赖。已提供经本机安装验证的 `package-lock.json`，Docker 使用 `npm ci`；本次未执行 Docker 镜像构建。
 
 ## 2. 怎样完整体验一轮旅程
 
-在首页保留“怎样找到真正热爱的事？”或者填写新问题，点击开始。进入起点后阅读身边的原创演示片段；按 E 收入行囊。沿桥走向“自我认知”等岛屿，停留后出现内容及三个新方向。再收集一张卡。
+在首页填写问题、话题词，或点击“随心出发”。进入世界后，用准星选中浮空内容卡，按 E 收入行囊。自由飞向其他话题，停留后出现内容与新的方向。按 V 可追踪选中的关键词，方向键可取消。
 
 按 B 打开行囊，选中 2–4 张卡，选“互相补充 / 形成分歧 / 跨界类比 / 因果假设”，写至少六个字说明联系，再生成“新问题 / 观点草稿 / 行动实验”。产物不是引用，也不被标为已证实事实；原卡片、来源 ID、联系类型和你的解释全部保留。
 
-按 R 留下想法，默认仅自己可见。按 M 打开画布：金色线记录探索，紫色线连接组合卡的来源话题，虚线表示候选方向。点击话题，再点击“去这里看看”，可以直接抵达，不必强行步行。
+按 F 进入选中文章的场域，按 Q 返回；按 R 留下自己的想法，按 T 阅读同话题锚点并共鸣、评论。按 H 回家，在柜子中归类收获、跨旅程合成，在日志中回顾思考与路线。按 M 切换三种画布视图。
 
 保存旅程后，在“同频的人”中查看公开范围预览，主动勾选确认并公开。用另一个浏览器/隐私窗口创建独立访客，探索并公开一条路线，双方才会进入真实匹配列表。单人使用时列表为空，这是正常行为，不是数据未加载。
 
@@ -83,12 +82,13 @@ docker compose up --build
 
 | 操作 | 方式 |
 | --- | --- |
-| 移动 / 加速 | WASD 或方向键 / Shift |
-| 视角 | 点击场景后锁定鼠标；未锁定时可拖拽 |
-| 释放鼠标 | Tab / Esc |
-| 阅读附近第一张卡 | F；或释放鼠标后点击卡片 |
-| 收纳附近第一张卡 | E |
-| 想法锚点 / 行囊 / 画布 | R / B / M |
+| 移动 / 上升 / 下降 | WASD 或方向键 / Shift / Ctrl |
+| 视角 | 进入探索后鼠标移动即转动视角，无需按住；浏览器允许时自动锁定鼠标 |
+| 释放鼠标 | Tab / Esc；点击场景恢复跟随。打开面板暂停，关闭后恢复 |
+| 阅读准星选中的卡 / 文章场域 | 鼠标左键 / F；Q 返回主世界 |
+| 收纳准星选中的片段 | E |
+| 想法 / 阅读他人想法 / 行囊 / 画布 / 家园 | R / T / B / M / H |
+| 自动追踪 / 缩放 | V / 鼠标滚轮 |
 | 触屏 | 左侧方向按钮、场景拖拽、底部导航；也可以地图直达 |
 | 暂停人物移动 | 打开任意阅读、行囊或设置面板时自动暂停 |
 
@@ -111,14 +111,16 @@ docker compose up --build
 │   ├── content.py                 # 原创示例、知乎 HTTP/CLI 适配、来源清洗
 │   ├── store.py                   # SQLite/WAL、缓存、原子额度预留
 │   ├── config.py / models.py
-│   └── schema.example.json        # 字段映射格式示例，不是已核验的官方契约
+│   └── schema.cli.json            # 已核对的官方 CLI 搜索参数与字段映射
 ├── web/
-│   ├── index.html / style.css
+│   ├── index.html / style.css / home.css
 │   ├── assets/mark.svg            # 原创山形标记
 │   └── js/
 │       ├── app.js                 # 旅程工作流与面板
 │       ├── core.js                # 采样、组合、来源链、导出等纯逻辑
-│       ├── world-view.js          # 第一人称、碰撞、标签、驻留触发
+│       ├── world-view.js          # 自由飞行、准星、文章场域、自动追踪
+│       ├── exploration.js         # 选取、飞行、文本场域的纯逻辑
+│       ├── home.js                # 家园设施、跨旅程收纳与日志
 │       ├── scene-data.js          # 原创几何、植被、桥梁、门环
 │       ├── math.js / graph.js     # 投影、二维个人画布
 │       ├── api.js / ui.js         # 同源 API、本地备份、可访问 UI
@@ -131,15 +133,17 @@ docker compose up --build
 │   ├── check.mjs                  # JavaScript 语法检查
 │   ├── bundle-preview.cjs         # 受限环境测试专用；非生产入口
 │   ├── smoke_http.py              # 独立 Uvicorn + 真实回环 TCP 检查
-│   └── smoke_browser.py           # 受限环境 Chromium + ASGI 交互检查
+│   ├── smoke_browser.py           # 旧版受限环境 Chromium + ASGI 检查
+│   └── smoke_v11.py               # 本版真实 HTTP + 双浏览器身份回归
 ├── tests/
-│   ├── core.test.mjs
+│   ├── core.test.mjs / exploration.test.mjs / home.test.mjs
 │   └── test_backend.py
 ├── docs/
 │   ├── ARCHITECTURE.md
 │   ├── ZHIHU_INTEGRATION.md
 │   ├── THIRD_PARTY_ASSETS.md
-│   └── TEST_REPORT.md
+│   ├── TEST_REPORT.md             # 原始版本历史记录
+│   └── RELEASE_1_1.md / LIVE_START.md
 ├── previews/                      # 实际界面截图与测试结果
 └── data/.gitkeep                   # 运行时自动生成 SQLite 数据库
 ```
@@ -168,31 +172,37 @@ ZHIHU_ACCESS_SECRET=仅在本机或服务器填写
 ZHIYE_PROVIDER=http
 ```
 
-公开文档已经核实搜索请求 URL、`Query`、Bearer 以及秒级 `X-Request-Timestamp`。没有拿到 beta Skill 和真实样本，因此字段映射不视为已经验证。请先运行官方 Skill 下载脚本，再核对 `backend/schema.example.json` 的路径；只在确实需要覆盖字段时配置 `ZHIHU_SCHEMA_FILE`。
+已阅读官方 Skill 0.5.3，并核对搜索请求与响应字段。2026-09-08 使用官方 CLI 完成一次真实搜索：HTTP 200，返回 6 条知乎内容，标题、摘要和来源链接均有效。本机推荐使用已初始化的 CLI 与系统凭据库：
 
 ```bash
-python scripts/fetch_official_skill.py
-# 先核对下载结果与官方说明，设置好 .env，再显式消耗一次真实搜索预算：
-python scripts/probe_zhihu.py --live --query "如何发现自己的兴趣"
+python run.py --live
 ```
 
 不要把真实密钥提交 Git、放进前端变量、发送到截图或输入框。默认所有知乎真实摘要都标成 `search_summary`，不是“逐字金句”。只有拿到许可范围内的正文且验证了对应文本区间，才有条件新增 `exact_quote` 类型；本版不会凭模型生成文本伪造引文。
+
+搜索结果保存在本机 `data/zhiye.sqlite3`，包括标题、摘要、作者、原文链接和抓取时间。默认 `ZHIYE_CACHE_SECONDS=0`，持久保留，不因经过 6 小时或重启而再次调用知乎。相同查询跨访客共享缓存，缓存命中不扣访客或开发者预算；新查询的并发请求会合并。浏览器 IndexedDB 另存当前旅程与已加载内容。需要备份全部已搜索内容时保留整个 `data` 目录；运行中的 SQLite 请使用数据库备份接口，或停止服务后复制目录。
 
 ## 6. 自动化验证
 
 ```bash
 python -m pip install -r requirements-dev.txt
-npm install
+npm ci
 npm test
 npm run check
 python -m pytest -q
 ```
 
-本次结果：**10 项 JS 领域测试、14 项 Python 测试通过**。测试证明的是所列场景，不是全量安全审计或生产验收。
+本次结果：**39 项 JS 测试、29 项 Python 测试通过**。真实 Chrome 分别通过 Three.js WebGL2 和软件三维两条路径，使用真实 HTTP、独立 SQLite、真实 Cookie 与 IndexedDB。覆盖准星采集、上下飞行、滚轮缩放、文章场域返回与存档隔离、合成与家园、双访客共鸣/评论/通知、公开路线热度及刷新恢复；390px 移动布局无水平溢出。
 
-界面检查因环境禁止浏览器访问 localhost/file URL，使用真实 Chromium 渲染前端、FastAPI TestClient 处理 API、内存模拟浏览器存储。软件三维路径实际执行了开始、访问、收集、组合、锚点、画布、保存和移动暂停；详见 [测试报告](docs/TEST_REPORT.md)。另通过了独立 Uvicorn + 真实回环 TCP 接口检查。本次未验证真实 IndexedDB、浏览器网络层部署、Three GPU 材质或官方实时 API。
+```bash
+# 默认查找 macOS Google Chrome；其他系统指定本机浏览器路径。
+python scripts/smoke_v11.py
+MANZHILU_TEST_SOFTWARE=1 python scripts/smoke_v11.py
+python scripts/smoke_mouse_look.py
+# 示例：CHROMIUM_PATH=/usr/bin/chromium python scripts/smoke_v11.py
+```
 
-测试脚本 `smoke_browser.py` 为这个受限环境编写，不是正常产品的入口；正常浏览器验收请启动 `run.py` 后直接访问本机地址。脚本默认 Chromium 位于 `/usr/bin/chromium`，可通过 `CHROMIUM_PATH` 修改。
+测试脚本会创建并清理独立演示数据库，不使用真实知乎额度。结果和截图位于 `previews/v11/` 与 `previews/v11-software/`；详见[本版验证记录](docs/RELEASE_1_1.md)。移动端检查采用桌面浏览器视口模拟，尚未覆盖实体手机和原生触摸输入；未执行压力测试或完整无障碍审计。
 
 ## 7. 隐私与社区边界
 
@@ -208,7 +218,7 @@ python -m pytest -q
 
 本包是可以运行、继续开发和演示的原型，不是未经验证即可大规模公开的成品。
 
-首先完成官方 Skill、真实响应样本、活动授权与知乎 OAuth 接入；再完成同站 HTTPS、Secure Cookie、依赖锁定、日志脱敏、备份恢复演练、审核队列、申诉与内容撤回策略、用户数据保存期限以及隐私告知。
+官方 Skill 与单次真实搜索已完成核验。上线前仍需核对活动授权与知乎 OAuth 接入，并完成同站 HTTPS、Secure Cookie、Python 传递依赖锁定、日志脱敏、备份恢复演练、审核队列、申诉与内容撤回策略、用户数据保存期限以及隐私告知。
 
 多人高并发时，迁移到 PostgreSQL 与 Redis：缓存、全局限额和 distributed singleflight 不能依赖进程内任务表。当前建议仅运行一个 Uvicorn worker。访客每日 80 次是本应用自定预算，不是平台授权凭据；更换访客会话可能规避访客预算，但不能绕过该 SQLite 数据库内的开发者总预算。公网仍需反滥用措施。
 

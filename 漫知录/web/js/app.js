@@ -1,11 +1,14 @@
 import { api, post, put, del, localSave, localLoad, localErase, download } from './api.js';
 import { WorldView } from './world-view.js';
-import { makeJourney, collect, synthesize, exportMarkdown, appendTrace, RELATIONS, validateBackup } from './core.js';
+import { makeJourney, collect, synthesize, exportMarkdown, appendTrace, RELATIONS, validateBackup, restoreCachedContent } from './core.js';
 import { el, button, icon, hydrateIcons, toast, emptyState, sourcePill, formatTime, safeUrl, Soundscape } from './ui.js';
 import { drawMiniMap, makeGraph } from './graph.js';
+import { renderHome } from './home.js';
 const $ = selector => document.querySelector(selector);
-const state = { session: null, world: null, journey: null, content: new Map(), contentInFlight: new Map(), activeId: 'root', selected: new Set(), panel: null, dirty: 0, saved: 0, publicSlug: null, remoteMode: 'demo', booted: false };
+const state = { session: null, world: null, journey: null, content: new Map(), homeCards: new Map(), contentInFlight: new Map(), activeId: 'root', selected: new Set(), panel: null, dirty: 0, saved: 0, publicSlug: null, remoteMode: 'demo', booted: false };
 let worldView, localTimer, savePromise = null, overlayToken = 0, lastFocus = null;
+let panelCleanups = [];
+function disposePanel() { for (const cleanup of panelCleanups.splice(0)) cleanup(); }
 const sounds = new Soundscape();
 const safe = fn => async (...args) => { try {
     return await fn(...args);
@@ -16,39 +19,39 @@ catch (error) {
 } };
 const currentNode = () => state.world?.nodes.find(n => n.id === state.activeId) || state.world?.nodes[0];
 const currentCards = () => state.content.get(state.activeId) || [];
-function snapshot() { return { schema: 1, owner: state.session?.id, world: state.world, journey: state.journey, content: [...state.content.entries()], savedAt: new Date().toISOString() }; }
+function snapshot() { return { schema: 1, owner: state.session?.id, world: state.world, journey: state.journey, content: [...state.content.entries()], contentMode: state.remoteMode, savedAt: new Date().toISOString() }; }
 function cacheLocal(immediate = false) { clearTimeout(localTimer); const write = () => localSave(snapshot()).catch(() => toast('本地存储空间不足，请及时导出旅程。', true)); if (immediate)
     write();
 else
     localTimer = setTimeout(write, 400); }
 function markDirty() { if (!state.journey)
     return; state.dirty++; state.journey.updatedAt = new Date().toISOString(); cacheLocal(); $('#save-label').textContent = '保存旅程'; updateHUD(); }
-async function saveJourney(showToast = false) {
-    if (!state.journey)
+async function saveJourney(showToast = false, target = state.journey) {
+    if (!target)
         return;
-    if (savePromise) {
+    // A late anchor response may belong to an earlier journey. Serialize writes
+    // without changing which journey this call was asked to persist.
+    while (savePromise) {
         await savePromise;
-        if (state.dirty === state.saved)
-            return;
     }
-    const target = state.journey, generation = state.dirty;
-    if (state.world && worldView.mode === 'explore')
+    const current = state.journey === target, generation = current ? state.dirty : null;
+    if (current && state.world && worldView.mode === 'explore' && !worldView.inField)
         target.position = { ...worldView.player };
     const { id, ...payload } = structuredClone(target);
-    $('#save-label').textContent = '保存中…';
+    if (current) $('#save-label').textContent = '保存中…';
     savePromise = put(`/api/journeys/${encodeURIComponent(id)}`, payload).then(result => { target.revision = result.revision; if (state.journey === target) {
         state.saved = generation;
         cacheLocal(true);
-        $('#save-label').textContent = '已保存';
+        $('#save-label').textContent = state.dirty === state.saved ? '已保存' : '保存旅程';
     } if (showToast)
-        toast('旅程已保存，本地备份也已更新。'); }).catch(error => { cacheLocal(true); $('#save-label').textContent = '本地已备份'; throw error; }).finally(() => savePromise = null);
+        toast('旅程已保存，本地备份也已更新。'); }).catch(error => { if (state.journey === target) { cacheLocal(true); $('#save-label').textContent = '本地已备份'; } throw error; }).finally(() => savePromise = null);
     return savePromise;
 }
 function updateHUD() { if (!state.journey || !state.world)
     return; const j = state.journey; $('#bag-count').textContent = j.bag.length; $('#visited-count').textContent = String(new Set(j.visited).size).padStart(2, '0'); $('#journey-stats').textContent = `${new Set(j.visited).size} 个话题 · ${j.bag.length} 件收获 · ${j.thoughts.length} 个想法`; worldView.visited = j.visited; drawMiniMap($('#minimap'), state.world, j); }
-function updateMode() { const live = state.remoteMode === 'live'; $('#mode-badge').textContent = live ? '知乎实时模式 · 以接口返回为准' : '原创演示 · 未连接知乎'; }
+function updateMode() { const live = state.remoteMode === 'live'; $('#mode-badge').textContent = live ? '知乎内容 · 本地优先' : '原创演示 · 未连接知乎'; }
 function enterExploration() { document.body.classList.add('exploring'); $('#intro').hidden = true; $('#explore-hud').hidden = false; $('#world-caption').hidden = true; $('#key-guide').hidden = false; $('#minimap-open').hidden = false; worldView.enter(); $('#hud-title').textContent = currentNode()?.title || '问题的原点'; $('#hud-question').textContent = state.world.seed; updateHUD(); }
-function returnToIntro() { closePanel(); if (state.journey) {
+function returnToIntro() { closePanel(); worldView.exitField?.(); if (state.journey) {
     cacheLocal(true);
     safe(() => saveJourney())();
 } worldView.overview(); document.body.classList.remove('exploring'); $('#intro').hidden = false; $('#explore-hud').hidden = true; $('#nearby').hidden = true; $('#minimap-open').hidden = true; $('#key-guide').hidden = true; $('#world-caption').hidden = false; $('#seed-input').focus(); }
@@ -56,10 +59,13 @@ async function startJourney(seed) {
     const btn = $('#start-btn');
     btn.disabled = true;
     try {
+        worldView.exitField?.();
+        worldView.cancelTracking?.();
         if (state.journey && state.dirty !== state.saved)
             await saveJourney();
         const world = await post('/api/worlds', { seed });
         state.world = world;
+        $('#seed-input').value = world.seed;
         state.journey = makeJourney(world);
         state.publicSlug = null;
         state.content.clear();
@@ -75,19 +81,19 @@ async function startJourney(seed) {
         markDirty();
         await saveJourney();
         await visitNode('root');
-        toast('点击画面锁定视角。Tab 或 Esc 释放鼠标；M 可直接选择目的地。');
+        toast('WASD 漫行，Shift 上升、Ctrl 下降。对准片段按 F，进入文章场域。');
     }
     finally {
         btn.disabled = false;
     }
 }
-async function contentFor(nid) { if (state.content.has(nid))
-    return state.content.get(nid); if (state.contentInFlight.has(nid))
+async function contentFor(nid) { if (state.content.has(nid)) {
+    worldView.setContent?.(nid, state.content.get(nid)); return state.content.get(nid); } if (state.contentInFlight.has(nid))
     return state.contentInFlight.get(nid); const worldId = state.world.id; const p = api(`/api/worlds/${worldId}/nodes/${nid}/content`).then(result => { if (state.world.id !== worldId)
-    return []; state.content.set(nid, result.items); cacheLocal(); return result.items; }).finally(() => { if (state.contentInFlight.get(nid) === p)
+    return []; state.content.set(nid, result.items); worldView.setContent?.(nid, result.items); cacheLocal(); return result.items; }).finally(() => { if (state.contentInFlight.get(nid) === p)
     state.contentInFlight.delete(nid); }); state.contentInFlight.set(nid, p); return p; }
 async function visitNode(nid) {
-    if (!state.journey || !state.world)
+    if (!state.journey || !state.world || worldView.inField)
         return;
     const node = state.world.nodes.find(n => n.id === nid);
     if (!node)
@@ -131,7 +137,7 @@ async function visitNode(nid) {
 }
 function collectCard(card) { if (!state.journey)
     return; try {
-    if (collect(state.journey, card)) {
+    if (collect(state.journey, { ...card, topic: card.topic || state.world.nodes.find(n => n.id === card.nodeId)?.title || currentNode()?.title })) {
         markDirty();
         toast('已收入知识行囊。试着把它与另一张卡片搭一座桥。');
         renderNearby();
@@ -145,8 +151,10 @@ catch (error) {
 function renderNearby(loading = false, error = null) {
     const host = $('#nearby');
     host.replaceChildren();
-    if (!state.journey || worldView.mode !== 'explore')
+    if (!state.journey || worldView.mode !== 'explore' || worldView.inField) {
+        host.hidden = true;
         return;
+    }
     host.hidden = false;
     const node = currentNode();
     host.append(el('div', { class: 'nearby-heading' }, icon('spark'), el('span', {}, `${node.title} · 沿途拾得`)));
@@ -164,13 +172,13 @@ function renderNearby(loading = false, error = null) {
     }
     for (const card of cards.slice(0, 2)) {
         const collected = state.journey.bag.some(c => c.id === card.id);
-        host.append(el('button', { class: 'near-card', type: 'button', onclick: () => openReader(card) }, sourcePill(card), el('p', { class: 'near-text' }, card.text), el('span', { class: 'near-footer' }, el('span', {}, card.author), el('span', {}, collected ? '已收纳' : '点击阅读', icon(collected ? 'check' : 'arrow')))));
+        host.append(el('button', { class: 'near-card content-preview', type: 'button', onclick: () => openReader(card) }, sourcePill(card), el('p', { class: 'near-text' }, card.text), el('span', { class: 'near-footer' }, el('span', {}, card.author), el('span', {}, collected ? '已收纳' : '点击阅读', icon(collected ? 'check' : 'arrow')))));
     }
-    host.append(el('div', { class: 'nearby-actions' }, button('拾起片段', () => cards[0] && collectCard(cards[0]), { style: 'secondary', glyph: 'bag', disabled: !cards.length }), button('留下想法', () => openAnchors(), { style: 'ghost', glyph: 'pin' })));
+    host.append(el('div', { class: 'nearby-actions' }, button(`浏览 ${cards.length} 条片段`, () => { const { body } = openSheet('reader', node.title, '这个话题周围的声音'); body.append(...cards.map(card => button(card.title, () => openReader(card), { style: 'secondary', glyph: 'book' }))); }, { style: 'secondary', glyph: 'book', disabled: !cards.length }), button('留下想法', () => openAnchors(), { style: 'ghost', glyph: 'pin' })));
 }
-function closePanel() { const root = $('#overlay-root'); root.replaceChildren(); state.panel = null; overlayToken++; worldView?.pause(false); document.querySelectorAll('.primary-nav button').forEach(b => b.classList.toggle('active', b.id === 'roam-nav')); if (lastFocus?.isConnected)
+function closePanel() { disposePanel(); const root = $('#overlay-root'); root.replaceChildren(); state.panel = null; overlayToken++; worldView?.pause(false); if (worldView) updateTargetHint(worldView.getTarget?.()); document.querySelectorAll('.primary-nav button').forEach(b => b.classList.toggle('active', b.id === 'roam-nav')); if (lastFocus?.isConnected)
     lastFocus.focus({ preventScroll: true }); }
-function openSheet(kind, title, kicker) { lastFocus = document.activeElement; state.panel = kind; worldView.pause(true); overlayToken++; const token = overlayToken; const root = $('#overlay-root'); const overlay = el('div', { class: 'overlay' }); const sheet = el('section', { class: `sheet ${kind}`, role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'sheet-title', tabIndex: -1 }); const close = el('button', { class: 'icon-button', type: 'button', 'aria-label': '关闭面板', onclick: closePanel }, icon('close')); sheet.append(el('header', { class: 'sheet-head' }, el('div', {}, el('div', { class: 'sheet-kicker' }, kicker || 'ZHIYE · WALK YOUR MIND'), el('h2', { class: 'sheet-title', id: 'sheet-title' }, title)), close)); const body = el('div', { class: 'sheet-body' }); sheet.append(body); overlay.append(sheet); root.replaceChildren(overlay); overlay.addEventListener('click', e => { if (e.target === overlay)
+function openSheet(kind, title, kicker) { disposePanel(); lastFocus = document.activeElement; state.panel = kind; $('#target-hint').hidden = true; worldView.pause(true); overlayToken++; const token = overlayToken; const root = $('#overlay-root'); const overlay = el('div', { class: 'overlay' }); const sheet = el('section', { class: `sheet ${kind}`, role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'sheet-title', tabIndex: -1 }); const close = el('button', { class: 'icon-button', type: 'button', 'aria-label': '关闭面板', onclick: closePanel }, icon('close')); sheet.append(el('header', { class: 'sheet-head' }, el('div', {}, el('div', { class: 'sheet-kicker' }, kicker || 'MANZHILU · WALK YOUR MIND'), el('h2', { class: 'sheet-title', id: 'sheet-title' }, title)), close)); const body = el('div', { class: 'sheet-body' }); sheet.append(body); overlay.append(sheet); root.replaceChildren(overlay); overlay.addEventListener('click', e => { if (e.target === overlay)
     closePanel(); }); sheet.addEventListener('keydown', e => { if (e.key === 'Escape') {
     e.preventDefault();
     closePanel();
@@ -191,12 +199,16 @@ function requireJourney() { if (state.journey)
 function openReader(card) {
     const { body } = openSheet('reader', '一束沿途的光', 'READ · PAUSE · THINK');
     body.append(sourcePill(card), el('h3', { class: 'reader-title' }, card.title), el('div', { class: 'reader-meta' }, el('span', {}, card.author), el('span', {}, card.provenance)), el('article', { class: 'reader-body' }, card.body || card.text));
+    if (card.source === 'zhihu' && card.retrievedAt != null) {
+        const retrieved = typeof card.retrievedAt === 'number' ? card.retrievedAt * 1000 : Date.parse(card.retrievedAt);
+        if (Number.isFinite(new Date(retrieved).getTime())) body.append(el('p', { class: 'muted tiny' }, '本地保存于 ' + formatTime(retrieved)));
+    }
     if (card.source === 'zhihu')
         body.append(el('div', { class: 'notice warning', style: 'margin-top:20px' }, '这里展示搜索接口返回的摘要，不等同于完整文章或逐字引文。上下文、作者署名与最新内容以知乎原文为准。'));
     if (card.sourceIds) {
         const sources = el('div', { class: 'stack', style: 'margin-top:20px' }, el('div', { class: 'field-label' }, '这张组合卡的来源'));
         for (const id of card.sourceIds) {
-            const origin = state.journey?.bag.find(c => c.id === id);
+            const origin = state.journey?.bag.find(c => c.id === id) || state.homeCards.get(id);
             if (origin)
                 sources.append(button(origin.title, () => openReader(origin), { style: 'ghost', glyph: 'link' }));
         }
@@ -210,6 +222,100 @@ function openReader(card) {
     if (url)
         actions.append(el('a', { class: 'button ghost original-link', href: url, target: '_blank', rel: 'noopener noreferrer' }, icon('external'), '在知乎阅读原文'));
     body.append(actions);
+    if (state.journey && !worldView.inField)
+        actions.prepend(button('进入这篇文章的场域 · F', () => enterArticle(card), { style: 'secondary', glyph: 'compass' }));
+}
+function updateTargetHint(target) {
+    const hint = $('#target-hint');
+    hint.hidden = !target || !!state.panel || worldView.mode !== 'explore';
+    if (!target) return;
+    hint.querySelector('strong').textContent = target.type === 'card' ? target.card.title : target.node.title;
+    hint.querySelector('span').textContent = target.type === 'card'
+        ? (worldView.inField ? '左键 阅读这一段 · E 收入行囊' : '左键 阅读 · F 进入场域 · E 收入行囊')
+        : (worldView.inField ? '靠近，阅读这里的思路' : 'V 自动追踪 · 靠近展开观点');
+}
+function enterArticle(card) {
+    if (!requireJourney() || !card) return;
+    if (worldView.inField) { toast('你已在文章场域中，可点击上方按钮返回主世界。'); return; }
+    state.journey.position = { ...worldView.player };
+    const node = state.world.nodes.find(n => n.id === card.nodeId) || currentNode();
+    closePanel();
+    if (worldView.enterField(card, node)) {
+        markDirty();
+        toast('沿着片段之间的路径阅读，随时可返回刚才的位置。');
+    }
+}
+function fieldChanged({ inField, card }) {
+    document.body.classList.toggle('article-field', inField);
+    $('#hud-title').textContent = inField ? '文章场域' : currentNode()?.title || '自由漫游';
+    $('#hud-question').textContent = inField ? card.title : currentNode()?.question || state.world.seed;
+    $('#nearby').hidden = inField;
+    if (!inField) renderNearby();
+}
+async function openHome() {
+    const { body, active } = openSheet('home', '把沿途的光，带回家', '漫知录 · 精神家园');
+    body.append(el('p', { class: 'muted' }, '正在整理这次旅程的收获…'));
+    let homeData = null;
+    try {
+        if (state.journey) await saveJourney();
+        homeData = await api('/api/home');
+    } catch (error) {
+        if (active()) toast('暂时无法读取家园存档，将展示当前旅程。' + error.message, true);
+    }
+    if (!active()) return;
+    body.replaceChildren();
+    if (homeData) state.homeCards = new Map(homeData.groups.flatMap(g => g.items || []).map(c => [c.id, c]));
+    renderHome(body, {
+        homeData, journey: state.journey, world: state.world,
+        onRead: openReader, onRestore: safe(restoreJourney), onCanvas: safe(openCanvas),
+        onCompanions: safe(openCompanions),
+        onExplore: () => { closePanel(); if (state.journey) enterExploration(); else returnToIntro(); },
+        onSynthesis: safe(async (cards = []) => {
+            if (!state.journey && cards.length) await startJourney(homeData?.journals?.[0]?.seed || '');
+            if (!requireJourney()) return;
+            const available = new Map((homeData?.groups || []).flatMap(g => g.items || []).map(c => [c.id, c]));
+            const add = (card, seen = new Set()) => {
+                if (!card || seen.has(card.id)) return;
+                seen.add(card.id);
+                for (const id of card.sourceIds || []) add(available.get(id), seen);
+                const node = state.world.nodes.find(n => n.title === card.topic);
+                collect(state.journey, { ...card, originNodeId: card.originNodeId || card.nodeId, nodeId: node?.id || null });
+            };
+            for (const card of cards) add(card);
+            if (cards.length) { state.selected = new Set(cards.slice(0, 4).map(c => c.id)); markDirty(); }
+            openBag();
+        })
+    });
+    refreshNotifications().catch(() => {});
+}
+async function refreshNotifications() {
+    const result = await api('/api/notifications');
+    const badge = $('#notification-count');
+    badge.textContent = result.unread > 99 ? '99+' : result.unread;
+    badge.hidden = !result.unread;
+    return result;
+}
+async function openNotifications() {
+    const { body, active } = openSheet('notifications', '来自同路人的回声', '共鸣消息');
+    const result = await refreshNotifications();
+    if (!active()) return;
+    if (!result.items.length) body.append(emptyState('山谷里，等待第一声回响', '公开锚点被同路人共鸣或评论后，消息会留在这里。', 'bell'));
+    for (const item of result.items) {
+        body.append(el('article', { class: 'anchor-item notification-item' + (item.read ? '' : ' unread') },
+            el('p', {}, item.text), el('div', { class: 'anchor-meta' },
+                el('span', {}, `${item.topic} · ${formatTime(item.created * 1000)}`),
+                button('看看这个锚点', safe(async () => {
+                    if (!active()) return;
+                    const row = await post('/api/anchors/' + item.anchorId + '/read');
+                    if (!active()) return;
+                    if (row) await openAnchorThread(row); else toast('这个锚点已被移除或暂不可见。');
+                }), { style: 'ghost', glyph: 'pin' }))));
+    }
+    const unreadIds = result.items.filter(n => !n.read).map(n => n.id);
+    if (unreadIds.length) {
+        await post('/api/notifications/read', { ids: unreadIds });
+        if (active()) await refreshNotifications();
+    }
 }
 function openBag() {
     if (!requireJourney())
@@ -271,41 +377,89 @@ function openBag() {
     renderStudio();
 }
 function exportMd() { if (!requireJourney())
-    return; download('知野_心路手记.md', exportMarkdown(state.journey, state.world), 'text/markdown;charset=utf-8'); toast('Markdown 手记已导出，保留来源与组合关系。'); }
+    return; download('漫知录_心路手记.md', exportMarkdown(state.journey, state.world), 'text/markdown;charset=utf-8'); toast('Markdown 手记已导出，保留来源与组合关系。'); }
 function exportJson() { if (!requireJourney())
-    return; download('知野_旅程备份.json', JSON.stringify(snapshot(), null, 2), 'application/json'); }
-function openCanvas() {
-    if (!requireJourney())
-        return;
-    const { body } = openSheet('canvas', '把走过的路，看成自己', 'YOUR PERSONAL ATLAS');
-    body.append(el('p', { class: 'section-intro' }, '金色是走过的路，紫色是你组合出的知识桥梁，虚线是尚未选择的方向。点击一个话题可直接抵达；画布记录探索，不替你给自己贴上人格标签。'));
-    const layout = el('div', { class: 'canvas-layout' }), side = el('aside', { class: 'canvas-sidebar' }), info = el('div', { class: 'stack' });
-    const go = node => { info.replaceChildren(el('h3', {}, node.title), el('p', {}, node.question), el('div', { class: 'notice' }, node.relation === 'alternative' ? '另一种立场不是“已被证明的反例”。带着问题查阅证据。' : node.relation === 'bridge' ? '这是一条跨界探索建议，而不是已证实的知识关系。' : '停留、阅读，再决定这个方向是否值得深入。'), button('去这里看看', () => { closePanel(); state.activeId = node.id; worldView.jump(node); enterExploration(); safe(() => visitNode(node.id))(); }, { glyph: 'compass' })); };
-    layout.append(makeGraph(state.world, state.journey, go), side);
-    const j = state.journey;
-    side.append(el('div', { class: 'metric-grid' }, ...[['话题', new Set(j.visited).size], ['收获', j.bag.length], ['锚点', j.thoughts.length], ['桥梁', j.bridges.length]].map(([label, value]) => el('div', { class: 'metric' }, el('strong', {}, String(value).padStart(2, '0')), el('span', {}, label)))), el('div', { class: 'divider', style: 'margin:0' }), info, el('div', { class: 'stack' }, button('导出心路手记', exportMd, { style: 'secondary', glyph: 'download' }), button('保存完整旅程', safe(() => saveJourney(true)), { style: 'ghost', glyph: 'save' })));
-    go(currentNode());
-    body.append(layout);
-    if (j.thoughts.length) {
-        body.append(el('div', { class: 'timeline' }, el('div', { class: 'field-label' }, '想法留下的时间刻度'), ...j.thoughts.slice(-5).reverse().map(t => el('div', { class: 'timeline-item' }, el('time', {}, formatTime(t.createdAt)), el('p', {}, t.text)))));
+    return; download('漫知录_旅程备份.json', JSON.stringify(snapshot(), null, 2), 'application/json'); }
+async function openCanvas(view = 'mine') {
+    if (!requireJourney()) return;
+    if (typeof view !== 'string') view = 'mine';
+    const { body, active } = openSheet('canvas', '词云小径 · 我的个人画布', '每一条路，都留下认知的形状');
+    const tabs = el('div', { class: 'canvas-tabs', role: 'tablist', 'aria-label': '小径视图' });
+    for (const [value, label] of [['mine', '我的足迹'], ['companions', '同频人足迹'], ['popular', '全员热门小径']]) {
+        tabs.append(el('button', { type: 'button', role: 'tab', 'aria-selected': value === view,
+            class: value === view ? 'active' : '', onclick: safe(() => openCanvas(value)) }, label));
     }
+    body.append(tabs, el('p', { class: 'section-intro' }, view === 'mine'
+        ? '金色是你的足迹，紫色是知识之间的桥梁。点一个话题，继续探路。'
+        : '每一条公开路线为小径添一点光。走过的人越多，连线越亮、越宽。'));
+    const layout = el('div', { class: 'canvas-layout' }), side = el('aside', { class: 'canvas-sidebar' });
+    body.append(layout);
+    if (view !== 'mine') {
+        layout.append(el('p', { class: 'muted' }, '正在汇聚同路人的足迹…'));
+        try {
+            const result = await api(`/api/trails?view=${view}&journeyId=${encodeURIComponent(state.journey.id)}`);
+            if (!active()) return;
+            layout.replaceChildren();
+            if (!result.enabled || !result.nodes.length) {
+                layout.append(emptyState(result.enabled ? '小径，等待更多脚步' : '从公开一条自己的路开始',
+                    result.enabled ? '还没有符合条件的公开路线。私人旅程不会被计入热度。' : '主动公开路线后，可以查看与你话题相近的同频人足迹。', 'route'));
+                if (!result.enabled) layout.append(button('到同频电话亭看看', safe(openCompanions), { glyph: 'people' }));
+                return;
+            }
+            side.append(el('div', { class: 'metric' }, el('strong', {}, result.pathCount), el('span', {}, '条主动公开的路线')),
+                el('p', { class: 'muted' }, '热度只表达同行人数，你依然可以走向任何方向。'));
+            const details = el('div', { class: 'stack' }); side.append(details);
+            layout.append(makeGraph(result, { visited: [], trace: [], thoughts: [] }, node => {
+                details.replaceChildren(el('h3', {}, node.title), el('p', {}, `${node.heat} 条公开路线经过这里`),
+                    button('以这个话题启程', safe(async () => { closePanel(); await startJourney(node.title); }), { glyph: 'compass' }));
+            }, { heat: true }), side);
+        } catch (error) {
+            if (active()) layout.replaceChildren(el('div', { class: 'notice warning' }, error.message));
+        }
+        return;
+    }
+    const info = el('div', { class: 'stack' });
+    const go = node => info.replaceChildren(el('h3', {}, node.title), el('p', {}, node.question),
+        button('自动追踪这个话题', () => {
+            closePanel(); worldView.exitField?.(); enterExploration(); worldView.track(node);
+        }, { glyph: 'compass' }),
+        button('直接到这里看看', () => {
+            closePanel(); worldView.exitField?.(); state.activeId = node.id; worldView.jump(node); enterExploration(); safe(() => visitNode(node.id))();
+        }, { style: 'ghost', glyph: 'route' }));
+    const j = state.journey;
+    side.append(el('div', { class: 'metric-grid' }, ...[['话题', new Set(j.visited).size], ['收获', j.bag.length], ['锚点', j.thoughts.length], ['桥梁', j.bridges.length]].map(([label, value]) => el('div', { class: 'metric' }, el('strong', {}, String(value).padStart(2, '0')), el('span', {}, label)))), info,
+        button('回家整理收获', safe(openHome), { style: 'secondary', glyph: 'home' }),
+        button('导出心路手记', exportMd, { style: 'ghost', glyph: 'download' }));
+    layout.append(makeGraph(state.world, j, go), side); go(currentNode());
+    if (j.thoughts.length) body.append(el('div', { class: 'timeline' }, el('div', { class: 'field-label' }, '想法留下的时间刻度'),
+        ...j.thoughts.slice(-5).reverse().map(t => el('div', { class: 'timeline-item' }, el('time', {}, formatTime(t.createdAt)), el('p', {}, t.text)))));
 }
-async function openAnchors(nodeId) {
+async function openAnchors(nodeId, { reading = false } = {}) {
     if (!requireJourney())
         return;
-    const node = state.world.nodes.find(n => n.id === nodeId) || currentNode();
-    const { body, active } = openSheet('anchors', '我在这里，想到了……', 'THOUGHT ANCHOR · ' + node.title);
+    const journey = state.journey, world = state.world;
+    const node = world.nodes.find(n => n.id === nodeId) || currentNode();
+    const { body, active } = openSheet('anchors', reading ? '听一听，同路人的声音' : '我在这里，想到了……', '想法锚点 · ' + node.title);
     body.append(el('p', { class: 'section-intro' }, '一句质疑、一声赞叹，或一个尚未成形的问题，都值得有一个落脚的地方。默认只有自己能看见。'));
     const text = el('textarea', { class: 'textarea', id: 'anchor-text', maxLength: 2000, placeholder: `关于「${node.title}」，我此刻想到……`, 'aria-label': '写下想法锚点' }), pub = el('input', { type: 'checkbox', id: 'anchor-public' });
     const save = button('把想法留在这里', safe(async () => { if (!text.value.trim()) {
         toast('写下一句话，再放下锚点。');
         return;
-    } save.disabled = true; try {
-        const result = await post('/api/anchors', { worldId: state.world.id, nodeId: node.id, text: text.value.trim(), visibility: pub.checked ? 'public' : 'private' });
-        state.journey.thoughts.push({ ...result, nodeId: node.id, text: text.value.trim(), position: node.id === state.activeId ? { x: worldView.player.x, z: worldView.player.z } : { x: node.x, z: node.z + 2 }, createdAt: new Date().toISOString() });
-        worldView.setThoughts?.(state.journey.thoughts);
-        markDirty();
-        await saveJourney();
+    } save.disabled = true;
+    const submitted = { worldId: world.id, nodeId: node.id, text: text.value.trim(), visibility: pub.checked ? 'public' : 'private' };
+    const position = node.id === state.activeId ? { ...journey.position } : { x: node.x, y: 2.6, z: node.z + 2 };
+    try {
+        const result = await post('/api/anchors', submitted);
+        // Restoring the same journey may replace its object while the request is
+        // pending. Use that current copy, otherwise save the original journey.
+        const target = state.journey?.id === journey.id ? state.journey : journey;
+        target.thoughts.push({ ...result, nodeId: node.id, text: submitted.text, position, createdAt: new Date().toISOString() });
+        target.updatedAt = new Date().toISOString();
+        if (state.journey === target) {
+            worldView.setThoughts?.(target.thoughts);
+            markDirty();
+        }
+        await saveJourney(false, target);
         if (active()) {
             text.value = '';
             pub.checked = false;
@@ -316,13 +470,18 @@ async function openAnchors(nodeId) {
     finally {
         save.disabled = false;
     } }), { glyph: 'pin' });
-    body.append(text, el('div', { class: 'form-group' }, el('label', { class: 'check-label' }, pub, el('span', {}, '申请公开这个想法', el('small', {}, '只有这一条文字会进入人工审核队列；不会公开行囊、连续坐标或其他私人思考。')))), save, el('div', { class: 'divider' }));
+    if (reading) {
+        body.append(button('留下我的想法', () => openAnchors(node.id), { style: 'secondary', glyph: 'pin' }));
+    } else {
+        body.append(text, el('div', { class: 'form-group' }, el('label', { class: 'check-label' }, pub, el('span', {}, '申请公开这个想法', el('small', {}, '审核通过后在这个话题旁展示给同路人。私人想法始终留给自己。')))), save);
+    }
+    body.append(el('div', { class: 'divider' }));
     const list = el('div', { class: 'stack' });
     body.append(el('div', { class: 'field-label' }, '留在这个话题旁的声音'), list);
     async function renderThoughts() { const rows = await api('/api/anchors?topic=' + encodeURIComponent(node.title)); if (!active())
         return; list.replaceChildren(); if (!rows.length)
-        list.append(emptyState('这里还很安静', '写下第一个想法。其他人的公开想法只有审核通过后才会出现。', 'pin')); for (const row of rows) {
-        const actions = el('div', { class: 'row' });
+        list.append(emptyState('这里还很安静', '写下第一个想法，等待另一位同路人。公开想法审核通过后会在这里相遇。', 'pin')); for (const row of rows) {
+        const actions = el('div', { class: 'row wrap' }, button(`阅读与共鸣 · ${row.resonance || 0}`, safe(() => openAnchorThread({ ...row, topic: node.title })), { style: 'ghost', glyph: 'spark' }));
         if (row.own)
             actions.append(el('button', { class: 'text-button', type: 'button', onclick: safe(async () => { await del('/api/anchors/' + row.id); state.journey.thoughts = state.journey.thoughts.filter(t => t.id !== row.id); worldView.setThoughts?.(state.journey.thoughts); markDirty(); await renderThoughts(); }) }, '删除'));
         else
@@ -335,6 +494,72 @@ async function openAnchors(nodeId) {
     catch (e) {
         if (active())
             list.append(el('div', { class: 'notice warning' }, e.message));
+    }
+}
+async function openAnchorThread(anchor) {
+    const { body, active } = openSheet('anchor-thread', '在这里，听见回声', anchor.topic || '想法锚点');
+    let row = { ...anchor }, busy = false, holdTimer, repeatTimer, held = false;
+    const stats = el('div', { class: 'resonance-stats' });
+    const resonance = el('button', { class: 'button primary resonance-button', type: 'button' });
+    const stopHold = () => { clearTimeout(holdTimer); clearInterval(repeatTimer); };
+    panelCleanups.push(stopHold);
+    const update = () => {
+        stats.textContent = `${row.readCount || 0} 位同路人读过 · ${row.resonance || 0} 共鸣`;
+        resonance.textContent = row.own ? '这是我留下的锚点' : (row.myResonance >= 3 ? '已连鸣 3 次' : `共鸣 ${row.myResonance || 0} / 3 · 长按连鸣`);
+        resonance.disabled = row.own || row.myResonance >= 3;
+    };
+    const resonate = safe(async () => {
+        if (busy || !active() || row.own || row.myResonance >= 3) return;
+        busy = true;
+        try {
+            const result = await post('/api/anchors/' + row.id + '/resonate');
+            row = { ...row, ...result };
+            if (active()) update();
+        } finally { busy = false; }
+    });
+    resonance.addEventListener('pointerdown', e => {
+        if (e.button !== 0 || resonance.disabled) return;
+        held = false;
+        resonance.setPointerCapture(e.pointerId);
+        holdTimer = setTimeout(() => { held = true; resonate(); repeatTimer = setInterval(resonate, 650); }, 600);
+    });
+    for (const name of ['pointerup', 'pointercancel', 'lostpointercapture']) resonance.addEventListener(name, stopHold);
+    resonance.addEventListener('click', () => { if (held) { held = false; return; } resonate(); });
+    body.append(el('blockquote', { class: 'anchor-quote' }, row.text),
+        el('p', { class: 'muted' }, `${row.own ? '我' : row.alias} · ${formatTime(row.created * 1000)}`), stats,
+        el('div', { class: 'row wrap' }, resonance, button('另设一个想法锚点', () => {
+            const node = state.world?.nodes.find(n => n.title === row.topic);
+            openAnchors(node?.id);
+        }, { style: 'secondary', glyph: 'pin' })),
+        el('p', { class: 'muted tiny' }, '首次阅读留下一点共鸣。深受触动时，再轻按或长按传递回声，每人最多三次。'),
+        el('div', { class: 'divider' }));
+    update();
+    const comments = el('div', { class: 'comment-list stack', 'aria-live': 'polite' });
+    const input = el('textarea', { class: 'textarea', maxLength: 1000, rows: 3, placeholder: '写下与你产生共鸣的地方…', 'aria-label': '评论这个想法锚点' });
+    const send = button('留下这句回应', safe(async () => {
+        if (!input.value.trim()) { toast('写下一句话，再把回应留下。'); return; }
+        send.disabled = true;
+        try {
+            await post('/api/anchors/' + row.id + '/comments', { text: input.value.trim() });
+            if (!active()) return;
+            input.value = '';
+            await loadComments();
+        } finally { send.disabled = false; }
+    }), { glyph: 'people' });
+    body.append(el('h3', {}, '在这句话之后'), comments, input, send);
+    async function loadComments() {
+        const result = await api('/api/anchors/' + row.id + '/comments');
+        if (!active()) return;
+        comments.replaceChildren();
+        if (!result.items.length) comments.append(el('p', { class: 'muted' }, '还没有回应，你可以留下第一句。'));
+        for (const comment of result.items) comments.append(el('article', { class: 'comment-item' },
+            el('p', {}, comment.text), el('small', { class: 'muted' }, `${comment.own ? '我' : comment.alias} · ${formatTime(comment.created * 1000)}`)));
+    }
+    try {
+        if (!row.own) { row = { ...row, ...await post('/api/anchors/' + row.id + '/read') }; if (active()) update(); }
+        await loadComments();
+    } catch (error) {
+        if (active()) comments.append(el('div', { class: 'notice warning' }, error.message));
     }
 }
 async function openArchives() {
@@ -364,7 +589,7 @@ async function openArchives() {
             list.replaceChildren(el('div', { class: 'notice warning' }, e.message));
     }
 }
-async function restoreJourney(id) { if (state.journey && state.dirty !== state.saved)
+async function restoreJourney(id) { worldView.exitField?.(); if (state.journey && state.dirty !== state.saved)
     await saveJourney(); const result = await api('/api/journeys/' + encodeURIComponent(id)); state.world = result.world; state.journey = { id: result.id, ...result.data }; state.publicSlug = result.publicSlug; state.activeId = state.journey.visited.at(-1) || 'root'; state.content.clear(); state.contentInFlight.clear(); state.selected.clear(); state.dirty = 0; state.saved = 0; worldView.setWorld(state.world); worldView.setPlayer(state.journey.position); worldView.setThoughts?.(state.journey.thoughts); closePanel(); enterExploration(); cacheLocal(true); await visitNode(state.activeId); toast('已回到上次停下的地方。'); }
 async function openCompanions() {
     if (!requireJourney())
@@ -377,7 +602,7 @@ async function openCompanions() {
         const publish = button('公开路线，寻找同路人', safe(async () => { await saveJourney(); const result = await post('/api/journeys/' + state.journey.id + '/publish', { confirm: true, alias: alias.value.trim() }); state.publicSlug = result.slug; cacheLocal(); openCompanions(); toast('路线快照已公开。可以随时撤回。'); }), { glyph: 'people', disabled: true });
         confirm.addEventListener('change', () => publish.disabled = !confirm.checked);
         sharing.append(publish);
-        body.append(sharing, emptyState('先决定被看见什么', '公开是你主动做出的选择，不是使用知野的前提。', 'eye'));
+        body.append(sharing, emptyState('先决定被看见什么', '公开是你主动做出的选择，不是使用漫知录的前提。', 'eye'));
         return;
     }
     const actionRow = el('div', { class: 'row wrap' }, button('复制公开路线链接', safe(async () => { const link = location.origin + '/?trail=' + encodeURIComponent(state.publicSlug); try {
@@ -412,7 +637,20 @@ async function openCompanions() {
     }
 }
 async function openPublicTrail(slug) { const p = await api('/api/public/' + encodeURIComponent(slug)); const { body } = openSheet('canvas', `${p.alias} 的公开心路`, 'A SHARED PATH'); body.append(el('p', { class: 'section-intro' }, p.seed)); const journey = { visited: p.nodes.map(n => n.id), trace: [], thoughts: [] }; body.append(makeGraph(p, journey, n => toast(n.title), { readOnly: true }), el('div', { class: 'notice', style: 'margin-top:20px' }, '这是用户主动公开的路线快照。不包含私人记录，也不是他们完整的兴趣画像。'), button('带着这个问题出发', safe(async () => { closePanel(); $('#seed-input').value = p.seed; await startJourney(p.seed); }), { glyph: 'compass' })); }
-function openHelp() { const { body } = openSheet('help', '给第一次启程的你', 'A SMALL GUIDE TO WANDERING'); const items = [['走进世界', 'W A S D', '沿岛屿与石桥移动。鼠标转动视角，Shift 加速。点击画面锁定鼠标，Tab 或 Esc 释放；未锁定时也可拖拽视角。'], ['停下来读', 'F', '靠近话题会浮现内容片段。用 F 打开第一张卡，或释放鼠标后直接点击。阅读面板打开时，人物不会继续移动。'], ['收获与锚点', 'E / R', 'E 把最近的片段收入知识行囊。R 留下自己的想法，默认仅自己可见。B 打开行囊，把两张卡片变成一条新思路。'], ['另一条路', 'M', 'M 打开心路画布，点击话题后选择“去这里看看”即可直接抵达。触屏、键盘或易晕 3D 的用户都不必强行步行。']]; body.append(el('div', { class: 'help-grid' }, ...items.map(([title, key, text]) => el('div', {}, el('div', { class: 'row between' }, el('h3', {}, title), el('kbd', {}, key)), el('p', {}, text)))), el('div', { class: 'notice warning', style: 'margin-top:20px' }, '原创演示内容与知乎真实内容始终明确标记。只有搜索摘要时，不会冒充原文金句。这个项目不会自动向知乎发布、点赞或关注。'), button('去看这个世界', closePanel, { glyph: 'compass' })); }
+function openHelp() {
+    const { body } = openSheet('help', '给第一次启程的你', '漫行指南');
+    const items = [
+        ['自由飞行', 'WASD · Shift / Ctrl', 'WASD 沿视角方向在水平面移动；Shift 上升，Ctrl 下降。鼠标转动视角，滚轮拉近或拉远。进入探索后鼠标自然跟随，无需按住。Tab 或 Esc 释放，点击画面恢复；打开面板暂停，关闭后继续。'],
+        ['进入文章', '左键 · F · Q', '靠近话题会浮现文章片段。用屏幕中央准星选中，左键阅读，F 进入文章场域。子地图按已有内容分段呈现；Q 或上方按钮返回原位置。'],
+        ['收获与联结', 'E · B', '对准片段按 E 收入知识行囊，B 整理行囊。选择 2–4 件收获，在思维合成台写下联系，生成新的洞察。'],
+        ['留下与听见', 'R · T', 'R 写下自己的想法锚点；T 阅读同话题的声音。展开锚点可评论、共鸣或长按连鸣，每人最多三次。'],
+        ['追踪与回顾', 'V · M', '对准话题词按 V，自动飞向它；按方向键可随时停止。M 打开个人画布，切换我的足迹、同频人足迹或热门小径。'],
+        ['回到家园', 'H', '把沿途的收获带回家。想法收纳柜自动按话题整理，日志回顾历次旅程，同频电话亭连接主动公开路线的同路人。']
+    ];
+    body.append(el('div', { class: 'help-grid' }, ...items.map(([title, key, text]) => el('div', {}, el('div', { class: 'row between' }, el('h3', {}, title), el('kbd', {}, key)), el('p', {}, text)))),
+        el('div', { class: 'notice', style: 'margin-top:20px' }, '内容卡会注明来源。仅有搜索摘要时，文章场域也只组织这些已取得的片段；原文可通过知乎链接继续阅读。'),
+        button('出发，按自己的节奏', closePanel, { glyph: 'compass' }));
+}
 function preferences() { try {
     return JSON.parse(localStorage.getItem('zhiye-preferences') || '{}');
 }
@@ -427,6 +665,7 @@ function applyPreferences() { const p = preferences(); worldView.reduced = p.red
 async function openSettings() {
     const { body, active } = openSheet('settings', '按自己的节奏探索', 'COMFORT · PRIVACY · PROVENANCE');
     const prefs = preferences();
+    body.append(el('p', { class: 'muted tiny' }, `漫知录 v${document.querySelector('meta[name="application-version"]').content} · 自由漫游与精神家园`));
     body.append(el('div', { class: 'notice' }, '当前是访客会话，不是知乎 OAuth 登录。数据保存在本浏览器的本地备份及本应用服务器；未接入跨设备身份同步。'));
     const group = el('div', { class: 'stack', style: 'margin-top:22px' });
     for (const [key, title, detail] of [['reduced', '减少动态效果', '关闭背景漂移、水面动画与泛光。'], ['contrast', '增强界面与标签对比度', '让文字比氛围更优先。'], ['large', '放大正文文字', '阅读卡片使用更大的字号。']]) {
@@ -447,7 +686,7 @@ async function openSettings() {
     body.append(el('div', { class: 'divider' }), button('删除我的全部应用数据', () => { const x = openSheet('settings', '让这次旅程真正离开', 'DELETE MY DATA'); x.body.append(el('div', { class: 'notice warning' }, '将删除本应用中的所有旅程、世界、锚点、公开路线，以及此浏览器的本地备份。不会删除知乎账号或知乎原文。操作不可撤销，建议先导出。'), el('div', { class: 'row wrap', style: 'margin-top:20px' }, button('先导出 JSON', exportJson, { style: 'secondary', disabled: !state.journey }), button('确认全部删除', safe(async () => { clearInterval(autoSaveTimer); clearTimeout(localTimer); if (savePromise)
         await savePromise.catch(() => { }); await del('/api/me/data'); await localErase(); localStorage.removeItem('zhiye-preferences'); state.journey = null; location.href = location.origin; }), { style: 'danger', glyph: 'trash' }))); }, { style: 'danger', glyph: 'trash' }));
 }
-const panels = { bag: openBag, canvas: openCanvas, anchors: openAnchors, archives: openArchives, companions: openCompanions, help: openHelp, settings: openSettings };
+const panels = { home: openHome, notifications: openNotifications, bag: openBag, canvas: openCanvas, anchors: openAnchors, archives: openArchives, companions: openCompanions, help: openHelp, settings: openSettings };
 let autoSaveTimer;
 async function boot() {
     hydrateIcons();
@@ -457,7 +696,7 @@ async function boot() {
         } state.activeId = nid; const cards = await contentFor(nid); if (cards.length)
             openReader(cards[0]);
         else
-            openAnchors(nid); }), onVisit: safe(visitNode), onMove: (p, force) => { if (!state.journey)
+            openAnchors(nid); }), onVisit: safe(visitNode), onRead: openReader, onTarget: updateTargetHint, onFieldChange: fieldChanged, onTracking: node => { const control = $('#tracking-cancel'); control.hidden = !node; control.textContent = node ? `正在追踪「${node.title}」 · 点击或按方向键停止` : ''; }, onMove: (p, force) => { if (!state.journey || worldView.inField)
             return; state.journey.position = { ...p }; const next = appendTrace(state.journey.trace, p, Date.now(), force); if (next !== state.journey.trace) {
             state.journey.trace = next;
             markDirty();
@@ -478,10 +717,11 @@ async function boot() {
             state.journey = useLocal ? local.journey : { id: saved.id, ...saved.data };
             state.publicSlug = saved.publicSlug;
             state.activeId = state.journey.visited.at(-1) || 'root';
-            if (useLocal && Array.isArray(local.content))
-                state.content = new Map(local.content);
+            if (useLocal)
+                state.content = new Map(restoreCachedContent(local.content, state.remoteMode, local.contentMode ?? local.mode));
             worldView.setWorld(state.world);
             worldView.setPlayer(state.journey.position);
+            for (const [nid, cards] of state.content) worldView.setContent(nid, cards);
             worldView.setThoughts?.(state.journey.thoughts);
             $('#seed-input').value = state.world.seed;
             $('#start-btn span:first-child').textContent = '继续漫游';
@@ -496,8 +736,10 @@ async function boot() {
     }
     updateHUD();
     state.booted = true;
-    $('#seed-form').addEventListener('submit', e => { e.preventDefault(); safe(async () => { const seed = $('#seed-input').value.trim(); if (seed.length < 2)
-        return; if (state.journey && seed === state.world.seed) {
+    refreshNotifications().catch(() => {});
+    $('#random-start').addEventListener('click', safe(() => startJourney('')));
+    $('#tracking-cancel').addEventListener('click', () => worldView.cancelTracking());
+    $('#seed-form').addEventListener('submit', e => { e.preventDefault(); safe(async () => { const seed = $('#seed-input').value.trim(); if (seed && state.journey && seed === state.world.seed) {
         enterExploration();
         await visitNode(state.activeId);
         toast('欢迎回来，继续走自己的路。');
@@ -517,19 +759,28 @@ async function boot() {
         await saveJourney(true); }));
     $('#minimap-open').addEventListener('click', openCanvas);
     $('#audio-btn').addEventListener('click', safe(async () => { const on = await sounds.toggle(); $('#audio-btn').style.opacity = on ? '1' : '.6'; $('#audio-btn').setAttribute('aria-label', on ? '关闭环境声音' : '开启环境声音'); toast(on ? '环境声音已开启。' : '环境声音已关闭。'); }));
-    document.addEventListener('keydown', e => { if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target?.tagName) || e.target?.isContentEditable)
-        return; if (state.panel || !state.journey)
-        return; if (e.repeat)
-        return; if (['KeyE', 'KeyR', 'KeyB', 'KeyM', 'KeyF'].includes(e.code))
-        e.preventDefault(); if (e.code === 'KeyE') {
-        const c = currentCards()[0];
-        if (c)
-            collectCard(c);
-    } if (e.code === 'KeyR')
-        openAnchors(); if (e.code === 'KeyB')
-        openBag(); if (e.code === 'KeyM')
-        openCanvas(); if (e.code === 'KeyF' && currentCards()[0])
-        openReader(currentCards()[0]); });
+    document.addEventListener('keydown', e => {
+        if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target?.tagName) || e.target?.isContentEditable || e.repeat || e.metaKey || e.altKey) return;
+        if (state.panel) return;
+        if (e.code === 'KeyH') { e.preventDefault(); safe(openHome)(); return; }
+        if (!state.journey || worldView.mode !== 'explore') return;
+        if (['KeyE', 'KeyR', 'KeyT', 'KeyB', 'KeyM', 'KeyF', 'KeyV', 'KeyQ'].includes(e.code)) e.preventDefault();
+        const target = worldView.getTarget?.();
+        if (e.code === 'KeyE') {
+            if (target?.type === 'card') collectCard(target.card); else toast('将十字准星对准一个观点片段，再按 E 收纳。');
+        }
+        if (e.code === 'KeyF') {
+            if (target?.type === 'card') enterArticle(target.card); else toast('将十字准星对准文章片段，再按 F 进入它的场域。');
+        }
+        if (e.code === 'KeyV') {
+            if (target?.type === 'node') worldView.track(target.node); else toast('对准感兴趣的话题词，再按 V 自动追踪。');
+        }
+        if (e.code === 'KeyQ' && worldView.inField) worldView.exitField();
+        if (e.code === 'KeyR') safe(() => openAnchors())();
+        if (e.code === 'KeyT') safe(() => openAnchors(undefined, { reading: true }))();
+        if (e.code === 'KeyB') openBag();
+        if (e.code === 'KeyM') safe(openCanvas)();
+    });
     document.addEventListener('visibilitychange', () => { if (document.hidden && state.journey)
         cacheLocal(true); });
     window.addEventListener('beforeunload', () => { if (state.journey)
@@ -541,6 +792,6 @@ async function boot() {
         await openPublicTrail(trail);
     // Test hooks are opt-in and local only. They expose no credentials or other users.
     if (['localhost', '127.0.0.1'].includes(location.hostname) && new URLSearchParams(location.search).has('debug'))
-        window.__zhiye = { state, worldView, saveJourney, startJourney, visitNode, openBag, openCanvas, openAnchors, openCompanions };
+        window.__manzhilu = window.__zhiye = { state, worldView, saveJourney, startJourney, visitNode, collectCard, enterArticle, openReader, openHome, openBag, openCanvas, openAnchors, openAnchorThread, openCompanions, openNotifications, restoreJourney };
 }
 boot().catch(error => { $('#fatal').hidden = false; $('#fatal').textContent = `世界暂时没有准备好。\n${error.message}\n请确认后端已经启动，然后刷新。`; $('body').classList.add('boot-error'); });

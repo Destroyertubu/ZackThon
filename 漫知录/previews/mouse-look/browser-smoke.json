@@ -1,0 +1,261 @@
+{
+  "native": {
+    "entryState": {
+      "mode": "explore",
+      "paused": false,
+      "panel": null,
+      "locked": false,
+      "lookEnabled": true,
+      "requests": [
+        {
+          "active": true,
+          "mode": "native",
+          "connected": true,
+          "worldCanvas": true,
+          "ownerDocument": true,
+          "focused": true,
+          "result": "rejected",
+          "reason": "WrongDocumentError: The root document of this element is not valid for pointer lock."
+        }
+      ]
+    },
+    "entryMouseMove": {
+      "yawDelta": 0.13,
+      "pitchDelta": 0.07
+    },
+    "panelPausesMouseLook": true,
+    "closePanelResumesMouseLook": {
+      "yawDelta": 0.13,
+      "pitchDelta": 0.07
+    },
+    "tabReleasesCursorForUI": true,
+    "canvasClickResumesMouseLook": {
+      "yawDelta": 0.13,
+      "pitchDelta": 0.07
+    },
+    "escapeReleasesCursor": true,
+    "afterEscapeResume": {
+      "yawDelta": 0.13,
+      "pitchDelta": 0.07
+    },
+    "finalState": {
+      "mode": "explore",
+      "paused": false,
+      "panel": null,
+      "locked": false,
+      "lookEnabled": true,
+      "requests": [
+        {
+          "active": true,
+          "mode": "native",
+          "connected": true,
+          "worldCanvas": true,
+          "ownerDocument": true,
+          "focused": true,
+          "result": "rejected",
+          "reason": "WrongDocumentError: The root document of this element is not valid for pointer lock."
+        },
+        {
+          "active": true,
+          "mode": "native",
+          "connected": true,
+          "worldCanvas": true,
+          "ownerDocument": true,
+          "focused": true,
+          "result": "rejected",
+          "reason": "WrongDocumentError: The root document of this element is not valid for pointer lock."
+        },
+        {
+          "active": true,
+          "mode": "native",
+          "connected": true,
+          "worldCanvas": true,
+          "ownerDocument": true,
+          "focused": true,
+          "result": "rejected",
+          "reason": "WrongDocumentError: The root document of this element is not valid for pointer lock."
+        },
+        {
+          "active": true,
+          "mode": "native",
+          "connected": true,
+          "worldCanvas": true,
+          "ownerDocument": true,
+          "focused": true,
+          "result": "rejected",
+          "reason": "WrongDocumentError: The root document of this element is not valid for pointer lock."
+        },
+        {
+          "active": true,
+          "mode": "native",
+          "connected": true,
+          "worldCanvas": true,
+          "ownerDocument": true,
+          "focused": true,
+          "result": "rejected",
+          "reason": "WrongDocumentError: The root document of this element is not valid for pointer lock."
+        }
+      ]
+    }
+  },
+  "unavailable": {
+    "entryState": {
+      "mode": "explore",
+      "paused": false,
+      "panel": null,
+      "locked": false,
+      "lookEnabled": true,
+      "requests": []
+    },
+    "entryMouseMove": {
+      "yawDelta": 0.13,
+      "pitchDelta": 0.07
+    },
+    "panelPausesMouseLook": true,
+    "closePanelResumesMouseLook": {
+      "yawDelta": 0.13,
+      "pitchDelta": 0.07
+    },
+    "tabReleasesCursorForUI": true,
+    "canvasClickResumesMouseLook": {
+      "yawDelta": 0.13,
+      "pitchDelta": 0.07
+    },
+    "escapeReleasesCursor": true,
+    "afterEscapeResume": {
+      "yawDelta": 0.13,
+      "pitchDelta": 0.07
+    },
+    "finalState": {
+      "mode": "explore",
+      "paused": false,
+      "panel": null,
+      "locked": false,
+      "lookEnabled": true,
+      "requests": []
+    }
+  },
+  "rejected": {
+    "entryState": {
+      "mode": "explore",
+      "paused": false,
+      "panel": null,
+      "locked": false,
+      "lookEnabled": true,
+      "requests": [
+        {
+          "active": true,
+          "mode": "rejected",
+          "connected": true,
+          "worldCanvas": true,
+          "ownerDocument": true,
+          "focused": true,
+          "result": "rejected",
+          "reason": "NotAllowedError: Deliberate test rejection"
+        }
+      ]
+    },
+    "entryMouseMove": {
+      "yawDelta": 0.13,
+      "pitchDelta": 0.07
+    },
+    "afterRejectedRequest": {
+      "yawDelta": 0.13,
+      "pitchDelta": 0.07
+    },
+    "panelPausesMouseLook": true,
+    "closePanelResumesMouseLook": {
+      "yawDelta": 0.13,
+      "pitchDelta": 0.07
+    },
+    "tabReleasesCursorForUI": true,
+    "canvasClickResumesMouseLook": {
+      "yawDelta": 0.13,
+      "pitchDelta": 0.07
+    },
+    "escapeReleasesCursor": true,
+    "afterEscapeResume": {
+      "yawDelta": 0.13,
+      "pitchDelta": 0.07
+    },
+    "finalState": {
+      "mode": "explore",
+      "paused": false,
+      "panel": null,
+      "locked": false,
+      "lookEnabled": true,
+      "requests": [
+        {
+          "active": true,
+          "mode": "rejected",
+          "connected": true,
+          "worldCanvas": true,
+          "ownerDocument": true,
+          "focused": true,
+          "result": "rejected",
+          "reason": "NotAllowedError: Deliberate test rejection"
+        },
+        {
+          "active": true,
+          "mode": "rejected",
+          "connected": true,
+          "worldCanvas": true,
+          "ownerDocument": true,
+          "focused": true,
+          "result": "rejected",
+          "reason": "NotAllowedError: Deliberate test rejection"
+        },
+        {
+          "active": true,
+          "mode": "rejected",
+          "connected": true,
+          "worldCanvas": true,
+          "ownerDocument": true,
+          "focused": true,
+          "result": "rejected",
+          "reason": "NotAllowedError: Deliberate test rejection"
+        },
+        {
+          "active": true,
+          "mode": "rejected",
+          "connected": true,
+          "worldCanvas": true,
+          "ownerDocument": true,
+          "focused": true,
+          "result": "rejected",
+          "reason": "NotAllowedError: Deliberate test rejection"
+        },
+        {
+          "active": true,
+          "mode": "rejected",
+          "connected": true,
+          "worldCanvas": true,
+          "ownerDocument": true,
+          "focused": true,
+          "result": "rejected",
+          "reason": "NotAllowedError: Deliberate test rejection"
+        },
+        {
+          "active": true,
+          "mode": "rejected",
+          "connected": true,
+          "worldCanvas": true,
+          "ownerDocument": true,
+          "focused": true,
+          "result": "rejected",
+          "reason": "NotAllowedError: Deliberate test rejection"
+        }
+      ]
+    }
+  },
+  "touch": {
+    "cdpTouchDragChangesView": true,
+    "syntheticTouchHoverIgnored": true,
+    "touchNeverRequestsPointerLock": true,
+    "yawDelta": 0.12,
+    "pitchDelta": 0.064
+  },
+  "errors": [],
+  "scope": "Real HTTP + Chromium; demo-only isolated database. API absence/rejection is injected; mobile drag is CDP touch, touch-hover is synthetic.",
+  "headless": true
+}

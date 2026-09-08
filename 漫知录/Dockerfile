@@ -1,7 +1,7 @@
 FROM node:22-bookworm-slim AS graphics
 WORKDIR /build
-COPY package.json ./
-RUN npm install --omit=dev --ignore-scripts --no-audit --no-fund
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev --ignore-scripts --no-audit --no-fund
 
 FROM python:3.13-slim
 WORKDIR /app

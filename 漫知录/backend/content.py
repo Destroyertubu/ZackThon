@@ -1,8 +1,8 @@
 """Source-preserving Zhihu adapter. No scraping, publishing, or guessed OAuth.
 
 Verified upstream contract: GET /api/v1/content/zhihu_search, Query=..., Bearer
-and X-Request-Timestamp. Response mapping is defensive/configurable because the
-provided beta Skill could not be downloaded in the build environment.
+and X-Request-Timestamp. Official Skill 0.5.3 documents Data.Items,
+ContentText and AuthorName. Alternative field mappings remain configurable.
 """
 import asyncio
 import hashlib
@@ -98,6 +98,8 @@ def normalize_results(payload, node, schema=None):
         code = field(payload,'code')
         if code not in (None,0,'0',200,'200'):
             raise ProviderError('知乎接口返回业务错误；请在服务端核查权限、额度与响应契约。')
+        if field(payload,'success') is False:
+            raise ProviderError('知乎接口返回业务错误；请在服务端核查权限、额度与响应契约。')
     try:
         rows = get_path(payload,schema['items']) if schema and 'items' in schema else locate_list(payload)
     except (KeyError,IndexError,TypeError,ValueError) as exc:
@@ -121,7 +123,7 @@ def normalize_results(payload, node, schema=None):
             return field(item,key,*aliases)
         title = plain(pick('title','name'),220)
         url = safe_zhihu_url(pick('url','link','content_url'))
-        summary = plain(pick('summary','snippet','abstract','excerpt','content','body'),6000)
+        summary = plain(pick('summary','content_text','snippet','abstract','excerpt','content','body'),6000)
         author = pick('author','author_name')
         if isinstance(author,dict):
             author = field(author,'name','display_name')
@@ -148,13 +150,13 @@ def demo_content(node, seed):
     a = node['title']
     records = [
       (f'{a} · 从一个问题开始', f'先别急着定义「{a}」。回想一个具体的时刻：你做了什么，又为什么还记得它？',
-       f'这是一段为知野交互演示创作的文字，不是知乎原文。\n\n当我们谈论「{a}」，可以先把很大的判断，换成一个能够回忆的场景。场景中有谁？你采取了什么行动？什么让你愿意继续？\n\n不必立刻交出漂亮的答案。给这段经历一个想法锚点，下一次走到这里时，再看看自己的理解是否改变。'),
+       f'这是一段为漫知录交互演示创作的文字，不是知乎原文。\n\n当我们谈论「{a}」，可以先把很大的判断，换成一个能够回忆的场景。场景中有谁？你采取了什么行动？什么让你愿意继续？\n\n不必立刻交出漂亮的答案。给这段经历一个想法锚点，下一次走到这里时，再看看自己的理解是否改变。'),
       (f'{a} · 换一个站位', f'关于「{a}」，也许可以同时保留两种解释。先写下你相信的，再认真寻找一个反例。',
        f'这是一段原创演示内容，不是对任何作者观点的引用。\n\n试着从另一个站位重新提出问题：你看到的限制，对另一个人来说会不会是机会？你的答案依赖哪些尚未验证的前提？\n\n把两张卡片放进行囊，再用一句自己的话解释它们之间的分歧。分歧不需要立刻被消除。'),
       (f'{a} · 带回生活', f'带走的不必是一个结论，也可以是一次小小的尝试：明天，我准备怎样重新认识「{a}」？',
-       '这是一段知野原创演示文字。\n\n为一次探索设计一个能够完成的小实验。明确要做的动作，记录观察到的变化，再写下什么结果会让你改变想法。\n\n知识行囊不是收藏数量的比赛。把两个片段组合成一个新问题或行动实验，让走过的路在生活中留下回声。'),
+       '这是一段漫知录原创演示文字。\n\n为一次探索设计一个能够完成的小实验。明确要做的动作，记录观察到的变化，再写下什么结果会让你改变想法。\n\n知识行囊不是收藏数量的比赛。把两个片段组合成一个新问题或行动实验，让走过的路在生活中留下回声。'),
     ]
-    return [dict(id=hash_id(seed,node['id'],str(i),'demo-v1'),nodeId=node['id'],title=t,text=s,body=b,author='知野 · 原创演示',url=None,kind='demo_original',source='demo',provenance='原创演示 · 非知乎原文',verifiedQuote=False) for i,(t,s,b) in enumerate(records)]
+    return [dict(id=hash_id(seed,node['id'],str(i),'demo-v1'),nodeId=node['id'],title=t,text=s,body=b,author='漫知录 · 原创演示',url=None,kind='demo_original',source='demo',provenance='原创演示 · 非知乎原文',verifiedQuote=False) for i,(t,s,b) in enumerate(records)]
 
 
 class ContentService:
@@ -208,13 +210,14 @@ class ContentService:
             return dict(items=demo_content(node,seed),mode='demo',cached=False)
         query=normalized(f"{seed} {node['title']}")[:200]
         key='zhihu:v1:'+hashlib.sha256(query.encode()).hexdigest()
-        cached=self.store.cache_get(key)
+        cached=self.store.cache_get(key,self.config.cache_seconds)
         if cached is not None:
             return dict(items=[dict(x,nodeId=node['id']) for x in cached],mode='live',cached=True)
-        # Budget the user's live cache misses even when requests join a single flight.
-        if not self.store.reserve_quota('guest:'+uid,self.config.guest_limit):
-            raise ProviderError('当前访客的今日实时探索预算已用完，仍可阅读已缓存内容。',429)
         if key not in self.inflight:
+            # Concurrent readers share one pending search. Only the request
+            # starting an upstream attempt spends a guest/developer budget.
+            if not self.store.reserve_quota('guest:'+uid,self.config.guest_limit):
+                raise ProviderError('当前访客的今日实时探索预算已用完，仍可阅读已缓存内容。',429)
             async def fetch():
                 if not self.store.reserve_quota('developer:zhihu_search',self.config.upstream_limit):
                     raise ProviderError('开发者今日知乎搜索总预算已用完，已有缓存仍可使用。',429)

@@ -8,16 +8,16 @@ class Strict(BaseModel):
 
 
 class WorldInput(Strict):
-    seed: str=Field(min_length=2,max_length=180)
+    seed: str=Field(default='',max_length=180)
     @field_validator('seed')
     @classmethod
     def not_blank(cls,v):
-        if len(v.strip())<2: raise ValueError('请输入至少两个字符的问题')
         return v.strip()
 
 
 class Position(Strict):
     x: float=Field(ge=-1000,le=1000)
+    y: float=Field(default=2.6,ge=-1000,le=1000)
     z: float=Field(ge=-1000,le=1000)
     yaw: float=Field(default=0,ge=-10000,le=10000)
     pitch: float=Field(default=0,ge=-1.4,le=1.4)
@@ -56,3 +56,17 @@ class PublishInput(Strict):
 
 class ReportInput(Strict):
     reason: str=Field(min_length=2,max_length=500)
+
+
+class CommentInput(Strict):
+    text: str=Field(min_length=1,max_length=1000)
+
+    @field_validator('text')
+    @classmethod
+    def text_not_empty(cls,v):
+        if not v.strip(): raise ValueError('评论不能为空')
+        return v.strip()
+
+
+class NotificationReadInput(Strict):
+    ids: list[str]=Field(default_factory=list,max_length=100)

@@ -1,4 +1,6 @@
 export const ICONS = {
+    home: 'M3 11 12 3l9 8M5 10v11h14V10M9 21v-7h6v7',
+    bell: 'M6 8a6 6 0 0 1 12 0v7l3 3H3l3-3V8Zm4 13h4',
     compass: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm4 5-2.5 5.5L8 16l2.5-5.5L16 8Z',
     route: 'M5 5a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm14 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM7 7h8a3 3 0 0 1 0 6H9a3 3 0 0 0 0 6h8',
     bag: 'M7 8V6a5 5 0 0 1 10 0v2M5 8h14l1 13H4L5 8Zm3 5h8v5H8v-5Z',

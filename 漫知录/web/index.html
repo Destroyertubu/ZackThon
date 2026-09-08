@@ -2,58 +2,63 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#153940"><meta name="description" content="知野：以问题为种子，在知识群岛间探索，把走过的路变成自己的心路画布。">
-  <title>知野 ZHIYE — 把问题，走成自己的路</title>
+  <meta name="application-version" content="1.1.0">
+  <meta name="theme-color" content="#153940"><meta name="description" content="漫知录：以问题为种子，在知识群岛间探索，把走过的路变成自己的心路画布。">
+  <title>漫知录 MANZHILU — 把问题，走成自己的路</title>
   <link rel="icon" type="image/svg+xml" href="/static/assets/mark.svg">
   <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/home.css">
   <script type="importmap">{"imports":{"three":"/vendor/three/build/three.module.js","three/addons/":"/vendor/three/examples/jsm/"}}</script>
   <script type="module" src="/static/js/app.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main-actions">跳过三维世界，进入操作区</a>
   <div id="world" aria-label="可探索的知识群岛">
-    <canvas id="world-canvas" aria-label="知野三维知识世界"></canvas>
+    <canvas id="world-canvas" aria-label="漫知录三维知识世界"></canvas>
     <div class="world-labels"></div><div class="world-thoughts"></div>
     <div class="crosshair" aria-hidden="true"><i></i><i></i></div>
+    <div id="target-hint" class="target-hint" hidden><strong></strong><span></span></div>
+    <button id="tracking-cancel" class="tracking-cancel" hidden>停止追踪 · 按方向键也可取消</button>
     <div class="touch-controls" aria-label="触屏移动控制">
       <button data-move="KeyW" aria-label="向前">↑</button><div><button data-move="KeyA" aria-label="向左">←</button><button data-move="KeyS" aria-label="向后">↓</button><button data-move="KeyD" aria-label="向右">→</button></div>
+    <div class="touch-altitude"><button data-move="ShiftLeft" aria-label="上升">升</button><button data-move="ControlLeft" aria-label="下降">降</button></div>
     </div>
   </div>
   <div class="screen-wash" aria-hidden="true"></div>
   <header class="topbar">
-    <button class="wordmark" id="home-btn" aria-label="知野首页"><img src="/static/assets/mark.svg" alt="" width="36" height="36"><span>知野<small>Z H I Y E</small></span></button>
+    <button class="wordmark" id="home-btn" aria-label="漫知录首页"><img src="/static/assets/mark.svg" alt="" width="36" height="36"><span>漫知录<small>M A N Z H I L U</small></span></button>
     <nav class="primary-nav" aria-label="主导航">
       <button id="roam-nav" class="active"><span data-icon="compass"></span>自由漫游</button>
       <button data-panel="canvas"><span data-icon="route"></span>心路画布</button>
       <button data-panel="bag"><span data-icon="bag"></span>知识行囊<span class="nav-count" id="bag-count">0</span></button>
-      <button data-panel="companions"><span data-icon="people"></span>同频的人</button>
+      <button data-panel="home"><span data-icon="home"></span>精神家园</button>
     </nav>
-    <div class="header-actions"><button class="icon-button" data-panel="archives" aria-label="打开旅程存档" title="旅程存档"><span data-icon="archive"></span></button><button id="save-btn" class="save-btn"><span data-icon="save"></span><span id="save-label">保存旅程</span></button><button class="avatar" data-panel="settings" aria-label="设置与隐私">旅</button></div>
+    <div class="header-actions"><button class="icon-button notification-button" data-panel="notifications" aria-label="共鸣消息" title="共鸣消息"><span data-icon="bell"></span><span id="notification-count" hidden>0</span></button><button class="icon-button" data-panel="archives" aria-label="打开旅程存档" title="旅程存档"><span data-icon="archive"></span></button><button id="save-btn" class="save-btn"><span data-icon="save"></span><span id="save-label">保存旅程</span></button><button class="avatar" data-panel="settings" aria-label="设置与隐私">旅</button></div>
   </header>
   <main id="main-actions">
     <section class="intro" id="intro" aria-labelledby="intro-title">
       <div class="eyebrow"><span></span>一场没有标准答案的远行</div>
       <h1 id="intro-title">把问题，<br>走成自己的<span>路。</span></h1>
-      <p class="intro-copy">让好奇心带路，在知识的群岛间漫游。<br>遇见一种观点，也遇见另一种可能。</p>
+      <p class="intro-copy">以第一人称，飞进一片由话题织成的旷野。<br>拾起观点，留下想法，把收获带回自己的家。</p>
       <form class="seed-form" id="seed-form">
-        <label for="seed-input"><span data-icon="spark"></span> 你的问题，就是世界的种子</label>
-        <div class="seed-input-row"><input id="seed-input" type="text" minlength="2" maxlength="180" value="怎样找到真正热爱的事？" autocomplete="off" required aria-label="输入本次旅程的种子问题"><button id="start-btn" type="submit" aria-label="开始漫游"><span>开始漫游</span><span data-icon="arrow"></span></button></div>
+        <label for="seed-input"><span data-icon="spark"></span> 一个问题、几个词，或一次随心出发</label>
+        <div class="seed-input-row"><input id="seed-input" type="text" maxlength="180" value="怎样找到真正热爱的事？" placeholder="也可以留空，让世界给你一个惊喜" autocomplete="off" aria-label="输入本次旅程的种子问题"><button id="start-btn" type="submit" aria-label="开始漫游"><span>开始漫游</span><span data-icon="arrow"></span></button></div>
       </form>
-      <div class="seed-suggestions"><span>或从这里启程</span><button data-seed="AI 应该记住什么，又该忘记什么？">AI 与记忆</button><button data-seed="我们为什么需要无用的事物？">无用之用</button></div>
+      <div class="seed-suggestions"><span>或从这里启程</span><button data-seed="AI 应该记住什么，又该忘记什么？">AI 与记忆</button><button data-seed="我们为什么需要无用的事物？">无用之用</button><button id="random-start" class="random-start" type="button">随心出发 ↗</button></div>
       <div class="intro-note"><span data-icon="route"></span>没有通关，没有标准路线。只有你自己走过的路。</div>
     </section>
     <section id="explore-hud" class="explore-hud" hidden>
-      <div class="eyebrow">正在探索 <span class="tiny-line"></span> EXPEDITION 01</div>
+      <div class="eyebrow">正在探索 <span class="tiny-line"></span> WANDER AT YOUR OWN PACE</div>
       <h1 id="hud-title">热爱的形状</h1>
       <p id="hud-question">怎样找到真正热爱的事？</p>
-      <button id="seed-change" class="text-button light">换一个问题，开启新旅程 <span data-icon="arrow"></span></button>
+      <div class="expedition-actions"><button data-panel="home" class="text-button light"><span data-icon="home"></span> 带着收获回家</button><button id="seed-change" class="text-button light">换一个问题 <span data-icon="arrow"></span></button></div>
     </section>
     <aside class="world-caption" id="world-caption"><span>THE ARCHIPELAGO OF IDEAS</span><i></i><p>远处是话题，近处是观点。<br>停下来，才有自己的思考。</p></aside>
     <section id="nearby" class="nearby" hidden aria-label="附近的话题内容"></section>
   </main>
   <footer class="bottom-bar">
     <div class="journey-meta"><span id="mode-badge" class="mode-badge">正在准备世界</span><span class="small-meta" id="journey-stats">一颗问题种子 · 无限种走法</span><span class="renderer-tag" id="renderer-tag"></span></div>
-    <div class="key-guide" id="key-guide" hidden><span><kbd>W A S D</kbd> 移动</span><span><kbd>鼠标</kbd> 视角</span><span><kbd>Tab</kbd> 释放鼠标</span><span><kbd>E</kbd> 收入行囊</span><span><kbd>R</kbd> 想法锚点</span><span><kbd>M</kbd> 画布</span></div>
+    <div class="key-guide" id="key-guide" hidden><span><kbd>WASD</kbd> 漫行</span><span><kbd>Shift / Ctrl</kbd> 升降</span><span><kbd>F</kbd> 文章场域</span><span><kbd>E / B</kbd> 收纳 / 行囊</span><span><kbd>R / T</kbd> 想法 / 共鸣</span><span><kbd>V</kbd> 追踪</span><span><kbd>H</kbd> 回家</span></div>
     <div class="bottom-tools"><button id="audio-btn" class="icon-button" aria-label="开启环境声音" title="环境声音 · 默认关闭"><span data-icon="volume"></span></button><button class="icon-button" data-panel="help" aria-label="操作帮助" title="操作帮助"><span data-icon="help"></span></button><button class="icon-button" data-panel="settings" aria-label="画质与隐私设置" title="画质与隐私"><span data-icon="settings"></span></button></div>
   </footer>
   <button class="minimap-card" id="minimap-open" aria-label="打开心路画布" hidden><span class="minimap-heading">我的心路 <span id="visited-count">01</span></span><svg id="minimap" viewBox="0 0 180 110" aria-hidden="true"></svg><span class="minimap-caption">每一步，都算数 <span data-icon="expand"></span></span></button>

@@ -14,13 +14,14 @@ export function drawMiniMap(svg, world, journey) { svg.replaceChildren(); if (!w
     const visited = journey.visited.includes(n.id);
     svg.append(svgEl('circle', { cx: tx(n), cy: ty(n), r: visited ? 2.8 : 1.7, fill: visited ? '#e6c691' : '#789f90', opacity: visited ? 1 : .6 }));
 } const p = journey.position; svg.append(svgEl('circle', { cx: tx(p), cy: ty(p), r: 3.2, fill: '#f6ead0', stroke: '#284c44', 'stroke-width': 1 })); }
-export function makeGraph(world, journey, onSelect, { readOnly = false } = {}) {
+export function makeGraph(world, journey, onSelect, { readOnly = false, heat = false } = {}) {
     const frame = el('div', { class: 'graph-frame' }), svg = svgEl('svg', { role: 'img', 'aria-label': '心路画布：话题、探索轨迹与知识联系' }), bounds = graphBounds(world.nodes);
     let box = { ...bounds };
     const view = () => svg.setAttribute('viewBox', `${box.x} ${box.y} ${box.w} ${box.h}`);
     view();
     frame.append(svg);
     const ns = new Map(world.nodes.map(n => [n.id, n]));
+    const maximumHeat = Math.max(1, ...world.edges.map(e => e.heat || 0));
     // Background topographic guide rings.
     for (let i = 1; i < 9; i++)
         svg.append(svgEl('ellipse', { cx: 0, cy: 0, rx: i * 15, ry: i * 13, fill: 'none', stroke: '#cbd6bf', 'stroke-width': .16, opacity: .65 }));
@@ -28,7 +29,13 @@ export function makeGraph(world, journey, onSelect, { readOnly = false } = {}) {
         const a = ns.get(e.source), b = ns.get(e.target);
         if (!a || !b)
             continue;
-        svg.append(svgEl('line', { x1: a.x, y1: a.z, x2: b.x, y2: b.z, stroke: e.kind === 'alternative' ? '#c8a58c' : e.kind === 'bridge' ? '#aeb0c0' : '#a9bb9a', 'stroke-width': .65, 'stroke-dasharray': e.kind === 'deepen' ? '0' : '1.6 1.6', opacity: .8 }));
+        const edge = svgEl('line', { x1: a.x, y1: a.z, x2: b.x, y2: b.z,
+            class: heat ? 'path-heat' : 'map-edge', 'data-heat': e.heat || 0,
+            stroke: heat ? '#b38339' : e.kind === 'alternative' ? '#c8a58c' : e.kind === 'bridge' ? '#aeb0c0' : '#a9bb9a',
+            'stroke-width': heat ? .65 + Math.min(3, Math.log2(1 + (e.heat || 0))) : .65,
+            'stroke-dasharray': heat || e.kind === 'deepen' ? '0' : '1.6 1.6', opacity: heat ? .3 + .65 * (e.heat || 0) / maximumHeat : .8 });
+        if (heat) edge.append(svgEl('title', {}, `${a.title} → ${b.title} · ${e.heat} 条公开路线`));
+        svg.append(edge);
     }
     if (journey.trace?.length > 1) {
         svg.append(svgEl('polyline', { points: journey.trace.map(p => `${p.x},${p.z}`).join(' '), fill: 'none', stroke: '#af8745', 'stroke-width': .85, opacity: .72, 'stroke-linejoin': 'round' }));
@@ -64,7 +71,7 @@ export function makeGraph(world, journey, onSelect, { readOnly = false } = {}) {
     }
     for (const n of world.nodes) {
         const visited = visits.includes(n.id), g = svgEl('g', { class: 'graph-node', tabindex: 0, role: 'button', 'aria-label': n.title, transform: `translate(${n.x},${n.z})` });
-        g.append(svgEl('circle', { r: visited ? 3.4 : 2.4, fill: visited ? '#efdfb0' : '#e5ebd8', stroke: visited ? '#a9894c' : '#9fb28e', 'stroke-width': .7 }));
+        g.append(svgEl('circle', { r: heat ? 2.4 + Math.min(3, Math.log2(1 + (n.heat || 0))) : visited ? 3.4 : 2.4, fill: heat || visited ? '#efdfb0' : '#e5ebd8', stroke: heat || visited ? '#a9894c' : '#9fb28e', 'stroke-width': .7 }));
         if (visited)
             g.append(svgEl('circle', { r: .8, fill: '#a2864d' }));
         const text = svgEl('text', { class: 'graph-label', x: 0, y: 8.5, 'text-anchor': 'middle' }, n.title.length > 13 ? n.title.slice(0, 12) + '…' : n.title);
@@ -81,7 +88,9 @@ export function makeGraph(world, journey, onSelect, { readOnly = false } = {}) {
         if (n)
             svg.append(svgEl('path', { d: `M${n.x + 4},${n.z - 6}l1.5 3-1.5 3-1.5-3Z`, fill: '#7c9181' }));
     }
-    frame.append(el('div', { class: 'graph-legend' }, el('span', {}, el('i'), '我走过的路'), el('span', {}, el('i'), '可能的方向'), el('span', {}, el('i'), '知识组合')));
+    frame.append(heat
+        ? el('div', { class: 'graph-legend' }, el('span', {}, el('i'), '越亮、越宽 · 同行的人越多'))
+        : el('div', { class: 'graph-legend' }, el('span', {}, el('i'), '我走过的路'), el('span', {}, el('i'), '可能的方向'), el('span', {}, el('i'), '知识组合')));
     const zoom = factor => { const cx = box.x + box.w / 2, cy = box.y + box.h / 2; box.w = Math.min(bounds.w * 3, Math.max(25, box.w * factor)); box.h = box.w * bounds.h / bounds.w; box.x = cx - box.w / 2; box.y = cy - box.h / 2; view(); };
     frame.append(el('div', { class: 'graph-tools' }, el('button', { type: 'button', onclick: () => zoom(.8), 'aria-label': '放大画布' }, '+'), el('button', { type: 'button', onclick: () => zoom(1.25), 'aria-label': '缩小画布' }, '−'), el('button', { type: 'button', onclick: () => { box = { ...bounds }; view(); }, 'aria-label': '重置画布' }, '⤢')));
     svg.addEventListener('wheel', e => { e.preventDefault(); zoom(e.deltaY > 0 ? 1.08 : .92); }, { passive: false });

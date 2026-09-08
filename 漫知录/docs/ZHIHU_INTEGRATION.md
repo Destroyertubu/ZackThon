@@ -22,32 +22,32 @@ curl -G 'https://developer.zhihu.com/api/v1/content/zhihu_search' \
 
 https://developer-cdn.zhihu.com/zhihu-cli/releases/beta/skill/0.5.3-beta.20260904115023/zhihu-cli-skill-0.5.3-beta.20260904115023.zip
 
-本次工具环境无法成功下载此 ZIP，未读取其内容，也没有安装到 agent。不能据此声称掌握 2026-09-04 新增故事、知识接口的精确请求参数。`fetch_official_skill.py` 只做下载与安全展开；失败时明确退出，绝不下载替代包、生成伪 Skill 或自动执行包内命令。
+2026-09-08 已成功下载并阅读此版本，安装到开发者的 Agent 技能目录，并完成官方 CLI 初始化。项目里的 `vendor/official-skill` 为被 Git 忽略的本地参考资料，不包含凭证。`fetch_official_skill.py` 仍只负责下载与安全展开，不执行包内命令。
 
 下载脚本的 SHA-256 仅用于标识取得的文件；因为没有官方预公布摘要，不能把这个摘要称为“官方签名验证”。接入前请人工查看 Skill 的完整说明、只读命令与凭据保存位置。
 
 ## 3. 响应契约
 
-本版提供一个保守的兼容归一化器，可以识别常见的 `data/items/results` 容器及 title/url/summary/author 等字段；这只是适配策略，不是官方 beta 响应保证。`schema.example.json` 演示如何指定路径：
+本版按官方 Skill 核对了搜索结果的 `Data.Items`、`Title`、`Url`、`ContentText` 和 `AuthorName`。默认归一化器兼容这些字段，`schema.example.json` 可显式指定映射：
 
 ```json
 {
-  "_notice": "映射格式示例；务必用真实样本核验",
+  "_notice": "依据官方 Skill 0.5.3 的搜索响应约定",
   "items": "Data.Items",
   "title": "Title",
   "url": "Url",
-  "summary": "Summary",
-  "author": "Author.Name"
+  "summary": "ContentText",
+  "author": "AuthorName"
 }
 ```
 
 保存经过核验的映射到服务器本地文件，然后配置：
 
 ```dotenv
-ZHIHU_SCHEMA_FILE=backend/schema.verified.json
+ZHIHU_SCHEMA_FILE=backend/schema.example.json
 ```
 
-上面这个文件名是你本地创建的映射文件，不在交付包中假装存在。检测不到列表结构、没有安全的知乎来源链接、业务错误或字段错配时，接口返回错误，`demoFallback` 为 `false`。合法的空结果列表保持空列表，不凭空补充答案。
+该映射文件随项目提供。检测不到列表结构、没有安全的知乎来源链接、业务错误或字段错配时，接口返回错误，`demoFallback` 为 `false`。合法的空结果列表保持空列表，不凭空补充答案。
 
 没有来源 URL 的文本不会进入“真实知乎内容”结果。`https://zhihu.com.evil.example`、userinfo、非 HTTPS、控制字符、不合预期端口均被拒绝。
 
@@ -74,14 +74,20 @@ ZHIHU_SCHEMA_FILE=backend/schema.verified.json
 
 ## 4. CLI 桥接是可选项
 
-默认 HTTP 不依赖 CLI。只有本地已经安装、初始化并核验了官方 Skill，才考虑：
+推荐本机使用已初始化的官方 CLI：
+
+```bash
+python run.py --live
+```
+
+启动器会定位官方 CLI，并加载 `backend/schema.cli.json`。自定义接入仍可配置：
 
 ```dotenv
 ZHIYE_PROVIDER=cli
 ZHIHU_CLI_PATH=/absolute/path/to/your/verified/official-cli
 ```
 
-在经核验的 schema 文件中填写 `cli_search_args` 字符串数组，以 `{query}` 表示唯一的用户查询替换位置；另设 `cli_readonly_confirmed: true`，表明开发者已检查命令确实只读。**此处不写猜测的子命令/参数示例。** 真实 argv 必须来自下载后的 Skill，不从本说明推断。
+`schema.cli.json` 已配置 `cli_readonly_confirmed: true` 及官方只读参数 `search zhihu --query {query} --count 6`；成功 stdout 保持官方 JSON 响应结构。系统凭据由 CLI 自行取得，应用不导出钥匙串，也不把凭证交给浏览器。
 
 实现使用 `asyncio.create_subprocess_exec`，不经过 shell；固定可执行文件与参数模板只来自服务器配置。不得把 Access Secret 放在命令参数里，不要允许浏览器上传 argv 或 executable。
 
@@ -92,16 +98,22 @@ ZHIHU_CLI_PATH=/absolute/path/to/your/verified/official-cli
 请求流程：
 
 ```text
-已缓存的话题内容
+本地 SQLite 已保存的查询结果（默认不过期）
   └─ 直接返回，不扣实时预算
 缓存未命中
-  └─ 原子预留访客预算
-     └─ 相同查询加入已有 in-flight 任务
-        或原子预留开发者预算、发起一次官方请求
-           └─ 清洗、记录来源、缓存 6 小时
+  └─ 相同查询加入已有 in-flight 任务
+     或发起一个新任务
+        └─ 原子预留访客与开发者预算、发起一次官方请求
+           └─ 清洗、记录来源与抓取时间，持久写入本地 SQLite
 ```
 
-计数按北京时间自然日划分；6 小时和访客 80 次都是本应用的配置，不宣称为官方规定。请求失败也不返还已预留的开发者预算，是偏保守的实现，因为无法确定上游是否已计费/计数。
+默认 `ZHIYE_CACHE_SECONDS=0`：本地优先，缓存不自动过期；旧版按 6 小时写入、已过期但仍保留在数据库中的结果也可复用。相同查询跨世界与访客共享；服务重启、重新进入话题和已达每日预算上限时，仍可读取已保存的结果。缓存命中不会扣任何查询预算。合法空列表也会保存，上游错误不会作为内容缓存。
+
+已用真实缓存验证：重启服务、更换为新访客后再次请求同一查询，返回原有 6 条内容，`cached=true`，开发者和访客预算增量均为 0。见[持久缓存验证结果](../previews/v11/persistent-cache-smoke.json)。
+
+只有显式设置正数 `ZHIYE_CACHE_SECONDS` 时才启用按秒计的自动过期策略；更新内容将消耗新的调用次数。缓存位于 `data/zhiye.sqlite3`（或 `ZHIYE_DB` 指定位置），保存已归一化的标题、摘要、作者、来源 URL 与抓取时间。浏览器 IndexedDB 另存当前旅程和已加载内容；它不替代服务端的全部搜索缓存。
+
+计数按北京时间自然日划分；访客 80 次是本应用自定配置，不宣称为官方规定。请求失败也不返还已预留的开发者预算，是偏保守的实现，因为无法确定上游是否已计费/计数。
 
 进程内 singleflight 适用于当前单进程运行方式；数据库额度是原子的。多实例部署必须增加 Redis 等共享缓存与分布式合并机制，且所有服务实例应共享同一开发者额度来源。
 
@@ -117,7 +129,7 @@ python scripts/probe_zhihu.py --live --query "如何发现自己的兴趣"
 
 探测只输出模式、命中情况、条数和来源类型，不打印密钥或原始完整响应。再手工核对每条返回结果的原文链接、作者以及“摘要”标签，检查 401/403/429、空结果、超时和额度耗尽。
 
-本次交付没有条件完成上述真实鉴权验收。应保存脱敏的真实响应样本，替换当前测试中的人工样本，补充契约回归测试。
+2026-09-08 已通过 `run.py --live` 启动真实服务，并由应用调用官方 CLI 完成一次未命中缓存的知乎搜索：HTTP 200，返回 6 条 `source=zhihu` 内容，全部具备标题、摘要和知乎原文链接。凭据由 CLI 从系统凭据库获取，未写入项目。脱敏的统计结果见 [live-smoke.json](../previews/v11/live-smoke.json)。这验证了当前账号的一次成功搜索，不代表已验证所有官方能力、权限和上游错误场景；契约单测仍使用人工样本。
 
 ## 7. 其他官方能力的接入优先级
 

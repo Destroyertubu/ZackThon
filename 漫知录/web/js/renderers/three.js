@@ -109,6 +109,8 @@ export class ThreeRenderer {
         this.group.add(this.particles);
     }
     render(camera, time, options = {}) {
+        const fov = options.fov ?? 58;
+        if (this.camera.fov !== fov) { this.camera.fov = fov; this.camera.updateProjectionMatrix(); }
         this.camera.position.set(camera.x, camera.y, camera.z);
         const { forward } = cameraBasis(camera);
         this.camera.lookAt(camera.x + forward[0], camera.y + forward[1], camera.z + forward[2]);

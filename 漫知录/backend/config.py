@@ -26,7 +26,9 @@ class Config:
     schema_file: str = os.getenv('ZHIHU_SCHEMA_FILE', '')
     upstream_limit: int = int(os.getenv('ZHIHU_SEARCH_DAILY_LIMIT', '5000'))
     guest_limit: int = int(os.getenv('ZHIYE_GUEST_DAILY_LIMIT', '80'))
-    cache_seconds: int = int(os.getenv('ZHIYE_CACHE_SECONDS', '21600'))
+    # Zero (or a negative value) keeps successful searches locally without an
+    # automatic refresh. A positive value explicitly opts into a freshness TTL.
+    cache_seconds: int = int(os.getenv('ZHIYE_CACHE_SECONDS', '0'))
     origins: tuple[str, ...] = tuple(os.getenv('ZHIYE_ALLOWED_ORIGINS', 'http://127.0.0.1:8000,http://localhost:8000').split(','))
     secure_cookie: bool = os.getenv('ZHIYE_SECURE_COOKIE', '0') == '1'
     admin_token: str = os.getenv('ZHIYE_ADMIN_TOKEN', '')

@@ -10,8 +10,8 @@ from fastapi.staticfiles import StaticFiles
 from .config import Config, ROOT
 from .store import Store, dump
 from .content import ContentService, ProviderError
-from .models import WorldInput, JourneyInput, AnchorInput, PublishInput, ReportInput
-from .world import make_world, expand_world, public_projection, similarity, hash_id
+from .models import WorldInput, JourneyInput, AnchorInput, PublishInput, ReportInput, CommentInput, NotificationReadInput
+from .world import make_world, expand_world, public_projection, similarity, hash_id, aggregate_trails
 
 
 def create_app(config=None):
@@ -20,7 +20,7 @@ def create_app(config=None):
         raise ValueError('ZHIYE_MODE must be demo or live')
     store=Store(cfg.db_path)
     content=ContentService(cfg,store)
-    app=FastAPI(title='知野 · Knowledge World',version='1.0.0',docs_url=None,redoc_url=None,openapi_url='/api/openapi.json')
+    app=FastAPI(title='漫知录 · Knowledge World',version='1.1.0',docs_url=None,redoc_url=None,openapi_url='/api/openapi.json')
     app.state.store,app.state.config,app.state.content=store,cfg,content
 
     @app.middleware('http')
@@ -167,6 +167,44 @@ def create_app(config=None):
             rows=db.execute('SELECT id,data,updated,public_slug FROM journeys WHERE owner=? ORDER BY updated DESC LIMIT 100',(u['id'],)).fetchall()
         return [dict(id=r['id'],title=json.loads(r['data'])['title'],updated=r['updated'],publicSlug=r['public_slug'],visited=len(json.loads(r['data']).get('visited',[]))) for r in rows]
 
+    @app.get('/api/home')
+    def home(u=Depends(user)):
+        with store.connect() as db:
+            rows=db.execute('SELECT j.id,j.data,j.updated,j.public_slug,w.data AS world_data FROM journeys j JOIN worlds w ON j.world_id=w.id AND j.owner=w.owner WHERE j.owner=? ORDER BY j.updated DESC',(u['id'],)).fetchall()
+        journals,thoughts,bridges,items=[],[],[],{}
+        thought_ids,bridge_ids=set(),set()
+        for row in rows:
+            data,world=json.loads(row['data']),json.loads(row['world_data'])
+            nodes={n['id']:n for n in world['nodes']}
+            context=dict(journeyId=row['id'],journeyTitle=data['title'])
+            journals.append(dict(id=row['id'],title=data['title'],seed=world['seed'],updated=row['updated'],startedAt=data.get('startedAt'),publicSlug=row['public_slug'],visited=len(set(data.get('visited',[]))),items=len(data.get('bag',[])),thoughts=len(data.get('thoughts',[])),bridges=len(data.get('bridges',[]))))
+            for card in data.get('bag',[]):
+                node=nodes.get(str(card.get('nodeId','')), {})
+                stored_topic=card.get('topic')
+                topic=(stored_topic.strip()[:180] if isinstance(stored_topic,str) else '') or node.get('title') or ('思维合成' if card.get('kind')=='derived' else '沿途收获')
+                cid=str(card.get('id') or hash_id(dump(card)))
+                origin=dict(context,topic=topic)
+                if cid in items:
+                    if row['id'] not in items[cid]['journeyIds']:
+                        items[cid]['journeyIds'].append(row['id'])
+                        items[cid]['origins'].append(origin)
+                    continue
+                items[cid]=dict(card,**context,topic=topic,color=node.get('color','#e5bd83'),journeyIds=[row['id']],origins=[origin])
+            for kind,target,seen in [('thoughts',thoughts,thought_ids),('bridges',bridges,bridge_ids)]:
+                for entry in data.get(kind,[]):
+                    key=str(entry.get('id') or hash_id(row['id'],dump(entry)))
+                    if key in seen: continue
+                    seen.add(key)
+                    node=nodes.get(str(entry.get('nodeId','')), {})
+                    target.append(dict(entry,**context,topic=node.get('title','沿途')))
+        groups={}
+        for card in items.values():
+            topic=card['topic']
+            group=groups.setdefault(topic,dict(topic=topic,nodeId=card.get('nodeId'),color=card['color'],items=[],count=0))
+            group['items'].append(card)
+            group['count']+=1
+        return dict(groups=sorted(groups.values(),key=lambda g:(-g['count'],g['topic'])),journals=journals,thoughts=thoughts,bridges=bridges,stats=dict(journeys=len(journals),items=len(items),topics=len(groups),thoughts=len(thoughts),bridges=len(bridges)))
+
     @app.get('/api/journeys/{jid}')
     def journey_get(jid:str,u=Depends(user)):
         row=store.owned('journeys',jid,u['id'])
@@ -229,6 +267,38 @@ def create_app(config=None):
                 items.append(dict(slug=candidate['public_slug'],alias=p['alias'],seed=p['seed'],score=score,commonTopics=common,visitedCount=p['visitedCount']))
         return {'enabled':True,'items':sorted(items,key=lambda x:-x['score'])[:12],'algorithm':'0.65×话题 Jaccard + 0.35×有向图边 Jaccard；不是人格推断。'}
 
+    @app.get('/api/trails')
+    def trails(view:str='popular',journeyId:str='',u=Depends(user)):
+        if view not in ('popular','companions'):
+            raise HTTPException(422,'请选择全员热门小径或同频人足迹。')
+        target=None
+        if view=='companions':
+            row=store.owned('journeys',journeyId,u['id'])
+            if not row or not row['public_slug'] or not row['public_data']:
+                return dict(view=view,enabled=False,nodes=[],edges=[],pathCount=0)
+            target=json.loads(row['public_data'])
+        with store.connect() as db:
+            rows=db.execute('SELECT owner,public_data FROM journeys WHERE public_slug IS NOT NULL AND public_data IS NOT NULL ORDER BY updated DESC LIMIT 500').fetchall()
+        projections=[]
+        for row in rows:
+            projection=json.loads(row['public_data'])
+            if target is not None and (row['owner']==u['id'] or similarity(target,projection)[0]<=0):
+                continue
+            projections.append(projection)
+        return dict(view=view,enabled=True,**aggregate_trails(projections))
+
+    def visible_anchor(db,aid,uid):
+        row=db.execute("SELECT a.*,u.alias FROM anchors a JOIN users u ON a.owner=u.id WHERE a.id=? AND (a.owner=? OR (a.visibility='public' AND a.status='approved'))",(aid,uid)).fetchone()
+        if not row:
+            raise HTTPException(404,'锚点不存在或尚未公开。')
+        return row
+
+    def anchor_view(db,row,uid):
+        counts=db.execute('SELECT count(read_at) AS readers,coalesce(sum(resonance),0) AS resonance FROM anchor_interactions WHERE anchor_id=?',(row['id'],)).fetchone()
+        mine=db.execute('SELECT resonance FROM anchor_interactions WHERE anchor_id=? AND owner=?',(row['id'],uid)).fetchone()
+        comments=db.execute('SELECT count(*) FROM anchor_comments WHERE anchor_id=?',(row['id'],)).fetchone()[0]
+        return dict(id=row['id'],text=row['text'],topic=row['topic'],alias=row['alias'],own=row['owner']==uid,status=row['status'],visibility=row['visibility'],created=row['created'],readCount=counts['readers'],resonance=counts['readers']+counts['resonance'],myResonance=mine[0] if mine else 0,commentCount=comments)
+
     @app.post('/api/anchors')
     def anchor_create(payload:AnchorInput,u=Depends(user)):
         if not store.rate('anchor:'+u['id'],6):
@@ -247,15 +317,88 @@ def create_app(config=None):
     def anchors(topic:str='',u=Depends(user)):
         topic=topic[:180]
         with store.connect() as db:
-            rows=db.execute('SELECT a.*,u.alias FROM anchors a JOIN users u ON a.owner=u.id WHERE a.topic=? AND (a.owner=? OR (a.visibility=\'public\' AND a.status=\'approved\')) ORDER BY a.created DESC LIMIT 60',(topic,u['id'])).fetchall()
-        return [dict(id=r['id'],text=r['text'],alias=r['alias'],own=r['owner']==u['id'],status=r['status'],visibility=r['visibility'],created=r['created']) for r in rows]
+            rows=db.execute("SELECT a.*,u.alias FROM anchors a JOIN users u ON a.owner=u.id WHERE a.topic=? AND (a.owner=? OR (a.visibility='public' AND a.status='approved')) ORDER BY coalesce((SELECT sum((i.read_at IS NOT NULL)+i.resonance) FROM anchor_interactions i WHERE i.anchor_id=a.id),0) DESC,a.created DESC LIMIT 60",(topic,u['id'])).fetchall()
+            return [anchor_view(db,row,u['id']) for row in rows]
+
+    @app.post('/api/anchors/{aid}/read')
+    def anchor_read(aid:str,u=Depends(user)):
+        if not store.rate('anchor-read:'+u['id'],60):
+            raise HTTPException(429,'阅读请求过于频繁，请稍后再试。')
+        with store.connect(True) as db:
+            row=visible_anchor(db,aid,u['id'])
+            changed=0
+            if row['owner']!=u['id']:
+                changed=db.execute('INSERT INTO anchor_interactions(anchor_id,owner,read_at) VALUES(?,?,?) ON CONFLICT(anchor_id,owner) DO UPDATE SET read_at=excluded.read_at WHERE anchor_interactions.read_at IS NULL',(aid,u['id'],time.time())).rowcount
+            return dict(anchor_view(db,row,u['id']),read=bool(changed))
+
+    @app.post('/api/anchors/{aid}/resonate')
+    def anchor_resonate(aid:str,u=Depends(user)):
+        if not store.rate('anchor-resonate:'+u['id'],30):
+            raise HTTPException(429,'连鸣过于频繁，请稍后再试。')
+        with store.connect(True) as db:
+            row=visible_anchor(db,aid,u['id'])
+            if row['owner']==u['id']:
+                raise HTTPException(403,'不能为自己的锚点连鸣。')
+            db.execute('INSERT OR IGNORE INTO anchor_interactions(anchor_id,owner) VALUES(?,?)',(aid,u['id']))
+            changed=db.execute('UPDATE anchor_interactions SET resonance=resonance+1 WHERE anchor_id=? AND owner=? AND resonance<3',(aid,u['id'])).rowcount
+            if not changed:
+                raise HTTPException(409,'你已为这个锚点连鸣 3 次。')
+            result=anchor_view(db,row,u['id'])
+            text=f"你的锚点在「{row['topic']}」话题被一位同路人连鸣了（第 {result['myResonance']} 次）。"
+            event_key=f"resonance:{aid}:{u['id']}"
+            db.execute('INSERT INTO notifications(id,owner,actor,anchor_id,topic,text,created,event_key) VALUES(?,?,?,?,?,?,?,?) ON CONFLICT(event_key) DO UPDATE SET text=excluded.text,created=excluded.created,read_at=NULL',(hash_id('notification',event_key),row['owner'],u['id'],aid,row['topic'],text,time.time(),event_key))
+            return result
+
+    @app.get('/api/anchors/{aid}/comments')
+    def anchor_comments(aid:str,u=Depends(user)):
+        with store.connect() as db:
+            visible_anchor(db,aid,u['id'])
+            rows=db.execute('SELECT c.*,u.alias FROM anchor_comments c JOIN users u ON c.owner=u.id WHERE c.anchor_id=? ORDER BY c.created DESC LIMIT 100',(aid,)).fetchall()
+            total=db.execute('SELECT count(*) FROM anchor_comments WHERE anchor_id=?',(aid,)).fetchone()[0]
+        return dict(items=[dict(id=r['id'],text=r['text'],alias=r['alias'],own=r['owner']==u['id'],created=r['created']) for r in rows],total=total)
+
+    @app.post('/api/anchors/{aid}/comments')
+    def anchor_comment(aid:str,payload:CommentInput,u=Depends(user)):
+        if not store.rate('anchor-comment:'+u['id'],6):
+            raise HTTPException(429,'评论过于频繁，请稍后再试。')
+        cid,created=secrets.token_hex(12),time.time()
+        with store.connect(True) as db:
+            anchor=visible_anchor(db,aid,u['id'])
+            duplicate=db.execute('SELECT id FROM anchor_comments WHERE anchor_id=? AND owner=? AND text=? AND created>?',(aid,u['id'],payload.text,created-60)).fetchone()
+            if duplicate:
+                raise HTTPException(409,'这条评论刚刚已经留下了。')
+            db.execute('INSERT INTO anchor_comments VALUES(?,?,?,?,?)',(cid,aid,u['id'],payload.text,created))
+            if anchor['owner']!=u['id']:
+                event_key='comment:'+cid
+                excerpt=payload.text[:80]+('…' if len(payload.text)>80 else '')
+                text=f"你在「{anchor['topic']}」留下的锚点收到一位同路人的回应：「{excerpt}」"
+                db.execute('INSERT OR IGNORE INTO notifications(id,owner,actor,anchor_id,topic,text,created,event_key) VALUES(?,?,?,?,?,?,?,?)',(hash_id('notification',event_key),anchor['owner'],u['id'],aid,anchor['topic'],text,created,event_key))
+        return dict(id=cid,text=payload.text,alias=u['alias'],own=True,created=created)
+
+    @app.get('/api/notifications')
+    def notifications(u=Depends(user)):
+        with store.connect() as db:
+            rows=db.execute('SELECT * FROM notifications WHERE owner=? ORDER BY created DESC LIMIT 100',(u['id'],)).fetchall()
+            unread=db.execute('SELECT count(*) FROM notifications WHERE owner=? AND read_at IS NULL',(u['id'],)).fetchone()[0]
+        return dict(items=[dict(id=r['id'],anchorId=r['anchor_id'],topic=r['topic'],text=r['text'],created=r['created'],read=r['read_at'] is not None) for r in rows],unread=unread)
+
+    @app.post('/api/notifications/read')
+    def notifications_read(payload:NotificationReadInput,u=Depends(user)):
+        with store.connect(True) as db:
+            if payload.ids:
+                placeholders=','.join('?' for _ in payload.ids)
+                changed=db.execute(f'UPDATE notifications SET read_at=? WHERE owner=? AND read_at IS NULL AND id IN ({placeholders})',(time.time(),u['id'],*payload.ids)).rowcount
+            else:
+                changed=db.execute('UPDATE notifications SET read_at=? WHERE owner=? AND read_at IS NULL',(time.time(),u['id'])).rowcount
+        return dict(read=changed)
 
     @app.delete('/api/anchors/{aid}')
     def anchor_delete(aid:str,u=Depends(user)):
         with store.connect(True) as db:
             n=db.execute('DELETE FROM anchors WHERE id=? AND owner=?',(aid,u['id'])).rowcount
             if n:
-                db.execute('DELETE FROM reports WHERE anchor_id=?',(aid,))
+                for table in ('reports','anchor_interactions','anchor_comments','notifications'):
+                    db.execute(f'DELETE FROM {table} WHERE anchor_id=?',(aid,))
         if not n:
             raise HTTPException(404,'锚点不存在。')
         return {'deleted':True}

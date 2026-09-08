@@ -17,9 +17,9 @@ export function walkable(p, world) {
 export function nearestNode(p, nodes) { return nodes.reduce((best, n) => { const d = distance(p, n); return !best || d < best.distance ? { node: n, distance: d } : best; }, null); }
 export function appendTrace(trace, p, t, force = false) {
     const prev = trace.at(-1);
-    if (!force && prev && Math.hypot(prev.x - p.x, prev.z - p.z) < 1.6 && t - prev.t < 8000)
+    if (!force && prev && Math.hypot(prev.x - p.x, (prev.y ?? 2.6) - (p.y ?? 2.6), prev.z - p.z) < 1.6 && t - prev.t < 8000)
         return trace;
-    const next = [...trace, { x: +p.x.toFixed(2), z: +p.z.toFixed(2), t }];
+    const next = [...trace, { x: +p.x.toFixed(2), y: +(p.y ?? 2.6).toFixed(2), z: +p.z.toFixed(2), t }];
     if (next.length <= 2800)
         return next;
     // Preserve start/end and coarsen old samples instead of discarding the beginning.
@@ -27,7 +27,18 @@ export function appendTrace(trace, p, t, force = false) {
 }
 export function makeJourney(world) {
     const date = new Date().toISOString();
-    return { id: crypto.randomUUID(), worldId: world.id, revision: 0, title: world.seed, position: { x: 0, z: 8, yaw: 0, pitch: 0 }, visited: ['root'], trace: [], bag: [], thoughts: [], bridges: [], startedAt: date, updatedAt: date };
+    return { id: crypto.randomUUID(), worldId: world.id, revision: 0, title: world.seed, position: { x: 0, y: 2.6, z: 8, yaw: 0, pitch: 0 }, visited: ['root'], trace: [], bag: [], thoughts: [], bridges: [], startedAt: date, updatedAt: date };
+}
+export function restoreCachedContent(entries, mode, contentMode) {
+    if (!Array.isArray(entries) || !['demo', 'live'].includes(mode) || (contentMode != null && contentMode !== mode)) return [];
+    const source = mode === 'live' ? 'zhihu' : 'demo';
+    return entries.filter(entry => {
+        if (!Array.isArray(entry) || entry.length !== 2 || typeof entry[0] !== 'string' || !Array.isArray(entry[1])) return false;
+        const cards = entry[1];
+        // Older backups have no mode stamp: their provenance can identify
+        // populated results, but an empty result must be fetched again.
+        return cards.length ? cards.every(card => card?.source === source) : contentMode === mode;
+    });
 }
 export function collect(journey, card) {
     if (journey.bag.some(c => c.id === card.id))
@@ -53,7 +64,7 @@ export function synthesize(cards, relation, note, output = 'question') {
 }
 export function exportMarkdown(journey, world) {
     const mdEscape = s => String(s ?? '').replace(/[\[\]<>]/g, c => ({ '[': '\\[', ']': '\\]', '<': '&lt;', '>': '&gt;' }[c]));
-    let s = `---\ntitle: ${JSON.stringify(journey.title)}\napp: 知野\ncreated: ${journey.startedAt}\nschema_version: 1\n---\n\n# ${mdEscape(journey.title)}\n\n> 问题是世界的种子；走过的路，是自己的答案。\n\n## 我走过的话题\n\n`;
+    let s = `---\ntitle: ${JSON.stringify(journey.title)}\napp: 漫知录\ncreated: ${journey.startedAt}\nschema_version: 1\n---\n\n# ${mdEscape(journey.title)}\n\n> 问题是世界的种子；走过的路，是自己的答案。\n\n## 我走过的话题\n\n`;
     const ns = new Map(world.nodes.map(n => [n.id, n]));
     s += journey.visited.map((id, i) => `${i + 1}. ${mdEscape(ns.get(id)?.title || id)}`).join('\n');
     s += '\n\n## 知识行囊\n';

@@ -1,8 +1,8 @@
 {
-  "_notice": "这是映射格式示例，不是已核验的官方 beta 响应；以下载到的官方 Skill 为准。删除不存在的路径。",
+  "_notice": "依据官方 Skill 0.5.3 HTTP 文档的知乎搜索响应。自定义代理如改变结构，请同步调整路径。",
   "items": "Data.Items",
   "title": "Title",
   "url": "Url",
-  "summary": "Summary",
-  "author": "Author.Name"
+  "summary": "ContentText",
+  "author": "AuthorName"
 }

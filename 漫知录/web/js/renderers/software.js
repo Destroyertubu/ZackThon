@@ -13,7 +13,7 @@ export class SoftwareRenderer {
     setWorld(world) { const scene = buildScene(world, { software: true }); this.faces = [...geometryFaces(scene.terrain), ...geometryFaces(scene.foliage)]; this.beacons = scene.beacons; this.lanterns = scene.lanterns; }
     render(camera, time, options = {}) {
         this.camera = camera;
-        this.project = projector(camera, this.width, this.height, 58);
+        this.project = projector(camera, this.width, this.height, options.fov ?? 58);
         const ctx = this.ctx, w = this.width, h = this.height;
         ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
         const horizon = clamp(h * .49 + camera.pitch * h * .82, h * .08, h * .86);
