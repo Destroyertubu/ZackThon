@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "checks": [
+    "Touch/narrow viewport/old preference/old URL all start real 3D; no simplified mode or crosshair",
+    "Left click near quote opens actual reader while camera faces away",
+    "E still collects and B still opens the original bag",
+    "F still enters the actual article field",
+    "Automatic expansion uses worker, keeps pointer lock/camera/movement, and never replaces app DOM",
+    "V navigation, R thought editor, and T anchor list retain their original meanings",
+    "Save home and refresh preserve the collected excerpt",
+    "Real context loss recovers through retry with one fresh canvas, no 2D fallback",
+    "Unsupported WebGL reports an explicit error; low-quality retry starts actual 3D"
+  ],
+  "errors": [],
+  "details": {
+    "expansion": {
+      "unlocks": 0,
+      "replacements": 0,
+      "created": 1,
+      "active": 0,
+      "locked": true
+    }
+  },
+  "browser": "152.0.7977.83",
+  "conditions": "macOS Apple M5, headed Chrome; 1920x1080 DPR1 plus 800x900 touch context; local real HTTP and isolated visitor"
+}

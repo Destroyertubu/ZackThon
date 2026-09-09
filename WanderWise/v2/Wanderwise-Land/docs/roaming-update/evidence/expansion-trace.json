@@ -1,0 +1,96 @@
+{
+  "before": {
+    "page": "world",
+    "renderer": "three-webgl2",
+    "sceneState": "ready",
+    "sceneKind": "world",
+    "sceneStage": null,
+    "eye": [
+      13.799221864334916,
+      1.856729396267984,
+      38.09675475871005
+    ],
+    "target": "s_6b174de22e16ca13645d0f9c:p1@n_4b3f8a4553e780161e1fd13f",
+    "active": true,
+    "facilities": null,
+    "assetBytes": null,
+    "position": {
+      "x": 13.016,
+      "y": 0,
+      "z": 34.233000000000004,
+      "yaw": 0
+    },
+    "camera": {
+      "yaw": 0.2,
+      "pitch": 0.17,
+      "distance": 4
+    },
+    "metrics": {
+      "drawCalls": 8,
+      "triangles": 37201,
+      "geometries": 3,
+      "textures": 13,
+      "programs": 5,
+      "labels": 13,
+      "fps": 60,
+      "medianFps": 60.2,
+      "p95ms": 17.6,
+      "rawFrameMs": 17
+    },
+    "pending": 0,
+    "worldVersion": 1,
+    "nodeCount": 7,
+    "modal": null
+  },
+  "after": {
+    "page": "world",
+    "renderer": "three-webgl2",
+    "sceneState": "ready",
+    "sceneKind": "world",
+    "sceneStage": null,
+    "eye": [
+      12.113164327347155,
+      1.856729396267984,
+      38.43853554190251
+    ],
+    "target": "s_6b174de22e16ca13645d0f9c:p1@n_4b3f8a4553e780161e1fd13f",
+    "active": true,
+    "facilities": null,
+    "assetBytes": null,
+    "position": {
+      "x": 11.329942462810822,
+      "y": 0,
+      "z": 34.574780783233294,
+      "yaw": 1.7707963267948965
+    },
+    "camera": {
+      "yaw": 0.2,
+      "pitch": 0.17,
+      "distance": 4
+    },
+    "metrics": {
+      "drawCalls": 6,
+      "triangles": 47589,
+      "geometries": 3,
+      "textures": 14,
+      "programs": 5,
+      "labels": 18,
+      "fps": 60,
+      "medianFps": 59.9,
+      "p95ms": 17.5,
+      "rawFrameMs": 17
+    },
+    "pending": 0,
+    "worldVersion": 2,
+    "nodeCount": 11,
+    "modal": null
+  },
+  "audit": {
+    "unlocks": 0,
+    "replacements": 0,
+    "created": 1,
+    "active": 0,
+    "locked": true
+  },
+  "toasts": "新的小径已出现：4 个话题。继续漫游即可。"
+}

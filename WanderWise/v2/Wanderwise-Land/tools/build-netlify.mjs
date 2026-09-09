@@ -10,5 +10,5 @@ app = app.replaceAll('本地运行版 · 自带内容明确标记为演示', 'Ne
   .replaceAll('FastAPI / SQLite 后端', 'Netlify Functions / Blobs 后端')
   .replaceAll('第三方 Python 依赖按各自许可证使用', '第三方运行依赖按各自许可证使用');
 await writeFile('dist/static/app.js', app);
-await writeFile('dist/deploy-info.json', JSON.stringify({version: '1.0.0-land-netlify', builtAt: new Date().toISOString(), persistence: 'Netlify Blobs'}, null, 2));
+await writeFile('dist/deploy-info.json', JSON.stringify({version: (await readFile('VERSION', 'utf8')).trim() + '-netlify-prepared', builtAt: new Date().toISOString(), persistence: 'Netlify Blobs'}, null, 2));
 console.log('Netlify public artifact prepared (frontend assets only).');

@@ -1,3 +1,7 @@
+> **当前版本 1.1.1-roaming：** 已删除简化阅读模式与准星；靠近金句直接左键打开原文，主题扩展原地更新，远近文字分层并避让。见 [本轮修改与验证](docs/roaming-update/README.md)。已发布到 [公网体验](https://wanderwise-land-v2-lostmagician155.netlify.app/home)，见 [发布验证](docs/roaming-update/PUBLIC_DEPLOYMENT.json)。下面的家园历史报告保留原测试范围。
+
+> **当前本地版本：1.1.0-home.1 · 林间灯火知识书屋。** Three.js + Blender GLB 家园升级，保留原业务与 Python 启动。见 [启动/升级/回滚](docs/home-upgrade/RUN_UPGRADE_ROLLBACK.md)、[本轮验收报告](docs/home-upgrade/TEST_REPORT.md)、[资产许可](docs/home-upgrade/ASSETS.md)、[渲染迁移](docs/home-upgrade/RENDERING_MIGRATION.md)。本轮尚未部署到公网；下面的云端状态属于上一轮版本。
+
 > **Netlify 云端适配：** 本次新增可部署后端与持久存储。见 [Netlify 部署说明](docs/NETLIFY_DEPLOYMENT.md) 和 [实际部署状态](docs/cloud-deployment-status.json)。下文保留原始本地包说明。
 
 ---
@@ -15,7 +19,7 @@ language: zh-CN
 
 ## 30 秒找到启动入口
 
-需要已安装 **Python 3.11+**。本次实测 Python 3.13.5。首次安装 Python 依赖需要能访问 Python 软件源；依赖装好后，自带演示路线无需外网。前端没有 npm 依赖，也不需要 Node.js 或前端构建。
+需要已安装 **Python 3.11+**。原包实测 Python 3.13.5；本轮实测 Python 3.12.13。首次安装 Python 依赖需要能访问 Python 软件源；依赖装好后，自带演示路线无需外网。前端库和模型已随包预制，最终用户不需要 Node.js 或前端构建；开发重建使用 package.json 中的依赖。
 
 | 系统 | 启动方式 |
 | --- | --- |
@@ -42,11 +46,7 @@ python3 -m pip install -r requirements.txt
 python3 start.py --use-current --no-install --no-browser
 ```
 
-默认只监听本机。更改端口：`python3 start.py --port 8080`。终端显示启动地址后，使用桌面 Chrome/Edge 打开；3D 初始化失败或小屏幕设备自动转为同数据的 2D 阅读界面。手动 2D 入口：
-
-```text
-http://127.0.0.1:8000/?mode=2d
-```
+默认只监听本机。更改端口：`python3 start.py --port 8080`。终端显示启动地址后，使用支持 WebGL2 的浏览器打开。触屏、窄窗口和旧偏好不会切换阅读模式；图形初始化失败时显示明确错误，提供重试与低画质重试。
 
 ## 第一条可以操作的闭环
 
@@ -58,7 +58,7 @@ http://127.0.0.1:8000/?mode=2d
 
 点击“进入漫游”后才捕获鼠标。WASD 相对相机移动；Space 跳跃；鼠标转动镜头；滚轮缩放；Esc 解锁或暂停。E 收集，F 进入有正文的文章场域，B 行囊，R 创建私人锚点，T 查看自己的锚点，V 在微风、光带、关闭间切换。V 不自动移动角色。
 
-阅读、行囊与编辑面板打开后暂停移动；中文输入和输入框中的游戏快捷键不生效。必要操作都有屏幕按钮。2D 模式点击话题后操作阅读与收藏，不要求模拟行走。
+阅读、行囊与编辑面板打开后暂停移动；中文输入和输入框中的游戏快捷键不生效。必要操作都有屏幕按钮。靠近金句约 4 米内，左键直接打开最近一条对应原文，无需瞄准；墙体仍会阻挡交互。靠近主题的后台扩展不退出漫游。
 
 ## 实际包含什么
 

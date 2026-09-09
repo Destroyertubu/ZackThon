@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "stage": "full",
+  "model": "/static/assets/home/home-full.glb",
+  "bounds": {
+    "minX": -5.82,
+    "maxX": 5.82,
+    "minZ": -4.91,
+    "maxZ": 4.82
+  },
+  "camera": {
+    "yaw": 0,
+    "pitch": 0.22,
+    "distance": 3.8
+  },
+  "requiredFacilities": [
+    "door",
+    "cabinet",
+    "synthesis",
+    "journal",
+    "phone"
+  ]
+}

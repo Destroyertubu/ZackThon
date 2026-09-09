@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "version": "1.1.1-roaming",
+  "checks": [
+    "All release manifest hashes match",
+    "Every frontend file equals the browser-tested source",
+    "Same-origin worker and dependency modules included in prebuilt dist",
+    "Previous frontend rollback archive included"
+  ],
+  "scope": "Byte-level distribution check; existing Python startup/backend unchanged and local browser runtime tested separately"
+}

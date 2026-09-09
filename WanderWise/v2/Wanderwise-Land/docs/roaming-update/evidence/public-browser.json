@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "url": "https://wanderwise-land-v2-lostmagician155.netlify.app/home",
+  "browser": "152.0.7977.83",
+  "headless": true,
+  "viewport": [
+    1920,
+    1080
+  ],
+  "checks": [
+    "Anonymous public HTTPS access",
+    "Full GLB home reaches ready with one canvas",
+    "No crosshair or simplified-mode UI",
+    "Public app, worker and model hashes equal deployed build",
+    "Original phone unavailable panel works"
+  ],
+  "sha256": {
+    "app.js": "7eaa0d6658e3579c716edb93a1393b80466cc0b2a50445de4533e107ed46a5c8",
+    "engine/world-worker.js": "cb10ddda38554ffb0ba26bd3439ff7401035339c81cb65bca1b1a30b5529dff6",
+    "assets/home/home-full.glb": "475b82f8abc5b1ad777b5e0653e514546ab0df22b8949840441c2f2ba8b5fc59"
+  },
+  "errors": []
+}

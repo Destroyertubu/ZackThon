@@ -1,6 +1,6 @@
 {
   "name": "wanderwise-land",
-  "version": "1.0.0",
+  "version": "1.1.1-roaming",
   "private": true,
   "type": "module",
   "description": "Wanderwise Land: local Python distribution and Netlify Functions cloud adapter.",
@@ -10,12 +10,16 @@
     "build:cloud": "node tools/check_frontend.mjs && node tools/build-netlify.mjs",
     "test:cloud": "node --test tests/cloud-*.test.mjs",
     "dev:cloud": "node tools/dev-cloud.mjs",
-    "test:storage": "node --test tests/storage-identity.test.mjs"
+    "test:storage": "node --test tests/storage-identity.test.mjs",
+    "test:home": "node --test tests/home_scene.test.mjs",
+    "vendor:three": "node tools/vendor-three.mjs",
+    "test:roaming": "node --test tests/roaming_interaction.test.mjs"
   },
   "dependencies": {
     "@netlify/blobs": "11.0.3",
     "ajv": "8.20.0",
-    "htmlparser2": "10.1.0"
+    "htmlparser2": "10.1.0",
+    "three": "0.186.0"
   },
   "engines": {
     "node": ">=22.13"

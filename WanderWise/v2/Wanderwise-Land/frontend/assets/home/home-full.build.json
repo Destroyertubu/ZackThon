@@ -1,0 +1,123 @@
+{
+  "stage": "full",
+  "axis": "Y-up",
+  "units": "metres",
+  "blender": "5.2.1 LTS",
+  "sha256": "475b82f8abc5b1ad777b5e0653e514546ab0df22b8949840441c2f2ba8b5fc59",
+  "bytes": 5156892,
+  "imports": [
+    {
+      "asset": "table_medium_long",
+      "scale": 0.82,
+      "position": [
+        2.35,
+        0,
+        -3.7
+      ],
+      "yaw": 0,
+      "owner": "journal"
+    },
+    {
+      "asset": "chair_B_wood",
+      "scale": 0.9,
+      "position": [
+        2.3,
+        0,
+        -2.53
+      ],
+      "yaw": 3.141592653589793,
+      "owner": "journal"
+    },
+    {
+      "asset": "lamp_table",
+      "scale": 0.4,
+      "position": [
+        3.12,
+        0.82,
+        -3.92
+      ],
+      "yaw": 0,
+      "owner": "journal"
+    },
+    {
+      "asset": "cactus_medium_A",
+      "scale": 0.66,
+      "position": [
+        4.0,
+        1.37,
+        -4.61
+      ],
+      "yaw": 0,
+      "owner": "window"
+    },
+    {
+      "asset": "armchair_pillows",
+      "scale": 0.65,
+      "position": [
+        3.5,
+        0,
+        -0.75
+      ],
+      "yaw": -0.55,
+      "owner": "lounge"
+    },
+    {
+      "asset": "book_set",
+      "scale": 0.55,
+      "position": [
+        5.49,
+        1.98,
+        -0.55
+      ],
+      "yaw": 1.5707963267948966,
+      "owner": "hearth"
+    }
+  ],
+  "nodes": [
+    "COL_armchair",
+    "COL_cabinet",
+    "COL_ceiling",
+    "COL_door_leaf",
+    "COL_door_lintel",
+    "COL_hearth",
+    "COL_journal_chair",
+    "COL_journal_desk",
+    "COL_north-0.95",
+    "COL_north-5.15",
+    "COL_north5.225",
+    "COL_phone_back",
+    "COL_phone_desk",
+    "COL_phone_glass4.12",
+    "COL_phone_glass5.53",
+    "COL_phone_post4.122.32",
+    "COL_phone_post4.123.87",
+    "COL_phone_post5.532.32",
+    "COL_phone_post5.533.87",
+    "COL_side-6",
+    "COL_side6",
+    "COL_south",
+    "COL_synthesis",
+    "COL_window_glass",
+    "COL_window_header",
+    "COL_window_sill",
+    "INTERACT_cabinet",
+    "INTERACT_door",
+    "INTERACT_journal",
+    "INTERACT_phone",
+    "INTERACT_synthesis",
+    "SPAWN_home",
+    "SPAWN_safe",
+    "VIS_architecture",
+    "VIS_cabinet",
+    "VIS_door",
+    "VIS_door_leaf",
+    "VIS_exterior",
+    "VIS_hearth",
+    "VIS_journal",
+    "VIS_lounge",
+    "VIS_phone",
+    "VIS_synthesis",
+    "VIS_window"
+  ],
+  "baking": "None. Base color atlas only; runtime direct shadows. No lightmap or AO map."
+}

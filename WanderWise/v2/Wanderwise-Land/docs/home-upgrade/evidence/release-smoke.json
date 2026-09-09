@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "source": "Extracted release, original Python start.py, PATH=/usr/bin:/bin; existing Python dependencies reused; no Node/Blender in runtime PATH",
+  "url": "http://127.0.0.1:18092/home",
+  "browser": "152.0.7977.83",
+  "canvasCount": 1,
+  "sceneState": "ready",
+  "sceneKind": "home",
+  "servedHashes": {
+    "engine/engine.js": "dda6e5149051d67de16b3756df5c55794166870b8d73e6f39708f9cc394137bc",
+    "assets/home/home-full.glb": "475b82f8abc5b1ad777b5e0653e514546ab0df22b8949840441c2f2ba8b5fc59",
+    "vendor/three/three.module.js": "9052042d676cb0fdc1ddfefe193053f34b7ac0513a616fdac4535d49987812ea",
+    "assets/home/scene.json": "e83ad3188df267c6de74436ae8572396ff543ca041aac0a51f6ed0d7c9f85a70"
+  },
+  "navigation": {
+    "transferSize": 1204,
+    "encodedBodySize": 904
+  },
+  "errors": [],
+  "checks": [
+    "Every initial ZIP manifest checksum verified",
+    "No user data, actual .env, node_modules or venv in ZIP",
+    "Python launcher from extracted package",
+    "Real Three home ready",
+    "Served GLB/library/config match final source",
+    "Original phone panel honestly unavailable"
+  ]
+}

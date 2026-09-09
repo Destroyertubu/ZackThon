@@ -1,0 +1,30 @@
+✔ GLB 2 container, embedded images and finite accessor bounds (3.922958ms)
+✔ actual GLB retains whitelist facilities, safe spawn and Y-up metre scale (2.662291ms)
+✔ all facility approaches share a traversable space; door is under ten seconds away (9.914584ms)
+✔ room bounds replace old hardcoded boundary without clipping a legitimate route (1.182083ms)
+✔ collision layers distinguish glass, frame, door leaf and camera ceiling (0.35975ms)
+✔ visible geometry and startup artifact have bounded size (0.394208ms)
+✔ same-tab reload preserves the lease ID and waits before its first API request (10.435625ms)
+✔ a duplicate tab changes its copied identity while the existing page keeps its lease (4.1645ms)
+✔ simultaneous instances with a copied ID elect one owner before either sends HTTP (4.117583ms)
+✔ a restored page re-checks an identity that another active page has claimed (2.068416ms)
+✔ without BroadcastChannel each page has a fresh ID and uses existing lease takeover (2.323042ms)
+✔ blocked sessionStorage still permits requests with distinct in-memory identities (3.050208ms)
+✔ seeded randomness is reproducible and bounded (56.85675ms)
+✔ normalized diagonal has the same movement speed (1.070167ms)
+✔ camera projection points its center toward the target (1.33375ms)
+✔ obstacle ray intersection and missed rays (0.51125ms)
+✔ navigation uses connected paths, not direct movement (2.296625ms)
+✔ home has four facilities and a door, finite geometry (36.85425ms)
+✔ world geometry is deterministic and all trail samples are level (409.292334ms)
+✔ simple character collision blocks a wall without blocking open space (1.355041ms)
+✔ character mesh visibly changes from idle to walking (1.880083ms)
+✔ V cycles three navigation states without moving the player (0.361375ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1016.504875
