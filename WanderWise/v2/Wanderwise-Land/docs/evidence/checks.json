@@ -1,0 +1,35 @@
+{
+  "backend": "passed",
+  "frontend-syntax": "passed",
+  "engine": "passed",
+  "python-syntax": "passed",
+  "local-http-startup": {
+    "status": "passed",
+    "checks": [
+      "delivered start.py",
+      "health/ready",
+      "HTTP guest cookie jar",
+      "world job",
+      "source read",
+      "committed collection",
+      "static module",
+      "SPA /home",
+      "online SQLite backup",
+      "backup integrity and collection count"
+    ]
+  },
+  "backup-restore-real-http": "passed",
+  "environment": {
+    "os": "Linux-6.18.35-x86_64-with-glibc2.41",
+    "python": "3.13.5",
+    "node": "v22.16.0",
+    "packages": {
+      "fastapi": "0.128.2",
+      "uvicorn": "0.48.0",
+      "pydantic": "2.13.4",
+      "httpx": "0.28.1",
+      "pytest": "9.0.2",
+      "playwright": "1.57.0"
+    }
+  }
+}

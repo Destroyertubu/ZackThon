@@ -1,0 +1,9 @@
+# Replace only with a domain you own and have pointed at this server.
+# Set APP_ORIGIN=https://your-domain.example and COOKIE_SECURE=1 on backend.
+your-domain.example {
+    encode zstd gzip
+    request_body {
+        max_size 512KB
+    }
+    reverse_proxy 127.0.0.1:8000
+}

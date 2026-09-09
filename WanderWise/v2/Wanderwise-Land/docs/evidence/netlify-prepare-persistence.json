@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "siteUrl": "https://wanderwise-land-v2-lostmagician155.netlify.app",
+  "checkedAt": "2026-09-09T14:27:55.666Z",
+  "checks": [
+    "HTTPS /",
+    "HTTPS /home",
+    "HTTPS /static/app.js",
+    "HTTPS /static/engine/renderer.js",
+    "/health/live",
+    "/health/ready",
+    "cross-origin write rejected",
+    "secure private guest cookie",
+    "invalid CSRF rejected",
+    "persistent demo world generation",
+    "collections persist across function requests",
+    "private cross-deployment fixture prepared"
+  ]
+}

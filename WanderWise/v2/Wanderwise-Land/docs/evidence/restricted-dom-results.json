@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "browser": "144.0.7559.96",
+  "mode": "2D DOM + in-process FastAPI transport; storage/history shims",
+  "assertions": [
+    "guest home",
+    "preset world",
+    "source reader",
+    "two distinct collections",
+    "enter/return field",
+    "private anchor",
+    "bag selection",
+    "manual synthesis save",
+    "pause home",
+    "journal",
+    "semantic map"
+  ],
+  "pageErrors": []
+}

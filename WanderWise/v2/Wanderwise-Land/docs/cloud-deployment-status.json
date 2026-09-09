@@ -1,0 +1,45 @@
+{
+  "status": "published_and_verified",
+  "checkedAt": "2026-09-09T14:32:33.489658+00:00",
+  "sourceArchive": "Wanderwise_Land_v1.0.0_Local_20260909.zip",
+  "sourceSha256": "091c1bf73cc5ab8cedbd6d2b8f5f97a5d6e730061b9377b7f8d241f57bcbf52b",
+  "extractedFiles": 75,
+  "cloudUrl": "https://wanderwise-land-v2-lostmagician155.netlify.app",
+  "cloudDeployed": true,
+  "configuration": "netlify.toml",
+  "configurationValidation": "Netlify official build and two Functions bundled successfully",
+  "configurationChanges": [
+    "Netlify Functions backend preserving /api/v1 contract",
+    "Strongly consistent Netlify Blobs with conditional writes",
+    "Secure HttpOnly SameSite=Strict guest cookies and CSRF checks",
+    "Generation idempotency claims prevent repeated upstream calls",
+    "Stable tab identity across reload with duplicate-tab detection",
+    "Simplified reading mode persists across reload"
+  ],
+  "blocker": null,
+  "limitations": [
+    "Real Zhihu and AI credentials are not configured",
+    "Headless WebGL scene rendered, but pointer-lock smoke timed out; full 3D acceptance not claimed",
+    "Netlify independent backup and restore not verified"
+  ],
+  "siteId": "2035deff-dff0-4af8-817e-eb11fc809437",
+  "target": "Netlify",
+  "cloudBackend": "Node.js Functions + strongly consistent Netlify Blobs",
+  "tests": {
+    "cloudBackend": 40,
+    "tabIdentity": 6,
+    "engine": 10,
+    "frontendModules": 7
+  },
+  "access": "public",
+  "deploymentId": "6aa16da62ac3de2cc9aec686",
+  "publicApiChecks": 15,
+  "publicBrowserChecks": 7,
+  "publicBrowserPageErrors": 0,
+  "crossDeployPersistence": "passed",
+  "evidence": {
+    "http": "docs/evidence/netlify-smoke.json",
+    "browser": "docs/evidence/netlify-public-browser/result.json",
+    "persistence": "docs/evidence/netlify-verify-persistence.json"
+  }
+}

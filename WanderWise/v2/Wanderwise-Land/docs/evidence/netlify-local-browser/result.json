@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "browser": "152.0.7977.83",
+  "checks": [
+    "real guest startup",
+    "preset world",
+    "source reader",
+    "field reload and return",
+    "idempotent collections and private anchor",
+    "manual synthesis save",
+    "pause / journal / map"
+  ],
+  "pageErrors": [],
+  "transport": "real browser HTTP",
+  "storage": "real browser storage"
+}

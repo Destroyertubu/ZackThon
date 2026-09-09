@@ -1,0 +1,9 @@
+{
+  "status": "failed",
+  "browser": "152.0.7977.83",
+  "checks": [
+    "real guest startup"
+  ],
+  "pageErrors": [],
+  "error": "Page.wait_for_function: Timeout 30000ms exceeded."
+}

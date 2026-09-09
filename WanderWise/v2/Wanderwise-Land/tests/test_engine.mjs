@@ -1,0 +1,18 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {random,norm,dist,segmentDistance,segmentBox,pathBetween,lookAt,perspective,multiply,project} from '../frontend/engine/math.js';
+import {buildScene,playerGeometry} from '../frontend/engine/scenes.js';
+import {Engine} from '../frontend/engine/engine.js';
+const nodes=[{id:'a',topicId:'ta',title:'问题',biome:'meadow',position:{x:0,y:0,z:-5},contentIds:['ca'],excerptIds:[],expansionState:'unexpanded'},{id:'b',topicId:'tb',title:'森林',biome:'forest',position:{x:30,y:0,z:-5},contentIds:['cb'],excerptIds:[],expansionState:'unexpanded'},{id:'c',topicId:'tc',title:'遗迹',biome:'ruins',position:{x:0,y:0,z:30},contentIds:['cc'],excerptIds:[],expansionState:'unexpanded'}];
+const links=[{source:'a',target:'b',kind:'path',waypoints:[nodes[0].position,nodes[1].position]},{source:'a',target:'c',kind:'path',waypoints:[nodes[0].position,nodes[2].position]}];
+const world={nodes,walkableLinks:links,layoutSeed:77,spawn:{position:{x:0,y:0,z:3},yaw:0}};
+test('seeded randomness is reproducible and bounded',()=>{let a=random(99),b=random(99);for(let i=0;i<1000;i++){let v=a();assert.equal(v,b());assert.ok(v>=0&&v<1)}});
+test('normalized diagonal has the same movement speed',()=>{assert.ok(Math.abs(Math.hypot(...norm([1,1]))-Math.hypot(...norm([1,0])))<1e-9)});
+test('camera projection points its center toward the target',()=>{let m=multiply(perspective(Math.PI/3,1,.1,100),lookAt([0,2,5],[0,1,0])),v=project([0,1,0],m);assert.ok(Math.abs(v[0])<1e-6&&Math.abs(v[1])<1e-6&&v[2]>0)});
+test('obstacle ray intersection and missed rays',()=>{let box={min:[-1,0,-1],max:[1,2,1]};assert.equal(segmentBox([0,1,5],[0,1,-5],box),.4);assert.equal(segmentBox([3,1,5],[3,1,-5],box),null)});
+test('navigation uses connected paths, not direct movement',()=>{assert.deepEqual(pathBetween(nodes,links,'b','c'),[nodes[1].position,nodes[0].position,nodes[2].position]);assert.deepEqual(pathBetween(nodes,[],'b','c'),[]);assert.equal(segmentDistance(15,-5,nodes[0].position,nodes[1].position),0)});
+test('home has four facilities and a door, finite geometry',()=>{let s=buildScene('home');assert.equal(s.targets.length,5);assert.deepEqual(s.targets.map(t=>t.action).sort(),['bag','journal','phone','seed','synthesis']);assert.equal(s.geometry.length%27,0);assert.ok(s.geometry.every(Number.isFinite));assert.ok(s.colliders.length>=10)});
+test('world geometry is deterministic and all trail samples are level',()=>{let a=buildScene('world',world),b=buildScene('world',world);assert.deepEqual(a.geometry,b.geometry);assert.ok(a.geometry.every(Number.isFinite));for(let l of links)for(let k=0;k<=20;k++){let t=k/20;assert.equal(a.height(l.waypoints[0].x*(1-t)+l.waypoints[1].x*t,l.waypoints[0].z*(1-t)+l.waypoints[1].z*t),0)}});
+test('simple character collision blocks a wall without blocking open space',()=>{let e={player:{x:0,y:0,z:0},kind:'world',scene:{boundary:90,colliders:[{min:[.5,0,-1],max:[2,3,1]}]}};Engine.prototype.move.call(e,.4,0);assert.equal(e.player.x,0);Engine.prototype.move.call(e,-.4,0);assert.equal(e.player.x,-.4)});
+test('character mesh visibly changes from idle to walking',()=>{let p={x:0,y:0,z:0,yaw:0},a=playerGeometry(p,.1,false).data(),b=playerGeometry(p,.1,true).data();assert.equal(a.length,b.length);assert.notDeepEqual(a,b);assert.ok(a.every(Number.isFinite))});
+test('V cycles three navigation states without moving the player',()=>{let e={navigation:{id:null,mode:0},callbacks:{},player:{x:1,y:0,z:2}};for(let expected of [1,2,0]){Engine.prototype.cycleNav.call(e,nodes[1]);assert.equal(e.navigation.mode,expected);assert.deepEqual(e.player,{x:1,y:0,z:2})}});

@@ -1,0 +1,18 @@
+✔ seeded randomness is reproducible and bounded (0.51925ms)
+✔ normalized diagonal has the same movement speed (0.05ms)
+✔ camera projection points its center toward the target (0.259459ms)
+✔ obstacle ray intersection and missed rays (0.079167ms)
+✔ navigation uses connected paths, not direct movement (0.316875ms)
+✔ home has four facilities and a door, finite geometry (3.100834ms)
+✔ world geometry is deterministic and all trail samples are level (59.683791ms)
+✔ simple character collision blocks a wall without blocking open space (0.130584ms)
+✔ character mesh visibly changes from idle to walking (0.451708ms)
+✔ V cycles three navigation states without moving the player (0.117709ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 99.902084

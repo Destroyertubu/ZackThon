@@ -1,0 +1,53 @@
+
+> wanderwise-land@1.0.0 test:cloud
+> node --test tests/cloud-*.test.mjs
+
+✔ HTTPS sessions, CSRF, exact origin, private isolation and deletion (17.135291ms)
+✔ demo route, excerpt, field, checkpoint, manual synthesis and reload (19.892917ms)
+✔ idempotent mutations and version conflicts preserve prior content (8.749333ms)
+✔ parallel independent collections survive conditional write races (11.619583ms)
+✔ schema rejects extra properties, invalid enums, positions and missing idempotency (1.764167ms)
+✔ concurrent identical generation invokes upstream only once and replay returns saved job (6.505875ms)
+✔ collect snapshots and excerpts with original provenance; duplicate collection emits no extra event (16.427875ms)
+✔ bag editing requires the current version, normalizes tags and supports combined filters (9.984042ms)
+✔ links are unordered and deduplicated; deleting a bag item cascades only its links (0.434125ms)
+✔ private anchors enforce context, bounds, archived journeys, excerpt identity and version (1.261917ms)
+✔ manual synthesis freezes sources, caches reordered materials, and invalidates cache after an edit (1.16375ms)
+✔ synthesis rejects duplicate-only input and topics without evidence (0.207958ms)
+✔ AI uses the adapter and saved insights retain immutable evidence and become bag materials (0.818208ms)
+✔ unknown routes remain available to the next handler (0.079083ms)
+✔ demo seeds preserve 12 originals, three presets, exact quotations and immutable snapshots (2.535458ms)
+✔ HTML is reduced to text, links and catalog IDs enforce their safety boundaries (1.101542ms)
+✔ paragraph offsets and fragment bounds retain Unicode and never invent quotations (0.231958ms)
+✔ search uses the documented protocol and cache hits require no secret or additional budget (13.019834ms)
+✔ independent provider instances share one cache lease and reserve daily budget atomically (172.108542ms)
+✔ missing credentials and zero budgets fail before an upstream call (0.197542ms)
+✔ public knowledge catalog and body use no authorization and reject work IDs outside the catalog (0.721375ms)
+▶ HTTP, quota, business and malformed responses remain distinct and never expose raw bodies
+  ✔ HTTP auth (0.207792ms)
+  ✔ HTTP quota (0.189041ms)
+  ✔ redirect (0.204542ms)
+  ✔ business auth (0.223417ms)
+  ✔ business quota (0.161625ms)
+  ✔ business unknown (0.182208ms)
+  ✔ malformed JSON (0.174625ms)
+  ✔ malformed structure (0.147625ms)
+  ✔ empty results (0.116541ms)
+  ✔ oversized body (2.681208ms)
+✔ HTTP, quota, business and malformed responses remain distinct and never expose raw bodies (4.645917ms)
+✔ the request deadline also bounds a fetch implementation that ignores abort (0.527791ms)
+✔ AI protocol accepts only validated JSON and material-owned evidence IDs (1.358041ms)
+✔ deterministic evidence-backed layout and frozen expansion (3.299875ms)
+✔ single actual article uses evidenced paragraphs and field text (1.548333ms)
+✔ world creation pauses previous active journey and versions are immutable (13.895208ms)
+✔ ownership, lease takeover, field checkpoints and stale versions (1.196333ms)
+✔ event dwell constraint, transactional batch, dedup and archived replay (1.070542ms)
+✔ pause and completion block expansion; delete retains private materials (0.78475ms)
+ℹ tests 40
+ℹ suites 0
+ℹ pass 40
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 270.86725

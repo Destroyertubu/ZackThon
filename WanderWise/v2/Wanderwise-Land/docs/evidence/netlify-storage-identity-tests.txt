@@ -1,0 +1,14 @@
+✔ same-tab reload preserves the lease ID and waits before its first API request (1.6675ms)
+✔ a duplicate tab changes its copied identity while the existing page keeps its lease (0.550917ms)
+✔ simultaneous instances with a copied ID elect one owner before either sends HTTP (1.102708ms)
+✔ a restored page re-checks an identity that another active page has claimed (0.513917ms)
+✔ without BroadcastChannel each page has a fresh ID and uses existing lease takeover (0.434667ms)
+✔ blocked sessionStorage still permits requests with distinct in-memory identities (0.394959ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 38.527709

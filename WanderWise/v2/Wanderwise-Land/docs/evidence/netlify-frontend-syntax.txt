@@ -1,0 +1,1 @@
+7 ES modules passed syntax checks. Frontend is already the distributable; no npm dependencies and no generated bundle.

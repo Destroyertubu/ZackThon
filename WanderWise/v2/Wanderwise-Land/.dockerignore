@@ -1,0 +1,15 @@
+**
+!requirements.txt
+!backend/
+!backend/**
+!frontend/
+!frontend/**
+!demo-data/
+!demo-data/**
+!start.py
+!tools/
+!tools/backup.py
+!deploy/
+!deploy/Dockerfile
+**/__pycache__/
+**/*.pyc

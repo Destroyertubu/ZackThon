@@ -1,0 +1,2 @@
+home 1785 triangles 12 colliders
+world 36973 triangles 166 colliders

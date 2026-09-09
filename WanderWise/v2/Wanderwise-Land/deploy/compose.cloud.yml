@@ -1,0 +1,62 @@
+# Dedicated Linux server with Docker Compose, a DNS name, and open ports 80/443.
+# From project root:
+# docker compose --env-file deploy/cloud.env -f deploy/compose.cloud.yml up -d --build --wait
+name: wanderwise-land-v2
+services:
+  wanderwise:
+    # A fixed name also prevents accidentally scaling this SQLite/job process.
+    container_name: wanderwise-land-v2-app
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    restart: unless-stopped
+    init: true
+    stop_grace_period: 30s
+    environment:
+      WANDERWISE_DB: /app/data/wanderwise.sqlite3
+      APP_ORIGIN: https://${WW_DOMAIN:?Set WW_DOMAIN in deploy/cloud.env}
+      COOKIE_SECURE: "1"
+      # Only Caddy reaches this backend: no host port is published.
+      FORWARDED_ALLOW_IPS: "*"
+      ZHIHU_ACCESS_SECRET: ${ZHIHU_ACCESS_SECRET:-}
+      ZHIHU_SEARCH_DAILY_BUDGET: ${ZHIHU_SEARCH_DAILY_BUDGET:-1000}
+      ZHIHU_AI_DAILY_BUDGET: ${ZHIHU_AI_DAILY_BUDGET:-50}
+      WW_HOURLY_TASK_LIMIT: ${WW_HOURLY_TASK_LIMIT:-10}
+    volumes:
+      - wanderwise-data:/app/data
+    networks:
+      - app
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      wanderwise:
+        condition: service_healthy
+    environment:
+      WW_DOMAIN: ${WW_DOMAIN:?Set WW_DOMAIN in deploy/cloud.env}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile.cloud:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    networks:
+      - app
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+networks:
+  app:
+volumes:
+  wanderwise-data:
+  caddy-data:
+  caddy-config:

@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "transport": "real HTTP over localhost",
+  "ready": {
+    "status": "ok",
+    "database": true
+  },
+  "homeStatus": 200,
+  "moduleStatus": 200,
+  "guestStatus": 200,
+  "cookieChecks": [
+    "HttpOnly",
+    "SameSite=strict"
+  ],
+  "database": "isolated temporary SQLite removed after validation",
+  "serverSecret": "unset for isolated subprocess"
+}

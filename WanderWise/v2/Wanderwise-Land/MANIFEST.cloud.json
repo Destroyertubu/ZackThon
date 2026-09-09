@@ -1,0 +1,209 @@
+{
+  "purpose": "Netlify cloud source artifact; the original MANIFEST.json describes the original ZIP only.",
+  "files": [
+    {
+      "path": "cloud/application.mjs",
+      "sha256": "f1e54ead3a0222742d7563511c6ba7d46f92cae8890b354d7fe8b7d824947b01"
+    },
+    {
+      "path": "cloud/common.mjs",
+      "sha256": "2fef2f6a2162576cf2697f2354c464f2b046f9fbcb4650e265f697429ce5b719"
+    },
+    {
+      "path": "cloud/knowledge.mjs",
+      "sha256": "de6fb74360ef56237f727d9d5b21fe46e310dc24a07921deb6a6ec21d0fb3b4e"
+    },
+    {
+      "path": "cloud/providers.mjs",
+      "sha256": "e0ed0807fbfd57655e9e8a4c3178ed74c378584ef429efd13e3630628d293fa4"
+    },
+    {
+      "path": "cloud/storage.mjs",
+      "sha256": "cf1e7eb615a2d0256d2e2b89c09fa8889c83b2c332e2bbc68e01fc350e8abe89"
+    },
+    {
+      "path": "cloud/validation.mjs",
+      "sha256": "782effe8b71ecfb218882a9201b3a04c20ba41408d3a08fb19eef27880fc9150"
+    },
+    {
+      "path": "cloud/world.mjs",
+      "sha256": "190c59249db039bdd36fb578ef9ac9116e36c324858c965b28d2a8f533f7a13e"
+    },
+    {
+      "path": "netlify/functions/api.mjs",
+      "sha256": "8959bdaddd2632650234fe958de905b31d76455b1da2c5583a4772778e9a4d66"
+    },
+    {
+      "path": "netlify/functions/cleanup.mjs",
+      "sha256": "d0eb822187669f03c57131fbc432e2716d8407c95d02dd872ce844e00daa7114"
+    },
+    {
+      "path": "frontend/app.js",
+      "sha256": "139a46b1e3724aa2059bd3338e4006f0baffbf3389062c78978bb561c333a8e5"
+    },
+    {
+      "path": "frontend/assets/mark.svg",
+      "sha256": "a392467045658c6240a60032de91e5281db167feee3b47240ee38437cbed5039"
+    },
+    {
+      "path": "frontend/engine/engine.js",
+      "sha256": "260e772eb141a1431cb79728c2fe7619a9b6ecbef7099f9c425c9fd91c193bb9"
+    },
+    {
+      "path": "frontend/engine/geometry.js",
+      "sha256": "f51eea7bcd0729542a6b45ea080be492f595f7f7fc9c8ada55177f3189272ef1"
+    },
+    {
+      "path": "frontend/engine/math.js",
+      "sha256": "76d4ba63657b37f57ca5844f0ce9600becd1b62baa9c1d22119b58c784222e73"
+    },
+    {
+      "path": "frontend/engine/renderer.js",
+      "sha256": "ae02ddecc16c28a3a9d2d14c5dbd9f3f645a3187d7c8b9d6fa2e9172705fbc64"
+    },
+    {
+      "path": "frontend/engine/scenes.js",
+      "sha256": "cf1b9cac0acf6920a648739d04a29e37af76fc7fdfa3417ecf40d8300cf9363a"
+    },
+    {
+      "path": "frontend/index.html",
+      "sha256": "f3beced25698a771d488835598b85a2a2a7008f4d1dc78511ebdafadf629772b"
+    },
+    {
+      "path": "frontend/storage.js",
+      "sha256": "0bbb6729520b30f52cdc5bf5d9f6a009a219ebec668589d8e0c7a8f114600112"
+    },
+    {
+      "path": "frontend/style.css",
+      "sha256": "1e3beac6af1c5f4e4c969a9cd92ad3d6cb08cc866462c56573c29b4562d3f73b"
+    },
+    {
+      "path": "demo-data/original_articles.json",
+      "sha256": "0287e2fc485ba578ebb682b04e6a592cb0893edd7d6b23a905df120391e7d384"
+    },
+    {
+      "path": "contracts/README.md",
+      "sha256": "744f5f20d38f8b975ec11d9bb31c82305289e179ba8f279d3ee3a2b710388095"
+    },
+    {
+      "path": "contracts/demo-world.example.json",
+      "sha256": "9a5365fd4950c0df64a112b1c41a5b66f04f7dc952c41082a279d75b990fba8a"
+    },
+    {
+      "path": "contracts/openapi.json",
+      "sha256": "ed4dff158c9187141a820ce4910b6fbf336aa950b20a98df50d0573d8ec707a6"
+    },
+    {
+      "path": "tools/backup.py",
+      "sha256": "abcd1d04e4af8701390a8dc0bd1771337e1bf7da1f9b1d94961d301b075473c4"
+    },
+    {
+      "path": "tools/build-netlify.mjs",
+      "sha256": "9c0b17b821515ed36f609ac8f19a38a90cf8ca4f33a52dc209947dc4ceac50cd"
+    },
+    {
+      "path": "tools/check_frontend.mjs",
+      "sha256": "a575cc447510718195c3603419beb77fad0d14f2ce3567a1a445566442ec3ff6"
+    },
+    {
+      "path": "tools/dev-cloud.mjs",
+      "sha256": "49678aac475e280e7e165209fef4301732a2b66001d45310a7adb8e0a6ad2f0d"
+    },
+    {
+      "path": "tools/download_official_skill.py",
+      "sha256": "b9ff9ad47700d477cfd57be81d764a3a8997f99172781d427e2702605c0a73e1"
+    },
+    {
+      "path": "tools/export_scene_test.mjs",
+      "sha256": "2b2a66906b5ce34ce5e51844c5be517ccab7b4d88448c3c944dba292bc91f52d"
+    },
+    {
+      "path": "tools/native_shader_check.py",
+      "sha256": "33118de1a87fdb35439a5e12b37693ea277275b79ff8197392b3b18a65057d57"
+    },
+    {
+      "path": "tools/verify-netlify.mjs",
+      "sha256": "541bdd463c463b84a4680ba0daf0989a638c09031b540c3672457b10146fe835"
+    },
+    {
+      "path": "tools/verify_zhihu.py",
+      "sha256": "1b626f1d50944a3f26c50b5450d55fc6ef6b239f7202b3774a3a00969a0218a0"
+    },
+    {
+      "path": "tests/browser_e2e.py",
+      "sha256": "1590df169eaff559235b2e1826825e403960182f23cae3e8f7db9fab5d2b4142"
+    },
+    {
+      "path": "tests/cloud-application.test.mjs",
+      "sha256": "716fefbdf6376240a4427bd295496802e2452163e5a55c22f2a5bc116cceabbd"
+    },
+    {
+      "path": "tests/cloud-knowledge.test.mjs",
+      "sha256": "fd22ad3bdad0b66bd66900a51c6c5b4f6e7069d1260ce4a273d9f8cdc7f044f2"
+    },
+    {
+      "path": "tests/cloud-providers.test.mjs",
+      "sha256": "50f4ad66f668b5b1e7adca053fe36570e7b9892fc2fe0363c6eecd79a9e317e4"
+    },
+    {
+      "path": "tests/cloud-world.test.mjs",
+      "sha256": "fa195b78ddbbb8c8c79e152e3bc28add3c16b2b1ee1c6da0554296a22584fb3c"
+    },
+    {
+      "path": "tests/restricted_dom_harness.py",
+      "sha256": "bd3f2f8048e3fca9c743ed56f5787bc3ab566b38250f04ea040a1fe28a7dcce2"
+    },
+    {
+      "path": "tests/storage-identity.test.mjs",
+      "sha256": "cfe1aba666c9f992afdb6e3a6a687d93ba52a468ac3b7e5ed9a29c247b658dbd"
+    },
+    {
+      "path": "tests/test_backend.py",
+      "sha256": "c16e60ae2cc0236b3dfc59d30e0990c5f43f7c7838412b0c15f652f8af6afedf"
+    },
+    {
+      "path": "tests/test_engine.mjs",
+      "sha256": "067ad9482562534ba975426466bcf427ff036bd249efc8f45a1c6d5fb315dedc"
+    },
+    {
+      "path": "deploy/Caddyfile.cloud",
+      "sha256": "248c3d136674e69326e5deff99b781636805ac410f61123cace2639bcdbdffb6"
+    },
+    {
+      "path": "deploy/Caddyfile.example",
+      "sha256": "e6d133943365115f7b61e47c19fa6c6023efb4e52dde861c77be7060c506b0b1"
+    },
+    {
+      "path": "deploy/Dockerfile",
+      "sha256": "277761641677c5a0ed6af7c630a5ea2968b5c169a7742b92ae2adf46400f8a77"
+    },
+    {
+      "path": "deploy/cloud.env.example",
+      "sha256": "94cae7499307ff308b30cadfbd1cfd4820000e696b84d67760da2a6f9e84f415"
+    },
+    {
+      "path": "deploy/compose.cloud.yml",
+      "sha256": "f11bb867524e5b2bc7df7ba2284eee15e339b99a07f157fb909e2ba469cf0b75"
+    },
+    {
+      "path": "deploy/compose.yml",
+      "sha256": "68a29ae18c981e07a5c63770765d3ee00e35a13dc59af846777d363969ad74a6"
+    },
+    {
+      "path": "package.json",
+      "sha256": "a6094581fa6cbaca6ac94ad61f35d704a25caf5883d77f7b93ada2b3f049199f"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "69b35e853dcb8b6955b5a54ef3c0b979bfaaeb9b703aedb361a1104e9a20b3b3"
+    },
+    {
+      "path": "netlify.toml",
+      "sha256": "df1bc92968526d0ddc18c912d69f8fbf2a454bce2bd23588b10aa1276df2d33b"
+    },
+    {
+      "path": ".dockerignore",
+      "sha256": "ea276e7feb447fc48b0ff1b99e7525c3600d390a3c1255e31054628ed073899e"
+    }
+  ]
+}

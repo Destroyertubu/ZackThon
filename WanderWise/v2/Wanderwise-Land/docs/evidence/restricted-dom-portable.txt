@@ -1,0 +1,3 @@
+WORLD {'page': 'world', 'renderer': '2d', 'mode2d': True, 'position': None, 'camera': None, 'metrics': {'fps': 0, 'drawCalls': 0, 'triangles': 0}, 'pending': 0, 'worldVersion': 1, 'nodeCount': 7, 'modal': None}
+FIELD {'page': 'field', 'renderer': '2d', 'mode2d': True, 'position': None, 'camera': None, 'metrics': {'fps': 0, 'drawCalls': 0, 'triangles': 0}, 'pending': 0, 'worldVersion': 1, 'nodeCount': 7, 'modal': None}
+ERRORS []

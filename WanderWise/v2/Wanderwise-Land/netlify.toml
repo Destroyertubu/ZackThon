@@ -1,0 +1,37 @@
+[build]
+  command = "npm run build:cloud"
+  publish = "dist"
+[build.environment]
+  NODE_VERSION = "22"
+  AWS_LAMBDA_JS_RUNTIME = "nodejs22.x"
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+  included_files = ["demo-data/original_articles.json", "contracts/openapi.json"]
+[[redirects]]
+  from = "/home"
+  to = "/index.html"
+  status = 200
+[[redirects]]
+  from = "/journeys/*"
+  to = "/index.html"
+  status = 200
+[[redirects]]
+  from = "/canvas/*"
+  to = "/index.html"
+  status = 200
+[[redirects]]
+  from = "/settings"
+  to = "/index.html"
+  status = 200
+[[redirects]]
+  from = "/credits"
+  to = "/index.html"
+  status = 200
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"

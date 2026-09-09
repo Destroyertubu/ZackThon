@@ -1,0 +1,38 @@
+{
+  "date": "2026-09-09",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "architecture": "arm64",
+  "python": "3.12.13",
+  "node": "v24.14.1",
+  "backend": {
+    "command": ".venv/bin/python -m pytest -q tests/test_backend.py",
+    "passed": 21,
+    "failed": 0,
+    "durationSeconds": 1.56,
+    "warnings": [
+      "Starlette TestClient references deprecated anyio.abc.BlockingPortal alias; non-fatal"
+    ]
+  },
+  "engine": {
+    "command": "node --test tests/test_engine.mjs",
+    "passed": 10,
+    "failed": 0
+  },
+  "frontendSyntax": {
+    "command": "node tools/check_frontend.mjs",
+    "passedModules": 7
+  },
+  "dependencies": {
+    "command": ".venv/bin/python -m pip check",
+    "result": "No broken requirements found",
+    "installation": "requirements-dev.txt installed in project .venv using Python 3.12.13"
+  },
+  "limitations": [
+    "Default system python3 is 3.9.6, below project requirement; use .venv/bin/python or python3.12.",
+    "No real Zhihu or AI calls were made.",
+    "These results alone do not establish public HTTPS deployment, browser WebGL2/pointer-lock acceptance, cloud persistence or production readiness.",
+    "Sandbox blocked initial dependency DNS and initial local port bind; specifically scoped escalation was approved and both completed successfully."
+  ],
+  "httpSmokeEvidence": "http-smoke.json",
+  "businessSourceModified": false
+}

@@ -1,0 +1,3 @@
+All geometry and SDF shaders compiled and linked under EGL GLES3
+home unique colors 126
+world unique colors 1204
