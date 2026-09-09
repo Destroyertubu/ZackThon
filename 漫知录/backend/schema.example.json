@@ -1,8 +1,0 @@
-{
-  "_notice": "依据官方 Skill 0.5.3 HTTP 文档的知乎搜索响应。自定义代理如改变结构，请同步调整路径。",
-  "items": "Data.Items",
-  "title": "Title",
-  "url": "Url",
-  "summary": "ContentText",
-  "author": "AuthorName"
-}
