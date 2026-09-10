@@ -1,0 +1,123 @@
+{
+  "status": "passed",
+  "url": "https://wanderwise-land-v2-lostmagician155.netlify.app/home",
+  "browser": "152.0.7977.83",
+  "viewport": [
+    1440,
+    900
+  ],
+  "dpr": 1,
+  "network": "public HTTPS, fresh browser context, no throttling",
+  "secondsToReadyPlusScreenshotDelay": 19.661340542021208,
+  "checks": [
+    "public HTTPS home without account login",
+    "current production-full GLB loaded through real WebGL",
+    "one canvas and five facilities",
+    "actual panel bag",
+    "actual panel synthesis",
+    "actual panel journal",
+    "actual panel phone",
+    "actual panel seed",
+    "real third-person key movement"
+  ],
+  "initialDiagnostics": {
+    "page": "landing",
+    "renderer": "three-webgl2",
+    "sceneState": "ready",
+    "sceneKind": "home",
+    "sceneStage": "production-full",
+    "eye": [
+      0,
+      1.4101287016403754,
+      5.172667686812518
+    ],
+    "target": "door",
+    "active": false,
+    "facilities": [
+      {
+        "id": "cabinet",
+        "position": {
+          "x": 4.949999809265137,
+          "y": 1.2999999523162842,
+          "z": -1.4500000476837158
+        }
+      },
+      {
+        "id": "door",
+        "position": {
+          "x": 0,
+          "y": 1.2999999523162842,
+          "z": 4.650000095367432
+        }
+      },
+      {
+        "id": "journal",
+        "position": {
+          "x": -4.050000190734863,
+          "y": 1.2000000476837158,
+          "z": 1.25
+        }
+      },
+      {
+        "id": "phone",
+        "position": {
+          "x": 4.25,
+          "y": 1.5,
+          "z": 3.450000047683716
+        }
+      },
+      {
+        "id": "synthesis",
+        "position": {
+          "x": 1.399999976158142,
+          "y": 1.0499999523162842,
+          "z": 0
+        }
+      }
+    ],
+    "assetBytes": 6942500,
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 3.6500000953674316,
+      "yaw": 0
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0.15,
+      "distance": 3.2,
+      "fov": 58
+    },
+    "metrics": {
+      "drawCalls": 267,
+      "triangles": 500164,
+      "geometries": 149,
+      "textures": 38,
+      "programs": 20,
+      "labels": 1,
+      "fps": 61,
+      "medianFps": 59.9,
+      "p95ms": 17.7,
+      "rawFrameMs": 17.799999999999272
+    },
+    "pending": 0,
+    "worldVersion": null,
+    "nodeCount": null,
+    "modal": null
+  },
+  "movement": {
+    "before": {
+      "x": 0,
+      "y": 9.999999747378752e-05,
+      "z": 3.6500000953674316,
+      "yaw": 0
+    },
+    "after": {
+      "x": 6.318719151465757e-06,
+      "y": 0.0023283687405637465,
+      "z": 1.9237974882125854,
+      "yaw": -0.0
+    }
+  },
+  "errors": []
+}

@@ -1,0 +1,23 @@
+{
+  "status": "published_and_verified",
+  "branch": "v3",
+  "deployedSourceCommit": "35f5cf0d",
+  "checkedAt": "2026-09-10T04:02:49.403335+00:00",
+  "deployment": {
+    "site_id": "2035deff-dff0-4af8-817e-eb11fc809437",
+    "site_name": "wanderwise-land-v2-lostmagician155",
+    "deploy_id": "6aa22b60f2cd8c3587958a0a",
+    "deploy_url": "https://6aa22b60f2cd8c3587958a0a--wanderwise-land-v2-lostmagician155.netlify.app",
+    "url": "https://wanderwise-land-v2-lostmagician155.netlify.app"
+  },
+  "checks": {
+    "cloudUnitTests": 40,
+    "frontendModules": 25,
+    "publicApiSmoke": "passed",
+    "crossDeploymentPersistence": "passed",
+    "realBrowser": "passed",
+    "publicModelMatchesSource": "passed"
+  },
+  "incidentAndResolution": "Initial deploy returned 502 because a development node_modules symlink caused @netlify/blobs to be omitted from function artifacts. Installed locked dependencies as a real worktree-local directory with npm ci, rebuilt production functions without cache, confirmed dependency files inside both ZIPs, redeployed and passed HTTP/API/browser checks. No source or storage namespace change was required.",
+  "scope": "Existing Netlify site and production Blobs namespace retained. Tests used dedicated visitors; cross-deployment fixture and API smoke visitors deleted after validation. No real Zhihu or paid AI calls. Prior room art/LOD/performance acceptance gaps remain."
+}
