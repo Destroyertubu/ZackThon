@@ -1,0 +1,278 @@
+[
+  {
+    "id": "CAM01",
+    "name": "主视觉",
+    "position_m": [
+      -1.7,
+      1.72,
+      4.1
+    ],
+    "target_m": [
+      0.25,
+      1.55,
+      -1.4
+    ],
+    "fov_deg": 60,
+    "reference_id": "R01",
+    "mode": "normal",
+    "aspect": "4:3",
+    "capture_size": [
+      1920,
+      1440
+    ],
+    "status": "施工摄影机起点，非照片反求标定；首轮可按统一CR微调"
+  },
+  {
+    "id": "CAM02",
+    "name": "入口全景",
+    "position_m": [
+      0,
+      1.72,
+      4.6
+    ],
+    "target_m": [
+      0,
+      1.45,
+      -1.0
+    ],
+    "fov_deg": 65,
+    "reference_id": "R02",
+    "mode": "normal",
+    "aspect": "4:3",
+    "capture_size": [
+      1920,
+      1440
+    ],
+    "status": "施工摄影机起点，非照片反求标定；首轮可按统一CR微调"
+  },
+  {
+    "id": "CAM03",
+    "name": "阅读角",
+    "position_m": [
+      -2.8,
+      1.4,
+      -0.8
+    ],
+    "target_m": [
+      -4.6,
+      0.8,
+      -3.0
+    ],
+    "fov_deg": 46,
+    "reference_id": "R03",
+    "mode": "normal",
+    "aspect": "4:3",
+    "capture_size": [
+      1920,
+      1440
+    ],
+    "status": "施工摄影机起点，非照片反求标定；首轮可按统一CR微调"
+  },
+  {
+    "id": "CAM04",
+    "name": "日志桌",
+    "position_m": [
+      -2.5,
+      1.32,
+      2.5
+    ],
+    "target_m": [
+      -4.5,
+      1.0,
+      1.25
+    ],
+    "fov_deg": 48,
+    "reference_id": "R04",
+    "mode": "normal",
+    "aspect": "4:3",
+    "capture_size": [
+      1920,
+      1440
+    ],
+    "status": "施工摄影机起点，非照片反求标定；首轮可按统一CR微调"
+  },
+  {
+    "id": "CAM05",
+    "name": "想法柜",
+    "position_m": [
+      2.25,
+      1.65,
+      -0.5
+    ],
+    "target_m": [
+      5.45,
+      1.55,
+      -1.45
+    ],
+    "fov_deg": 52,
+    "reference_id": "R05",
+    "mode": "normal",
+    "aspect": "4:3",
+    "capture_size": [
+      1920,
+      1440
+    ],
+    "status": "施工摄影机起点，非照片反求标定；首轮可按统一CR微调"
+  },
+  {
+    "id": "CAM06",
+    "name": "合成台",
+    "position_m": [
+      2.45,
+      1.75,
+      2.5
+    ],
+    "target_m": [
+      0,
+      0.98,
+      0
+    ],
+    "fov_deg": 50,
+    "reference_id": "R06",
+    "mode": "normal",
+    "aspect": "4:3",
+    "capture_size": [
+      1920,
+      1440
+    ],
+    "status": "施工摄影机起点，非照片反求标定；首轮可按统一CR微调"
+  },
+  {
+    "id": "CAM07",
+    "name": "剖切总览",
+    "position_m": [
+      11,
+      14,
+      14
+    ],
+    "target_m": [
+      0,
+      0.7,
+      0
+    ],
+    "fov_deg": 45,
+    "reference_id": "R07",
+    "mode": "cutaway_only",
+    "aspect": "4:3",
+    "capture_size": [
+      1920,
+      1440
+    ],
+    "status": "施工摄影机起点，非照片反求标定；首轮可按统一CR微调"
+  },
+  {
+    "id": "CAM08",
+    "name": "反向入口与电话亭",
+    "position_m": [
+      0,
+      1.72,
+      -3.7
+    ],
+    "target_m": [
+      1.0,
+      1.35,
+      3.2
+    ],
+    "fov_deg": 65,
+    "reference_id": null,
+    "mode": "normal",
+    "aspect": "4:3",
+    "capture_size": [
+      1920,
+      1440
+    ],
+    "status": "施工摄影机起点，非照片反求标定；首轮可按统一CR微调"
+  },
+  {
+    "id": "CAM09",
+    "name": "壁炉盲区",
+    "position_m": [
+      2.2,
+      1.45,
+      -2.3
+    ],
+    "target_m": [
+      4.25,
+      1.05,
+      -4.4
+    ],
+    "fov_deg": 48,
+    "reference_id": null,
+    "mode": "normal",
+    "aspect": "4:3",
+    "capture_size": [
+      1920,
+      1440
+    ],
+    "status": "施工摄影机起点，非照片反求标定；首轮可按统一CR微调"
+  },
+  {
+    "id": "CAM10",
+    "name": "台灯与日志近景",
+    "position_m": [
+      -3.62,
+      1.14,
+      1.47
+    ],
+    "target_m": [
+      -4.5,
+      0.86,
+      1.15
+    ],
+    "fov_deg": 44,
+    "reference_id": "R04",
+    "mode": "normal",
+    "aspect": "4:3",
+    "capture_size": [
+      1920,
+      1440
+    ],
+    "status": "施工摄影机起点，非照片反求标定；首轮可按统一CR微调"
+  },
+  {
+    "id": "CAM11",
+    "name": "地面接触检查",
+    "position_m": [
+      1.8,
+      0.28,
+      1.4
+    ],
+    "target_m": [
+      0,
+      0.1,
+      0
+    ],
+    "fov_deg": 55,
+    "reference_id": null,
+    "mode": "normal",
+    "aspect": "4:3",
+    "capture_size": [
+      1920,
+      1440
+    ],
+    "status": "施工摄影机起点，非照片反求标定；首轮可按统一CR微调"
+  },
+  {
+    "id": "CAM12",
+    "name": "顶部与吊点检查",
+    "position_m": [
+      1.8,
+      1.72,
+      2.9
+    ],
+    "target_m": [
+      0,
+      3.8,
+      0
+    ],
+    "fov_deg": 64,
+    "reference_id": "R01",
+    "mode": "normal",
+    "aspect": "4:3",
+    "capture_size": [
+      1920,
+      1440
+    ],
+    "status": "施工摄影机起点，非照片反求标定；首轮可按统一CR微调"
+  }
+]

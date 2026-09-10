@@ -1,0 +1,15 @@
+using deprecated parameters for the initialization function; pass a single object instead
+✔ Rapier capsule applies swept corrected motion, slides, lands, and jumps (87.632041ms)
+✔ camera sphere protects near-plane volume independently of character layers (4.189417ms)
+✔ cancelled home setup does not create a live physics world (0.718667ms)
+✔ nearby quote is readable outside the camera and without label LOD (1.288709ms)
+✔ nearby quote wins over topic, closest quote wins deterministically (0.347416ms)
+✔ walls and range still prevent reading or facility activation (0.223917ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 348.498833

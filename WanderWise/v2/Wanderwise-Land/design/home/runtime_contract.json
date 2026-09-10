@@ -1,0 +1,99 @@
+{
+  "version": "1.0",
+  "facility_actions": {
+    "door": "seed",
+    "cabinet": "bag",
+    "synthesis": "synthesis",
+    "journal": "journal",
+    "phone": "phone"
+  },
+  "facility_roots": {
+    "door": "south_door",
+    "cabinet": "east_cabinet",
+    "synthesis": "synthesis",
+    "journal": "west_journal",
+    "phone": "east_phone"
+  },
+  "keys": {
+    "WASD": "camera-relative walk",
+    "Space": "jump grounded only",
+    "LeftMouse": "read/activate",
+    "E": "collect",
+    "F": "enter article field",
+    "B": "bag",
+    "R": "create anchor",
+    "T": "read anchor",
+    "V": "navigation three states",
+    "Esc": "unlock/modal/pause"
+  },
+  "overlay": "existing DOM retained; one active canvas/renderer/RAF",
+  "distance_m": {
+    "facility_label": 3.0,
+    "facility_activate": 3.0,
+    "content_collect": 4.0
+  },
+  "state_machine": [
+    "BOOT",
+    "HOME",
+    "WORLD",
+    "FIELD",
+    "MODAL",
+    "TRANSITION",
+    "PAUSED",
+    "RECOVERING"
+  ],
+  "pipeline_hooks_expected": [
+    "boot",
+    "pause",
+    "resume",
+    "setScene",
+    "checkpoint",
+    "dispose",
+    "capture_state",
+    "capture_camera",
+    "read_metrics"
+  ],
+  "write_policy": "no API calls for visual development; preserve users and SQLite; no new social matching",
+  "physics": {
+    "step_s": 0.016666666666666666,
+    "max_catch_up_steps": 5,
+    "capsule_radius": 0.28,
+    "capsule_half_segment": 0.58,
+    "ground_offset": 0.01,
+    "gravity": 9.81,
+    "walk_speed": 4.5,
+    "jump_height": 0.8,
+    "step_height_start": 0.18,
+    "snap_to_ground_start": 0.12
+  },
+  "camera": {
+    "near_m": 0.06,
+    "far_m": 2500,
+    "sphere_min_radius": 0.16,
+    "query_exclude": "player/effects/trigger volumes",
+    "algorithm": "sweep desired; immediate retract; damp extension; validate post-smoothing final pose; handle initial overlaps"
+  },
+  "budget_medium": {
+    "median_fps_min": 45,
+    "p95_frame_ms_max": 33,
+    "initial_transfer_bytes_target": 15000000,
+    "visible_tris_target": 200000,
+    "draw_calls_target": 150,
+    "cold_home_s_target": 8
+  },
+  "budget_high_note": "近景LOD0/摄影档允许更高质量但不代替中画质性能验收；相同房间、物件数量和布局",
+  "medium_tri_subbudgets": {
+    "architecture": 40000,
+    "furniture": 70000,
+    "props_textiles": 35000,
+    "vegetation": 20000,
+    "character": 15000,
+    "distant_environment": 15000,
+    "effects": 2000
+  },
+  "test_rules": {
+    "raw_frame_time": "performance.now raw delta，模拟dt可截断但性能不能截断",
+    "soak_minutes": 20,
+    "scene_roundtrips": 10
+  }
+}

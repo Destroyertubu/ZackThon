@@ -1,0 +1,67 @@
+{
+  "status": "passed",
+  "checks": [
+    "GLB failure exposes bounded error and actual retry, no 2D fallback",
+    "Actual WebGL context loss restores home and Rapier with one canvas",
+    "Embedded texture failure becomes explicit load error, no silent textureless room",
+    "Rapid scene changes reject late GLB/physics installation",
+    "Restoring a checkpoint inside relocated furniture uses safe spawn",
+    "10 isolated home/world cycles keep GPU resource counts stable; disposal cancels pending home"
+  ],
+  "errors": [],
+  "details": {
+    "lifecycle": {
+      "late": false,
+      "kind": "world before return",
+      "safe": {
+        "x": 0,
+        "y": 0,
+        "z": 3.6500000953674316,
+        "yaw": 0
+      },
+      "records": [
+        {
+          "geometries": 149,
+          "textures": 38
+        },
+        {
+          "geometries": 149,
+          "textures": 38
+        },
+        {
+          "geometries": 149,
+          "textures": 38
+        },
+        {
+          "geometries": 149,
+          "textures": 38
+        },
+        {
+          "geometries": 149,
+          "textures": 38
+        },
+        {
+          "geometries": 149,
+          "textures": 38
+        },
+        {
+          "geometries": 149,
+          "textures": 38
+        },
+        {
+          "geometries": 149,
+          "textures": 38
+        },
+        {
+          "geometries": 149,
+          "textures": 38
+        },
+        {
+          "geometries": 149,
+          "textures": 38
+        }
+      ],
+      "disposed": false
+    }
+  }
+}

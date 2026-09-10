@@ -1,0 +1,98 @@
+{
+  "version": "1.0",
+  "status": "设计起点，不是实测照度",
+  "tone_mapping": "ACESFilmicToneMapping，整项目只一次tone/output转换",
+  "white_balance_note": "避免全屋橙化；窗外冷中性、室内暖金；不从已烘阴影参考图提取albedo",
+  "key": {
+    "type": "DirectionalLight",
+    "position": [
+      8,
+      8,
+      -9
+    ],
+    "target": [
+      -4,
+      0,
+      -2
+    ],
+    "intensity_start": 2.4,
+    "color_srgb": "#FFE9C4",
+    "shadow": true,
+    "shadow_map_medium": 2048,
+    "shadow_map_low": 1024,
+    "shadow_frustum_note": "只覆盖房间+露台，远山单独背景光；tight bounds实测"
+  },
+  "environment": {
+    "type": "room-prefiltered-environment",
+    "intensity_start": 0.32,
+    "source": "取得合法HDRI后登记；默认自制校准环境",
+    "warning": "天空IBL不理解墙，室内不能直接用强户外环境当GI",
+    "hemisphere_intensity": 0.9,
+    "ambient_intensity": 0.23
+  },
+  "practicals": {
+    "color_kelvin_art_target": [
+      2400,
+      2900
+    ],
+    "visible_lanterns": 12,
+    "active_nonshadow_local_lights_medium_max": 4,
+    "dynamic_shadowed_point_lights": 0,
+    "active": [
+      {
+        "id": "reading",
+        "position": [
+          -3.58,
+          1.26,
+          -2.62
+        ],
+        "intensity": 0.85,
+        "distance": 6
+      },
+      {
+        "id": "journal",
+        "position": [
+          -4.5,
+          1.25,
+          1.25
+        ],
+        "intensity": 2,
+        "distance": 6
+      },
+      {
+        "id": "crown",
+        "position": [
+          0,
+          2.85,
+          0
+        ],
+        "intensity": 12,
+        "distance": 7
+      },
+      {
+        "id": "cabinet",
+        "position": [
+          4.95,
+          1.85,
+          -1.45
+        ],
+        "intensity": 4,
+        "distance": 4
+      }
+    ]
+  },
+  "bake": {
+    "strategy": "优先间接漫反射+局部灯光烘焙，主日光和角色阴影保留动态；正式执行需回归绑定",
+    "bake_direct_sun": false,
+    "bake_specular": false,
+    "store": "线性辐照度；UV2独立不重叠；sidecar映射，不假设glTF自动导出",
+    "disable_duplicate_contributions": true
+  },
+  "post": {
+    "bloom": "默认关闭；主水晶高画质可局部启用",
+    "dof_gameplay": false,
+    "ao": "先几何与接触正确；中画质可低成本AO，但不双重压黑烘焙AO",
+    "particles_medium_max": 150
+  },
+  "revision": "CR-005: one sun directed through the north opening toward the west reading corner"
+}

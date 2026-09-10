@@ -1,0 +1,17 @@
+{
+  "date": "2026-09-10",
+  "node": "v24.14.1",
+  "Blender": "5.2.1 LTS (9e2066aef7ef)",
+  "browser": "Chrome 152.0.7977.83",
+  "three": "0.186.0",
+  "rapier": "0.19.3",
+  "gltfTransform": "4.5.0",
+  "Vite": null,
+  "TypeScript": null,
+  "packageLockSha256": "2d0f79e64e10ba2a16332b9ba6d06e3fc4aa31b14d41ce68cd06588efe8ce5cc",
+  "localUrl": "http://127.0.0.1:18095",
+  "previewNetwork": "localhost; no throttling; fresh browser context; OS file cache warm",
+  "measurementScope": "Stage evidence plus final headed Chrome soak; precise final conditions in production-acceptance/home-acceptance.json",
+  "systemPython": "3.9.6",
+  "runtimePython": "Python 3.12.13"
+}

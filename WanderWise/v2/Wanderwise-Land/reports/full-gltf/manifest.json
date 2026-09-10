@@ -1,0 +1,6 @@
+{
+  "file": "frontend/assets/home/production/full.glb",
+  "bytes": 6942500,
+  "sha256": "82a2ef0f770f3efd547a667c36d59e7d76090f97866fda425ff5667530ba24a6",
+  "pipeline": "inspect; dedup; weld; tangents; JPEG87; full only Meshopt-medium 16bit position/UV with same-origin decoder; validate. No hierarchy flattening or scene simplification."
+}

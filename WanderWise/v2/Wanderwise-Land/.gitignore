@@ -22,3 +22,7 @@ dist/
 *.blend1
 *.blend2
 releases/
+
+# Local worktree development symlinks are never source artifacts.
+.venv
+node_modules

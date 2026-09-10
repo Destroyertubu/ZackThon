@@ -1,0 +1,308 @@
+[
+  {
+    "id": "D01",
+    "asset_id": "P01",
+    "count": 96,
+    "zone": "west_bookcase / east_cabinet / west_journal",
+    "placement_rule": "书架64本、柜内20本、桌/边几/合成台12本；每行从左至右按书宽累加，加2–6毫米间隙；最多15%斜放，倾斜书需邻书/挡板承托。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D02",
+    "asset_id": "P02",
+    "count": 1,
+    "zone": "west_journal",
+    "placement_rule": "桌面局部(0,.79,.10)，展开朝玩家；不可挡住journal标签。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D03",
+    "asset_id": "P03",
+    "count": 18,
+    "zone": "west_journal / synthesis / east_cabinet",
+    "placement_rule": "日志桌6张、合成台4张、柜背8张；只在定义纸区摆放，固定seed，不覆盖主晶。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D04",
+    "asset_id": "P04",
+    "count": 8,
+    "zone": "map_rack / synthesis",
+    "placement_rule": "筒架6卷，合成台2卷；放筒内或平放桌面，各自设surface。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D05",
+    "asset_id": "P05",
+    "count": 1,
+    "zone": "west_journal",
+    "placement_rule": "西墙，中心y=2.0,z=1.25；图框正面朝+X。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D06",
+    "asset_id": "P06",
+    "count": 8,
+    "zone": "west_bookcase / east_cabinet",
+    "placement_rule": "西墙4幅、柜背4幅，4种图案各2次；安装间距至少3厘米。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D07",
+    "asset_id": "P07",
+    "count": 12,
+    "zone": "east_cabinet",
+    "placement_rule": "背板12纸签，留出藏品轮廓；不与P03相同位置叠合。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D08",
+    "asset_id": "P08",
+    "count": 3,
+    "zone": "west_journal / east_cabinet",
+    "placement_rule": "桌后大星盘1，柜内中小各1。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D09",
+    "asset_id": "P09",
+    "count": 2,
+    "zone": "west_journal / synthesis",
+    "placement_rule": "一个开盖一个闭盖；接触surface而非世界y=0。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D10",
+    "asset_id": "P10",
+    "count": 1,
+    "zone": "west_journal",
+    "placement_rule": "桌面局部(.45,.79,.13)，与日记外沿分离2厘米。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D11",
+    "asset_id": "P11",
+    "count": 1,
+    "zone": "west_journal",
+    "placement_rule": "笔筒局部(.65,.79,-.18)，6支笔属于模型内部，不另计6套筒。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D12",
+    "asset_id": "P12",
+    "count": 1,
+    "zone": "west_journal",
+    "placement_rule": "桌面局部(.25,.79,-.20)，羽毛离灯罩10厘米以上。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D13",
+    "asset_id": "P13",
+    "count": 2,
+    "zone": "west_journal / reading_table",
+    "placement_rule": "桌右杯1、边几杯1；杯底贴surface。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D14",
+    "asset_id": "P14",
+    "count": 6,
+    "zone": "east_cabinet",
+    "placement_rule": "每件装在一个展示盘，不能把现代标签临时贴上。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D15",
+    "asset_id": "P15",
+    "count": 9,
+    "zone": "east_cabinet",
+    "placement_rule": "6种矿物分配9件；最高不超各格净高80%。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D16",
+    "asset_id": "P16",
+    "count": 9,
+    "zone": "east_cabinet",
+    "placement_rule": "展示托盘9，部分共享两件小标本；定义盘面高度供其他物体继承。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D17",
+    "asset_id": "P17",
+    "count": 8,
+    "zone": "east_cabinet / west_journal / synthesis / reading_round_trunk",
+    "placement_rule": "柜内3、桌1、合成台2、阅读边几2；远离纸和叶，火焰配套X01。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D18",
+    "asset_id": "P19",
+    "count": 1,
+    "zone": "all_assets",
+    "placement_rule": "微件母库，只按父模型parts重复，不能额外在场景放整套五金展台。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D19",
+    "asset_id": "P20",
+    "count": 16,
+    "zone": "east_cabinet / east_phone",
+    "placement_rule": "柜内15个中性编号，电话1块真实未开放铭牌。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D20",
+    "asset_id": "P22",
+    "count": 1,
+    "zone": "all_assets",
+    "placement_rule": "唯一徽章母版，由旗/书/金属徽重复引用；不另放一块空中logo。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D21",
+    "asset_id": "L02",
+    "count": 6,
+    "zone": "wall_posts",
+    "placement_rule": "除吊灯6个以外另有墙/窗6盏；统一分配可见灯与实际light，不每个加投影。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D22",
+    "asset_id": "L03",
+    "count": 6,
+    "zone": "wall_posts",
+    "placement_rule": "与D21一一对应；光源挂件坐标匹配。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D23",
+    "asset_id": "L04",
+    "count": 1,
+    "zone": "west_journal",
+    "placement_rule": "桌后左(-.65,.79,-.18)。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D24",
+    "asset_id": "L06",
+    "count": 1,
+    "zone": "west_bookcase",
+    "placement_rule": "留空层板，灯帽到上层板净空至少8厘米。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D25",
+    "asset_id": "L07",
+    "count": 2,
+    "zone": "east_cabinet / south_door",
+    "placement_rule": "东柜南边、南门东侧，不能贴地毯通路中央。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D26",
+    "asset_id": "L08",
+    "count": 9,
+    "zone": "east_cabinet",
+    "placement_rule": "九层灯槽随层板分配；其余格口靠烘焙补光，不虚增12个点光。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D27",
+    "asset_id": "T04",
+    "count": 4,
+    "zone": "reading_chair / journal_chair / synthesis_chair_south / synthesis_chair_north",
+    "placement_rule": "每椅一静态布变体；布模拟与接触都在最终椅形上生成。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D28",
+    "asset_id": "T06",
+    "count": 3,
+    "zone": "east_wall / north_wall",
+    "placement_rule": "东墙1、北开口两侧各1，离主灯有边距。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D29",
+    "asset_id": "V03",
+    "count": 8,
+    "zone": "ceiling / east_cabinet / west_bookcase",
+    "placement_rule": "顶梁4段、柜顶2、书架2；最多总投影面积15%覆盖柜架。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D30",
+    "asset_id": "V04",
+    "count": 2,
+    "zone": "west_journal / reading_round_trunk",
+    "placement_rule": "小多肉各一，桌面位置固定。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D31",
+    "asset_id": "X01",
+    "count": 9,
+    "zone": "candles / hearth",
+    "placement_rule": "8烛火+1炉火实例，共用时钟与图集。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D32",
+    "asset_id": "X02",
+    "count": 1,
+    "zone": "north_window",
+    "placement_rule": "全屋只一组局部尘埃容积。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D33",
+    "asset_id": "X03",
+    "count": 1,
+    "zone": "synthesis",
+    "placement_rule": "主晶微光与4槽按真实状态变化。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  },
+  {
+    "id": "D34",
+    "asset_id": "X04",
+    "count": 1,
+    "zone": "room_system",
+    "placement_rule": "系统配方而非mesh；声音素材取得后登记。",
+    "seed": 731,
+    "status": "design_recipe; instantiated transforms must be serialized after G12"
+  }
+]

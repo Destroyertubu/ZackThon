@@ -1,0 +1,685 @@
+{
+  "schema_version": "1.0",
+  "layout_id": "WW-HOME-GOLDEN-01",
+  "status": "施工设计基线；未建模/未实测",
+  "seed": 731,
+  "units": "meter",
+  "coordinate_system": "right-handed Y-up; +X east/right, +Z south/entry; asset front +Z",
+  "blender_mapping": {
+    "web_to_blender": "(x, y, z)_web -> (x, -z, y)_blender",
+    "blender_to_web": "(x, y, z)_blender -> (x, z, -y)_web",
+    "yaw": "正yaw为绕Web+Y右手旋转；Blender对应绕+Z正旋转；导出时只转换一次"
+  },
+  "footprint_xz": [
+    [
+      -5.3,
+      -5
+    ],
+    [
+      5.3,
+      -5
+    ],
+    [
+      6,
+      -4.3
+    ],
+    [
+      6,
+      4.3
+    ],
+    [
+      5.3,
+      5
+    ],
+    [
+      -5.3,
+      5
+    ],
+    [
+      -6,
+      4.3
+    ],
+    [
+      -6,
+      -4.3
+    ]
+  ],
+  "room": {
+    "width": 12,
+    "depth": 10,
+    "wall_thickness": 0.24,
+    "eaves_y": 3.4,
+    "ridge_y": 5.2,
+    "floor_y": 0,
+    "primary_clear_path_width": 1.2
+  },
+  "openings": [
+    {
+      "id": "south_departure",
+      "wall": "south",
+      "center_x": 0,
+      "z": 5,
+      "clear_width": 1.8,
+      "clear_height": 2.6,
+      "purpose": "唯一主要起程入口"
+    },
+    {
+      "id": "north_view",
+      "wall": "north",
+      "center_x": 0,
+      "z": -5,
+      "clear_width": 5.4,
+      "clear_height": 3.2,
+      "purpose": "观景露台；不是第二个起程入口"
+    }
+  ],
+  "spawn": {
+    "position": [
+      0,
+      0,
+      3.65
+    ],
+    "yaw": 3.141592653589793,
+    "player_height": 1.72,
+    "capsule_radius": 0.28,
+    "capsule_cylinder_half_height": 0.58,
+    "camera_distance": 3.2,
+    "camera_fov_deg": 58
+  },
+  "primary_routes": [
+    {
+      "id": "entry_to_synthesis",
+      "points_xz": [
+        [
+          0,
+          3.65
+        ],
+        [
+          1.8,
+          3.25
+        ],
+        [
+          2.6,
+          1.8
+        ],
+        [
+          2.5,
+          0.3
+        ]
+      ],
+      "width": 1.2
+    },
+    {
+      "id": "east_facilities",
+      "points_xz": [
+        [
+          2.6,
+          2.1
+        ],
+        [
+          3.45,
+          2.1
+        ],
+        [
+          3.8,
+          3.45
+        ]
+      ],
+      "width": 1.2
+    },
+    {
+      "id": "west_journal",
+      "points_xz": [
+        [
+          0,
+          3.65
+        ],
+        [
+          -2.5,
+          3.4
+        ],
+        [
+          -2.6,
+          1.25
+        ]
+      ],
+      "width": 1.2
+    },
+    {
+      "id": "north_view_loop",
+      "points_xz": [
+        [
+          -2.6,
+          1.25
+        ],
+        [
+          -2.5,
+          -1.5
+        ],
+        [
+          -2.2,
+          -3.2
+        ],
+        [
+          0,
+          -4.2
+        ],
+        [
+          0,
+          -6.0
+        ]
+      ],
+      "width": 1.2
+    }
+  ],
+  "roots": [
+    {
+      "id": "architecture",
+      "asset_ids": [
+        "A01",
+        "A02",
+        "A03",
+        "A04",
+        "A05",
+        "A06",
+        "A07",
+        "A08"
+      ],
+      "position_m": [
+        0,
+        0,
+        0
+      ],
+      "yaw_rad": 0,
+      "note": "按建筑参数展开；不是八个模型全部重叠在原点"
+    },
+    {
+      "id": "south_door",
+      "asset_ids": [
+        "A09",
+        "A10"
+      ],
+      "position_m": [
+        0,
+        0,
+        5
+      ],
+      "yaw_rad": 3.141592653589793,
+      "note": "门叶局部转轴以实际铰链为准"
+    },
+    {
+      "id": "entry_steps",
+      "asset_ids": [
+        "A11"
+      ],
+      "position_m": [
+        0,
+        -0.32,
+        5.45
+      ],
+      "yaw_rad": 0,
+      "note": ""
+    },
+    {
+      "id": "north_frame",
+      "asset_ids": [
+        "A12"
+      ],
+      "position_m": [
+        0,
+        0,
+        -5
+      ],
+      "yaw_rad": 0,
+      "note": ""
+    },
+    {
+      "id": "terrace",
+      "asset_ids": [
+        "A13",
+        "A14"
+      ],
+      "position_m": [
+        0,
+        0,
+        -6
+      ],
+      "yaw_rad": 0,
+      "note": "露台板位于-5..-7，栏杆另沿外缘"
+    },
+    {
+      "id": "hearth",
+      "asset_ids": [
+        "A15",
+        "P18"
+      ],
+      "position_m": [
+        4.25,
+        0,
+        -4.6
+      ],
+      "yaw_rad": 0,
+      "note": ""
+    },
+    {
+      "id": "reading_chair",
+      "asset_ids": [
+        "F01",
+        "T05"
+      ],
+      "position_m": [
+        -4.65,
+        0,
+        -3.1
+      ],
+      "yaw_rad": 0.55,
+      "note": ""
+    },
+    {
+      "id": "reading_table",
+      "asset_ids": [
+        "F02"
+      ],
+      "position_m": [
+        -4.98,
+        0,
+        -1.9
+      ],
+      "yaw_rad": 0,
+      "note": ""
+    },
+    {
+      "id": "reading_round_trunk",
+      "asset_ids": [
+        "F03"
+      ],
+      "position_m": [
+        -3.3,
+        0,
+        -3.65
+      ],
+      "yaw_rad": 0,
+      "note": ""
+    },
+    {
+      "id": "west_bookcase",
+      "asset_ids": [
+        "F04"
+      ],
+      "position_m": [
+        -5.7,
+        0,
+        -2.25
+      ],
+      "yaw_rad": 1.5707963267948966,
+      "note": ""
+    },
+    {
+      "id": "west_journal",
+      "asset_ids": [
+        "F05"
+      ],
+      "position_m": [
+        -4.65,
+        0,
+        1.25
+      ],
+      "yaw_rad": 1.5707963267948966,
+      "note": ""
+    },
+    {
+      "id": "journal_chair",
+      "asset_ids": [
+        "F06"
+      ],
+      "position_m": [
+        -3.6,
+        0,
+        1.25
+      ],
+      "yaw_rad": -1.5707963267948966,
+      "note": ""
+    },
+    {
+      "id": "east_cabinet",
+      "asset_ids": [
+        "F07",
+        "F08",
+        "F09"
+      ],
+      "position_m": [
+        5.48,
+        0,
+        -1.45
+      ],
+      "yaw_rad": -1.5707963267948966,
+      "note": ""
+    },
+    {
+      "id": "synthesis",
+      "asset_ids": [
+        "F10",
+        "F11",
+        "F12",
+        "F13",
+        "P21"
+      ],
+      "position_m": [
+        0,
+        0,
+        0
+      ],
+      "yaw_rad": 0,
+      "note": "F11底y=.805;F12底y=.88;材料槽底y=.882；以子坐标放置"
+    },
+    {
+      "id": "synthesis_chair_south",
+      "asset_ids": [
+        "F14"
+      ],
+      "position_m": [
+        -0.6,
+        0,
+        2.0
+      ],
+      "yaw_rad": 3.141592653589793,
+      "note": ""
+    },
+    {
+      "id": "synthesis_chair_north",
+      "asset_ids": [
+        "F14"
+      ],
+      "position_m": [
+        0.7,
+        0,
+        -1.95
+      ],
+      "yaw_rad": 0,
+      "note": ""
+    },
+    {
+      "id": "east_luggage",
+      "asset_ids": [
+        "F15"
+      ],
+      "position_m": [
+        4.75,
+        0,
+        1.0
+      ],
+      "yaw_rad": -1.5707963267948966,
+      "note": ""
+    },
+    {
+      "id": "entry_luggage",
+      "asset_ids": [
+        "F15"
+      ],
+      "position_m": [
+        4.0,
+        0,
+        4.25
+      ],
+      "yaw_rad": -1.5707963267948966,
+      "note": "两层总高不超过.82米"
+    },
+    {
+      "id": "east_phone",
+      "asset_ids": [
+        "F16",
+        "F17"
+      ],
+      "position_m": [
+        4.9,
+        0,
+        3.45
+      ],
+      "yaw_rad": -1.5707963267948966,
+      "note": "电话底y=1.0；外侧即可交互"
+    },
+    {
+      "id": "map_rack",
+      "asset_ids": [
+        "F18"
+      ],
+      "position_m": [
+        5.32,
+        0,
+        1.08
+      ],
+      "yaw_rad": -1.5707963267948966,
+      "note": ""
+    },
+    {
+      "id": "chandelier",
+      "asset_ids": [
+        "L01",
+        "L02"
+      ],
+      "position_m": [
+        0,
+        2.7,
+        0
+      ],
+      "yaw_rad": 0,
+      "note": "灯架最低y2.7；6灯笼由子socket布置"
+    },
+    {
+      "id": "reading_lamp",
+      "asset_ids": [
+        "L05"
+      ],
+      "position_m": [
+        -3.58,
+        0,
+        -2.62
+      ],
+      "yaw_rad": 0,
+      "note": ""
+    },
+    {
+      "id": "hero_rug",
+      "asset_ids": [
+        "T01"
+      ],
+      "position_m": [
+        0,
+        0.001,
+        0.05
+      ],
+      "yaw_rad": 0,
+      "note": ""
+    },
+    {
+      "id": "journal_rug",
+      "asset_ids": [
+        "T02"
+      ],
+      "position_m": [
+        -4.05,
+        0.001,
+        1.25
+      ],
+      "yaw_rad": 1.5707963267948966,
+      "note": ""
+    },
+    {
+      "id": "entry_rug",
+      "asset_ids": [
+        "T03"
+      ],
+      "position_m": [
+        0,
+        0.001,
+        3.72
+      ],
+      "yaw_rad": 0,
+      "note": ""
+    },
+    {
+      "id": "plant_reading",
+      "asset_ids": [
+        "V01",
+        "V06"
+      ],
+      "position_m": [
+        -5.0,
+        0,
+        -4.15
+      ],
+      "yaw_rad": 0,
+      "note": "植物根底取盆土surface，不能两个模型都从地面起"
+    },
+    {
+      "id": "plant_cabinet",
+      "asset_ids": [
+        "V01",
+        "V06"
+      ],
+      "position_m": [
+        3.85,
+        0,
+        0.75
+      ],
+      "yaw_rad": 0,
+      "note": ""
+    },
+    {
+      "id": "plant_window_left",
+      "asset_ids": [
+        "V02",
+        "V05"
+      ],
+      "position_m": [
+        -3.25,
+        0,
+        -4.6
+      ],
+      "yaw_rad": 0,
+      "note": ""
+    },
+    {
+      "id": "plant_window_right",
+      "asset_ids": [
+        "V02",
+        "V05"
+      ],
+      "position_m": [
+        3.08,
+        0,
+        -4.4
+      ],
+      "yaw_rad": 0,
+      "note": ""
+    },
+    {
+      "id": "plant_journal",
+      "asset_ids": [
+        "V02",
+        "V05"
+      ],
+      "position_m": [
+        -5.1,
+        0,
+        2.8
+      ],
+      "yaw_rad": 0,
+      "note": ""
+    },
+    {
+      "id": "plant_phone",
+      "asset_ids": [
+        "V02",
+        "V05"
+      ],
+      "position_m": [
+        3.88,
+        0,
+        2.3
+      ],
+      "yaw_rad": 0,
+      "note": ""
+    },
+    {
+      "id": "mountain",
+      "asset_ids": [
+        "E01"
+      ],
+      "position_m": [
+        -40,
+        -25,
+        -900
+      ],
+      "yaw_rad": 0,
+      "note": ""
+    },
+    {
+      "id": "forest",
+      "asset_ids": [
+        "E02",
+        "V07"
+      ],
+      "position_m": [
+        0,
+        -8,
+        -230
+      ],
+      "yaw_rad": 0,
+      "note": ""
+    },
+    {
+      "id": "water",
+      "asset_ids": [
+        "E03"
+      ],
+      "position_m": [
+        0,
+        -15,
+        -210
+      ],
+      "yaw_rad": 0,
+      "note": ""
+    },
+    {
+      "id": "sky",
+      "asset_ids": [
+        "E04"
+      ],
+      "position_m": [
+        0,
+        0,
+        0
+      ],
+      "yaw_rad": 0,
+      "note": ""
+    },
+    {
+      "id": "near_slope",
+      "asset_ids": [
+        "E05"
+      ],
+      "position_m": [
+        0,
+        -1.8,
+        -8.5
+      ],
+      "yaw_rad": 0,
+      "note": ""
+    },
+    {
+      "id": "player",
+      "asset_ids": [
+        "C01",
+        "C02"
+      ],
+      "position_m": [
+        0,
+        0,
+        3.65
+      ],
+      "yaw_rad": 3.141592653589793,
+      "note": ""
+    }
+  ]
+}

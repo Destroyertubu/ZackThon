@@ -1,7 +1,7 @@
 import * as T from '../vendor/three/three.module.js';
 export function disposeTree(root) {
  if(!root)return;const gs=new Set(),ms=new Set(),ts=new Set();
- root.traverse(o=>{if(o.geometry)gs.add(o.geometry);for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[]){ms.add(m);for(const v of Object.values(m))if(v?.isTexture)ts.add(v)}});
+ root.traverse(o=>{if(o.isInstancedMesh)o.dispose();if(o.geometry)gs.add(o.geometry);for(const m of Array.isArray(o.material)?o.material:o.material?[o.material]:[]){ms.add(m);for(const v of Object.values(m))if(v?.isTexture)ts.add(v)}});
  ts.forEach(t=>{t.dispose();t.source?.data?.close?.()});ms.forEach(m=>m.dispose());gs.forEach(g=>g.dispose());root.removeFromParent();
 }
 // One renderer and one render at end(). draw() only marks a batch visible.
@@ -16,7 +16,7 @@ export class Renderer {
   this.hemi=new T.HemisphereLight(0xdce9e5,0x8c6444,1.3);this.ambient=new T.AmbientLight(0xffdfb5,.35);this.sun=new T.DirectionalLight(0xffe6c2,3.1);
   this.sun.castShadow=true;this.sun.shadow.mapSize.set(2048,2048);Object.assign(this.sun.shadow.camera,{left:-9,right:9,top:8,bottom:-8,near:.3,far:35});
   this.sun.shadow.bias=-.00015;this.sun.shadow.normalBias=.025;
-  this.lamps=[new T.PointLight(0xffcb83,12,6,2),new T.PointLight(0xffcd8d,10,6,2)];
+  this.lamps=[new T.PointLight(0xffcb83,12,6,2),new T.PointLight(0xffcd8d,10,6,2),new T.PointLight(0xffddb0,0,7,2),new T.PointLight(0xffd699,0,4,2)];
   this.scene.add(this.hemi,this.ambient,this.sun,this.sun.target,...this.lamps);this.metrics={drawCalls:0,triangles:0};
   // Low-resolution studio-style environment, generated once for PBR reflections.
   // This is an ambient approximation, not a baked lightmap or a displayed background.
@@ -27,12 +27,19 @@ export class Renderer {
   const generator=new T.PMREMGenerator(this.webgl);this.homeEnvironment=generator.fromScene(environment,.05,.1,20,{size:128});generator.dispose();disposeTree(environment);
  }
  setLoop(cb){this.webgl.setAnimationLoop(cb)}
- configure(kind){
-  this.kind=kind;this.sun.castShadow=kind==='home';this.sun.position.set(...(kind==='home'?[3.5,5.5,-8]:[-30,65,20]));this.sun.target.position.set(...(kind==='home'?[0,0,1]:[0,0,0]));
+ configure(kind,rig=null,camera=null){
+  this.camera.far=kind==='home'&&rig?2500:650;this.camera.fov=camera?.fov||65;this.camera.updateProjectionMatrix();
+  this.kind=kind;this.sun.color.set(0xffe6c2);this.sun.castShadow=kind==='home';this.sun.position.set(...(kind==='home'?[3.5,5.5,-8]:[-30,65,20]));this.sun.target.position.set(...(kind==='home'?[0,0,1]:[0,0,0]));
   this.sun.intensity=kind==='home'?3.8:2.1;this.hemi.intensity=kind==='home'?.75:1.7;this.ambient.intensity=kind==='home'?.12:.1;
   this.scene.environment=kind==='home'?this.homeEnvironment.texture:null;this.scene.environmentIntensity=.48;
-  this.lamps[0].position.set(2.82,1.31,-3.75);this.lamps[1].position.set(-5.19,1.30,.59);this.lamps[0].intensity=8;this.lamps[1].intensity=9;this.lamps.forEach(l=>l.visible=kind==='home');
+  this.lamps[0].position.set(2.82,1.31,-3.75);this.lamps[1].position.set(-5.19,1.30,.59);this.lamps[0].intensity=8;this.lamps[1].intensity=9;this.lamps[2].intensity=0;this.lamps[3].intensity=0;this.lamps.forEach(l=>l.visible=kind==='home');
   this.scene.background=new T.Color(kind==='home'?'#b6b9a1':'#90af9f');this.scene.fog=new T.Fog(this.scene.background,kind==='home'?35:95,kind==='home'?95:290);
+  if(kind==='home'&&rig){this.sun.position.fromArray(rig.key.position);this.sun.target.position.fromArray(rig.key.target);this.sun.color.set(rig.key.color_srgb);this.sun.intensity=rig.key.intensity_start;this.scene.environmentIntensity=rig.environment.intensity_start;this.lamps.forEach((lamp,i)=>{const spec=rig.practicals?.active?.[i];lamp.visible=!!spec;if(spec){lamp.position.fromArray(spec.position);lamp.intensity=spec.intensity;lamp.distance=spec.distance}});this.hemi.intensity=rig.environment.hemisphere_intensity??.9;this.ambient.intensity=rig.environment.ambient_intensity??.23;this.scene.background.set('#b8cbd9');this.scene.fog=new T.Fog('#b8cbd9',180,1600);}
+ }
+ setCutaway(enabled){
+  if(enabled&&!this.cutawayBackground){this.cutawayBackground=this.scene.background.clone();this.scene.background.set('#171d19')}else if(!enabled&&this.cutawayBackground){this.scene.background.copy(this.cutawayBackground);this.cutawayBackground=null}
+  this.webgl.clippingPlanes=enabled?[new T.Plane(new T.Vector3(-1,0,0),5.75),new T.Plane(new T.Vector3(0,0,-1),4.75)]:[];
+  this.root?.traverse(o=>{if(/^WW_A0[67]$/.test(o.name)||/^WW_E0[1235]$/.test(o.name))o.visible=!enabled});
  }
  install(root){this.root=root;if(root)this.scene.add(root)}
  detach(){this.root?.removeFromParent();this.root=null}

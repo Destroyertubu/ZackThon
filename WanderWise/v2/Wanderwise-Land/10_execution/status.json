@@ -1,0 +1,1039 @@
+{
+  "schema_version": "1.0",
+  "project": "Wanderwise room rebuild",
+  "kit_date": "2026-09-10",
+  "current_stage": "G20",
+  "state": "local_delivery_with_open_acceptance_items",
+  "project_root": "/Users/gauss/Desktop/SuperTechMagician/SolarMaster/ZackThon-previews/production-room/WanderWise/v2/Wanderwise-Land",
+  "layout_id": "WW-HOME-GOLDEN-01",
+  "stages": [
+    {
+      "id": "G00",
+      "state": "complete",
+      "evidence": [
+        "reports/G00_repository_audit.md",
+        "reports/G00_baseline/browser.json"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "G01",
+      "state": "complete",
+      "evidence": [
+        "reports/G01_decisions.md"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "G02",
+      "state": "runtime_review",
+      "evidence": [
+        "reports/G02_browser/result.json"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "G03",
+      "state": "runtime_review",
+      "evidence": [
+        "reports/G03_screenshots/result.json"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "G04",
+      "state": "complete",
+      "evidence": [
+        "reports/G04_asset_decisions.json"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "G05",
+      "state": "runtime_review",
+      "evidence": [
+        "reports/G05_materials/result.json"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "G06",
+      "state": "engineering_pass",
+      "evidence": [
+        "reports/G06_browser/result.json",
+        "reports/G06_corner_review.md",
+        "reports/G06_browser/interaction.json"
+      ],
+      "notes": "四轮修订后真实角落交互/镜头/接触检查通过；材质审美差距和LOD仍列未完成。"
+    },
+    {
+      "id": "G07",
+      "state": "implemented_and_runtime_checked",
+      "evidence": [],
+      "notes": "墙体COL旋转与交互过滤已修复；K02/K13复测通过。"
+    },
+    {
+      "id": "G08",
+      "state": "implemented_and_runtime_checked",
+      "evidence": [],
+      "notes": "三联柜/玻璃、同一收藏面板已在实机验证。"
+    },
+    {
+      "id": "G09",
+      "state": "implemented_and_runtime_checked",
+      "evidence": [],
+      "notes": "书桌/阅读区已整合，原日志与保存回读通过。"
+    },
+    {
+      "id": "G10",
+      "state": "implemented_and_runtime_checked",
+      "evidence": [],
+      "notes": "圆台四槽与原手工合成保存通过，实体绕桌通过。"
+    },
+    {
+      "id": "G11",
+      "state": "implemented_and_runtime_checked",
+      "evidence": [],
+      "notes": "电话亭真实未开放；壁炉为设计补充，无新增匹配接口。"
+    },
+    {
+      "id": "G12",
+      "state": "partial",
+      "evidence": [],
+      "notes": "87个单元逐项记录；96本书、4藤/3盆已建，完整四椅背毯/全部植物家族/音频等未完成。"
+    },
+    {
+      "id": "G13",
+      "state": "partial",
+      "evidence": [],
+      "notes": "程序PBR纹理与UV已导出；未做lightmap/AO烘焙绑定或三档LOD。"
+    },
+    {
+      "id": "G14",
+      "state": "runtime_review",
+      "evidence": [],
+      "notes": "同一主光/4补光，12视角已拍；最终审美批准仍未完成。"
+    },
+    {
+      "id": "G15",
+      "state": "implemented_and_runtime_checked",
+      "evidence": [],
+      "notes": "Meshopt+同源解码器实际运行；GLTF基础校验无errors/warnings，但validator不理解Meshopt扩展，实际浏览器解码另验。"
+    },
+    {
+      "id": "G16",
+      "state": "implemented_and_runtime_checked",
+      "evidence": [],
+      "notes": "原世界/文章场域/10次家园往返通过，一个Canvas与RAF。"
+    },
+    {
+      "id": "G17",
+      "state": "partial",
+      "evidence": [],
+      "notes": "28-cases.md逐项区分通过/部分/未测；没有28/28通过声明。"
+    },
+    {
+      "id": "G18",
+      "state": "implemented_and_runtime_checked",
+      "evidence": [],
+      "notes": "五入口、中文输入、收藏/锚点/手工合成/保存/刷新通过。"
+    },
+    {
+      "id": "G19",
+      "state": "runtime_review",
+      "evidence": [],
+      "notes": "12固定视角来自实机，完整视觉门槛未全通过。"
+    },
+    {
+      "id": "G20",
+      "state": "local_runtime_verified",
+      "evidence": [
+        "docs/PRODUCTION_ROOM_REPORT.md",
+        "reports/production-acceptance/home-acceptance.json"
+      ],
+      "notes": "1203.6秒、19项业务/运行检查与10次实际往返通过；本地交付，不代表87/28或美术/预算全部通过。"
+    }
+  ],
+  "assets": [
+    {
+      "id": "A01",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "A02",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "A03",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "A04",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "A05",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "A06",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "A07",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "A08",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "A09",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "A10",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "A11",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "A12",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "A13",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "A14",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "A15",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "F01",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "F02",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "F03",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "F04",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "F05",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "F06",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "F07",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "F08",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "F09",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "F10",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "F11",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "F12",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "F13",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "F14",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "F15",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "F16",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "F17",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "F18",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "L01",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "L02",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "L03",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "L04",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "L05",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "L06",
+      "state": "deferred_or_existing_system",
+      "source_acquired": false,
+      "model_exists": false,
+      "browser_review": "not_run",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "L07",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "L08",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "T01",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "T02",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "T03",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "T04",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "T05",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "T06",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "P01",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "P02",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "P03",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "P04",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "P05",
+      "state": "deferred_or_existing_system",
+      "source_acquired": false,
+      "model_exists": false,
+      "browser_review": "not_run",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "P06",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "P07",
+      "state": "deferred_or_existing_system",
+      "source_acquired": false,
+      "model_exists": false,
+      "browser_review": "not_run",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "P08",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "P09",
+      "state": "deferred_or_existing_system",
+      "source_acquired": false,
+      "model_exists": false,
+      "browser_review": "not_run",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "P10",
+      "state": "deferred_or_existing_system",
+      "source_acquired": false,
+      "model_exists": false,
+      "browser_review": "not_run",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "P11",
+      "state": "deferred_or_existing_system",
+      "source_acquired": false,
+      "model_exists": false,
+      "browser_review": "not_run",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "P12",
+      "state": "deferred_or_existing_system",
+      "source_acquired": false,
+      "model_exists": false,
+      "browser_review": "not_run",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "P13",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "P14",
+      "state": "deferred_or_existing_system",
+      "source_acquired": false,
+      "model_exists": false,
+      "browser_review": "not_run",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "P15",
+      "state": "deferred_or_existing_system",
+      "source_acquired": false,
+      "model_exists": false,
+      "browser_review": "not_run",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "P16",
+      "state": "deferred_or_existing_system",
+      "source_acquired": false,
+      "model_exists": false,
+      "browser_review": "not_run",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "P17",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "P18",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "P19",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "P20",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "P21",
+      "state": "deferred_or_existing_system",
+      "source_acquired": false,
+      "model_exists": false,
+      "browser_review": "not_run",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "P22",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "V01",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "V02",
+      "state": "deferred_or_existing_system",
+      "source_acquired": false,
+      "model_exists": false,
+      "browser_review": "not_run",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "V03",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "V04",
+      "state": "deferred_or_existing_system",
+      "source_acquired": false,
+      "model_exists": false,
+      "browser_review": "not_run",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "V05",
+      "state": "deferred_or_existing_system",
+      "source_acquired": false,
+      "model_exists": false,
+      "browser_review": "not_run",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "V06",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "V07",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "E01",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "E02",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "E03",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "E04",
+      "state": "deferred_or_existing_system",
+      "source_acquired": false,
+      "model_exists": false,
+      "browser_review": "not_run",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "E05",
+      "state": "implemented_geometry_review_pending",
+      "source_acquired": false,
+      "model_exists": true,
+      "browser_review": "fixed_views_partial",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "C01",
+      "state": "deferred_or_existing_system",
+      "source_acquired": false,
+      "model_exists": false,
+      "browser_review": "not_run",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "C02",
+      "state": "deferred_or_existing_system",
+      "source_acquired": false,
+      "model_exists": false,
+      "browser_review": "not_run",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "X01",
+      "state": "deferred_or_existing_system",
+      "source_acquired": false,
+      "model_exists": false,
+      "browser_review": "not_run",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "X02",
+      "state": "deferred_or_existing_system",
+      "source_acquired": false,
+      "model_exists": false,
+      "browser_review": "not_run",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "X03",
+      "state": "deferred_or_existing_system",
+      "source_acquired": false,
+      "model_exists": false,
+      "browser_review": "not_run",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    },
+    {
+      "id": "X04",
+      "state": "deferred_or_existing_system",
+      "source_acquired": false,
+      "model_exists": false,
+      "browser_review": "not_run",
+      "evidence": [
+        "reports/production-assets/asset-receipts.json"
+      ]
+    }
+  ],
+  "metrics": {
+    "cold_home_s": 1.3258227499900386,
+    "median_fps": 59.880239521125056,
+    "p95_frame_ms": 17.5,
+    "transfer_bytes": 11672804,
+    "visible_triangles": null,
+    "draw_calls": 258,
+    "trianglePassCount": 490048
+  },
+  "warning": "包结构校验不是游戏实现；禁止批量把not_run改pass"
+}

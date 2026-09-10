@@ -1,0 +1,2 @@
+warn: tangents: No qualifying primitives found. See debug output.
+info: full.glb (24.06 MB) → full.glb (24.06 MB)

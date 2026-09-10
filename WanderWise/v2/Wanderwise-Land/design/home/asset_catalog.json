@@ -1,0 +1,6618 @@
+[
+  {
+    "id": "A01",
+    "name": "基础台基与楼板",
+    "category": "architecture",
+    "dimensions_m": [
+      12.6,
+      0.36,
+      10.6
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "八边形台基",
+      "承重楼板",
+      "前门台阶接口",
+      "露台连接边",
+      "底部遮蔽面"
+    ],
+    "make_steps": [
+      "从统一 footprint 顶点挤出0.36米厚台基，楼面顶面固定Web y=0",
+      "前后台阶与门槛分对象且连续，禁止把全部地面抬高后漏改出生点",
+      "只给外露边2–4毫米倒角，底面可减面但碰撞面保持封闭",
+      "实体地板碰撞只用一个主板加外缘代理，避免每条木板缝成为坎",
+      "最后用1米标尺和胶囊站立验证顶面高度"
+    ],
+    "material_ids": [
+      "M02",
+      "M18"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R01",
+      "R07"
+    ],
+    "placement": "建筑基准原点(0,0,0)，结构向下延伸",
+    "collision": "连续静态楼板；外缘按footprint建立",
+    "lod0_triangle_budget": 1200,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/architecture/A01.md",
+    "components": [
+      {
+        "id": "A01.01",
+        "name": "八边形台基",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A01.02",
+        "name": "承重楼板",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A01.03",
+        "name": "前门台阶接口",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A01.04",
+        "name": "露台连接边",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A01.05",
+        "name": "底部遮蔽面",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "A02",
+    "name": "长条橡木地板",
+    "category": "architecture",
+    "dimensions_m": [
+      12,
+      0.025,
+      10
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "板面",
+      "板边微倒角",
+      "端头拼接",
+      "缝隙暗层",
+      "窗下磨损区"
+    ],
+    "make_steps": [
+      "按长方向Z铺设0.16–0.23米宽地板，端缝采用固定种子错缝",
+      "选整面贴图方案或独立板面方案，禁止两套缝线重叠",
+      "近景板边0.5–1毫米圆角，远景合并几何并复用图集",
+      "色差限制在同一暖木色相内，书桌和窗下可轻磨损",
+      "保留平整可行走平面，视觉沟缝不改变碰撞"
+    ],
+    "material_ids": [
+      "M01"
+    ],
+    "source_ids": [
+      "S18"
+    ],
+    "reference_ids": [
+      "R01",
+      "R02",
+      "R07"
+    ],
+    "placement": "覆盖建筑footprint，视觉顶面y=0.001",
+    "collision": "沿用A01；不逐板碰撞",
+    "lod0_triangle_budget": 6000,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/architecture/A02.md",
+    "components": [
+      {
+        "id": "A02.01",
+        "name": "板面",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A02.02",
+        "name": "板边微倒角",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A02.03",
+        "name": "端头拼接",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A02.04",
+        "name": "缝隙暗层",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A02.05",
+        "name": "窗下磨损区",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "A03",
+    "name": "厚灰泥墙与真实洞口",
+    "category": "architecture",
+    "dimensions_m": [
+      12,
+      3.4,
+      10
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "墙体厚度",
+      "奶油灰泥面",
+      "南门洞",
+      "北景观洞口",
+      "内外墙边",
+      "倒角转角"
+    ],
+    "make_steps": [
+      "依统一平面生成0.24米厚墙，先切南门和北景观洞口再做分段碰撞",
+      "墙面不使用单面无厚平面，门口需真实侧壁和顶壁",
+      "西东墙保留四设施背墙，不照剖视图删除前墙",
+      "灰泥大面保持平整，微小凹凸交给法线",
+      "墙洞口角增加2毫米倒角，清理长薄三角面及法线",
+      "碰撞按洞口左右和上方分盒，不能用总AABB封洞"
+    ],
+    "material_ids": [
+      "M05"
+    ],
+    "source_ids": [
+      "S19"
+    ],
+    "reference_ids": [
+      "R01",
+      "R07"
+    ],
+    "placement": "footprint外缘、洞口参数取room_layout.json",
+    "collision": "分段静态墙盒；洞口净空必须保留",
+    "lod0_triangle_budget": 5000,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/architecture/A03.md",
+    "components": [
+      {
+        "id": "A03.01",
+        "name": "墙体厚度",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A03.02",
+        "name": "奶油灰泥面",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A03.03",
+        "name": "南门洞",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A03.04",
+        "name": "北景观洞口",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A03.05",
+        "name": "内外墙边",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A03.06",
+        "name": "倒角转角",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "A04",
+    "name": "转角立柱与榫接",
+    "category": "architecture",
+    "dimensions_m": [
+      0.24,
+      3.4,
+      0.24
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "木柱",
+      "柱脚",
+      "柱帽",
+      "斜切角",
+      "木榫",
+      "木钉"
+    ],
+    "make_steps": [
+      "在八个墙角及门窗侧设置同截面柱，不额外侵入净宽",
+      "四边3–6毫米倒角，柱脚与踢脚线衔接",
+      "木纹沿高度，顶底端面年轮独立UV",
+      "榫头和木钉仅外露处建模，不堆砌全套不可见木工",
+      "保留轻微手工不规则但主体垂直，柱与梁交接不能悬浮"
+    ],
+    "material_ids": [
+      "M02"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R01",
+      "R07"
+    ],
+    "placement": "由建筑柱位表实例化，不手工随机摆放",
+    "collision": "并入墙代理；可见外凸超过5厘米补盒",
+    "lod0_triangle_budget": 1800,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 2,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/architecture/A04.md",
+    "components": [
+      {
+        "id": "A04.01",
+        "name": "木柱",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A04.02",
+        "name": "柱脚",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A04.03",
+        "name": "柱帽",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A04.04",
+        "name": "斜切角",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A04.05",
+        "name": "木榫",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A04.06",
+        "name": "木钉",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "A05",
+    "name": "横梁与门窗过梁",
+    "category": "architecture",
+    "dimensions_m": [
+      12,
+      0.26,
+      0.24
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "主横梁",
+      "窗过梁",
+      "门过梁",
+      "支撑端头",
+      "接榫木钉"
+    ],
+    "make_steps": [
+      "按开口跨度建立完整梁，不做看似压在空气中的短块",
+      "梁深0.24–0.30米按本设计统一，不宣称结构工程安全认证",
+      "沿长度展开UV，转角木纹不垂直断裂",
+      "留3毫米倒角与少量凿痕，复杂纹理烘法线",
+      "检查与吊灯链条、屋架交汇而非穿插"
+    ],
+    "material_ids": [
+      "M02"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R01",
+      "R02",
+      "R07"
+    ],
+    "placement": "建筑梁位表；统一eaves_y=3.4",
+    "collision": "高处可并墙，低过梁必须相机阻挡",
+    "lod0_triangle_budget": 2200,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/architecture/A05.md",
+    "components": [
+      {
+        "id": "A05.01",
+        "name": "主横梁",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A05.02",
+        "name": "窗过梁",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A05.03",
+        "name": "门过梁",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A05.04",
+        "name": "支撑端头",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A05.05",
+        "name": "接榫木钉",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "A06",
+    "name": "木板天花与椽条",
+    "category": "architecture",
+    "dimensions_m": [
+      12,
+      1.8,
+      10
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "两坡顶板",
+      "窄木椽",
+      "屋脊收口",
+      "内檐",
+      "检修隐藏面"
+    ],
+    "make_steps": [
+      "沿两坡屋面建立板面，檐高3.4米、脊高5.2米",
+      "天花与外屋面区分，透过门不能看见无限空面",
+      "椽条节奏统一，近景3毫米倒角而非简单硬边长方体",
+      "木纹沿板长，顶角UV不拉长",
+      "低细节版本将非轮廓椽条烘入法线但保留主梁"
+    ],
+    "material_ids": [
+      "M02"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R01",
+      "R02"
+    ],
+    "placement": "常规游玩始终有顶；仅摄影剖切层可暂隐藏",
+    "collision": "屋顶与横梁加入相机组",
+    "lod0_triangle_budget": 6000,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/architecture/A06.md",
+    "components": [
+      {
+        "id": "A06.01",
+        "name": "两坡顶板",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A06.02",
+        "name": "窄木椽",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A06.03",
+        "name": "屋脊收口",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A06.04",
+        "name": "内檐",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A06.05",
+        "name": "检修隐藏面",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "A07",
+    "name": "三角屋架与脊梁",
+    "category": "architecture",
+    "dimensions_m": [
+      12,
+      1.8,
+      0.24
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "下弦",
+      "两侧斜梁",
+      "中柱",
+      "脊梁",
+      "金属连接片"
+    ],
+    "make_steps": [
+      "用斜梁端点与屋面斜率构造屋架，不随意旋转方块相交",
+      "梁端做合理平切和接榫，连接片厚4–6毫米",
+      "中柱与吊灯顶盘避开重叠，明确吊点",
+      "同一截面共用trim纹理，远处螺栓烘贴图",
+      "在低角度相机检查梁内表面是否缺失"
+    ],
+    "material_ids": [
+      "M02",
+      "M07"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R01",
+      "R07"
+    ],
+    "placement": "位于预定屋架平面，含顶部中心吊点",
+    "collision": "简化长盒/凸体；相机必须检测",
+    "lod0_triangle_budget": 4500,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/architecture/A07.md",
+    "components": [
+      {
+        "id": "A07.01",
+        "name": "下弦",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A07.02",
+        "name": "两侧斜梁",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A07.03",
+        "name": "中柱",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A07.04",
+        "name": "脊梁",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A07.05",
+        "name": "金属连接片",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "A08",
+    "name": "踢脚线与墙裙线脚",
+    "category": "architecture",
+    "dimensions_m": [
+      1,
+      0.15,
+      0.035
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "底部基座",
+      "收口条",
+      "阴角",
+      "阳角",
+      "门侧断开",
+      "壁炉避让"
+    ],
+    "make_steps": [
+      "绘制带凹槽的线脚截面再沿墙路径扫掠",
+      "门洞与炉台处断开，禁止一条踢脚线穿过门口",
+      "转角用斜接，端头封口",
+      "木纹按每段长度映射，UV密度一致",
+      "毫米细槽使用法线，保留顶部轮廓"
+    ],
+    "material_ids": [
+      "M03"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R01",
+      "R02",
+      "R05"
+    ],
+    "placement": "由墙段程序化生成并避开openings",
+    "collision": "不单独碰撞，归墙体",
+    "lod0_triangle_budget": 1500,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/architecture/A08.md",
+    "components": [
+      {
+        "id": "A08.01",
+        "name": "底部基座",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A08.02",
+        "name": "收口条",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A08.03",
+        "name": "阴角",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A08.04",
+        "name": "阳角",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A08.05",
+        "name": "门侧断开",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A08.06",
+        "name": "壁炉避让",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "A09",
+    "name": "出发大门套",
+    "category": "architecture",
+    "dimensions_m": [
+      2.2,
+      2.85,
+      0.32
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "左右门柱",
+      "顶梁",
+      "内侧止口",
+      "包边",
+      "门铰座",
+      "门牌槽"
+    ],
+    "make_steps": [
+      "门洞净宽1.8米净高2.6米，模型外宽2.2米",
+      "止口和包边形成至少两级真实深度",
+      "门铰安装侧与门叶枢轴统一",
+      "近景木材边3毫米倒角，榫和金属座可识别",
+      "门牌保留平面区域，不把文字焊成重网格"
+    ],
+    "material_ids": [
+      "M02",
+      "M06"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R02",
+      "R07"
+    ],
+    "placement": "南墙中线z=5，门向外开启不侵入室内通路",
+    "collision": "门套分左右顶盒",
+    "lod0_triangle_budget": 3500,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/architecture/A09.md",
+    "components": [
+      {
+        "id": "A09.01",
+        "name": "左右门柱",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A09.02",
+        "name": "顶梁",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A09.03",
+        "name": "内侧止口",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A09.04",
+        "name": "包边",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A09.05",
+        "name": "门铰座",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A09.06",
+        "name": "门牌槽",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "A10",
+    "name": "出发门叶与环形把手",
+    "category": "architecture",
+    "dimensions_m": [
+      1.76,
+      2.56,
+      0.065
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "门叶框",
+      "拼板",
+      "环形拉手",
+      "锁孔盖",
+      "铰链",
+      "门钉",
+      "底挡"
+    ],
+    "make_steps": [
+      "按南门套内口留每侧1–2厘米缝，制作框架与内拼板",
+      "把手用曲线/旋转体成环并做固定座，环与木板有合理间隔",
+      "门轴放在真实铰链侧底部，输出局部旋转动画或配置",
+      "默认作为起程设施，打开面板不等于立刻切场，防止门扫过玩家",
+      "动态门碰撞同步旋转或开启时阻挡角色进入扫掠区"
+    ],
+    "material_ids": [
+      "M02",
+      "M06",
+      "M07"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R02",
+      "R07"
+    ],
+    "placement": "南门A09内部，唯一主要起程入口",
+    "collision": "门叶独立运动学盒；禁止离线动画与碰撞脱节",
+    "lod0_triangle_budget": 5000,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/architecture/A10.md",
+    "components": [
+      {
+        "id": "A10.01",
+        "name": "门叶框",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A10.02",
+        "name": "拼板",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A10.03",
+        "name": "环形拉手",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A10.04",
+        "name": "锁孔盖",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A10.05",
+        "name": "铰链",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A10.06",
+        "name": "门钉",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A10.07",
+        "name": "底挡",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "A11",
+    "name": "门槛与前台阶",
+    "category": "architecture",
+    "dimensions_m": [
+      2.4,
+      0.32,
+      1.0
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "木门槛",
+      "石阶上层",
+      "下层",
+      "侧收口",
+      "磨损前缘"
+    ],
+    "make_steps": [
+      "台阶只在外侧，室内门槛高差不超过0.02米",
+      "每级高度约0.14–0.16米且步面至少0.3米",
+      "用截面挤出后倒角，避免细碎扫描网格作为碰撞",
+      "前缘磨损沿行走方向，不把裂缝做成障碍",
+      "测试角色正向、斜向、后退经过台阶"
+    ],
+    "material_ids": [
+      "M02",
+      "M18"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R07"
+    ],
+    "placement": "南门外z>5",
+    "collision": "连续阶梯盒/坡代理；两者只能选一主路径",
+    "lod0_triangle_budget": 1800,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/architecture/A11.md",
+    "components": [
+      {
+        "id": "A11.01",
+        "name": "木门槛",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A11.02",
+        "name": "石阶上层",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A11.03",
+        "name": "下层",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A11.04",
+        "name": "侧收口",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A11.05",
+        "name": "磨损前缘",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "A12",
+    "name": "北侧全景门窗框",
+    "category": "architecture",
+    "dimensions_m": [
+      5.9,
+      3.65,
+      0.32
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "两侧框",
+      "顶部过梁",
+      "下部门轨",
+      "开启侧板",
+      "侧边灯挂点",
+      "露台门口"
+    ],
+    "make_steps": [
+      "保留5.4米宽3.2米高净开口，周边厚木框",
+      "默认两侧玻璃门扇滑开/收于墙边，不能把整扇透明墙横挡景观",
+      "开放处与露台同高，边框有止口和玻璃压条",
+      "窗外透视不按图中一张照片投成近处假墙",
+      "其外缘灯挂点统一命名"
+    ],
+    "material_ids": [
+      "M02",
+      "M16"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R01",
+      "R02",
+      "R03",
+      "R07"
+    ],
+    "placement": "北墙中线z=-5；非新的旅程入口",
+    "collision": "开口左右顶分盒；门扇关合状态才阻挡",
+    "lod0_triangle_budget": 6000,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/architecture/A12.md",
+    "components": [
+      {
+        "id": "A12.01",
+        "name": "两侧框",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A12.02",
+        "name": "顶部过梁",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A12.03",
+        "name": "下部门轨",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A12.04",
+        "name": "开启侧板",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A12.05",
+        "name": "侧边灯挂点",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A12.06",
+        "name": "露台门口",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "A13",
+    "name": "露台地板与边缘",
+    "category": "architecture",
+    "dimensions_m": [
+      6.4,
+      0.2,
+      2.0
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "木平台",
+      "边封",
+      "外侧梁",
+      "地板缝",
+      "栏杆脚座"
+    ],
+    "make_steps": [
+      "平台由z=-5延伸到-7，与室内顶面同高",
+      "外沿可略显旧但与室内同木材家族",
+      "板缝为视觉细节，碰撞必须连续",
+      "外缘梁与栏杆柱脚有实际连接",
+      "禁止露台变成另一片无限地图，仅供站立看景"
+    ],
+    "material_ids": [
+      "M02"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R01",
+      "R02",
+      "R07"
+    ],
+    "placement": "north_terrace",
+    "collision": "一个静态平台盒+外侧栏杆",
+    "lod0_triangle_budget": 2200,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/architecture/A13.md",
+    "components": [
+      {
+        "id": "A13.01",
+        "name": "木平台",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A13.02",
+        "name": "边封",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A13.03",
+        "name": "外侧梁",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A13.04",
+        "name": "地板缝",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A13.05",
+        "name": "栏杆脚座",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "A14",
+    "name": "露台木栏杆",
+    "category": "architecture",
+    "dimensions_m": [
+      6.4,
+      1.05,
+      0.14
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "栏杆柱",
+      "上扶手",
+      "中横梁",
+      "柱帽",
+      "转角",
+      "金属连接"
+    ],
+    "make_steps": [
+      "沿露台外缘及两侧设置连续护栏，净高1.05米",
+      "栏杆柱与地板相接而不是插进半根",
+      "扶手上缘6毫米圆角，木纹沿各部件",
+      "保留视线开阔，碰撞可用连续隐形栏杆平面但不可挡到室内门洞",
+      "三种角度确认下方没有人物可钻出的大缝"
+    ],
+    "material_ids": [
+      "M02",
+      "M07"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R01",
+      "R07"
+    ],
+    "placement": "露台外缘z=-7及两侧",
+    "collision": "静态护栏盒；相机与角色都阻挡",
+    "lod0_triangle_budget": 3000,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/architecture/A14.md",
+    "components": [
+      {
+        "id": "A14.01",
+        "name": "栏杆柱",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A14.02",
+        "name": "上扶手",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A14.03",
+        "name": "中横梁",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A14.04",
+        "name": "柱帽",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A14.05",
+        "name": "转角",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A14.06",
+        "name": "金属连接",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "A15",
+    "name": "小型石壁炉与烟道",
+    "category": "architecture",
+    "dimensions_m": [
+      1.55,
+      2.2,
+      0.65
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "炉台",
+      "炉口",
+      "石侧柱",
+      "木/石炉架",
+      "烟道",
+      "耐火内衬",
+      "炉栅"
+    ],
+    "make_steps": [
+      "这是需求中的炉火补充，不冒充参考图已明确展示",
+      "放北东侧盲区，避开主景观窗和想法柜",
+      "炉口制作真实凹入0.3米的暗腔，不能一张火焰贴图贴墙",
+      "石框轻倒角，内壁暗灰粗糙且留烟熏层",
+      "火焰、木柴另件放入指定socket，门槛路径不经过炉台",
+      "整个炉台作为静态障碍，粒子没有碰撞"
+    ],
+    "material_ids": [
+      "M18",
+      "M07",
+      "M02"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R00",
+      "R07"
+    ],
+    "placement": "(4.25,0,-4.60)，面向+Z；design_extension",
+    "collision": "静态炉台盒，不给火焰碰撞",
+    "lod0_triangle_budget": 6500,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/architecture/A15.md",
+    "components": [
+      {
+        "id": "A15.01",
+        "name": "炉台",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A15.02",
+        "name": "炉口",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A15.03",
+        "name": "石侧柱",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A15.04",
+        "name": "木/石炉架",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A15.05",
+        "name": "烟道",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A15.06",
+        "name": "耐火内衬",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "A15.07",
+        "name": "炉栅",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "F01",
+    "name": "苔绿色阅读扶手椅",
+    "category": "furniture",
+    "dimensions_m": [
+      1.04,
+      1.12,
+      1.08
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "椅脚",
+      "木底架",
+      "座垫",
+      "靠背",
+      "左右宽扶手",
+      "滚边",
+      "压痕",
+      "缝线"
+    ],
+    "make_steps": [
+      "先用侧轮廓确定座高0.44米、靠背后倾约10度、扶手厚0.12米",
+      "木腿用旋转剖面并细倒角，四脚同时接地",
+      "软包先低模带支撑线细分再雕刻轻微压陷，避免球状枕头堆叠",
+      "扶手与靠背缝线用曲线烘法线，英雄视角留滚边几何",
+      "可以检查S12作基础，但轮廓不匹配时按此从零制作，不把维多利亚瘦木椅缩放成宽软包椅",
+      "毯子和抱枕由T04/T05提供，需真实落在椅面上"
+    ],
+    "material_ids": [
+      "M03",
+      "M08"
+    ],
+    "source_ids": [
+      "S12"
+    ],
+    "reference_ids": [
+      "R03",
+      "R01"
+    ],
+    "placement": "阅读角x=-4.65,z=-3.1，朝中心偏南",
+    "collision": "座/背/扶手组合盒，不给缝线碰撞",
+    "lod0_triangle_budget": 16000,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/furniture/F01.md",
+    "components": [
+      {
+        "id": "F01.01",
+        "name": "椅脚",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F01.02",
+        "name": "木底架",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F01.03",
+        "name": "座垫",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F01.04",
+        "name": "靠背",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F01.05",
+        "name": "左右宽扶手",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F01.06",
+        "name": "滚边",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F01.07",
+        "name": "压痕",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F01.08",
+        "name": "缝线",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "F02",
+    "name": "木格栅圆边桌",
+    "category": "furniture",
+    "dimensions_m": [
+      0.64,
+      0.59,
+      0.64
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "圆桌面",
+      "桌缘",
+      "竖向格栅",
+      "底圈",
+      "中间支撑",
+      "橡木端面"
+    ],
+    "make_steps": [
+      "旋转剖面制作桌面和底圈，顶面有2毫米斜边",
+      "环向均匀排18–24根窄格栅，不能全部融成桶",
+      "格栅边轻倒角，缝隙足够产生层次但不需物理",
+      "桌面可放杯和少量书，子物体底面以y=.59对齐",
+      "与扶手椅保留可触及但不相交的间隙"
+    ],
+    "material_ids": [
+      "M04"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R03"
+    ],
+    "placement": "reading侧前方 world(-4.98,0,-1.90)，避免书架及椅子的包络",
+    "collision": "一个凸/圆柱代理",
+    "lod0_triangle_budget": 4000,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/furniture/F02.md",
+    "components": [
+      {
+        "id": "F02.01",
+        "name": "圆桌面",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F02.02",
+        "name": "桌缘",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F02.03",
+        "name": "竖向格栅",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F02.04",
+        "name": "底圈",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F02.05",
+        "name": "中间支撑",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F02.06",
+        "name": "橡木端面",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "F03",
+    "name": "黄铜箍旅行圆箱边几",
+    "category": "furniture",
+    "dimensions_m": [
+      0.65,
+      0.64,
+      0.65
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "木桶形箱体",
+      "黄铜箍",
+      "圆盖",
+      "锁扣",
+      "双侧提手",
+      "铆钉"
+    ],
+    "make_steps": [
+      "构造轻微桶腹的多段旋转体，24–32边而非六边柱",
+      "纵向木条沟槽以贴图和有限几何分工",
+      "两到三条金属箍厚3毫米并贴合箱体",
+      "提手、锁扣使用P19统一五金",
+      "上盖平整承托烛台/盆，侧锁不穿入木体"
+    ],
+    "material_ids": [
+      "M04",
+      "M06"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R03"
+    ],
+    "placement": "F01另一侧，world(-3.3,0,-3.65)",
+    "collision": "简化凸体",
+    "lod0_triangle_budget": 5000,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/furniture/F03.md",
+    "components": [
+      {
+        "id": "F03.01",
+        "name": "木桶形箱体",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F03.02",
+        "name": "黄铜箍",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F03.03",
+        "name": "圆盖",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F03.04",
+        "name": "锁扣",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F03.05",
+        "name": "双侧提手",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F03.06",
+        "name": "铆钉",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "F04",
+    "name": "西墙开放书架",
+    "category": "furniture",
+    "dimensions_m": [
+      3.35,
+      2.75,
+      0.4
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "立柱",
+      "背板",
+      "五层层板",
+      "顶部压线",
+      "下柜",
+      "层板托",
+      "分类留白"
+    ],
+    "make_steps": [
+      "做5层但允许一层留出灯和星盘，层高以32–45厘米为区间",
+      "层板厚2.8厘米，前缘1.5毫米倒角",
+      "背板后退5厘米营造阴影，不能书直接贴墙",
+      "模型按柜架/下柜分组，摆书区域导出slots",
+      "背景书以图集组合复用，不每本一材质",
+      "阅读角与日志墙架使用同一木工语言而非两套柜子"
+    ],
+    "material_ids": [
+      "M03"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R03",
+      "R04"
+    ],
+    "placement": "西北墙，面朝+X，长轴沿Z",
+    "collision": "组合静态盒；独立碰撞不细到每层书",
+    "lod0_triangle_budget": 6500,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/furniture/F04.md",
+    "components": [
+      {
+        "id": "F04.01",
+        "name": "立柱",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F04.02",
+        "name": "背板",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F04.03",
+        "name": "五层层板",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F04.04",
+        "name": "顶部压线",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F04.05",
+        "name": "下柜",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F04.06",
+        "name": "层板托",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F04.07",
+        "name": "分类留白",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "F05",
+    "name": "漫行者日志写字桌",
+    "category": "furniture",
+    "dimensions_m": [
+      1.85,
+      0.79,
+      0.78
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "厚木桌板",
+      "双抽屉箱",
+      "膝部净空",
+      "桌腿",
+      "后挡边",
+      "横撑",
+      "桌面书写区"
+    ],
+    "make_steps": [
+      "桌高0.79米，桌板厚4厘米、前缘圆角3毫米",
+      "保留中间0.70米宽膝部空间，抽屉箱不能把椅子堵在外面",
+      "侧板与腿有木工接榫，支撑横梁不与角色活动脚位冲突",
+      "六个抽屉面使用统一五金并留1.5–2毫米缝",
+      "桌面前中保留打开日记空间，周边物件通过socket摆放",
+      "长木纹沿X，抽屉竖板和端面UV分开"
+    ],
+    "material_ids": [
+      "M04",
+      "M06"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R04",
+      "R01"
+    ],
+    "placement": "west_journal root(-4.65,0,1.25), yaw=pi/2",
+    "collision": "桌面、两侧柜、腿简化盒，不用总盒填满膝部",
+    "lod0_triangle_budget": 10000,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/furniture/F05.md",
+    "components": [
+      {
+        "id": "F05.01",
+        "name": "厚木桌板",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F05.02",
+        "name": "双抽屉箱",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F05.03",
+        "name": "膝部净空",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F05.04",
+        "name": "桌腿",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F05.05",
+        "name": "后挡边",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F05.06",
+        "name": "横撑",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F05.07",
+        "name": "桌面书写区",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "F06",
+    "name": "木制软垫写字椅",
+    "category": "furniture",
+    "dimensions_m": [
+      0.58,
+      1.02,
+      0.62
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "四椅腿",
+      "椅背边框",
+      "软座",
+      "椅背布面",
+      "侧扶手",
+      "横撑"
+    ],
+    "make_steps": [
+      "椅座0.46米高，宽0.48米，背面倾约8度",
+      "支撑腿下端统一着地，腿与座框榫接",
+      "软垫轻圆角不膨胀成沙发",
+      "椅背留T04徽章毯的真实搭挂位置",
+      "可与F14共享部分网格但不能一把椅子随意缩放造成坐高失真"
+    ],
+    "material_ids": [
+      "M03",
+      "M10"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R04"
+    ],
+    "placement": "写字桌前，局部(0,0,1.05)",
+    "collision": "组合盒；不创建动态推椅物理",
+    "lod0_triangle_budget": 7000,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/furniture/F06.md",
+    "components": [
+      {
+        "id": "F06.01",
+        "name": "四椅腿",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F06.02",
+        "name": "椅背边框",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F06.03",
+        "name": "软座",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F06.04",
+        "name": "椅背布面",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F06.05",
+        "name": "侧扶手",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F06.06",
+        "name": "横撑",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "F07",
+    "name": "三联玻璃想法柜柜体",
+    "category": "furniture",
+    "dimensions_m": [
+      3.55,
+      2.88,
+      0.62
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "底座",
+      "三联竖框",
+      "顶冠",
+      "背板",
+      "十二个展示隔层",
+      "脚座",
+      "柜顶植物台"
+    ],
+    "make_steps": [
+      "三联等节奏，每格净宽约1.08米，立框8厘米",
+      "顶冠用自制截面扫掠，底座分层突出3–5厘米",
+      "背板浅暖木/纸背结合但遵循统一材质",
+      "层板厚3厘米，明确每个展示socket坐标",
+      "从S13只借基础木工可行时改造，否则完整自制",
+      "沿墙接地，柜后留2厘米施工缝，不能把深柜伸入窗洞"
+    ],
+    "material_ids": [
+      "M03",
+      "M04",
+      "M06"
+    ],
+    "source_ids": [
+      "S13"
+    ],
+    "reference_ids": [
+      "R05",
+      "R01"
+    ],
+    "placement": "east_cabinet root(5.48,0,-1.45),yaw=-pi/2",
+    "collision": "完整外柜可用静态包络，内部不供玩家穿行",
+    "lod0_triangle_budget": 17000,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/furniture/F07.md",
+    "components": [
+      {
+        "id": "F07.01",
+        "name": "底座",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F07.02",
+        "name": "三联竖框",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F07.03",
+        "name": "顶冠",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F07.04",
+        "name": "背板",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F07.05",
+        "name": "十二个展示隔层",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F07.06",
+        "name": "脚座",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F07.07",
+        "name": "柜顶植物台",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "F08",
+    "name": "想法柜门框与玻璃",
+    "category": "furniture",
+    "dimensions_m": [
+      3.55,
+      2.52,
+      0.055
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "三扇木门框",
+      "玻璃片",
+      "门压条",
+      "铰链",
+      "长拉手",
+      "锁扣"
+    ],
+    "make_steps": [
+      "按F07分栏一一匹配，玻璃内缩1.2厘米形成层次",
+      "玻璃不要叠三层透明面，角度反射以同一个环境处理",
+      "窗门玻璃厚3–5毫米，高画质才启用昂贵透射",
+      "拉手长约0.16米与所有柜子一致，左右门的手性正确",
+      "默认门不动画打开，整柜触发DOM整理，未来动画时再绑定碰撞状态"
+    ],
+    "material_ids": [
+      "M03",
+      "M06",
+      "M16"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R05"
+    ],
+    "placement": "挂在F07正面，禁止导出另一套整柜重叠",
+    "collision": "并F07；门框可交互，玻璃不挡柜内展示视觉选择",
+    "lod0_triangle_budget": 6500,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/furniture/F08.md",
+    "components": [
+      {
+        "id": "F08.01",
+        "name": "三扇木门框",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F08.02",
+        "name": "玻璃片",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F08.03",
+        "name": "门压条",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F08.04",
+        "name": "铰链",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F08.05",
+        "name": "长拉手",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F08.06",
+        "name": "锁扣",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "F09",
+    "name": "想法柜分类抽屉与隔板",
+    "category": "furniture",
+    "dimensions_m": [
+      1.05,
+      0.3,
+      0.5
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "浅抽屉",
+      "黄铜标签槽",
+      "木隔板",
+      "纸签",
+      "半开样例",
+      "滑轨"
+    ],
+    "make_steps": [
+      "下部展示区加入分隔抽屉，选择一只微开1.5厘米而非全部敞开",
+      "槽内分区服务知识归档，不随机装满瓶子",
+      "拉手和标签用P19/P20复用",
+      "导出抽屉与静态框分组，微开状态仍无碰撞穿插",
+      "对齐F07格口，不按外部素材自带尺度硬塞"
+    ],
+    "material_ids": [
+      "M03",
+      "M06",
+      "M12"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R05"
+    ],
+    "placement": "F07底部格口，3个变体实例",
+    "collision": "并F07静态包络",
+    "lod0_triangle_budget": 3500,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 3,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/furniture/F09.md",
+    "components": [
+      {
+        "id": "F09.01",
+        "name": "浅抽屉",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F09.02",
+        "name": "黄铜标签槽",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F09.03",
+        "name": "木隔板",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F09.04",
+        "name": "纸签",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F09.05",
+        "name": "半开样例",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F09.06",
+        "name": "滑轨",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "F10",
+    "name": "圆形合成台木基座",
+    "category": "furniture",
+    "dimensions_m": [
+      3.1,
+      0.805,
+      3.1
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "圆形裙板",
+      "承重底座",
+      "分段弧面木板",
+      "检修门",
+      "底脚",
+      "金属锁饰"
+    ],
+    "make_steps": [
+      "总外径3.1米、桌高0.88米，以64–96边分段圆为主形",
+      "底座直径2.25米留膝部挑檐，不做同直径实心大桶",
+      "弧面分板沿圆周展开UV，纹理尺度不逐段跳变",
+      "底部接地并做收脚，检修门只在南面一处",
+      "金属锁和五金不重复增殖，使用P19标准件",
+      "台边与椅背之间预留通路，不能照图中巨大桌子无限放大"
+    ],
+    "material_ids": [
+      "M04",
+      "M06"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R06",
+      "R01"
+    ],
+    "placement": "synthesis root(0,0,0)",
+    "collision": "基座凸体+桌面圆柱代理",
+    "lod0_triangle_budget": 11000,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/furniture/F10.md",
+    "components": [
+      {
+        "id": "F10.01",
+        "name": "圆形裙板",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F10.02",
+        "name": "承重底座",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F10.03",
+        "name": "分段弧面木板",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F10.04",
+        "name": "检修门",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F10.05",
+        "name": "底脚",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F10.06",
+        "name": "金属锁饰",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "F11",
+    "name": "青绿嵌板圆桌面",
+    "category": "furniture",
+    "dimensions_m": [
+      3.1,
+      0.075,
+      3.1
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "外黄铜包边",
+      "青绿台面",
+      "同心环",
+      "嵌条",
+      "放射细线",
+      "纸面工作区"
+    ],
+    "make_steps": [
+      "环向使用一致圆心，桌面上表面y=.88",
+      "青绿台面默认着色石/搪瓷而非发光屏，细粗糙度区分",
+      "黄铜外圈宽2.5厘米，同心线条3–6毫米，用图案贴图或浅槽而非粗电线",
+      "所有环与桌面不共面闪烁，嵌槽统一深1毫米",
+      "四个材料工作区按F13摆位留白，避免文具压在晶体座下"
+    ],
+    "material_ids": [
+      "M06",
+      "M23",
+      "M04"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R06"
+    ],
+    "placement": "F10顶面",
+    "collision": "共享F10桌面碰撞",
+    "lod0_triangle_budget": 6000,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/furniture/F11.md",
+    "components": [
+      {
+        "id": "F11.01",
+        "name": "外黄铜包边",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F11.02",
+        "name": "青绿台面",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F11.03",
+        "name": "同心环",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F11.04",
+        "name": "嵌条",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F11.05",
+        "name": "放射细线",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F11.06",
+        "name": "纸面工作区",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "F12",
+    "name": "中央知识晶体与座环",
+    "category": "furniture",
+    "dimensions_m": [
+      0.66,
+      0.85,
+      0.66
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "主晶体",
+      "非对称晶面",
+      "底部座环",
+      "支座爪",
+      "轻微内部裂纹",
+      "底灯"
+    ],
+    "make_steps": [
+      "从非对称6–8边基底向上收尖，做18–28个较大的真实晶面",
+      "主晶高0.72米并坐入10厘米高座环，平底与座槽重合而不穿出",
+      "晶体封闭流形，晶面平面法线清晰，不做透明噪声球",
+      "薄裂纹用内部贴片或贴图且控制数量，不能多层透明壳累积",
+      "M17只在主晶用高质量透射，近看无黑三角",
+      "周边发光不是照亮全屋的唯一灯，效果归X03"
+    ],
+    "material_ids": [
+      "M17",
+      "M06",
+      "M22"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R06",
+      "R01"
+    ],
+    "placement": "F11中心上方，root(0,.88,0)",
+    "collision": "并F10禁入区域；视觉不单独物理",
+    "lod0_triangle_budget": 5500,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/furniture/F12.md",
+    "components": [
+      {
+        "id": "F12.01",
+        "name": "主晶体",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F12.02",
+        "name": "非对称晶面",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F12.03",
+        "name": "底部座环",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F12.04",
+        "name": "支座爪",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F12.05",
+        "name": "轻微内部裂纹",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F12.06",
+        "name": "底灯",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "F13",
+    "name": "四材料槽与联系标记",
+    "category": "furniture",
+    "dimensions_m": [
+      0.36,
+      0.025,
+      0.24
+    ],
+    "origin": "单槽底部中心；场景以四实例旋转装配，并非四槽模型再复制四份",
+    "parts": [
+      "单材料纸签槽（四实例）",
+      "黄铜小柱",
+      "定位刻线",
+      "边缘夹",
+      "选择灯点",
+      "连线锚点"
+    ],
+    "make_steps": [
+      "围绕中心定义恰好四个材料位，而不是生成图中随意数量的柱",
+      "每个槽0.36×0.24米，局部前方留纸张边",
+      "每槽两小柱高6厘米，接口命名MAT_0..3",
+      "2–4有效选材时只亮实际占用槽，未保存/错误状态不可冒充成功",
+      "连线效果独立X03，槽/柱是模型非交互业务副本"
+    ],
+    "material_ids": [
+      "M06",
+      "M12",
+      "M22"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R06"
+    ],
+    "placement": "F11环向半径1.0米四象限",
+    "collision": "不另建碰撞，交互绑定synthesis根",
+    "lod0_triangle_budget": 3200,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/furniture/F13.md",
+    "components": [
+      {
+        "id": "F13.01",
+        "name": "单材料纸签槽（四实例）",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F13.02",
+        "name": "黄铜小柱",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F13.03",
+        "name": "定位刻线",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F13.04",
+        "name": "边缘夹",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F13.05",
+        "name": "选择灯点",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F13.06",
+        "name": "连线锚点",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "F14",
+    "name": "两把合成台座椅",
+    "category": "furniture",
+    "dimensions_m": [
+      0.6,
+      1.0,
+      0.64
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "木框",
+      "四腿",
+      "软座",
+      "背板",
+      "搭毯点",
+      "底横撑"
+    ],
+    "make_steps": [
+      "与F06共木材/五金但椅背稍低，固定总数两把",
+      "座高0.46米适配台高，近景椅脚和地毯接触",
+      "一南一北略偏侧，不能占入口直线路径",
+      "布毯由T04按同模板生成不同褶皱",
+      "对齐两种摄影视角仍保持同一位置，不为每镜头挪椅子"
+    ],
+    "material_ids": [
+      "M03",
+      "M10"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R01",
+      "R06",
+      "R07"
+    ],
+    "placement": "局部(-.6,0,2.0)和(.7,0,-1.95)",
+    "collision": "组合盒；玩家可绕行",
+    "lod0_triangle_budget": 6500,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 2,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/furniture/F14.md",
+    "components": [
+      {
+        "id": "F14.01",
+        "name": "木框",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F14.02",
+        "name": "四腿",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F14.03",
+        "name": "软座",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F14.04",
+        "name": "背板",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F14.05",
+        "name": "搭毯点",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F14.06",
+        "name": "底横撑",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "F15",
+    "name": "旅行方箱与行李箱堆",
+    "category": "furniture",
+    "dimensions_m": [
+      0.92,
+      0.48,
+      0.56
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "箱体",
+      "皮革/木面",
+      "金属护角",
+      "提手",
+      "锁",
+      "束带",
+      "箱脚"
+    ],
+    "make_steps": [
+      "做大中小三种真实尺寸，不靠任意非均匀缩放",
+      "箱盖与箱身分缝，护角沿真实边折弯",
+      "皮革沿M13家族，金属沿M06，同色但粗糙度不同",
+      "堆叠最多两层，上箱底不穿下箱把手",
+      "柜旁和入口作为留白边界，不堵功能标签"
+    ],
+    "material_ids": [
+      "M03",
+      "M13",
+      "M06"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R05",
+      "R07"
+    ],
+    "placement": "east_props与entry_props两个组",
+    "collision": "每堆一个或两个盒",
+    "lod0_triangle_budget": 5500,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 3,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/furniture/F15.md",
+    "components": [
+      {
+        "id": "F15.01",
+        "name": "箱体",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F15.02",
+        "name": "皮革/木面",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F15.03",
+        "name": "金属护角",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F15.04",
+        "name": "提手",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F15.05",
+        "name": "锁",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F15.06",
+        "name": "束带",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F15.07",
+        "name": "箱脚",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "F16",
+    "name": "同频木玻璃电话亭",
+    "category": "furniture",
+    "dimensions_m": [
+      1.45,
+      2.55,
+      1.28
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "木角柱",
+      "顶框",
+      "侧玻璃",
+      "背板",
+      "开放入口",
+      "电话台",
+      "未开放铭牌"
+    ],
+    "make_steps": [
+      "这是参考缺失但原需求必须补齐的设施，设计为小型开口亭而非红色街头电话亭",
+      "立柱同M03，玻璃与F08一致",
+      "面向房间中心，入口无锁门，可在外侧约3米激活",
+      "电话台高1.0米，内部只容装置不引导玩家挤入狭窄区域",
+      "铭牌写“同频电话亭 · 暂未开放”，不能画在线人数",
+      "所有边角与侧框有真实厚度，避免电话穿背板"
+    ],
+    "material_ids": [
+      "M03",
+      "M06",
+      "M16"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R07"
+    ],
+    "placement": "east_phone root(4.9,0,3.45),yaw=-pi/2；design_extension",
+    "collision": "外围盒，入口是否可入按统一测试；默认外部交互",
+    "lod0_triangle_budget": 9500,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/furniture/F16.md",
+    "components": [
+      {
+        "id": "F16.01",
+        "name": "木角柱",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F16.02",
+        "name": "顶框",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F16.03",
+        "name": "侧玻璃",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F16.04",
+        "name": "背板",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F16.05",
+        "name": "开放入口",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F16.06",
+        "name": "电话台",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F16.07",
+        "name": "未开放铭牌",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "F17",
+    "name": "黄铜黑胶木复古电话",
+    "category": "furniture",
+    "dimensions_m": [
+      0.34,
+      0.44,
+      0.26
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "底座",
+      "拨号盘",
+      "听筒",
+      "话筒架",
+      "螺旋线",
+      "小铭牌"
+    ],
+    "make_steps": [
+      "旋转体与曲面构造底座，拨号盘10孔用法线与薄几何结合",
+      "听筒两端碗形，握把曲线平滑，不做长条圆柱套球",
+      "线缆沿下垂曲线，近景螺旋少段，远景简化管",
+      "胶木非金属、黄铜局部金属，避免全部金闪闪",
+      "听筒固定在座架接触点，P0无真实通信动画与假铃声"
+    ],
+    "material_ids": [
+      "M06",
+      "M26"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R07"
+    ],
+    "placement": "F16电话台socket，底y=1.0",
+    "collision": "归F16，视觉电话可作为命中子网格",
+    "lod0_triangle_budget": 7500,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/furniture/F17.md",
+    "components": [
+      {
+        "id": "F17.01",
+        "name": "底座",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F17.02",
+        "name": "拨号盘",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F17.03",
+        "name": "听筒",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F17.04",
+        "name": "话筒架",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F17.05",
+        "name": "螺旋线",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F17.06",
+        "name": "小铭牌",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "F18",
+    "name": "卷图与雨伞式收纳筒架",
+    "category": "furniture",
+    "dimensions_m": [
+      0.46,
+      0.66,
+      0.38
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "木框底架",
+      "筒隔",
+      "金属圈",
+      "卷轴槽",
+      "底衬"
+    ],
+    "make_steps": [
+      "为P04卷图做4–6格收纳，不能把纸直接插地板",
+      "角柱3毫米倒角，接头统一木色",
+      "每格卷图有不同高度但不随机伸出超过1米",
+      "靠近想法柜右侧，与大花盆有至少10厘米间隔",
+      "同一图卷不会同时在两个槽显示相同破损位置"
+    ],
+    "material_ids": [
+      "M03",
+      "M06"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R05"
+    ],
+    "placement": "east_props指定局部槽",
+    "collision": "组合盒",
+    "lod0_triangle_budget": 2500,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/furniture/F18.md",
+    "components": [
+      {
+        "id": "F18.01",
+        "name": "木框底架",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F18.02",
+        "name": "筒隔",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F18.03",
+        "name": "金属圈",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F18.04",
+        "name": "卷轴槽",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "F18.05",
+        "name": "底衬",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "L01",
+    "name": "环形黄铜吊灯骨架",
+    "category": "lighting",
+    "dimensions_m": [
+      1.8,
+      1.3,
+      1.8
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "顶盘",
+      "四条吊链",
+      "环形灯架",
+      "六个吊点",
+      "中央叶徽",
+      "连接耳"
+    ],
+    "make_steps": [
+      "以直径1.8米圆环为骨架，黄铜截面2.5×4厘米并倒角",
+      "四条链对应真实承重点，链环近景交错有空隙而非穿插",
+      "环上固定6个L02灯笼，与插画多变数量区别标为统一决定",
+      "中央徽章由P22生成，不复制不稳定生成文字",
+      "最低点y=2.7米，角色跳跃及相机都不能撞入裸灯体",
+      "影子只来自有预算的主光，不创建6个投影点光"
+    ],
+    "material_ids": [
+      "M06",
+      "M07"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R01",
+      "R02",
+      "R07"
+    ],
+    "placement": "ceiling_center(0,2.7,0)",
+    "collision": "相机简化环包络；角色无需逐链碰撞",
+    "lod0_triangle_budget": 8000,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/lighting/L01.md",
+    "components": [
+      {
+        "id": "L01.01",
+        "name": "顶盘",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L01.02",
+        "name": "四条吊链",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L01.03",
+        "name": "环形灯架",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L01.04",
+        "name": "六个吊点",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L01.05",
+        "name": "中央叶徽",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L01.06",
+        "name": "连接耳",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "L02",
+    "name": "共用六边灯笼模块",
+    "category": "lighting",
+    "dimensions_m": [
+      0.19,
+      0.38,
+      0.19
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "六边底",
+      "细框",
+      "灯罩",
+      "玻璃",
+      "挂环",
+      "灯芯",
+      "通风孔"
+    ],
+    "make_steps": [
+      "旋转体+六根棱柱做框，玻璃内缩4毫米",
+      "顶帽有两级坡度与小孔，孔贴图在LOD1烘",
+      "灯芯在玻璃内但不贴玻璃，亮度保留玻璃轮廓",
+      "所有墙灯、吊灯、景观灯共用此模块按批准尺寸变体",
+      "不重复绑定照明对象，光照由light_rig.json集中管理"
+    ],
+    "material_ids": [
+      "M06",
+      "M16",
+      "M19"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R01",
+      "R03"
+    ],
+    "placement": "L01六实例，墙挂/窗边实例见dressing",
+    "collision": "不逐实例物理，高处归父体",
+    "lod0_triangle_budget": 1800,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 2,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/lighting/L02.md",
+    "components": [
+      {
+        "id": "L02.01",
+        "name": "六边底",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L02.02",
+        "name": "细框",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L02.03",
+        "name": "灯罩",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L02.04",
+        "name": "玻璃",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L02.05",
+        "name": "挂环",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L02.06",
+        "name": "灯芯",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L02.07",
+        "name": "通风孔",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "L03",
+    "name": "墙灯弯钩支架",
+    "category": "lighting",
+    "dimensions_m": [
+      0.18,
+      0.3,
+      0.25
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "贴墙底板",
+      "S形弯钩",
+      "固定铆钉",
+      "挂环",
+      "灯笼连接"
+    ],
+    "make_steps": [
+      "用Bezier曲线构造S形金属弯钩，截面半径8毫米",
+      "底座4个固定铆钉，贴墙但不z-fight",
+      "灯笼悬挂点与L02挂环实际连接",
+      "重复四到六组时只共享同一网格",
+      "与梁柱留装配余量，不让灯笼半截嵌进墙里"
+    ],
+    "material_ids": [
+      "M06"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R01",
+      "R03",
+      "R05"
+    ],
+    "placement": "墙柱与北门边预定socket",
+    "collision": "无独立物理",
+    "lod0_triangle_budget": 1200,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/lighting/L03.md",
+    "components": [
+      {
+        "id": "L03.01",
+        "name": "贴墙底板",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L03.02",
+        "name": "S形弯钩",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L03.03",
+        "name": "固定铆钉",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L03.04",
+        "name": "挂环",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L03.05",
+        "name": "灯笼连接",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "L04",
+    "name": "可调黄铜写字台灯",
+    "category": "lighting",
+    "dimensions_m": [
+      0.4,
+      0.53,
+      0.3
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "圆底座",
+      "双关节灯臂",
+      "转轴螺帽",
+      "半球灯罩",
+      "灯泡",
+      "电线"
+    ],
+    "make_steps": [
+      "底座直径0.18米且压在桌面",
+      "两段灯臂靠转轴连接，半球罩用剖面旋转并给1.5毫米厚度",
+      "灯罩内部用浅暖涂层，不整面金属反射",
+      "灯口朝日记且不直照玩家，光由统一局部补光管理",
+      "电线沿桌后边下垂，不漂浮或穿过书",
+      "S15仅是复古照明参考不是此模型替代，默认从零制作"
+    ],
+    "material_ids": [
+      "M06",
+      "M19",
+      "M07"
+    ],
+    "source_ids": [
+      "S15"
+    ],
+    "reference_ids": [
+      "R04"
+    ],
+    "placement": "F05桌面左后socket",
+    "collision": "无独立碰撞；桌沿代理已覆盖",
+    "lod0_triangle_budget": 7000,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/lighting/L04.md",
+    "components": [
+      {
+        "id": "L04.01",
+        "name": "圆底座",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L04.02",
+        "name": "双关节灯臂",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L04.03",
+        "name": "转轴螺帽",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L04.04",
+        "name": "半球灯罩",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L04.05",
+        "name": "灯泡",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L04.06",
+        "name": "电线",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "L05",
+    "name": "阅读角金属罩落地灯",
+    "category": "lighting",
+    "dimensions_m": [
+      0.38,
+      1.45,
+      0.38
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "重底座",
+      "立杆",
+      "弯头",
+      "钟形灯罩",
+      "转向接头",
+      "线缆"
+    ],
+    "make_steps": [
+      "底座宽0.30米避免视觉头重脚轻",
+      "杆径2.5厘米，弯头朝椅面",
+      "罩直径0.28米带卷边，内外材质区分",
+      "靠椅但与靠背至少留8厘米，转镜头无闪黑",
+      "光源放罩内并限制范围，不做通屋点光"
+    ],
+    "material_ids": [
+      "M06",
+      "M19"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R03"
+    ],
+    "placement": "reading_lamp(-3.58,0,-2.62)",
+    "collision": "底座小盒/杆可忽略，灯罩入相机组",
+    "lod0_triangle_budget": 4500,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/lighting/L05.md",
+    "components": [
+      {
+        "id": "L05.01",
+        "name": "重底座",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L05.02",
+        "name": "立杆",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L05.03",
+        "name": "弯头",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L05.04",
+        "name": "钟形灯罩",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L05.05",
+        "name": "转向接头",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L05.06",
+        "name": "线缆",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "L06",
+    "name": "小型布罩暖灯",
+    "category": "lighting",
+    "dimensions_m": [
+      0.27,
+      0.42,
+      0.27
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "底座",
+      "细柱",
+      "布灯罩",
+      "边框",
+      "灯泡",
+      "开关绳"
+    ],
+    "make_steps": [
+      "旋转台座与柱，灯罩锥台加上下包边并真实薄壁",
+      "布罩M10但开灯时透出柔和亮色，不使用透明玻璃",
+      "罩底与灯柱对中，轻微布纹烘入normal",
+      "可研究S15的底座比例，但花瓷油灯不是默认布罩",
+      "只在一处书架/小台上放，不到处复制"
+    ],
+    "material_ids": [
+      "M06",
+      "M10",
+      "M19"
+    ],
+    "source_ids": [
+      "S15"
+    ],
+    "reference_ids": [
+      "R03",
+      "R04"
+    ],
+    "placement": "西书架留空格口",
+    "collision": "无独立碰撞",
+    "lod0_triangle_budget": 3000,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/lighting/L06.md",
+    "components": [
+      {
+        "id": "L06.01",
+        "name": "底座",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L06.02",
+        "name": "细柱",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L06.03",
+        "name": "布灯罩",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L06.04",
+        "name": "边框",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L06.05",
+        "name": "灯泡",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L06.06",
+        "name": "开关绳",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "L07",
+    "name": "地面提灯",
+    "category": "lighting",
+    "dimensions_m": [
+      0.27,
+      0.6,
+      0.27
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "底座",
+      "长玻璃窗",
+      "四/六根金属柱",
+      "上盖",
+      "大提环",
+      "蜡烛腔"
+    ],
+    "make_steps": [
+      "以L02语言放大但不直接非均匀拉伸",
+      "长玻璃窗上下有真实承框",
+      "提手挂在两侧轴销可看到承接",
+      "内烛与底托距离正确，玻璃不重复叠层",
+      "摆在柜边/入口侧不占主通路，必要时底座加碰撞"
+    ],
+    "material_ids": [
+      "M06",
+      "M16",
+      "M19"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R05",
+      "R07"
+    ],
+    "placement": "东柜与入口边2实例",
+    "collision": "低矮凸体，玩家不可踢穿",
+    "lod0_triangle_budget": 3500,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/lighting/L07.md",
+    "components": [
+      {
+        "id": "L07.01",
+        "name": "底座",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L07.02",
+        "name": "长玻璃窗",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L07.03",
+        "name": "四/六根金属柱",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L07.04",
+        "name": "上盖",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L07.05",
+        "name": "大提环",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L07.06",
+        "name": "蜡烛腔",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "L08",
+    "name": "柜内隐藏照明结构",
+    "category": "lighting",
+    "dimensions_m": [
+      1.02,
+      0.015,
+      0.025
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "灯槽",
+      "遮光唇",
+      "灯带扩散面",
+      "隐藏线缆"
+    ],
+    "make_steps": [
+      "在各展示格顶部做向内后缩的窄灯槽",
+      "遮光唇防止玩家看见巨大白条",
+      "扩散面只做低强度emissive，不能假称自动照亮下层",
+      "真实亮部由静态烘焙或少量统一补光实现",
+      "玻璃与黄铜别过曝，柜背纸和书名需可分辨"
+    ],
+    "material_ids": [
+      "M06",
+      "M19"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R05"
+    ],
+    "placement": "F07各层顶部，最多9段共享",
+    "collision": "无碰撞",
+    "lod0_triangle_budget": 500,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/lighting/L08.md",
+    "components": [
+      {
+        "id": "L08.01",
+        "name": "灯槽",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L08.02",
+        "name": "遮光唇",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L08.03",
+        "name": "灯带扩散面",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "L08.04",
+        "name": "隐藏线缆",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "T01",
+    "name": "深青金边中央地毯",
+    "category": "textiles",
+    "dimensions_m": [
+      5.8,
+      0.012,
+      5.2
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "主体织物",
+      "双重细边框",
+      "四角图案",
+      "中央叶徽",
+      "压边",
+      "低卷毛边"
+    ],
+    "make_steps": [
+      "平面细分后边缘轻微起伏不超过8毫米，做真实1厘米左右厚度",
+      "图案由统一P22叶徽派生但不夸大占满中央",
+      "边框宽0.18米，金色是织线非镜面金属",
+      "主晶台下只保留可见绒纹，减少隐藏网格",
+      "椅脚与绒面接触，地毯不能悬在地板上",
+      "整张2K图集，低画质缩1K而不删地毯"
+    ],
+    "material_ids": [
+      "M11",
+      "M10"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R01",
+      "R06",
+      "R07"
+    ],
+    "placement": "center(0,.006,0.05)",
+    "collision": "无独立碰撞，地板仍是唯一平面",
+    "lod0_triangle_budget": 1600,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/textiles/T01.md",
+    "components": [
+      {
+        "id": "T01.01",
+        "name": "主体织物",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T01.02",
+        "name": "双重细边框",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T01.03",
+        "name": "四角图案",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T01.04",
+        "name": "中央叶徽",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T01.05",
+        "name": "压边",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T01.06",
+        "name": "低卷毛边",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "T02",
+    "name": "日志区复古编织地毯",
+    "category": "textiles",
+    "dimensions_m": [
+      2.45,
+      0.01,
+      2.05
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "外边框",
+      "几何花纹",
+      "内层花纹",
+      "穗边",
+      "磨损区域"
+    ],
+    "make_steps": [
+      "采用褐红/暖米/深绿的小尺度几何图案，不引入艳紫和大红",
+      "双面对齐厚度，穗边近景几何少量成束其余alpha",
+      "与中央毯可有一处小重叠，但禁止大片共面闪烁",
+      "桌脚和椅脚都落在正确最高面",
+      "图案通过自制向量/纹理生成而非拿参考截图当地毯贴图"
+    ],
+    "material_ids": [
+      "M11",
+      "M10",
+      "M28"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R04",
+      "R07"
+    ],
+    "placement": "journal区域，与F05旋转一致",
+    "collision": "无独立碰撞",
+    "lod0_triangle_budget": 1200,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/textiles/T02.md",
+    "components": [
+      {
+        "id": "T02.01",
+        "name": "外边框",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T02.02",
+        "name": "几何花纹",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T02.03",
+        "name": "内层花纹",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T02.04",
+        "name": "穗边",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T02.05",
+        "name": "磨损区域",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "T03",
+    "name": "入口窄长地毯",
+    "category": "textiles",
+    "dimensions_m": [
+      1.25,
+      0.01,
+      2.1
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "窄毯面",
+      "几何边框",
+      "端穗",
+      "踏行压痕"
+    ],
+    "make_steps": [
+      "沿南门轴向铺设，避免把起程标签挡住",
+      "配色与T02同族，图案不是T02按单轴拉伸",
+      "门叶向外开，地毯不需要被门切开",
+      "端穗不过度翘起，不形成玩家绊点",
+      "重复纹样保持真实厘米尺度"
+    ],
+    "material_ids": [
+      "M11",
+      "M10",
+      "M28"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R02",
+      "R07"
+    ],
+    "placement": "south_entry world(0,.006,3.72)",
+    "collision": "无独立碰撞",
+    "lod0_triangle_budget": 900,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/textiles/T03.md",
+    "components": [
+      {
+        "id": "T03.01",
+        "name": "窄毯面",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T03.02",
+        "name": "几何边框",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T03.03",
+        "name": "端穗",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T03.04",
+        "name": "踏行压痕",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "T04",
+    "name": "绿织毯与椅背披毯",
+    "category": "textiles",
+    "dimensions_m": [
+      0.72,
+      0.95,
+      0.008
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "厚布主体",
+      "主褶皱",
+      "小皱褶",
+      "边缝",
+      "穗束",
+      "叶徽"
+    ],
+    "make_steps": [
+      "先以厘米尺度细分矩形，碰撞对象使用最终椅子简化复制体",
+      "固定上边适度下垂进行离线布模拟，模拟后烘为静态网格，不在浏览器运行布物理",
+      "手修椅角附近穿布和过度折叠，厚度2–5毫米",
+      "大褶皱保留几何，小皱烘normal",
+      "每把椅子拥有自己的批准静态变体，不能同一僵硬毯子悬空",
+      "穗子按束建模不逐纤维"
+    ],
+    "material_ids": [
+      "M09",
+      "M10"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R03",
+      "R04",
+      "R06"
+    ],
+    "placement": "F01、F06、F14各自cloth_socket",
+    "collision": "无碰撞；不可遮盖交互标记",
+    "lod0_triangle_budget": 3500,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 4,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/textiles/T04.md",
+    "components": [
+      {
+        "id": "T04.01",
+        "name": "厚布主体",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T04.02",
+        "name": "主褶皱",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T04.03",
+        "name": "小皱褶",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T04.04",
+        "name": "边缝",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T04.05",
+        "name": "穗束",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T04.06",
+        "name": "叶徽",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "T05",
+    "name": "米色叶徽抱枕",
+    "category": "textiles",
+    "dimensions_m": [
+      0.43,
+      0.43,
+      0.15
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "枕体",
+      "缝边",
+      "四角",
+      "中心刺绣",
+      "压痕"
+    ],
+    "make_steps": [
+      "枕体不是球，四角有捏合和中间浅鼓",
+      "在椅背与座垫之间做真实接触压扁，不能一半穿靠背",
+      "刺绣先用高度图/normal，局部少量轮廓线保留几何",
+      "底色M10，图案深绿",
+      "只在F01放一枚，额外数量需CR而不是自动填满"
+    ],
+    "material_ids": [
+      "M10",
+      "M08"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R03"
+    ],
+    "placement": "F01抱枕socket",
+    "collision": "无碰撞",
+    "lod0_triangle_budget": 4500,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/textiles/T05.md",
+    "components": [
+      {
+        "id": "T05.01",
+        "name": "枕体",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T05.02",
+        "name": "缝边",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T05.03",
+        "name": "四角",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T05.04",
+        "name": "中心刺绣",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T05.05",
+        "name": "压痕",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "T06",
+    "name": "深绿金边墙旗",
+    "category": "textiles",
+    "dimensions_m": [
+      0.65,
+      1.35,
+      0.008
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "顶部挂杆",
+      "两挂环",
+      "垂布",
+      "尖底",
+      "金色边线",
+      "叶徽",
+      "短标语"
+    ],
+    "make_steps": [
+      "布幅顶部固定，底部尖角而非规则矩形",
+      "离墙2–4厘米，建立轻波浪但不模拟狂风",
+      "统一叶徽居中，短字由真实排版生成，禁止保留概念图乱码",
+      "默认品牌字WANDERWISE，其他文字可省略而非凭空增添",
+      "旗杆金属和挂环使用M06/P19",
+      "墙旗总数固定3幅"
+    ],
+    "material_ids": [
+      "M09",
+      "M06",
+      "M10",
+      "M28"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R01",
+      "R05",
+      "R07"
+    ],
+    "placement": "东墙1、北开口侧2；避开电话铭牌",
+    "collision": "无碰撞",
+    "lod0_triangle_budget": 1800,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 3,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/textiles/T06.md",
+    "components": [
+      {
+        "id": "T06.01",
+        "name": "顶部挂杆",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T06.02",
+        "name": "两挂环",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T06.03",
+        "name": "垂布",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T06.04",
+        "name": "尖底",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T06.05",
+        "name": "金色边线",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T06.06",
+        "name": "叶徽",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "T06.07",
+        "name": "短标语",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "P01",
+    "name": "统一旧书库与书脊变体",
+    "category": "props",
+    "dimensions_m": [
+      0.19,
+      0.27,
+      0.035
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "硬封面",
+      "书脊",
+      "纸芯",
+      "缝线",
+      "金色压纹",
+      "书签",
+      "磨边"
+    ],
+    "make_steps": [
+      "做12种受控版型：高矮厚薄成系列而非随机缩放",
+      "书皮厚2毫米，纸芯比封面内缩3毫米",
+      "3种深绿/褐色/黑绿配色，使用同一2K封面图集",
+      "书脊金字和凸纹要读得清但不用每字网格",
+      "S14可用于背景基础，现代鲜艳书套要改成统一自制封套",
+      "书架分组排列，最多15%斜放/横放且必须有支撑",
+      "一本至少有封面侧面层次，不能全用同色方盒子"
+    ],
+    "material_ids": [
+      "M13",
+      "M12",
+      "M06"
+    ],
+    "source_ids": [
+      "S14"
+    ],
+    "reference_ids": [
+      "R03",
+      "R04",
+      "R05"
+    ],
+    "placement": "book_slot分组共96本；高近景另指定英雄书，不随机逐帧重排",
+    "collision": "归书架/桌代理；背景书不独立物理",
+    "lod0_triangle_budget": 650,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 12,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/props/P01.md",
+    "components": [
+      {
+        "id": "P01.01",
+        "name": "硬封面",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P01.02",
+        "name": "书脊",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P01.03",
+        "name": "纸芯",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P01.04",
+        "name": "缝线",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P01.05",
+        "name": "金色压纹",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P01.06",
+        "name": "书签",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P01.07",
+        "name": "磨边",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "P02",
+    "name": "展开的漫行者日志",
+    "category": "props",
+    "dimensions_m": [
+      0.42,
+      0.045,
+      0.29
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "两页弧面",
+      "装订沟",
+      "纸页厚层",
+      "皮封",
+      "丝带书签",
+      "手写示意图",
+      "翻页边"
+    ],
+    "make_steps": [
+      "两侧书页从装订沟向外缓拱，不能纯平面矩形",
+      "纸芯分3–5个可见层块，单页边缘用纹理",
+      "写入中性原创探索笔记，不放用户真实隐私",
+      "左右页文字方向正确，不镜像",
+      "本体与桌面接触，书脊位置考虑翻开高度",
+      "点击仍绑定journal，不让装饰日志成为第二个数据库"
+    ],
+    "material_ids": [
+      "M12",
+      "M13",
+      "M06"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R04"
+    ],
+    "placement": "F05前中桌面socket",
+    "collision": "归桌面，journal命中根",
+    "lod0_triangle_budget": 2800,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/props/P02.md",
+    "components": [
+      {
+        "id": "P02.01",
+        "name": "两页弧面",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P02.02",
+        "name": "装订沟",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P02.03",
+        "name": "纸页厚层",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P02.04",
+        "name": "皮封",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P02.05",
+        "name": "丝带书签",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P02.06",
+        "name": "手写示意图",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P02.07",
+        "name": "翻页边",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "P03",
+    "name": "纸张与工作草稿",
+    "category": "props",
+    "dimensions_m": [
+      0.21,
+      0.002,
+      0.3
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "纸面",
+      "边缘轻翘",
+      "折痕",
+      "地图线",
+      "批注",
+      "钉夹位置"
+    ],
+    "make_steps": [
+      "用6×8左右网格做少量角部弯曲，正反法线有序",
+      "厚度0.2–0.5毫米，避免厚如木板",
+      "设计山形、关系线、时间轴3组原创线稿",
+      "最多3张叠放，层间0.4–1毫米，不让纸互相z-fight",
+      "不把AI生成文字假装为真实知乎引用"
+    ],
+    "material_ids": [
+      "M12"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R04",
+      "R06"
+    ],
+    "placement": "desk/synthesis/cabinet_back三组，共18张",
+    "collision": "无碰撞",
+    "lod0_triangle_budget": 180,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 6,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/props/P03.md",
+    "components": [
+      {
+        "id": "P03.01",
+        "name": "纸面",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P03.02",
+        "name": "边缘轻翘",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P03.03",
+        "name": "折痕",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P03.04",
+        "name": "地图线",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P03.05",
+        "name": "批注",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P03.06",
+        "name": "钉夹位置",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "P04",
+    "name": "卷轴地图与纸筒",
+    "category": "props",
+    "dimensions_m": [
+      0.08,
+      0.62,
+      0.08
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "纸卷",
+      "内卷螺旋端",
+      "绑绳",
+      "散开纸角",
+      "薄纸边"
+    ],
+    "make_steps": [
+      "用横截面卷曲曲线挤出纸面，端口可见空隙而非实心圆柱",
+      "长度0.35–0.75米3种变体，色调同M12",
+      "绑绳落在外表不穿纸",
+      "散开变体只1–2个用于桌面，其他直立放F18",
+      "远景简化为卷面与端cap法线"
+    ],
+    "material_ids": [
+      "M12",
+      "M09"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R05",
+      "R06"
+    ],
+    "placement": "F18六卷；桌面另2卷",
+    "collision": "归容器，不独立物理",
+    "lod0_triangle_budget": 900,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 4,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/props/P04.md",
+    "components": [
+      {
+        "id": "P04.01",
+        "name": "纸卷",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P04.02",
+        "name": "内卷螺旋端",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P04.03",
+        "name": "绑绳",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P04.04",
+        "name": "散开纸角",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P04.05",
+        "name": "薄纸边",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "P05",
+    "name": "山峰地图木框画",
+    "category": "props",
+    "dimensions_m": [
+      0.64,
+      0.86,
+      0.035
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "相框",
+      "内衬",
+      "原创山线地图",
+      "背板",
+      "挂钩",
+      "角接缝"
+    ],
+    "make_steps": [
+      "以R04山峰图为主题但重新制图，不裁切概念图作材质",
+      "线稿山峰与窗外主峰轮廓呼应，但不宣称真实地理",
+      "相框45度斜接，细木槽真实深度",
+      "图纸在玻璃后至少2毫米，低画质不必加全透明玻璃",
+      "悬挂点与墙保持微间隙避免闪烁"
+    ],
+    "material_ids": [
+      "M03",
+      "M12"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R04"
+    ],
+    "placement": "west_journal上方墙位",
+    "collision": "无碰撞",
+    "lod0_triangle_budget": 1100,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/props/P05.md",
+    "components": [
+      {
+        "id": "P05.01",
+        "name": "相框",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P05.02",
+        "name": "内衬",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P05.03",
+        "name": "原创山线地图",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P05.04",
+        "name": "背板",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P05.05",
+        "name": "挂钩",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P05.06",
+        "name": "角接缝",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "P06",
+    "name": "植物与罗盘小框画",
+    "category": "props",
+    "dimensions_m": [
+      0.32,
+      0.43,
+      0.025
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "窄木框",
+      "植物线稿",
+      "罗盘图案",
+      "纸背",
+      "挂件"
+    ],
+    "make_steps": [
+      "统一3:4或方形系列尺寸，禁止满墙随意缩放框",
+      "绘制4种原创线稿，线宽在像素预算内",
+      "相框与P05同木色但更细",
+      "墙面按2×2与单幅混合明确编排，不随机喷洒",
+      "彼此与书架外框至少留3厘米"
+    ],
+    "material_ids": [
+      "M03",
+      "M12"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R03",
+      "R04"
+    ],
+    "placement": "西墙、柜内背板8幅",
+    "collision": "无碰撞",
+    "lod0_triangle_budget": 700,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 4,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/props/P06.md",
+    "components": [
+      {
+        "id": "P06.01",
+        "name": "窄木框",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P06.02",
+        "name": "植物线稿",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P06.03",
+        "name": "罗盘图案",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P06.04",
+        "name": "纸背",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P06.05",
+        "name": "挂件",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "P07",
+    "name": "背板便签与金属夹",
+    "category": "props",
+    "dimensions_m": [
+      0.14,
+      0.18,
+      0.01
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "纸签",
+      "夹子",
+      "圆钉",
+      "折角",
+      "淡线图"
+    ],
+    "make_steps": [
+      "便签6个形态，不沿每个柜格自动生成假文字",
+      "金属夹2毫米厚，针/钉和纸接触合理",
+      "纸角轻翘，边缘与背板分离1毫米以上",
+      "用于柜内收藏线索，外部来源标签仍DOM真实数据",
+      "组合图集减少材质"
+    ],
+    "material_ids": [
+      "M12",
+      "M06"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R05"
+    ],
+    "placement": "F07背板12张，按socket排列",
+    "collision": "无碰撞",
+    "lod0_triangle_budget": 260,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 6,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/props/P07.md",
+    "components": [
+      {
+        "id": "P07.01",
+        "name": "纸签",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P07.02",
+        "name": "夹子",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P07.03",
+        "name": "圆钉",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P07.04",
+        "name": "折角",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P07.05",
+        "name": "淡线图",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "P08",
+    "name": "黄铜浑天仪/星盘",
+    "category": "props",
+    "dimensions_m": [
+      0.3,
+      0.45,
+      0.3
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "底座",
+      "立柱",
+      "外子午环",
+      "赤道环",
+      "内轴",
+      "中心球",
+      "刻度圈"
+    ],
+    "make_steps": [
+      "用剖面旋转底座和柱，环厚2–4毫米",
+      "3–4个环共用中心且有可辨旋转轴，环间间隙至少2毫米",
+      "非运动结构不必模拟，但不能无意义互相贯穿",
+      "刻度烘贴图，主要环轮廓用真实几何",
+      "设大中小3版，桌面一件为主、柜内两件辅助"
+    ],
+    "material_ids": [
+      "M06"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R04",
+      "R05"
+    ],
+    "placement": "desk_back_left与cabinet三个socket",
+    "collision": "归家具，无独立物理",
+    "lod0_triangle_budget": 5000,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 3,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/props/P08.md",
+    "components": [
+      {
+        "id": "P08.01",
+        "name": "底座",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P08.02",
+        "name": "立柱",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P08.03",
+        "name": "外子午环",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P08.04",
+        "name": "赤道环",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P08.05",
+        "name": "内轴",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P08.06",
+        "name": "中心球",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P08.07",
+        "name": "刻度圈",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "P09",
+    "name": "黄铜便携指南针",
+    "category": "props",
+    "dimensions_m": [
+      0.11,
+      0.025,
+      0.11
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "圆盒",
+      "翻盖",
+      "刻度盘",
+      "指针",
+      "玻璃",
+      "铰轴"
+    ],
+    "make_steps": [
+      "底盒与翻盖用旋转体，盖开启角固定约110度",
+      "刻度盘真实朝上，字不镜像",
+      "指针与玻璃留2毫米，贴地白圈不是模型",
+      "黄铜外缘微磨、内部黑白刻度",
+      "桌面与合成台各一件，罗盘不读取用户真实方位"
+    ],
+    "material_ids": [
+      "M06",
+      "M16",
+      "M12"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R04",
+      "R06"
+    ],
+    "placement": "小物socket",
+    "collision": "无碰撞",
+    "lod0_triangle_budget": 1800,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 2,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/props/P09.md",
+    "components": [
+      {
+        "id": "P09.01",
+        "name": "圆盒",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P09.02",
+        "name": "翻盖",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P09.03",
+        "name": "刻度盘",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P09.04",
+        "name": "指针",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P09.05",
+        "name": "玻璃",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P09.06",
+        "name": "铰轴",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "P10",
+    "name": "手持放大镜",
+    "category": "props",
+    "dimensions_m": [
+      0.12,
+      0.02,
+      0.25
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "圆框",
+      "玻璃",
+      "握柄",
+      "连接颈",
+      "尾帽"
+    ],
+    "make_steps": [
+      "圆镜框外径10厘米，金属截面4毫米",
+      "镜片轻凸但高画质可仅反射，不实现必需真实放大",
+      "木/胶木握柄与框连接无裂",
+      "放平在纸边但保持真实接触，不能漂于3厘米高",
+      "不为放大镜新增第二个实时场景相机"
+    ],
+    "material_ids": [
+      "M06",
+      "M16",
+      "M26"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R04",
+      "R06"
+    ],
+    "placement": "desk_right/synthesis_props",
+    "collision": "无碰撞",
+    "lod0_triangle_budget": 1600,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/props/P10.md",
+    "components": [
+      {
+        "id": "P10.01",
+        "name": "圆框",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P10.02",
+        "name": "玻璃",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P10.03",
+        "name": "握柄",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P10.04",
+        "name": "连接颈",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P10.05",
+        "name": "尾帽",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "P11",
+    "name": "笔刷与笔筒",
+    "category": "props",
+    "dimensions_m": [
+      0.1,
+      0.2,
+      0.1
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "笔筒",
+      "钢笔",
+      "铅笔",
+      "画笔",
+      "笔尖",
+      "笔帽",
+      "筒口厚度"
+    ],
+    "make_steps": [
+      "笔筒口沿3毫米厚，内壁可见且笔根藏在合理深度",
+      "钢笔与画笔不同轮廓，做6支套件",
+      "长细几何至少6–8边，镜头远时并组",
+      "只在笔筒内做±12度受控倾斜，不能笔穿筒侧壁",
+      "金属尖用法线/小几何，不给每支笔独立材质"
+    ],
+    "material_ids": [
+      "M06",
+      "M04",
+      "M26",
+      "M29"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R04"
+    ],
+    "placement": "desk_back_right",
+    "collision": "无碰撞",
+    "lod0_triangle_budget": 1800,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/props/P11.md",
+    "components": [
+      {
+        "id": "P11.01",
+        "name": "笔筒",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P11.02",
+        "name": "钢笔",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P11.03",
+        "name": "铅笔",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P11.04",
+        "name": "画笔",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P11.05",
+        "name": "笔尖",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P11.06",
+        "name": "笔帽",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P11.07",
+        "name": "筒口厚度",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "P12",
+    "name": "墨水瓶与羽毛笔",
+    "category": "props",
+    "dimensions_m": [
+      0.15,
+      0.3,
+      0.13
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "瓶身",
+      "瓶口",
+      "瓶盖",
+      "深色墨面",
+      "羽梗",
+      "羽片"
+    ],
+    "make_steps": [
+      "墨瓶厚玻璃用深色近不透明材质省成本，瓶口有真实厚度",
+      "羽毛中轴用细曲线，羽片少量网格与透明遮罩",
+      "羽梗伸入瓶口而非穿瓶底",
+      "摆放与日记有留白，不能遮住书页中心",
+      "概念板细节道具可做近景补充，不增殖成满桌羽毛"
+    ],
+    "material_ids": [
+      "M16",
+      "M26",
+      "M29"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R00",
+      "R04"
+    ],
+    "placement": "desk_rear小物区",
+    "collision": "无碰撞",
+    "lod0_triangle_budget": 1400,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/props/P12.md",
+    "components": [
+      {
+        "id": "P12.01",
+        "name": "瓶身",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P12.02",
+        "name": "瓶口",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P12.03",
+        "name": "瓶盖",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P12.04",
+        "name": "深色墨面",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P12.05",
+        "name": "羽梗",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P12.06",
+        "name": "羽片",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "P13",
+    "name": "深色陶杯与杯碟",
+    "category": "props",
+    "dimensions_m": [
+      0.1,
+      0.115,
+      0.13
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "杯壁",
+      "杯口",
+      "内壁",
+      "杯底",
+      "弧形把手",
+      "叶徽",
+      "茶面",
+      "可选小碟"
+    ],
+    "make_steps": [
+      "用剖面旋转有厚度杯体，杯口2–3毫米，内腔真实",
+      "把手曲线两端与杯壁融合，孔口能看穿",
+      "茶面在杯口下1厘米，不能液体穿壁",
+      "杯面叶徽沿P22比例，不读不稳定生成字",
+      "桌面一杯阅读桌一杯，杯底/碟底与支撑面精确接触"
+    ],
+    "material_ids": [
+      "M14",
+      "M06"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R03",
+      "R04"
+    ],
+    "placement": "desk_front_right和F02桌面",
+    "collision": "无碰撞",
+    "lod0_triangle_budget": 2200,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 2,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/props/P13.md",
+    "components": [
+      {
+        "id": "P13.01",
+        "name": "杯壁",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P13.02",
+        "name": "杯口",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P13.03",
+        "name": "内壁",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P13.04",
+        "name": "杯底",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P13.05",
+        "name": "弧形把手",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P13.06",
+        "name": "叶徽",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P13.07",
+        "name": "茶面",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P13.08",
+        "name": "可选小碟",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "P14",
+    "name": "陶瓶与玻璃标本瓶",
+    "category": "props",
+    "dimensions_m": [
+      0.14,
+      0.26,
+      0.14
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "陶罐",
+      "细颈瓶",
+      "瓶塞",
+      "刻度纸签",
+      "瓶口",
+      "底圈"
+    ],
+    "make_steps": [
+      "自制3种旋转剖面，禁止全部缩放自同一个圆柱",
+      "陶瓶粗糙，玻璃瓶选深色半透明省成本",
+      "有瓶塞就放入瓶颈且不悬浮",
+      "标签只写原创索引，不假造真实学术样本",
+      "只在柜格展示盘中放置不占空中"
+    ],
+    "material_ids": [
+      "M14",
+      "M16",
+      "M12"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R05"
+    ],
+    "placement": "cabinet_display的6件",
+    "collision": "无碰撞",
+    "lod0_triangle_budget": 1500,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 3,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/props/P14.md",
+    "components": [
+      {
+        "id": "P14.01",
+        "name": "陶罐",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P14.02",
+        "name": "细颈瓶",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P14.03",
+        "name": "瓶塞",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P14.04",
+        "name": "刻度纸签",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P14.05",
+        "name": "瓶口",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P14.06",
+        "name": "底圈",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "P15",
+    "name": "小型矿物晶体组",
+    "category": "props",
+    "dimensions_m": [
+      0.16,
+      0.24,
+      0.16
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "晶簇",
+      "基岩",
+      "抛光单晶",
+      "棱面",
+      "微裂",
+      "底托接触"
+    ],
+    "make_steps": [
+      "做6种不同比例但同色家族的晶体，主青绿辅透明琥珀",
+      "单晶是凸闭合体，晶簇可相交但交接应在共同基岩中",
+      "所有晶簇不启用昂贵transmission，柜内默认反射+颜色",
+      "高度控制在格口净空80%内",
+      "一个格最多3件且有展示底托"
+    ],
+    "material_ids": [
+      "M17",
+      "M18",
+      "M06"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R05",
+      "R06"
+    ],
+    "placement": "cabinet specimens 9件，不与中央主晶抢焦点",
+    "collision": "无碰撞",
+    "lod0_triangle_budget": 1300,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 6,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/props/P15.md",
+    "components": [
+      {
+        "id": "P15.01",
+        "name": "晶簇",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P15.02",
+        "name": "基岩",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P15.03",
+        "name": "抛光单晶",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P15.04",
+        "name": "棱面",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P15.05",
+        "name": "微裂",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P15.06",
+        "name": "底托接触",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "P16",
+    "name": "标本托盘与展示座",
+    "category": "props",
+    "dimensions_m": [
+      0.23,
+      0.035,
+      0.19
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "浅盘",
+      "卷边",
+      "木底托",
+      "金属小脚",
+      "标签槽"
+    ],
+    "make_steps": [
+      "盘边2毫米厚，不做厚实砖块",
+      "底托可圆/方两型，统一黄铜脚",
+      "盘内放P15/P14，接触定位取盘底实际高度",
+      "与柜内地板的阴影区分，不堆叠三重悬空",
+      "铭牌贴图与P20共享"
+    ],
+    "material_ids": [
+      "M06",
+      "M03"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R05",
+      "R06"
+    ],
+    "placement": "cabinet/desk展示socket",
+    "collision": "无碰撞",
+    "lod0_triangle_budget": 700,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 3,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/props/P16.md",
+    "components": [
+      {
+        "id": "P16.01",
+        "name": "浅盘",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P16.02",
+        "name": "卷边",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P16.03",
+        "name": "木底托",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P16.04",
+        "name": "金属小脚",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P16.05",
+        "name": "标签槽",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "P17",
+    "name": "蜡烛与黄铜烛台",
+    "category": "props",
+    "dimensions_m": [
+      0.11,
+      0.3,
+      0.11
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "烛台底",
+      "细柱",
+      "滴蜡盘",
+      "蜡柱",
+      "熔池",
+      "灯芯",
+      "蜡滴"
+    ],
+    "make_steps": [
+      "烛台旋转剖面带细层次，蜡柱略有不规则但不块状",
+      "蜡滴在一侧聚集并有重力方向",
+      "灯芯位于熔池中央，火焰X01是独立透明/发光效果",
+      "书页与植物离烛火保留视觉安全距离，不让叶子穿入火",
+      "全屋8根有编号，不全都带动态点光"
+    ],
+    "material_ids": [
+      "M06",
+      "M25",
+      "M19"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R03",
+      "R04",
+      "R05",
+      "R06"
+    ],
+    "placement": "candles固定8实例，点位见dressing",
+    "collision": "无独立碰撞",
+    "lod0_triangle_budget": 1800,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 3,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/props/P17.md",
+    "components": [
+      {
+        "id": "P17.01",
+        "name": "烛台底",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P17.02",
+        "name": "细柱",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P17.03",
+        "name": "滴蜡盘",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P17.04",
+        "name": "蜡柱",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P17.05",
+        "name": "熔池",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P17.06",
+        "name": "灯芯",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P17.07",
+        "name": "蜡滴",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "P18",
+    "name": "炉内木柴与铁制工具",
+    "category": "props",
+    "dimensions_m": [
+      0.7,
+      0.48,
+      0.45
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "劈柴",
+      "炭黑面",
+      "木端面",
+      "铁栅",
+      "火钳",
+      "拨火棒",
+      "木柴篮"
+    ],
+    "make_steps": [
+      "劈柴3种分叉劈面，端面年轮与长纹一致",
+      "放入A15炉口，木柴之间允许自然堆叠但不能穿出炉壁",
+      "铁工具曲线成型，靠独立支架有支点",
+      "篮子只做主编条，细纹烘焙，避免十万根曲线",
+      "这是补齐炉火的装饰件，视觉不改变室内导航"
+    ],
+    "material_ids": [
+      "M02",
+      "M07",
+      "M19"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R00"
+    ],
+    "placement": "A15炉内与右侧",
+    "collision": "并A15",
+    "lod0_triangle_budget": 4200,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 3,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/props/P18.md",
+    "components": [
+      {
+        "id": "P18.01",
+        "name": "劈柴",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P18.02",
+        "name": "炭黑面",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P18.03",
+        "name": "木端面",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P18.04",
+        "name": "铁栅",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P18.05",
+        "name": "火钳",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P18.06",
+        "name": "拨火棒",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P18.07",
+        "name": "木柴篮",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "P19",
+    "name": "统一五金微件库",
+    "category": "props",
+    "dimensions_m": [
+      0.16,
+      0.08,
+      0.035
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "环拉手",
+      "直拉手",
+      "铰链",
+      "螺帽",
+      "平头木螺钉",
+      "护角",
+      "角码",
+      "锁孔盖",
+      "挂钩"
+    ],
+    "make_steps": [
+      "建立毫米真实尺寸：门环外径85毫米、柜拉手160毫米、抽屉拉手80毫米、铰链100×30×3毫米",
+      "曲线/旋转体/折板分别建模，不用一堆圆柱代替所有形态",
+      "螺钉头一字槽烘法线，近景头直径6毫米且不得异常放大",
+      "黄铜与黑铁只用M06/M07两族",
+      "各模型使用同一trim图集，背景小件合并入父模型",
+      "微件是可复用模板不是要求一个螺钉一个GLB"
+    ],
+    "material_ids": [
+      "M06",
+      "M07"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R04",
+      "R05",
+      "R06"
+    ],
+    "placement": "被所有主体资产引用，不单独随机scatter",
+    "collision": "无独立物理",
+    "lod0_triangle_budget": 600,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 9,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/props/P19.md",
+    "components": [
+      {
+        "id": "P19.01",
+        "name": "环拉手",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P19.02",
+        "name": "直拉手",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P19.03",
+        "name": "铰链",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P19.04",
+        "name": "螺帽",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P19.05",
+        "name": "平头木螺钉",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P19.06",
+        "name": "护角",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P19.07",
+        "name": "角码",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P19.08",
+        "name": "锁孔盖",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P19.09",
+        "name": "挂钩",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "P20",
+    "name": "分类标签与铭牌",
+    "category": "props",
+    "dimensions_m": [
+      0.09,
+      0.035,
+      0.004
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "黄铜框",
+      "纸签",
+      "刻字面",
+      "固定钉",
+      "圆角"
+    ],
+    "make_steps": [
+      "铭牌角半径2毫米，框细3毫米",
+      "准确排版简体中文功能名或中性编号，缺字不得方框",
+      "烘装饰编号用图集，实时功能名由DOM清晰显示",
+      "柜格用01–12，勿暗示实际藏品数量",
+      "电话铭牌未开放字始终正确"
+    ],
+    "material_ids": [
+      "M06",
+      "M12"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R05"
+    ],
+    "placement": "cabinet drawers和phone",
+    "collision": "无碰撞",
+    "lod0_triangle_budget": 220,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 6,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/props/P20.md",
+    "components": [
+      {
+        "id": "P20.01",
+        "name": "黄铜框",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P20.02",
+        "name": "纸签",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P20.03",
+        "name": "刻字面",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P20.04",
+        "name": "固定钉",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P20.05",
+        "name": "圆角",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "P21",
+    "name": "桌面黄铜定位柱",
+    "category": "props",
+    "dimensions_m": [
+      0.035,
+      0.09,
+      0.035
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "小圆底",
+      "立柱",
+      "顶球",
+      "底螺座",
+      "刻线"
+    ],
+    "make_steps": [
+      "独立旋转体柱而非简单裸圆柱，直径1.8厘米高6厘米加底盘",
+      "用于F13槽位的八根柱，不能图片有几个就每轮变化",
+      "柱脚贴桌面无接缝黑洞",
+      "刻线只在近景用贴图",
+      "不创建8个业务interaction对象，仍由synthesis根承载"
+    ],
+    "material_ids": [
+      "M06"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R06"
+    ],
+    "placement": "F13每槽两根",
+    "collision": "无碰撞",
+    "lod0_triangle_budget": 450,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/props/P21.md",
+    "components": [
+      {
+        "id": "P21.01",
+        "name": "小圆底",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P21.02",
+        "name": "立柱",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P21.03",
+        "name": "顶球",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P21.04",
+        "name": "底螺座",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P21.05",
+        "name": "刻线",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "P22",
+    "name": "统一叶形指南徽章",
+    "category": "props",
+    "dimensions_m": [
+      0.22,
+      0.32,
+      0.008
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "外叶形轮廓",
+      "中轴",
+      "三对支脉",
+      "下尖",
+      "圆/吊环变体"
+    ],
+    "make_steps": [
+      "先定义一套对称叶形矢量母版，长宽比约1.45，支脉恰好三对",
+      "只用自制路径，不在不同模型上让AI随机改logo",
+      "墙旗/书皮用平面纹理，吊灯中心用0.8毫米浅挤出金属",
+      "小于2像素的分支在LOD纹理合并，不反复增密",
+      "母版源文件版本与materials.json一起冻结"
+    ],
+    "material_ids": [
+      "M06",
+      "M28"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R01",
+      "R04",
+      "R05"
+    ],
+    "placement": "纹样库，多材质引用，非每处重画",
+    "collision": "无碰撞",
+    "lod0_triangle_budget": 600,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/props/P22.md",
+    "components": [
+      {
+        "id": "P22.01",
+        "name": "外叶形轮廓",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P22.02",
+        "name": "中轴",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P22.03",
+        "name": "三对支脉",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P22.04",
+        "name": "下尖",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "P22.05",
+        "name": "圆/吊环变体",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "V01",
+    "name": "大龟背竹与分裂叶",
+    "category": "vegetation",
+    "dimensions_m": [
+      1.0,
+      1.55,
+      0.95
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "主茎",
+      "叶柄",
+      "大叶",
+      "叶片孔洞",
+      "新叶",
+      "盆土接点"
+    ],
+    "make_steps": [
+      "从3种叶形母版生成7–11片叶，叶缘裂口与自然中脉方向一致",
+      "叶片曲面有弧度，近景孔洞用几何/alpha组合，不能整片像纸板",
+      "每根叶柄接到主茎，植物不能一堆叶片悬浮",
+      "叶色变化只在M15范围，叶面不涂成塑料绿",
+      "默认自制，因为S16叶形并非龟背竹，不能偷换植物",
+      "近相机叶边避免无穷透明叠加"
+    ],
+    "material_ids": [
+      "M15"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R03",
+      "R05"
+    ],
+    "placement": "reading外侧与cabinet南侧各1株；植入V05/V06",
+    "collision": "仅花盆碰撞，叶片不强挡相机",
+    "lod0_triangle_budget": 7000,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 2,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/vegetation/V01.md",
+    "components": [
+      {
+        "id": "V01.01",
+        "name": "主茎",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V01.02",
+        "name": "叶柄",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V01.03",
+        "name": "大叶",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V01.04",
+        "name": "叶片孔洞",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V01.05",
+        "name": "新叶",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V01.06",
+        "name": "盆土接点",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "V02",
+    "name": "中型室内观叶灌木",
+    "category": "vegetation",
+    "dimensions_m": [
+      0.68,
+      1.05,
+      0.68
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "分枝",
+      "小卵叶",
+      "新芽",
+      "主干",
+      "根口"
+    ],
+    "make_steps": [
+      "先确定3–5条向上枝干再布叶，禁止均匀球状叶团",
+      "S16可导入，但检查叶片数、图集和盆具风格，不全包加载8K",
+      "根部伸入土1–2厘米，中层分枝有透气空隙",
+      "制作高矮2变体并冻结随机种子",
+      "环境风动低于1厘米且根部不动，室内不吹成风暴"
+    ],
+    "material_ids": [
+      "M15",
+      "M02"
+    ],
+    "source_ids": [
+      "S16"
+    ],
+    "reference_ids": [
+      "R01",
+      "R05"
+    ],
+    "placement": "north_opening左右与桌边共4株",
+    "collision": "仅盆体代理",
+    "lod0_triangle_budget": 5000,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 2,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/vegetation/V02.md",
+    "components": [
+      {
+        "id": "V02.01",
+        "name": "分枝",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V02.02",
+        "name": "小卵叶",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V02.03",
+        "name": "新芽",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V02.04",
+        "name": "主干",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V02.05",
+        "name": "根口",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "V03",
+    "name": "梁上与柜顶垂藤",
+    "category": "vegetation",
+    "dimensions_m": [
+      1.2,
+      0.75,
+      0.4
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "主藤",
+      "次藤",
+      "心形叶",
+      "卷须",
+      "土盆/根部",
+      "支撑连接"
+    ],
+    "make_steps": [
+      "沿梁/柜真实可附着路径生成藤而非空中漂浮曲线",
+      "固定8段，有长短但不能逐帧随机",
+      "靠玻璃门一侧留净开门及视线区域，藤不盖住柜内容物",
+      "叶片用同一图集3种形态，根部可见小盆或藏于柜顶盆中",
+      "所有藤离灯芯和烟道至少0.2米，不穿灯或梁"
+    ],
+    "material_ids": [
+      "M15"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R01",
+      "R05",
+      "R07"
+    ],
+    "placement": "ceiling/cabinet_vines共8段",
+    "collision": "无碰撞；只对近景主藤保留几何",
+    "lod0_triangle_budget": 1500,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 3,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/vegetation/V03.md",
+    "components": [
+      {
+        "id": "V03.01",
+        "name": "主藤",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V03.02",
+        "name": "次藤",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V03.03",
+        "name": "心形叶",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V03.04",
+        "name": "卷须",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V03.05",
+        "name": "土盆/根部",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V03.06",
+        "name": "支撑连接",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "V04",
+    "name": "桌面小多肉",
+    "category": "vegetation",
+    "dimensions_m": [
+      0.14,
+      0.17,
+      0.14
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "肉质叶",
+      "中心芽",
+      "陶盆",
+      "土粒",
+      "盆底"
+    ],
+    "make_steps": [
+      "优先检查S17尺寸与格式，缩至自然桌面尺度但不压扁",
+      "自制时用弧形叶沿螺旋半径排列，叶根汇入中心",
+      "叶表条纹用图集，小叶不逐个独立材质",
+      "盆口有土层、叶子不能从空心盆底长出",
+      "只放两盆，不用其替代所有室内植物"
+    ],
+    "material_ids": [
+      "M15",
+      "M14"
+    ],
+    "source_ids": [
+      "S17"
+    ],
+    "reference_ids": [
+      "R04"
+    ],
+    "placement": "desk窗侧及F03边几共2盆",
+    "collision": "无独立碰撞",
+    "lod0_triangle_budget": 2000,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/vegetation/V04.md",
+    "components": [
+      {
+        "id": "V04.01",
+        "name": "肉质叶",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V04.02",
+        "name": "中心芽",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V04.03",
+        "name": "陶盆",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V04.04",
+        "name": "土粒",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V04.05",
+        "name": "盆底",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "V05",
+    "name": "陶土花盆与土壤",
+    "category": "vegetation",
+    "dimensions_m": [
+      0.46,
+      0.48,
+      0.46
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "厚盆壁",
+      "口沿",
+      "盆脚",
+      "内土",
+      "排水孔",
+      "土粒"
+    ],
+    "make_steps": [
+      "旋转剖面保证盆口厚8–12毫米且内壁可见",
+      "土面低于盆沿3厘米，围绕主茎而不盖住全部盆口",
+      "旧陶细斑仅占小比例，不做废墟花盆",
+      "不同盆高宽按三规格生成，禁止拉伸同款纹理",
+      "土粒用少量实例或normal，不几千颗独立物件"
+    ],
+    "material_ids": [
+      "M14",
+      "M27"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R01",
+      "R03"
+    ],
+    "placement": "承托V01/V02，三个规格",
+    "collision": "圆柱/凸体，半径与实际外形吻合",
+    "lod0_triangle_budget": 2500,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 3,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/vegetation/V05.md",
+    "components": [
+      {
+        "id": "V05.01",
+        "name": "厚盆壁",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V05.02",
+        "name": "口沿",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V05.03",
+        "name": "盆脚",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V05.04",
+        "name": "内土",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V05.05",
+        "name": "排水孔",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V05.06",
+        "name": "土粒",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "V06",
+    "name": "黄铜覆面大花器",
+    "category": "vegetation",
+    "dimensions_m": [
+      0.54,
+      0.6,
+      0.54
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "瓶形盆体",
+      "厚口沿",
+      "浅压纹",
+      "底圈",
+      "内陶胆",
+      "土面"
+    ],
+    "make_steps": [
+      "旋转体做略收口腹部，32–48边保证近景轮廓",
+      "压纹按环带组织并烘法线，边缘有轻氧化",
+      "外层黄铜M06，内胆非金属M14，不全体同亮度",
+      "大植物根正确落入土，顶盆与叶冠尺度匹配",
+      "与邻柜之间留间隙避免花盆半截穿柜"
+    ],
+    "material_ids": [
+      "M06",
+      "M14"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R03",
+      "R05"
+    ],
+    "placement": "大叶植株承托，与V05交替",
+    "collision": "简化凸体",
+    "lod0_triangle_budget": 3500,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 2,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/vegetation/V06.md",
+    "components": [
+      {
+        "id": "V06.01",
+        "name": "瓶形盆体",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V06.02",
+        "name": "厚口沿",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V06.03",
+        "name": "浅压纹",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V06.04",
+        "name": "底圈",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V06.05",
+        "name": "内陶胆",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V06.06",
+        "name": "土面",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "V07",
+    "name": "室外针叶树原型",
+    "category": "vegetation",
+    "dimensions_m": [
+      2.6,
+      7.0,
+      2.6
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "树干",
+      "一级枝",
+      "针叶簇",
+      "树梢",
+      "根脚",
+      "远景剪影"
+    ],
+    "make_steps": [
+      "做3个自然不对称树形，不能每棵同一圆锥",
+      "近树保留枝干轮廓，叶簇用少量交错卡片并有正确alpha边缘",
+      "远景2–3级LOD，不把所有树加载高模",
+      "颜色随远距空气透视过渡，株高随机范围0.85–1.15均匀缩放",
+      "树根附地，绝不在河中或露台通道散布"
+    ],
+    "material_ids": [
+      "M20",
+      "M02"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R01",
+      "R02",
+      "R07"
+    ],
+    "placement": "仅北景观外，E02按种子实例化",
+    "collision": "远景不碰撞；露台外不可进入",
+    "lod0_triangle_budget": 4500,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 3,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/vegetation/V07.md",
+    "components": [
+      {
+        "id": "V07.01",
+        "name": "树干",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V07.02",
+        "name": "一级枝",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V07.03",
+        "name": "针叶簇",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V07.04",
+        "name": "树梢",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V07.05",
+        "name": "根脚",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "V07.06",
+        "name": "远景剪影",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "E01",
+    "name": "远景雪山主峰",
+    "category": "environment",
+    "dimensions_m": [
+      800,
+      450,
+      600
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "主峰",
+      "两侧山脊",
+      "阴坡",
+      "岩石层",
+      "雪线",
+      "近低坡"
+    ],
+    "make_steps": [
+      "固定一个主峰在北轴略偏西，所有相机都见同一主峰而非billboard跟随转头",
+      "从粗山脊网格雕形，细节用normal和宏观雪遮罩",
+      "雪线依坡度/高度组合但不是可验证真实地理",
+      "分2–3层远景，不把一张原概念图贴到窗外",
+      "视差允许远山近似少但近林必须有深度",
+      "窗景只是一段北向环境，不实现整个开放世界"
+    ],
+    "material_ids": [
+      "M18",
+      "M24"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R01",
+      "R02",
+      "R03",
+      "R07"
+    ],
+    "placement": "world(-40,-25,-900)，设计景物非真实地点",
+    "collision": "不可到达，无物理",
+    "lod0_triangle_budget": 18000,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/environment/E01.md",
+    "components": [
+      {
+        "id": "E01.01",
+        "name": "主峰",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "E01.02",
+        "name": "两侧山脊",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "E01.03",
+        "name": "阴坡",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "E01.04",
+        "name": "岩石层",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "E01.05",
+        "name": "雪线",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "E01.06",
+        "name": "近低坡",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "E02",
+    "name": "林谷中景与树林分区",
+    "category": "environment",
+    "dimensions_m": [
+      300,
+      80,
+      400
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "近坡",
+      "中坡",
+      "远坡",
+      "河谷开口",
+      "树林区",
+      "留白路径"
+    ],
+    "make_steps": [
+      "用3层地形组织谷底河线与树林，明确不能挡住主峰中心",
+      "实例化V07按坡向有疏密，避免棋盘式排布",
+      "离相机很远的树林合并低细节网格或impostor，边界不露黑边",
+      "先保护露台视野和河道，再生成树林",
+      "固定seed=731，并序列化生成结果供回归"
+    ],
+    "material_ids": [
+      "M18",
+      "M20"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R01",
+      "R02"
+    ],
+    "placement": "北向窗景far_environment组",
+    "collision": "不可进入；外界安全边界在露台栏杆",
+    "lod0_triangle_budget": 15000,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/environment/E02.md",
+    "components": [
+      {
+        "id": "E02.01",
+        "name": "近坡",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "E02.02",
+        "name": "中坡",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "E02.03",
+        "name": "远坡",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "E02.04",
+        "name": "河谷开口",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "E02.05",
+        "name": "树林区",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "E02.06",
+        "name": "留白路径",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "E03",
+    "name": "远景湖河水面",
+    "category": "environment",
+    "dimensions_m": [
+      35,
+      0.02,
+      240
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "河道曲线",
+      "水面",
+      "岸边浅层",
+      "远反射条",
+      "流水高光"
+    ],
+    "make_steps": [
+      "依据E02谷底绘制河道，不用一片无限海平面",
+      "远景水面仅低频波纹和环境颜色反射",
+      "岸线与地形无裂缝，水不能爬坡",
+      "默认不使用逐帧反射相机，高画质升级需单列成本",
+      "水面动画在固定相机QA中冻结"
+    ],
+    "material_ids": [
+      "M21"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R01",
+      "R03"
+    ],
+    "placement": "北谷地，低于露台y",
+    "collision": "不可进入，无碰撞",
+    "lod0_triangle_budget": 2200,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/environment/E03.md",
+    "components": [
+      {
+        "id": "E03.01",
+        "name": "河道曲线",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "E03.02",
+        "name": "水面",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "E03.03",
+        "name": "岸边浅层",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "E03.04",
+        "name": "远反射条",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "E03.05",
+        "name": "流水高光",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "E04",
+    "name": "天空云层与空气透视",
+    "category": "environment",
+    "dimensions_m": [
+      1,
+      1,
+      1
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "天空背景",
+      "云层",
+      "薄雾",
+      "远山层次",
+      "太阳方向",
+      "环境照明"
+    ],
+    "make_steps": [
+      "天空作为环境系统，不做一个巨型实心球碰撞",
+      "光照方向与北窗投影一致，不能HDRI一个太阳而方向光另一个太阳",
+      "云用有权素材或自制程序体烘出球面纹理，不是网上随抓照片",
+      "雾限制远景，室内不能用浓雾掩盖模型",
+      "画面主峰与暖灯保持冷暖差而不全橙"
+    ],
+    "material_ids": [
+      "M30"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R01",
+      "R02"
+    ],
+    "placement": "环境系统以light_rig为准",
+    "collision": "无物理",
+    "lod0_triangle_budget": 1000,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/environment/E04.md",
+    "components": [
+      {
+        "id": "E04.01",
+        "name": "天空背景",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "E04.02",
+        "name": "云层",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "E04.03",
+        "name": "薄雾",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "E04.04",
+        "name": "远山层次",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "E04.05",
+        "name": "太阳方向",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "E04.06",
+        "name": "环境照明",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "E05",
+    "name": "露台外近坡与灌木",
+    "category": "environment",
+    "dimensions_m": [
+      12,
+      3,
+      5
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "近地表",
+      "小岩",
+      "树根边缘",
+      "灌木簇",
+      "栏外安全边界"
+    ],
+    "make_steps": [
+      "只补露台下可见近景，不能留下悬空平台下黑洞",
+      "灌木数量有限，与室内M15相近但更粗犷",
+      "枝叶不越栏伸入主通路",
+      "岩石边缘自然分块且接地",
+      "安全边界与栏杆一致，不引导玩家走到无碰撞地形"
+    ],
+    "material_ids": [
+      "M18",
+      "M15",
+      "M02"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R01",
+      "R07"
+    ],
+    "placement": "北露台外局部近景",
+    "collision": "不进入；边界依A14",
+    "lod0_triangle_budget": 5000,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/environment/E05.md",
+    "components": [
+      {
+        "id": "E05.01",
+        "name": "近地表",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "E05.02",
+        "name": "小岩",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "E05.03",
+        "name": "树根边缘",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "E05.04",
+        "name": "灌木簇",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "E05.05",
+        "name": "栏外安全边界",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "C01",
+    "name": "统一风格旅人角色",
+    "category": "character",
+    "dimensions_m": [
+      0.6,
+      1.72,
+      0.4
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "身体",
+      "头发/帽",
+      "亚麻内衣",
+      "深绿短披风",
+      "皮靴",
+      "小行囊",
+      "手套",
+      "叶徽"
+    ],
+    "make_steps": [
+      "参考图无人，此角色是功能必需补充，不冒充图中人物",
+      "先保持现有角色轮廓/动画接口再提高造型，衣服配色沿M09/M10",
+      "角色高1.72米，脚底原点，披风最长不拖地",
+      "关节附近拓扑环绕，不用独立球块拼人体作最终模型",
+      "布料与手/背包留余量，披风绑定骨骼做可控摆动，不实时重布模拟",
+      "需要face不必写真肖像，保持柔和可读3/4比例"
+    ],
+    "material_ids": [
+      "M09",
+      "M10",
+      "M32",
+      "M31",
+      "M33"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R07"
+    ],
+    "placement": "spawn与所有场景共用角色，非多个场景重复持有",
+    "collision": "胶囊半径.28米，总高1.72米；视觉不决定真实位移",
+    "lod0_triangle_budget": 15000,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/character/C01.md",
+    "components": [
+      {
+        "id": "C01.01",
+        "name": "身体",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "C01.02",
+        "name": "头发/帽",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "C01.03",
+        "name": "亚麻内衣",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "C01.04",
+        "name": "深绿短披风",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "C01.05",
+        "name": "皮靴",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "C01.06",
+        "name": "小行囊",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "C01.07",
+        "name": "手套",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "C01.08",
+        "name": "叶徽",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "C02",
+    "name": "旅人骨骼与三态动作",
+    "category": "character",
+    "dimensions_m": [
+      0.6,
+      1.72,
+      0.4
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "骨架",
+      "idle",
+      "walk",
+      "jump",
+      "披风辅助骨",
+      "脚步事件"
+    ],
+    "make_steps": [
+      "骨架层级一次冻结，站立脚底y=0",
+      "idle缓慢呼吸不漂移，walk原地循环不带root水平位移",
+      "jump起落姿态与物理接地同步，不用动画重写角色位置",
+      "步速驱动动画倍率，脚滑测试包含斜向和低帧率",
+      "披风避开手腿，必要时缩小动作范围",
+      "记录骨数和动画名，不在每次切场重新创建整个骨骼系统"
+    ],
+    "material_ids": [],
+    "source_ids": [],
+    "reference_ids": [
+      "R07"
+    ],
+    "placement": "绑定C01；动画无独立可见三角面",
+    "collision": "服从C01控制器，不独立物理",
+    "lod0_triangle_budget": 0,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/character/C02.md",
+    "components": [
+      {
+        "id": "C02.01",
+        "name": "骨架",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "C02.02",
+        "name": "idle",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "C02.03",
+        "name": "walk",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "C02.04",
+        "name": "jump",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "C02.05",
+        "name": "披风辅助骨",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "C02.06",
+        "name": "脚步事件",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "X01",
+    "name": "火焰与暖光微动",
+    "category": "effects",
+    "dimensions_m": [
+      0.1,
+      0.2,
+      0.1
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "蜡烛火焰",
+      "壁炉火焰片",
+      "低频光变",
+      "火星",
+      "热色梯度"
+    ],
+    "make_steps": [
+      "烛焰用1–2面交叉billboard，炉火用少量层片，避免烟火遮满屋",
+      "透明不深度写入但按效果系统处理排序",
+      "一个共享时间seed控制轻微变化，不每帧随机闪烁",
+      "仅一到两盏局部补光响应，其他烛火只是可见发光",
+      "减少动态模式固定火焰，静音与视效分别控制"
+    ],
+    "material_ids": [
+      "M19"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R03",
+      "R05"
+    ],
+    "placement": "P17与A15火焰socket",
+    "collision": "无物理",
+    "lod0_triangle_budget": 200,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/effects/X01.md",
+    "components": [
+      {
+        "id": "X01.01",
+        "name": "蜡烛火焰",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "X01.02",
+        "name": "壁炉火焰片",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "X01.03",
+        "name": "低频光变",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "X01.04",
+        "name": "火星",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "X01.05",
+        "name": "热色梯度",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "X02",
+    "name": "窗光尘埃与微弱光束",
+    "category": "effects",
+    "dimensions_m": [
+      5,
+      3,
+      4
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "稀疏尘点",
+      "局部光束",
+      "淡入淡出",
+      "屏幕外剔除"
+    ],
+    "make_steps": [
+      "只在北窗光照锥内放80–150个稀疏尘点，共一批",
+      "尘点尺寸按像素限制，不做飞雪白斑",
+      "光束必须与统一主光同方向且可关闭",
+      "低画质关闭，材质/几何仍须好看",
+      "不把浓体积雾当作接触阴影和模型细节的替代"
+    ],
+    "material_ids": [
+      "M19"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R01"
+    ],
+    "placement": "north_light_volume",
+    "collision": "无物理",
+    "lod0_triangle_budget": 300,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/effects/X02.md",
+    "components": [
+      {
+        "id": "X02.01",
+        "name": "稀疏尘点",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "X02.02",
+        "name": "局部光束",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "X02.03",
+        "name": "淡入淡出",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "X02.04",
+        "name": "屏幕外剔除",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "X03",
+    "name": "知识晶体与选材联系微光",
+    "category": "effects",
+    "dimensions_m": [
+      3.1,
+      1,
+      3.1
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "主晶柔光",
+      "四槽选择提示",
+      "已选材料连线",
+      "保存成功反馈",
+      "失败反馈"
+    ],
+    "make_steps": [
+      "只依据真实选材状态点亮0–4槽，线段连实际槽位",
+      "线细到不压住桌面细节，不无限旋转霓虹环",
+      "生成失败不能播放保存成功金光",
+      "减少动态模式用静态描边与文字状态",
+      "效果边界限定在合成台，不能改变柜体和布料的统一曝光"
+    ],
+    "material_ids": [
+      "M22"
+    ],
+    "source_ids": [],
+    "reference_ids": [
+      "R06"
+    ],
+    "placement": "synthesis根及F13 sockets",
+    "collision": "无物理",
+    "lod0_triangle_budget": 1200,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/effects/X03.md",
+    "components": [
+      {
+        "id": "X03.01",
+        "name": "主晶柔光",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "X03.02",
+        "name": "四槽选择提示",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "X03.03",
+        "name": "已选材料连线",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "X03.04",
+        "name": "保存成功反馈",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "X03.05",
+        "name": "失败反馈",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  },
+  {
+    "id": "X04",
+    "name": "环境与交互声音设计",
+    "category": "effects",
+    "dimensions_m": [
+      1,
+      1,
+      1
+    ],
+    "origin": "资产底部中心；面向局部+Z；复合组件见放置说明",
+    "parts": [
+      "室外风",
+      "房间底噪",
+      "脚步",
+      "纸翻",
+      "柜操作",
+      "烛火",
+      "静音状态"
+    ],
+    "make_steps": [
+      "声音素材需原创录制或核对许可，此包不虚构音频已到手",
+      "北窗风较远，室内轻，禁止开场自动大声播放",
+      "用户交互后才启用，静音持久保存",
+      "脚步按真实步行接地发出，不每帧触发",
+      "电话P0不模拟真实来电/在线匹配",
+      "音量和画质无关，失焦暂停或淡出"
+    ],
+    "material_ids": [],
+    "source_ids": [],
+    "reference_ids": [
+      "R01"
+    ],
+    "placement": "全局音频系统，空间发声点来自room布局",
+    "collision": "无物理，非mesh",
+    "lod0_triangle_budget": 0,
+    "lod1_ratio": 0.5,
+    "lod2_ratio": 0.2,
+    "variants": 1,
+    "priority": "P0",
+    "status": "planned",
+    "prompt_file": "05_assets/effects/X04.md",
+    "components": [
+      {
+        "id": "X04.01",
+        "name": "室外风",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "X04.02",
+        "name": "房间底噪",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "X04.03",
+        "name": "脚步",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "X04.04",
+        "name": "纸翻",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "X04.05",
+        "name": "柜操作",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "X04.06",
+        "name": "烛火",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      },
+      {
+        "id": "X04.07",
+        "name": "静音状态",
+        "construction": "按本资产make_steps与公用建模规范实现，不保证每部件为独立GLB"
+      }
+    ]
+  }
+]

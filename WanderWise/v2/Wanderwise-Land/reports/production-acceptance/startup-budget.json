@@ -1,0 +1,6 @@
+{
+  "resourceTransferBytes": 11672804,
+  "documentBodyBytesSeparateRead": 904,
+  "estimatedTotalBytesExcludingDocumentHeaders": 11673708,
+  "note": "Resource Timing from fresh browser context; HTML size separately read after test. Local HTTP without gzip, no network throttle; OS filesystem cache retained."
+}

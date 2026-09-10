@@ -1,0 +1,19 @@
+✔ rollback fixture: GLB 2 container, embedded images and finite accessor bounds (1.241583ms)
+✔ rollback fixture: actual GLB retains whitelist facilities, safe spawn and Y-up metre scale (1.655833ms)
+✔ rollback fixture: all facility approaches share a traversable space; door is under ten seconds away (5.817583ms)
+✔ rollback fixture: room bounds replace old hardcoded boundary without clipping a legitimate route (0.299666ms)
+✔ rollback fixture: collision layers distinguish glass, frame, door leaf and camera ceiling (0.188459ms)
+✔ rollback fixture: visible geometry and startup artifact have bounded size (0.175625ms)
+using deprecated parameters for the initialization function; pass a single object instead
+✔ production artifact retains exact business markers and self-contained resources (1.518958ms)
+✔ exported east and west collision proxies match wall orientation and block interaction (0.16825ms)
+✔ real production collider geometry stops swept capsule and camera at east wall (108.907125ms)
+✔ opaque architecture is separate from floor and glass interaction filtering (0.357375ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 401.25825

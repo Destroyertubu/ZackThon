@@ -1,0 +1,41 @@
+{
+  "runtime": "Python start.py --use-current --no-install; no project Node/Blender/venv present",
+  "files": [
+    {
+      "path": "/home",
+      "status": 200,
+      "bytes": 904,
+      "sha256": "f3beced25698a771d488835598b85a2a2a7008f4d1dc78511ebdafadf629772b"
+    },
+    {
+      "path": "/static/assets/home/scene.json",
+      "status": 200,
+      "bytes": 3144,
+      "sha256": "829d782d6f0a73b85482701a6663ef826043234715eea7b747f422a724579d9b"
+    },
+    {
+      "path": "/static/assets/home/production/full.glb",
+      "status": 200,
+      "bytes": 6942500,
+      "sha256": "82a2ef0f770f3efd547a667c36d59e7d76090f97866fda425ff5667530ba24a6"
+    },
+    {
+      "path": "/static/vendor/meshoptimizer/meshopt_decoder.mjs",
+      "status": 200,
+      "bytes": 29059,
+      "sha256": "cb08bf53ad8ad9693d8bb759b2dbade350eb38bcce63d005385e225b564c5f6a"
+    }
+  ],
+  "health": {
+    "status": 200,
+    "body": {
+      "data": {
+        "status": "ok",
+        "database": true
+      },
+      "meta": {
+        "requestId": "req_1f87aa1cf40341419c4068bc0d787246"
+      }
+    }
+  }
+}

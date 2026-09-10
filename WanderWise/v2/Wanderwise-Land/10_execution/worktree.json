@@ -1,0 +1,11 @@
+{
+  "worktree": "/Users/gauss/Desktop/SuperTechMagician/SolarMaster/ZackThon-previews/production-room",
+  "project": "/Users/gauss/Desktop/SuperTechMagician/SolarMaster/ZackThon-previews/production-room/WanderWise/v2/Wanderwise-Land",
+  "branch": "codex/wanderwise-production-room",
+  "basedOn": "2c80d9bf",
+  "packRoot": "/Users/gauss/Desktop/SuperTechMagician/SolarMaster/ZackThon/WanderWise/v2/图片素材/房间/Wanderwise_Room_Production_Kit_2026-09-10",
+  "transferBackup": "/Users/gauss/Desktop/SuperTechMagician/SolarMaster/ZackThon/WanderWise/v2/production-kit-worktree-transfer.tar",
+  "copiedFiles": 45,
+  "verification": "SHA-256 each file matched",
+  "runtime": "Existing dev dependencies linked read-only by convention; source/model outputs isolated."
+}

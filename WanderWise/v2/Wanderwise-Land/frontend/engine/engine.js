@@ -26,14 +26,14 @@ export class Engine{
  }
  cancelSceneLoad(){this.worldUpdateController?.abort();this.sceneEpoch++;this.loadController?.abort();this.presentReady?.resolve(false);this.presentReady=null;this.pause();}
  async setScene(kind,world=null,field=null,checkpoint=null){
-  this.cancelSceneLoad();this.busy=true;const epoch=this.sceneEpoch;this.requestedScene={kind,world,field,checkpoint};
+  this.cancelSceneLoad();this.renderer?.setCutaway(false);this.photoCamera=null;this.busy=true;const epoch=this.sceneEpoch;this.requestedScene={kind,world,field,checkpoint};
   const controller=new AbortController();this.loadController=controller;this.status='loading';this.callbacks.sceneState?.('loading');
   const timer=setTimeout(()=>controller.abort(),18000);let next;
   try{
    next=kind==='home'?await loadHome(controller.signal):buildScene(kind,world,field);
    if(epoch!==this.sceneEpoch||this.disposed){next.dispose?.();return false}
    this.renderer.detach();this.scene?.dispose?.();this.world=world;this.field=field;this.kind=kind;this.scene=next;
-   this.renderer.upload('scene',next.geometry);this.renderer.clearText();this.renderer.install(next.root);this.renderer.configure(kind);
+   this.renderer.upload('scene',next.geometry);this.renderer.clearText();this.renderer.install(next.root);this.renderer.configure(kind,next.lightRig,next.camera);
    this.player={...(checkpoint?.position||next.spawn),yaw:checkpoint?.yaw||0};
    if(kind==='home'&&checkpoint?.position&&next.colliders.some(b=>b.player!==false&&this.player.x+.28>b.min[0]&&this.player.x-.28<b.max[0]&&this.player.z+.28>b.min[2]&&this.player.z-.28<b.max[2]&&this.player.y+1.5>b.min[1]&&this.player.y<b.max[1]-.001)){this.player={...next.spawn,yaw:0};this.callbacks.notice?.('小屋陈设已更新，已将你放到安全落点。')}
 
@@ -53,6 +53,7 @@ export class Engine{
  updateTargets(){if(!this.scene)return;this.targets=[...this.scene.targets];if(this.kind!=='home')for(let n of this.scene.nodes){let c=this.contents.get(n.contentIds[0]);if(!c)continue;let excerpts=this.kind==='field'?[{id:n.section.excerptId,text:n.section.text,kind:'original_excerpt'}]:c.excerpts.filter(e=>n.excerptIds.includes(e.id)).slice(0,2);for(let [i,e] of excerpts.entries())this.targets.push({id:e.id+'@'+n.id,type:'excerpt',node:n,content:c,excerpt:e,title:c.title,position:{x:n.position.x+(i?2.1:-1.8),y:2.25+i*.6,z:n.position.z+1.8}})}}
  async resume(){
   if(this.busy||this.status!=='ready')return;
+  this.renderer?.setCutaway(false);this.photoCamera=null;this.renderer.camera.fov=this.scene?.camera?.fov||65;this.renderer.camera.updateProjectionMatrix();
   try{await this.canvas.requestPointerLock();this.controlMode=document.pointerLockElement===this.canvas?'locked':'drag'}
   catch{this.controlMode='drag';this.callbacks.notice?.('鼠标捕获不可用：按住右键转动视角，WASD 移动，左键打开设施。')}
   if(this.disposed||this.busy)return;this.active=true;this.canvas.tabIndex=0;this.canvas.focus({preventScroll:true});this.callbacks.active?.(true);
@@ -72,7 +73,7 @@ export class Engine{
   if(this.scene.physics)this.eye=this.scene.physics.camera(target,this.eye);
   for(const b of this.scene.physics?[]:this.scene.colliders){if(b.camera===false)continue;const hit=segmentBox(target,this.eye,b,.12);if(hit!==null)this.eye=target.map((v,i)=>mix(v,this.eye[i],Math.max(0,hit-.01)))}
   this.eye[1]=Math.max(this.eye[1],this.scene.height(this.eye[0],this.eye[2])+.3);
-  this.renderer.begin(this.eye,target,{fog:this.kind==='home'?[.33,.31,.24]:[.49,.66,.59],fogDistance:this.kind==='home'?85:130,quality:this.settings.quality});this.renderer.draw('scene');let dynamic=playerGeometry(p,this.settings.reduceMotion?0:this.time,moving);dynamic.transform=null;
+  this.renderer.begin(this.photoCamera?.position||this.eye,this.photoCamera?.target||target,{fog:this.kind==='home'?[.33,.31,.24]:[.49,.66,.59],fogDistance:this.kind==='home'?85:130,quality:this.settings.quality});this.renderer.draw('scene');let dynamic=playerGeometry(p,this.settings.reduceMotion?0:this.time,moving);dynamic.transform=null;
   // Persisted private anchors only, rendered as small lanterns at stable node-relative offsets.
   if(this.kind==='world')for(let a of this.anchors){let n=this.scene.nodes.find(n=>n.topicId===a.topicId);if(n&&dist(p,n.position)<32){let x=n.position.x+a.localOffset.x,z=n.position.z+a.localOffset.z;dynamic.cylinder(x,0,z,.18,.8,C.gold,6,.1);dynamic.rock(x,.8,z,.12,C.cream)}}
   if(this.kind==='world'&&this.navigation.mode){let dest=this.scene.nodes.find(n=>n.id===this.navigation.id),near=this.nearest();if(dest&&near&&dist(p,dest.position)>6){let path=pathBetween(this.scene.nodes,this.scene.links,near.id,dest.id);if(path.length===1)path=[{x:p.x,y:0,z:p.z},...path];for(let i=1;i<path.length;i++){let a=path[i-1],b=path[i],length=dist(a,b);if(this.navigation.mode===2||this.settings.reduceMotion){for(let t=0;t<length;t+=2.4){let f=t/length,v=Math.min(1,(t+1.3)/length);dynamic.path({x:mix(a.x,b.x,f),z:mix(a.z,b.z,f)},{x:mix(a.x,b.x,v),z:mix(a.z,b.z,v)},.14,C.cream,.13)}}else for(let j=0;j<9;j++){let f=(j/9+this.time*.11)%1;dynamic.rock(mix(a.x,b.x,f),.45+Math.sin(f*6)*.1,mix(a.z,b.z,f),.055,C.cream)}}}}
