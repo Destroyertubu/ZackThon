@@ -1,0 +1,56 @@
+{
+  "stage": "corner",
+  "blender": "5.2.1 LTS",
+  "bytes": 12977076,
+  "sha256": "f53d22b8b9a1d1d7e6dbd630bec897c59dc45b962a584cacd20b3368dbd9a4a4",
+  "imports": [
+    {
+      "asset": "ArmChair_01",
+      "position": [
+        2.25,
+        0,
+        -2.28
+      ],
+      "yaw": 3.141592653589793,
+      "dimensions": [
+        0.848430871963501,
+        0.7657603025436401,
+        1.0650876760482788
+      ],
+      "scale": 1
+    },
+    {
+      "asset": "GothicCabinet_01",
+      "position": [
+        -0.95,
+        0,
+        -4.23
+      ],
+      "yaw": 0,
+      "dimensions": [
+        1.7191437482833862,
+        1.1286652088165283,
+        2.36090087890625
+      ],
+      "scale": 1
+    },
+    {
+      "asset": "Shelf_01",
+      "position": [
+        4.9,
+        0,
+        -4.6
+      ],
+      "yaw": 0,
+      "dimensions": [
+        1.003443717956543,
+        0.25697949528694153,
+        2.080310344696045
+      ],
+      "scale": 1
+    }
+  ],
+  "lighting": "Runtime direct shadows and generated PMREM environment. No baked lighting. Imported ARM AO only where original glTF provides it.",
+  "textures": "Original color=sRGB, normal/ARM=Non-Color. Metre-projected architecture UV, authored furniture UV.",
+  "source": "assets-source/home-realistic-corner.blend"
+}

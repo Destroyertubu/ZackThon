@@ -18,12 +18,20 @@ export class Renderer {
   this.sun.shadow.bias=-.00015;this.sun.shadow.normalBias=.025;
   this.lamps=[new T.PointLight(0xffcb83,12,6,2),new T.PointLight(0xffcd8d,10,6,2)];
   this.scene.add(this.hemi,this.ambient,this.sun,this.sun.target,...this.lamps);this.metrics={drawCalls:0,triangles:0};
+  // Low-resolution studio-style environment, generated once for PBR reflections.
+  // This is an ambient approximation, not a baked lightmap or a displayed background.
+  const environment=new T.Scene();environment.background=new T.Color(.32,.30,.26);
+  const room=new T.Mesh(new T.BoxGeometry(12,8,12),new T.MeshBasicMaterial({color:0x70604c,side:T.BackSide}));environment.add(room);
+  const panel=new T.Mesh(new T.PlaneGeometry(4,3),new T.MeshBasicMaterial({color:new T.Color(3.0,3.3,3.5),side:T.DoubleSide}));panel.position.set(2,1,-5);environment.add(panel);
+  const warm=new T.Mesh(new T.PlaneGeometry(2,2),new T.MeshBasicMaterial({color:new T.Color(1.4,.9,.45),side:T.DoubleSide}));warm.position.set(-4,0,0);warm.rotation.y=Math.PI/2;environment.add(warm);
+  const generator=new T.PMREMGenerator(this.webgl);this.homeEnvironment=generator.fromScene(environment,.05,.1,20,{size:128});generator.dispose();disposeTree(environment);
  }
  setLoop(cb){this.webgl.setAnimationLoop(cb)}
  configure(kind){
   this.kind=kind;this.sun.castShadow=kind==='home';this.sun.position.set(...(kind==='home'?[3.5,5.5,-8]:[-30,65,20]));this.sun.target.position.set(...(kind==='home'?[0,0,1]:[0,0,0]));
-  this.sun.intensity=kind==='home'?3:2.1;this.hemi.intensity=kind==='home'?1.25:1.7;this.ambient.intensity=kind==='home'?.5:.1;
-  this.lamps[0].position.set(2.4,2,-3.8);this.lamps[1].position.set(-4.1,2.3,1.4);this.lamps.forEach(l=>l.visible=kind==='home');
+  this.sun.intensity=kind==='home'?3.8:2.1;this.hemi.intensity=kind==='home'?.75:1.7;this.ambient.intensity=kind==='home'?.12:.1;
+  this.scene.environment=kind==='home'?this.homeEnvironment.texture:null;this.scene.environmentIntensity=.48;
+  this.lamps[0].position.set(2.82,1.31,-3.75);this.lamps[1].position.set(-5.19,1.30,.59);this.lamps[0].intensity=8;this.lamps[1].intensity=9;this.lamps.forEach(l=>l.visible=kind==='home');
   this.scene.background=new T.Color(kind==='home'?'#b6b9a1':'#90af9f');this.scene.fog=new T.Fog(this.scene.background,kind==='home'?35:95,kind==='home'?95:290);
  }
  install(root){this.root=root;if(root)this.scene.add(root)}
@@ -92,5 +100,5 @@ export class Renderer {
 
  end(){this.webgl.info.reset();this.webgl.render(this.scene,this.camera);const i=this.webgl.info;this.metrics={drawCalls:i.render.calls,triangles:i.render.triangles,geometries:i.memory.geometries,textures:i.memory.textures,programs:i.programs.length,labels:this.textures.size}}
  async compile(){await this.webgl.compileAsync(this.scene,this.camera)}
- dispose(){this.setLoop(null);this.detach();this.clearText();for(const b of this.batches.values()){b.mesh.removeFromParent();b.geometry.dispose()}this.batches.clear();this.legacyMaterial.dispose();this.sun.shadow.map?.dispose();this.webgl.dispose()}
+ dispose(){this.setLoop(null);this.detach();this.clearText();for(const b of this.batches.values()){b.mesh.removeFromParent();b.geometry.dispose()}this.batches.clear();this.legacyMaterial.dispose();this.sun.shadow.map?.dispose();this.homeEnvironment?.dispose();this.webgl.dispose()}
 }

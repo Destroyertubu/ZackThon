@@ -1,6 +1,6 @@
 {
   "name": "wanderwise-land",
-  "version": "1.1.1-roaming",
+  "version": "1.2.0-realistic-home",
   "private": true,
   "type": "module",
   "description": "Wanderwise Land: local Python distribution and Netlify Functions cloud adapter.",
@@ -13,9 +13,12 @@
     "test:storage": "node --test tests/storage-identity.test.mjs",
     "test:home": "node --test tests/home_scene.test.mjs",
     "vendor:three": "node tools/vendor-three.mjs",
-    "test:roaming": "node --test tests/roaming_interaction.test.mjs"
+    "test:roaming": "node --test tests/roaming_interaction.test.mjs",
+    "test:physics": "node --test tests/realistic_physics.test.mjs",
+    "optimize:home": "node tools/optimize-realistic-home.mjs full"
   },
   "dependencies": {
+    "@dimforge/rapier3d-compat": "0.19.3",
     "@netlify/blobs": "11.0.3",
     "ajv": "8.20.0",
     "htmlparser2": "10.1.0",
@@ -23,5 +26,8 @@
   },
   "engines": {
     "node": ">=22.13"
+  },
+  "devDependencies": {
+    "@gltf-transform/cli": "4.5.0"
   }
 }

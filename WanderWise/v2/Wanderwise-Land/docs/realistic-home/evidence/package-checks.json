@@ -1,0 +1,100 @@
+{
+  "status": "passed",
+  "checks": [
+    "Extracted package starts with Python and no Node/Blender in PATH",
+    "Real GLB/PBR/Rapier home becomes ready",
+    "Original phone panel remains unavailable",
+    "WASM CSP present; no JavaScript page errors"
+  ],
+  "browser": "152.0.7977.83",
+  "scene": {
+    "page": "landing",
+    "renderer": "three-webgl2",
+    "sceneState": "ready",
+    "sceneKind": "home",
+    "sceneStage": "realistic-full",
+    "eye": [
+      0,
+      2.088655933423811,
+      4.082046356704884
+    ],
+    "target": null,
+    "active": false,
+    "facilities": [
+      {
+        "id": "cabinet",
+        "position": {
+          "x": -0.949999988079071,
+          "y": 1.649999976158142,
+          "z": -3.549999952316284
+        }
+      },
+      {
+        "id": "door",
+        "position": {
+          "x": -3.299999952316284,
+          "y": 1.5,
+          "z": -4.550000190734863
+        }
+      },
+      {
+        "id": "journal",
+        "position": {
+          "x": 2.1500000953674316,
+          "y": 1.2000000476837158,
+          "z": -2.9000000953674316
+        }
+      },
+      {
+        "id": "phone",
+        "position": {
+          "x": 4.824999809265137,
+          "y": 1.600000023841858,
+          "z": 2.380000114440918
+        }
+      },
+      {
+        "id": "synthesis",
+        "position": {
+          "x": -4.400000095367432,
+          "y": 1.350000023841858,
+          "z": 1
+        }
+      }
+    ],
+    "assetBytes": 10461572,
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0.6499999761581421,
+      "yaw": 0
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0.22,
+      "distance": 3.8
+    },
+    "metrics": {
+      "drawCalls": 149,
+      "triangles": 154860,
+      "geometries": 81,
+      "textures": 20,
+      "programs": 12,
+      "labels": 0,
+      "fps": 37,
+      "medianFps": 59.9,
+      "p95ms": 116.6,
+      "rawFrameMs": 16.700000000000045
+    },
+    "pending": 0,
+    "worldVersion": null,
+    "nodeCount": null,
+    "modal": null
+  },
+  "errors": [],
+  "runtimePackage": {
+    "sha256": "a1026659538395434377317be65091b0443d9e0f1da4322243f04986bc4cfca0",
+    "bytes": 8094675,
+    "validation": "All included frontend/backend files byte-identical to the browser-verified extracted preflight; same final GLB hash. Metadata and packaging layout differ."
+  }
+}

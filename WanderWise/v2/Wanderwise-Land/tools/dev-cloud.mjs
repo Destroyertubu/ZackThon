@@ -6,7 +6,7 @@ import {memoryStorage} from '../cloud/storage.mjs';
 
 const port = Number(process.env.PORT || 18090), store = memoryStorage();
 const app = createApplication({storage: store, secureCookies: false, getEnv: name => name === 'WW_HOURLY_TASK_LIMIT' ? '100' : ''});
-const types = {'.js':'text/javascript; charset=utf-8','.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.svg':'image/svg+xml','.json':'application/json'};
+const types = {'.mjs':'text/javascript; charset=utf-8','.js':'text/javascript; charset=utf-8','.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.svg':'image/svg+xml','.json':'application/json'};
 const root = resolve('frontend');
 http.createServer(async (req, res) => {
   try {
@@ -20,6 +20,6 @@ http.createServer(async (req, res) => {
     const path = url.pathname.startsWith('/static/') ? resolve(root, '.' + url.pathname.slice(7)) : resolve(root, 'index.html');
     if (!path.startsWith(root + '/')) {res.writeHead(404); res.end(); return;}
     const content = await readFile(path), ext = path.slice(path.lastIndexOf('.'));
-    res.writeHead(200, {'Content-Type': types[ext] || 'application/octet-stream','Content-Security-Policy': "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'"}); res.end(content);
+    res.writeHead(200, {'Content-Type': types[ext] || 'application/octet-stream','Content-Security-Policy': "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'"}); res.end(content);
   } catch {res.writeHead(500); res.end('Local cloud-adapter error');}
 }).listen(port, '127.0.0.1', () => console.log(`Cloud adapter development server: http://127.0.0.1:${port} (isolated in-memory test data)`));

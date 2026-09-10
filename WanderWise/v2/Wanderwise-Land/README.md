@@ -1,6 +1,8 @@
-> **当前版本 1.1.1-roaming：** 已删除简化阅读模式与准星；靠近金句直接左键打开原文，主题扩展原地更新，远近文字分层并避让。见 [本轮修改与验证](docs/roaming-update/README.md)。已发布到 [公网体验](https://wanderwise-land-v2-lostmagician155.netlify.app/home)，见 [发布验证](docs/roaming-update/PUBLIC_DEPLOYMENT.json)。下面的家园历史报告保留原测试范围。
+> **当前本地版本 1.2.0-realistic-home：** Poly Haven 写实家具/PBR、Blender 重建小屋、Rapier 胶囊移动与独立相机避障。保留原业务与 Python 启动。见 [本轮交付、启动及回滚](docs/realistic-home/README.md)、[实机图集](docs/realistic-home/GALLERY.md)。本轮尚未发布到公网，现有公网仍为上轮版本。
 
-> **当前本地版本：1.1.0-home.1 · 林间灯火知识书屋。** Three.js + Blender GLB 家园升级，保留原业务与 Python 启动。见 [启动/升级/回滚](docs/home-upgrade/RUN_UPGRADE_ROLLBACK.md)、[本轮验收报告](docs/home-upgrade/TEST_REPORT.md)、[资产许可](docs/home-upgrade/ASSETS.md)、[渲染迁移](docs/home-upgrade/RENDERING_MIGRATION.md)。本轮尚未部署到公网；下面的云端状态属于上一轮版本。
+> **历史公网版本 1.1.1-roaming：** 已删除简化阅读模式与准星；靠近金句直接左键打开原文，主题扩展原地更新，远近文字分层并避让。见 [本轮修改与验证](docs/roaming-update/README.md)。已发布到 [公网体验](https://wanderwise-land-v2-lostmagician155.netlify.app/home)，见 [发布验证](docs/roaming-update/PUBLIC_DEPLOYMENT.json)。下面的家园历史报告保留原测试范围。
+
+> **历史本地版本：1.1.0-home.1 · 林间灯火知识书屋。** Three.js + Blender GLB 家园升级，保留原业务与 Python 启动。见 [启动/升级/回滚](docs/home-upgrade/RUN_UPGRADE_ROLLBACK.md)、[本轮验收报告](docs/home-upgrade/TEST_REPORT.md)、[资产许可](docs/home-upgrade/ASSETS.md)、[渲染迁移](docs/home-upgrade/RENDERING_MIGRATION.md)。本轮尚未部署到公网；下面的云端状态属于上一轮版本。
 
 > **Netlify 云端适配：** 本次新增可部署后端与持久存储。见 [Netlify 部署说明](docs/NETLIFY_DEPLOYMENT.md) 和 [实际部署状态](docs/cloud-deployment-status.json)。下文保留原始本地包说明。
 

@@ -1,0 +1,4955 @@
+{
+  "state": {
+    "page": "home",
+    "renderer": "three-webgl2",
+    "sceneState": "ready",
+    "sceneKind": "home",
+    "sceneStage": "realistic-full",
+    "eye": [
+      0,
+      2.032198962233547,
+      4.278594715655564
+    ],
+    "target": null,
+    "active": false,
+    "facilities": [
+      {
+        "id": "cabinet",
+        "position": {
+          "x": -0.949999988079071,
+          "y": 1.649999976158142,
+          "z": -3.549999952316284
+        }
+      },
+      {
+        "id": "door",
+        "position": {
+          "x": -3.299999952316284,
+          "y": 1.5,
+          "z": -4.550000190734863
+        }
+      },
+      {
+        "id": "journal",
+        "position": {
+          "x": 2.1500000953674316,
+          "y": 1.2000000476837158,
+          "z": -2.9000000953674316
+        }
+      },
+      {
+        "id": "phone",
+        "position": {
+          "x": 4.824999809265137,
+          "y": 1.600000023841858,
+          "z": 2.380000114440918
+        }
+      },
+      {
+        "id": "synthesis",
+        "position": {
+          "x": -4.400000095367432,
+          "y": 1.350000023841858,
+          "z": 1
+        }
+      }
+    ],
+    "assetBytes": 10434764,
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0.6499999761581421,
+      "yaw": 0
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0.22,
+      "distance": 3.8
+    },
+    "metrics": {
+      "fps": 0,
+      "drawCalls": 149,
+      "triangles": 154860,
+      "geometries": 81,
+      "textures": 19,
+      "programs": 10,
+      "labels": 0
+    },
+    "pending": 0,
+    "worldVersion": null,
+    "nodeCount": null,
+    "modal": null
+  },
+  "inspection": {
+    "meshes": [
+      {
+        "name": "COL_atlas_desk",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_cabinet",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_ceiling",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_door_leaf",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_doorlintel",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_floor",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_hearth",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_journal_chair",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_journal_desk",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_loungechair",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_north535",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_north-11",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_north-52",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_phone_back",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_phone_desk",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_phone_glass412",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_phone_glass553",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_phone_post412232",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_phone_post412387",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_phone_post553232",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_phone_post553387",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_side6",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_side-6",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_side_table",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_south",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_synthesis_desk",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_window_glass",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_windowlintel",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_windowsill",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_workshop_shelf",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube296",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 1708,
+        "materials": [
+          {
+            "name": "walnut",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube296_1",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 564,
+        "materials": [
+          {
+            "name": "oak",
+            "roughness": 1,
+            "metalness": 0,
+            "map": true,
+            "mapColorSpace": "srgb",
+            "normalMapColorSpace": ""
+          }
+        ]
+      },
+      {
+        "name": "Cube296_2",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 640,
+        "materials": [
+          {
+            "name": "brass",
+            "roughness": 0.33000001311302185,
+            "metalness": 0.8500000238418579,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube296_3",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 752,
+        "materials": [
+          {
+            "name": "paper",
+            "roughness": 0.9399999976158142,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube296_4",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 264,
+        "materials": [
+          {
+            "name": "sage",
+            "roughness": 0.8500000238418579,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube296_5",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 264,
+        "materials": [
+          {
+            "name": "teal",
+            "roughness": 0.6499999761581421,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "VIS_beams",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 752,
+        "materials": [
+          {
+            "name": "walnut",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "VIS_cabinet__GothicCabinet_01_cabinet",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 3718,
+        "materials": [
+          {
+            "name": "GothicCabinet_01",
+            "roughness": 1,
+            "metalness": 1,
+            "map": true,
+            "mapColorSpace": "srgb",
+            "normalMapColorSpace": ""
+          }
+        ]
+      },
+      {
+        "name": "VIS_cabinet__GothicCabinet_01_door1",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 2115,
+        "materials": [
+          {
+            "name": "GothicCabinet_01",
+            "roughness": 1,
+            "metalness": 1,
+            "map": true,
+            "mapColorSpace": "srgb",
+            "normalMapColorSpace": ""
+          }
+        ]
+      },
+      {
+        "name": "VIS_cabinet__GothicCabinet_01_door2",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 2111,
+        "materials": [
+          {
+            "name": "GothicCabinet_01",
+            "roughness": 1,
+            "metalness": 1,
+            "map": true,
+            "mapColorSpace": "srgb",
+            "normalMapColorSpace": ""
+          }
+        ]
+      },
+      {
+        "name": "VIS_cabinet__GothicCabinet_01_door3",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 2115,
+        "materials": [
+          {
+            "name": "GothicCabinet_01",
+            "roughness": 1,
+            "metalness": 1,
+            "map": true,
+            "mapColorSpace": "srgb",
+            "normalMapColorSpace": ""
+          }
+        ]
+      },
+      {
+        "name": "VIS_cabinet__GothicCabinet_01_door4",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 2111,
+        "materials": [
+          {
+            "name": "GothicCabinet_01",
+            "roughness": 1,
+            "metalness": 1,
+            "map": true,
+            "mapColorSpace": "srgb",
+            "normalMapColorSpace": ""
+          }
+        ]
+      },
+      {
+        "name": "VIS_ceiling",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 188,
+        "materials": [
+          {
+            "name": "plaster",
+            "roughness": 1,
+            "metalness": 0,
+            "map": true,
+            "mapColorSpace": "srgb",
+            "normalMapColorSpace": ""
+          }
+        ]
+      },
+      {
+        "name": "Cube195",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 376,
+        "materials": [
+          {
+            "name": "oak",
+            "roughness": 1,
+            "metalness": 0,
+            "map": true,
+            "mapColorSpace": "srgb",
+            "normalMapColorSpace": ""
+          }
+        ]
+      },
+      {
+        "name": "Cube195_1",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 564,
+        "materials": [
+          {
+            "name": "walnut",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube195_2",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 44,
+        "materials": [
+          {
+            "name": "brass",
+            "roughness": 0.33000001311302185,
+            "metalness": 0.8500000238418579,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube199",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 188,
+        "materials": [
+          {
+            "name": "teal",
+            "roughness": 0.6499999761581421,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube199_1",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 88,
+        "materials": [
+          {
+            "name": "sage",
+            "roughness": 0.8500000238418579,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube199_2",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 352,
+        "materials": [
+          {
+            "name": "walnut",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube199_3",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 172,
+        "materials": [
+          {
+            "name": "brass",
+            "roughness": 0.33000001311302185,
+            "metalness": 0.8500000238418579,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "VIS_drapery",
+        "visible": true,
+        "castShadow": false,
+        "receiveShadow": true,
+        "triangles": 3592,
+        "materials": [
+          {
+            "name": "linen",
+            "roughness": 0.9700000286102295,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cone002",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 4180,
+        "materials": [
+          {
+            "name": "walnut",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cone002_1",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "sky",
+            "roughness": 1,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cone002_2",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 5280,
+        "materials": [
+          {
+            "name": "leaf",
+            "roughness": 0.75,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "VIS_floor",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 188,
+        "materials": [
+          {
+            "name": "oak",
+            "roughness": 1,
+            "metalness": 0,
+            "map": true,
+            "mapColorSpace": "srgb",
+            "normalMapColorSpace": ""
+          }
+        ]
+      },
+      {
+        "name": "Cube268",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 44,
+        "materials": [
+          {
+            "name": "ink",
+            "roughness": 0.75,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube268_1",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 752,
+        "materials": [
+          {
+            "name": "stone",
+            "roughness": 0.9399999976158142,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube268_2",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 188,
+        "materials": [
+          {
+            "name": "oak",
+            "roughness": 1,
+            "metalness": 0,
+            "map": true,
+            "mapColorSpace": "srgb",
+            "normalMapColorSpace": ""
+          }
+        ]
+      },
+      {
+        "name": "Cube268_3",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 180,
+        "materials": [
+          {
+            "name": "walnut",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube084",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 1832,
+        "materials": [
+          {
+            "name": "walnut",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube084_1",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 564,
+        "materials": [
+          {
+            "name": "oak",
+            "roughness": 1,
+            "metalness": 0,
+            "map": true,
+            "mapColorSpace": "srgb",
+            "normalMapColorSpace": ""
+          }
+        ]
+      },
+      {
+        "name": "Cube084_2",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 564,
+        "materials": [
+          {
+            "name": "brass",
+            "roughness": 0.33000001311302185,
+            "metalness": 0.8500000238418579,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube084_3",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 384,
+        "materials": [
+          {
+            "name": "lamp",
+            "roughness": 0.8600000143051147,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube084_4",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 3072,
+        "materials": [
+          {
+            "name": "linen",
+            "roughness": 0.9700000286102295,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube084_5",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 44,
+        "materials": [
+          {
+            "name": "teal",
+            "roughness": 0.6499999761581421,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube084_6",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 200,
+        "materials": [
+          {
+            "name": "paper",
+            "roughness": 0.9399999976158142,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube084_7",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 144,
+        "materials": [
+          {
+            "name": "ink",
+            "roughness": 0.75,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube084_8",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 96,
+        "materials": [
+          {
+            "name": "sage",
+            "roughness": 0.8500000238418579,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube084_9",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 220,
+        "materials": [
+          {
+            "name": "ceramic",
+            "roughness": 0.25999999046325684,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "VIS_journal_chair",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 5626,
+        "materials": [
+          {
+            "name": "Armchair_01",
+            "roughness": 1,
+            "metalness": 1,
+            "map": true,
+            "mapColorSpace": "srgb",
+            "normalMapColorSpace": ""
+          }
+        ]
+      },
+      {
+        "name": "Cylinder002",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 5626,
+        "materials": [
+          {
+            "name": "Armchair_01",
+            "roughness": 1,
+            "metalness": 1,
+            "map": true,
+            "mapColorSpace": "srgb",
+            "normalMapColorSpace": ""
+          }
+        ]
+      },
+      {
+        "name": "Cylinder002_1",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 44,
+        "materials": [
+          {
+            "name": "linen",
+            "roughness": 0.9700000286102295,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cylinder002_2",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 188,
+        "materials": [
+          {
+            "name": "oak",
+            "roughness": 1,
+            "metalness": 0,
+            "map": true,
+            "mapColorSpace": "srgb",
+            "normalMapColorSpace": ""
+          }
+        ]
+      },
+      {
+        "name": "Cylinder002_3",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 364,
+        "materials": [
+          {
+            "name": "walnut",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "VIS_molding",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 2068,
+        "materials": [
+          {
+            "name": "walnut",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube057",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 564,
+        "materials": [
+          {
+            "name": "sage",
+            "roughness": 0.8500000238418579,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube057_1",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 1056,
+        "materials": [
+          {
+            "name": "walnut",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube279",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 188,
+        "materials": [
+          {
+            "name": "sage",
+            "roughness": 0.8500000238418579,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube279_1",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 940,
+        "materials": [
+          {
+            "name": "walnut",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube279_2",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 752,
+        "materials": [
+          {
+            "name": "oak",
+            "roughness": 1,
+            "metalness": 0,
+            "map": true,
+            "mapColorSpace": "srgb",
+            "normalMapColorSpace": ""
+          }
+        ]
+      },
+      {
+        "name": "Cube279_3",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 3500,
+        "materials": [
+          {
+            "name": "ink",
+            "roughness": 0.75,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube279_4",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 156,
+        "materials": [
+          {
+            "name": "brass",
+            "roughness": 0.33000001311302185,
+            "metalness": 0.8500000238418579,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube279_5",
+        "visible": true,
+        "castShadow": false,
+        "receiveShadow": true,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "glass4.12",
+            "roughness": 0.18000000715255737,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube279_6",
+        "visible": true,
+        "castShadow": false,
+        "receiveShadow": true,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "glass4.12",
+            "roughness": 0.18000000715255737,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "leaf",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 3024,
+        "materials": [
+          {
+            "name": "leaf",
+            "roughness": 0.75,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "leaf_1",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 372,
+        "materials": [
+          {
+            "name": "ceramic",
+            "roughness": 0.25999999046325684,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "leaf_2",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 228,
+        "materials": [
+          {
+            "name": "walnut",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube078",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 44,
+        "materials": [
+          {
+            "name": "linen",
+            "roughness": 0.9700000286102295,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube078_1",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 48,
+        "materials": [
+          {
+            "name": "sage",
+            "roughness": 0.8500000238418579,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube105",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 792,
+        "materials": [
+          {
+            "name": "teal",
+            "roughness": 0.6499999761581421,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube105_1",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 182,
+        "materials": [
+          {
+            "name": "Shelf_01",
+            "roughness": 1,
+            "metalness": 1,
+            "map": true,
+            "mapColorSpace": "srgb",
+            "normalMapColorSpace": ""
+          }
+        ]
+      },
+      {
+        "name": "Cube105_2",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 2820,
+        "materials": [
+          {
+            "name": "paper",
+            "roughness": 0.9399999976158142,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube105_3",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 1320,
+        "materials": [
+          {
+            "name": "brass",
+            "roughness": 0.33000001311302185,
+            "metalness": 0.8500000238418579,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube105_4",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 792,
+        "materials": [
+          {
+            "name": "sage",
+            "roughness": 0.8500000238418579,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube105_5",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 396,
+        "materials": [
+          {
+            "name": "walnut",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube213",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 1708,
+        "materials": [
+          {
+            "name": "walnut",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube213_1",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 564,
+        "materials": [
+          {
+            "name": "oak",
+            "roughness": 1,
+            "metalness": 0,
+            "map": true,
+            "mapColorSpace": "srgb",
+            "normalMapColorSpace": ""
+          }
+        ]
+      },
+      {
+        "name": "Cube213_2",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 680,
+        "materials": [
+          {
+            "name": "brass",
+            "roughness": 0.33000001311302185,
+            "metalness": 0.8500000238418579,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube213_3",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 132,
+        "materials": [
+          {
+            "name": "teal",
+            "roughness": 0.6499999761581421,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube213_4",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 132,
+        "materials": [
+          {
+            "name": "paper",
+            "roughness": 0.9399999976158142,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube213_5",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 108,
+        "materials": [
+          {
+            "name": "ink",
+            "roughness": 0.75,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube213_6",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 384,
+        "materials": [
+          {
+            "name": "lamp",
+            "roughness": 0.8600000143051147,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube213_7",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 3072,
+        "materials": [
+          {
+            "name": "linen",
+            "roughness": 0.9700000286102295,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "VIS_walls",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 1692,
+        "materials": [
+          {
+            "name": "plaster",
+            "roughness": 1,
+            "metalness": 0,
+            "map": true,
+            "mapColorSpace": "srgb",
+            "normalMapColorSpace": ""
+          }
+        ]
+      },
+      {
+        "name": "Cube066",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 564,
+        "materials": [
+          {
+            "name": "oak",
+            "roughness": 1,
+            "metalness": 0,
+            "map": true,
+            "mapColorSpace": "srgb",
+            "normalMapColorSpace": ""
+          }
+        ]
+      },
+      {
+        "name": "Cube066_1",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 1504,
+        "materials": [
+          {
+            "name": "walnut",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube066_2",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 76,
+        "materials": [
+          {
+            "name": "brass",
+            "roughness": 0.33000001311302185,
+            "metalness": 0.8500000238418579,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube235",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 660,
+        "materials": [
+          {
+            "name": "teal",
+            "roughness": 0.6499999761581421,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube235_1",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 940,
+        "materials": [
+          {
+            "name": "paper",
+            "roughness": 0.9399999976158142,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube235_2",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 440,
+        "materials": [
+          {
+            "name": "brass",
+            "roughness": 0.33000001311302185,
+            "metalness": 0.8500000238418579,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "VIS_workshop_shelf",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 182,
+        "materials": [
+          {
+            "name": "Shelf_01",
+            "roughness": 1,
+            "metalness": 1,
+            "map": true,
+            "mapColorSpace": "srgb",
+            "normalMapColorSpace": ""
+          }
+        ]
+      }
+    ],
+    "resources": {
+      "drawCalls": 129,
+      "triangles": 137968,
+      "geometries": 84,
+      "textures": 23,
+      "programs": 13,
+      "labels": 4
+    },
+    "colliders": [
+      {
+        "id": "COL_atlas_desk",
+        "min": [
+          -1.550000011920929,
+          0,
+          3.7300001978874207
+        ],
+        "max": [
+          0.949999988079071,
+          0.8399999737739563,
+          4.370000183582306
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_cabinet",
+        "min": [
+          -1.8299999833106995,
+          0,
+          -4.805000007152557
+        ],
+        "max": [
+          -0.06999999284744263,
+          2.4000000953674316,
+          -3.6550000309944153
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_ceiling",
+        "min": [
+          -6.150000095367432,
+          3.8500000685453415,
+          -5.150000095367432
+        ],
+        "max": [
+          6.150000095367432,
+          4.010000064969063,
+          5.150000095367432
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": false
+      },
+      {
+        "id": "COL_door_leaf",
+        "min": [
+          -4.349999904632568,
+          0,
+          -5.135000169277191
+        ],
+        "max": [
+          -2.25,
+          2.8299999237060547,
+          -5.005000174045563
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_doorlintel",
+        "min": [
+          -4.399999976158142,
+          2.8000000715255737,
+          -5.180000007152557
+        ],
+        "max": [
+          -2.1999999284744263,
+          3.850000023841858,
+          -4.819999992847443
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_floor",
+        "min": [
+          -6,
+          -0.20000000298023224,
+          -5
+        ],
+        "max": [
+          6,
+          0,
+          5
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": false
+      },
+      {
+        "id": "COL_hearth",
+        "min": [
+          5.050000011920929,
+          0,
+          -1.2000000476837158
+        ],
+        "max": [
+          5.949999988079071,
+          1.600000023841858,
+          1.2000000476837158
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_journal_chair",
+        "min": [
+          1.8199999928474426,
+          0,
+          -2.6749999821186066
+        ],
+        "max": [
+          2.6800000071525574,
+          1.059999942779541,
+          -1.8849999606609344
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_journal_desk",
+        "min": [
+          1.1250001192092896,
+          0,
+          -4.049999892711639
+        ],
+        "max": [
+          3.1750000715255737,
+          0.8399999737739563,
+          -3.1499999165534973
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_loungechair",
+        "min": [
+          3.5500000417232513,
+          0,
+          -0.3399999961256981
+        ],
+        "max": [
+          4.35000005364418,
+          1.0800000429153442,
+          0.5399999991059303
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_north535",
+        "min": [
+          4.699999928474426,
+          0,
+          -5.180000007152557
+        ],
+        "max": [
+          5.9999998807907104,
+          3.8499999046325684,
+          -4.819999992847443
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_north-11",
+        "min": [
+          -2.399999976158142,
+          0,
+          -5.180000007152557
+        ],
+        "max": [
+          0.19999992847442627,
+          3.8499999046325684,
+          -4.819999992847443
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_north-52",
+        "min": [
+          -5.999999821186066,
+          0,
+          -5.180000007152557
+        ],
+        "max": [
+          -4.399999797344208,
+          3.8499999046325684,
+          -4.819999992847443
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_phone_back",
+        "min": [
+          4.0599998235702515,
+          0,
+          3.789999894797802
+        ],
+        "max": [
+          5.589999794960022,
+          2.75,
+          3.9299998953938484
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_phone_desk",
+        "min": [
+          4.124999821186066,
+          0,
+          3.169999986886978
+        ],
+        "max": [
+          5.524999797344208,
+          1.1399999856948853,
+          3.830000013113022
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_phone_glass412",
+        "min": [
+          4.1099998857825994,
+          0.800000011920929,
+          2.3899999260902405
+        ],
+        "max": [
+          4.129999885335565,
+          2.4300000071525574,
+          3.7899999022483826
+        ],
+        "player": true,
+        "camera": false,
+        "interaction": false
+      },
+      {
+        "id": "COL_phone_glass553",
+        "min": [
+          5.520000210031867,
+          0.800000011920929,
+          2.3899999260902405
+        ],
+        "max": [
+          5.540000209584832,
+          2.4300000071525574,
+          3.7899999022483826
+        ],
+        "player": true,
+        "camera": false,
+        "interaction": false
+      },
+      {
+        "id": "COL_phone_post412232",
+        "min": [
+          4.0599998869001865,
+          0,
+          2.2599999345839024
+        ],
+        "max": [
+          4.1799998842179775,
+          2.700000047683716,
+          2.3799999319016933
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_phone_post412387",
+        "min": [
+          4.0599998869001865,
+          0,
+          3.8099998869001865
+        ],
+        "max": [
+          4.1799998842179775,
+          2.700000047683716,
+          3.9299998842179775
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_phone_post553232",
+        "min": [
+          5.470000211149454,
+          0,
+          2.2599999345839024
+        ],
+        "max": [
+          5.590000208467245,
+          2.700000047683716,
+          2.3799999319016933
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_phone_post553387",
+        "min": [
+          5.470000211149454,
+          0,
+          3.8099998869001865
+        ],
+        "max": [
+          5.590000208467245,
+          2.700000047683716,
+          3.9299998842179775
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_side6",
+        "min": [
+          5.819999992847443,
+          0,
+          -5.150000095367432
+        ],
+        "max": [
+          6.180000007152557,
+          3.8499999046325684,
+          5.150000095367432
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_side-6",
+        "min": [
+          -6.180000007152557,
+          0,
+          -5.150000095367432
+        ],
+        "max": [
+          -5.819999992847443,
+          3.8499999046325684,
+          5.150000095367432
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_side_table",
+        "min": [
+          3.2700001001358032,
+          0,
+          1.059999942779541
+        ],
+        "max": [
+          3.9900001287460327,
+          0.6700000166893005,
+          1.7799999713897705
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_south",
+        "min": [
+          -6.150000095367432,
+          0,
+          4.819999992847443
+        ],
+        "max": [
+          6.150000095367432,
+          3.8499999046325684,
+          5.180000007152557
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_synthesis_desk",
+        "min": [
+          -5.525000095367432,
+          0,
+          -0.2749999761581421
+        ],
+        "max": [
+          -3.2750000953674316,
+          0.8399999737739563,
+          0.7749999761581421
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_window_glass",
+        "min": [
+          0.2999999523162842,
+          1.1200000047683716,
+          -5.029999999329448
+        ],
+        "max": [
+          4.700000047683716,
+          3.3000000715255737,
+          -4.970000000670552
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": false
+      },
+      {
+        "id": "COL_windowlintel",
+        "min": [
+          0.2999999523162842,
+          3.3000000417232513,
+          -5.180000007152557
+        ],
+        "max": [
+          4.700000047683716,
+          3.8500000536441803,
+          -4.819999992847443
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_windowsill",
+        "min": [
+          0.2999999523162842,
+          0,
+          -5.180000007152557
+        ],
+        "max": [
+          4.700000047683716,
+          1.1200000047683716,
+          -4.819999992847443
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_workshop_shelf",
+        "min": [
+          -5.744999900460243,
+          0,
+          -2.5049999952316284
+        ],
+        "max": [
+          -5.4549999088048935,
+          2.0999999046325684,
+          -1.4950000047683716
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      }
+    ],
+    "bounds": {
+      "minX": -5.82,
+      "maxX": 5.82,
+      "minZ": -4.91,
+      "maxZ": 4.82
+    },
+    "shadowEnabled": true,
+    "lights": [
+      {
+        "type": "HemisphereLight",
+        "castShadow": false,
+        "visible": true
+      },
+      {
+        "type": "AmbientLight",
+        "castShadow": false,
+        "visible": true
+      },
+      {
+        "type": "DirectionalLight",
+        "castShadow": true,
+        "visible": true
+      },
+      {
+        "type": "PointLight",
+        "castShadow": false,
+        "visible": true
+      },
+      {
+        "type": "PointLight",
+        "castShadow": false,
+        "visible": true
+      }
+    ],
+    "frameTimes": [
+      0.016700000000000274,
+      0.01659999999999991,
+      0.01669999999999982,
+      0.016700000000000274,
+      0.01659999999999991,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016700000000000274,
+      0.01659999999999991,
+      0.01669999999999982,
+      0.016700000000000274,
+      0.01659999999999991,
+      0.01659999999999991,
+      0.016800000000000183,
+      0.01659999999999991,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01659999999999991,
+      0.016700000000000274,
+      0.01669999999999982,
+      0.01659999999999991,
+      0.016700000000000274,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016700000000000274,
+      0.01659999999999991,
+      0.01669999999999982,
+      0.016700000000000274,
+      0.01659999999999991,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01659999999999991,
+      0.016700000000000274,
+      0.01669999999999982,
+      0.01659999999999991,
+      0.016700000000000274,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01659999999999991,
+      0.016700000000000274,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016700000000000274,
+      0.01659999999999991,
+      0.01659999999999991,
+      0.016700000000000274,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016700000000000274,
+      0.01659999999999991,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01659999999999991,
+      0.016700000000000274,
+      0.01659999999999991,
+      0.01679999999999973,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01659999999999991,
+      0.016700000000000274,
+      0.01669999999999982,
+      0.01659999999999991,
+      0.016700000000000274,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01659999999999991,
+      0.016700000000000274,
+      0.01659999999999991,
+      0.01669999999999982,
+      0.016700000000000274,
+      0.01659999999999991,
+      0.01669999999999982,
+      0.016700000000000274,
+      0.01659999999999991,
+      0.01669999999999982,
+      0.016700000000000274,
+      0.016599999999999455,
+      0.016700000000000728,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.016599999999999455,
+      0.016700000000000728,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.016599999999999455,
+      0.016700000000000728,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.016599999999999455,
+      0.01669999999999982,
+      0.016700000000000728,
+      0.01669999999999982,
+      0.016599999999999455,
+      0.016700000000000728,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.016599999999999455,
+      0.016700000000000728,
+      0.016599999999999455,
+      0.01669999999999982,
+      0.016700000000000728,
+      0.016599999999999455,
+      0.016800000000000183,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.016599999999999455,
+      0.016700000000000728,
+      0.016599999999999455,
+      0.016800000000000183,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.016599999999999455,
+      0.016700000000000728,
+      0.016599999999999455,
+      0.016800000000000183,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.016599999999999455,
+      0.016800000000000183,
+      0.016600000000000364,
+      0.016599999999999455,
+      0.016800000000000183,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.016599999999999455,
+      0.016700000000000728,
+      0.01669999999999982,
+      0.016599999999999455,
+      0.016700000000000728,
+      0.01669999999999982,
+      0.016599999999999455,
+      0.016700000000000728,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.0165,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016700000000000728,
+      0.016599999999999455,
+      0.01669999999999982,
+      0.016700000000000728,
+      0.016599999999999455,
+      0.01669999999999982,
+      0.016700000000000728,
+      0.01669999999999982,
+      0.016599999999999455,
+      0.016700000000000728,
+      0.01669999999999982,
+      0.016599999999999455,
+      0.016700000000000728,
+      0.016599999999999455,
+      0.01669999999999982,
+      0.016700000000000728,
+      0.016599999999999455,
+      0.016600000000000364,
+      0.016800000000000183,
+      0.016599999999999455,
+      0.01669999999999982,
+      0.016700000000000728,
+      0.016599999999999455,
+      0.01669999999999982,
+      0.016700000000000728,
+      0.016599999999999455,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016700000000000728,
+      0.016599999999999455,
+      0.01669999999999982,
+      0.016700000000000728,
+      0.016599999999999455,
+      0.01669999999999982,
+      0.016700000000000728,
+      0.016599999999999455,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.016800000000000183,
+      0.016599999999999455,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016700000000000728,
+      0.016599999999999455,
+      0.01669999999999982,
+      0.016700000000000728,
+      0.016599999999999455,
+      0.01669999999999982,
+      0.016700000000000728,
+      0.016599999999999455,
+      0.01669999999999982,
+      0.016700000000000728,
+      0.016599999999999455,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.016800000000000183,
+      0.016599999999999455,
+      0.01669999999999982,
+      0.016700000000000728,
+      0.016599999999999455,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.016800000000000183,
+      0.016599999999999455,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.016799999999999274,
+      0.016600000000000364,
+      0.016600000000000364,
+      0.016799999999999274,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.016799999999999274,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.016600000000000364,
+      0.016799999999999274,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.0165
+    ],
+    "frameTrace": [
+      [
+        190.2,
+        0.1,
+        0
+      ],
+      [
+        223.6,
+        33.400000000000006,
+        0
+      ],
+      [
+        240.3,
+        16.700000000000017,
+        0
+      ],
+      [
+        256.9,
+        16.599999999999966,
+        0
+      ],
+      [
+        273.6,
+        16.700000000000045,
+        0
+      ],
+      [
+        290.2,
+        16.599999999999966,
+        0
+      ],
+      [
+        356.9,
+        66.69999999999999,
+        0
+      ],
+      [
+        373.6,
+        16.700000000000045,
+        0
+      ],
+      [
+        390.3,
+        16.69999999999999,
+        0
+      ],
+      [
+        406.9,
+        16.599999999999966,
+        0
+      ],
+      [
+        706.9,
+        300,
+        0
+      ],
+      [
+        723.6,
+        16.700000000000045,
+        0
+      ],
+      [
+        740.3,
+        16.699999999999932,
+        0
+      ],
+      [
+        756.9,
+        16.600000000000023,
+        0
+      ],
+      [
+        773.6,
+        16.700000000000045,
+        0
+      ],
+      [
+        790.2,
+        16.600000000000023,
+        0
+      ],
+      [
+        806.9,
+        16.699999999999932,
+        0
+      ],
+      [
+        823.6,
+        16.700000000000045,
+        0
+      ],
+      [
+        840.3,
+        16.699999999999932,
+        0
+      ],
+      [
+        856.9,
+        16.600000000000023,
+        0
+      ],
+      [
+        873.6,
+        16.700000000000045,
+        0
+      ],
+      [
+        890.3,
+        16.699999999999932,
+        0
+      ],
+      [
+        906.9,
+        15.29999997615812,
+        0
+      ],
+      [
+        923.5,
+        16.600000000000023,
+        0
+      ],
+      [
+        940.2,
+        16.700000000000045,
+        0
+      ],
+      [
+        956.9,
+        16.699999999999932,
+        0
+      ],
+      [
+        973.6,
+        16.700000000000045,
+        0
+      ],
+      [
+        990.2,
+        16.600000000000023,
+        0
+      ],
+      [
+        1006.9,
+        16.699999999999932,
+        0
+      ],
+      [
+        1023.6,
+        16.700000000000045,
+        0
+      ],
+      [
+        1040.3,
+        16.699999999999932,
+        0
+      ],
+      [
+        1056.9,
+        16.600000000000136,
+        0
+      ],
+      [
+        1073.5,
+        16.59999999999991,
+        0
+      ],
+      [
+        1090.2,
+        16.700000000000045,
+        0
+      ],
+      [
+        1106.9,
+        16.700000000000045,
+        0
+      ],
+      [
+        1123.6,
+        16.699999999999818,
+        0
+      ],
+      [
+        1140.3,
+        16.700000000000045,
+        0
+      ],
+      [
+        1156.9,
+        16.600000000000136,
+        0
+      ],
+      [
+        1173.6,
+        16.699999999999818,
+        0
+      ],
+      [
+        1190.2,
+        16.600000000000136,
+        0
+      ],
+      [
+        1206.9,
+        16.700000000000045,
+        0
+      ],
+      [
+        1223.5,
+        16.59999999999991,
+        0
+      ],
+      [
+        1240.2,
+        16.700000000000045,
+        0
+      ],
+      [
+        1256.9,
+        16.700000000000045,
+        0
+      ],
+      [
+        1273.6,
+        16.699999999999818,
+        0
+      ],
+      [
+        1290.2,
+        16.600000000000136,
+        0
+      ],
+      [
+        1306.9,
+        16.700000000000045,
+        0
+      ],
+      [
+        1323.6,
+        16.699999999999818,
+        0
+      ],
+      [
+        1340.3,
+        16.700000000000045,
+        0
+      ],
+      [
+        1356.9,
+        16.600000000000136,
+        0
+      ],
+      [
+        1373.5,
+        16.59999999999991,
+        0
+      ],
+      [
+        1390.2,
+        16.700000000000045,
+        0
+      ],
+      [
+        1406.8,
+        16.59999999999991,
+        0
+      ],
+      [
+        1423.5,
+        16.700000000000045,
+        0
+      ],
+      [
+        1440.2,
+        16.700000000000045,
+        0
+      ],
+      [
+        1456.9,
+        16.700000000000045,
+        0
+      ],
+      [
+        1473.5,
+        16.59999999999991,
+        0
+      ],
+      [
+        1490.2,
+        16.700000000000045,
+        0
+      ],
+      [
+        1506.9,
+        16.700000000000045,
+        0
+      ],
+      [
+        1523.6,
+        16.699999999999818,
+        0
+      ],
+      [
+        1540.2,
+        16.600000000000136,
+        0
+      ],
+      [
+        1556.8,
+        16.59999999999991,
+        0
+      ],
+      [
+        1573.6,
+        16.799999999999955,
+        0
+      ],
+      [
+        1590.2,
+        16.600000000000136,
+        0
+      ],
+      [
+        1606.9,
+        16.700000000000045,
+        0
+      ],
+      [
+        1623.6,
+        16.699999999999818,
+        0
+      ],
+      [
+        1640.3,
+        16.700000000000045,
+        0
+      ],
+      [
+        1656.8,
+        16.5,
+        0
+      ],
+      [
+        1673.6,
+        16.799999999999955,
+        0
+      ],
+      [
+        1690.2,
+        16.600000000000136,
+        0
+      ],
+      [
+        1706.9,
+        16.700000000000045,
+        0
+      ],
+      [
+        1723.6,
+        16.699999999999818,
+        0
+      ],
+      [
+        1740.2,
+        16.600000000000136,
+        0
+      ],
+      [
+        1756.8,
+        16.59999999999991,
+        0
+      ],
+      [
+        1773.6,
+        16.799999999999955,
+        0
+      ],
+      [
+        1790.2,
+        16.600000000000136,
+        0
+      ],
+      [
+        1806.9,
+        16.700000000000045,
+        0
+      ],
+      [
+        1823.6,
+        16.699999999999818,
+        0
+      ],
+      [
+        1840.2,
+        16.600000000000136,
+        0
+      ],
+      [
+        1856.9,
+        16.700000000000045,
+        0
+      ],
+      [
+        1873.6,
+        16.699999999999818,
+        0
+      ],
+      [
+        1890.2,
+        16.600000000000136,
+        0
+      ],
+      [
+        1906.9,
+        16.700000000000045,
+        0
+      ],
+      [
+        1923.5,
+        16.59999999999991,
+        0
+      ],
+      [
+        2140.2,
+        216.69999999999982,
+        0
+      ],
+      [
+        2156.8,
+        16.600000000000364,
+        0
+      ],
+      [
+        2173.6,
+        16.799999999999727,
+        0
+      ],
+      [
+        2190.2,
+        16.59999999999991,
+        0
+      ],
+      [
+        2206.9,
+        16.700000000000273,
+        0
+      ],
+      [
+        2223.5,
+        16.59999999999991,
+        0
+      ],
+      [
+        2240.2,
+        16.699999999999818,
+        0
+      ],
+      [
+        2256.9,
+        16.700000000000273,
+        0
+      ],
+      [
+        2273.5,
+        16.59999999999991,
+        0
+      ],
+      [
+        2290.2,
+        16.699999999999818,
+        0
+      ],
+      [
+        2306.9,
+        16.700000000000273,
+        0
+      ],
+      [
+        2323.5,
+        16.59999999999991,
+        0
+      ],
+      [
+        2340.2,
+        16.699999999999818,
+        0
+      ],
+      [
+        2356.8,
+        16.600000000000364,
+        0
+      ],
+      [
+        2373.5,
+        16.699999999999818,
+        0
+      ],
+      [
+        2390.2,
+        16.699999999999818,
+        0
+      ],
+      [
+        2406.8,
+        16.600000000000364,
+        0
+      ],
+      [
+        2423.6,
+        16.799999999999727,
+        0
+      ],
+      [
+        2440.2,
+        16.59999999999991,
+        0
+      ],
+      [
+        2456.9,
+        16.700000000000273,
+        0
+      ],
+      [
+        2473.5,
+        16.59999999999991,
+        0
+      ],
+      [
+        2490.2,
+        16.699999999999818,
+        0
+      ],
+      [
+        2506.9,
+        16.700000000000273,
+        0
+      ],
+      [
+        2523.5,
+        16.59999999999991,
+        0
+      ],
+      [
+        2540.2,
+        16.699999999999818,
+        0
+      ],
+      [
+        2556.9,
+        16.700000000000273,
+        0
+      ],
+      [
+        2573.5,
+        16.59999999999991,
+        0
+      ],
+      [
+        2590.2,
+        16.699999999999818,
+        0
+      ],
+      [
+        2606.9,
+        16.700000000000273,
+        0
+      ],
+      [
+        2623.5,
+        16.59999999999991,
+        0
+      ],
+      [
+        2640.2,
+        16.699999999999818,
+        0
+      ],
+      [
+        2656.9,
+        16.700000000000273,
+        0
+      ],
+      [
+        2673.5,
+        16.59999999999991,
+        0
+      ],
+      [
+        2690.2,
+        16.699999999999818,
+        0
+      ],
+      [
+        2706.9,
+        16.700000000000273,
+        0
+      ],
+      [
+        2723.5,
+        16.59999999999991,
+        0
+      ],
+      [
+        2740.2,
+        16.699999999999818,
+        0
+      ],
+      [
+        2756.8,
+        16.600000000000364,
+        0
+      ],
+      [
+        2773.5,
+        16.699999999999818,
+        0
+      ],
+      [
+        2790.2,
+        16.699999999999818,
+        0
+      ],
+      [
+        2806.8,
+        16.600000000000364,
+        0
+      ],
+      [
+        2823.5,
+        16.699999999999818,
+        0
+      ],
+      [
+        2840.2,
+        16.699999999999818,
+        0
+      ],
+      [
+        2856.9,
+        16.700000000000273,
+        0
+      ],
+      [
+        2873.5,
+        16.59999999999991,
+        0
+      ],
+      [
+        2890.2,
+        16.699999999999818,
+        0
+      ],
+      [
+        2906.9,
+        16.700000000000273,
+        0
+      ],
+      [
+        2923.5,
+        16.59999999999991,
+        0
+      ],
+      [
+        2940.1,
+        16.59999999999991,
+        0
+      ],
+      [
+        2956.9,
+        16.800000000000182,
+        0
+      ],
+      [
+        2973.5,
+        16.59999999999991,
+        0
+      ],
+      [
+        2990.2,
+        16.699999999999818,
+        0
+      ],
+      [
+        3006.8,
+        16.600000000000364,
+        0
+      ],
+      [
+        3023.5,
+        16.699999999999818,
+        0
+      ],
+      [
+        3040.1,
+        16.59999999999991,
+        0
+      ],
+      [
+        3056.8,
+        16.700000000000273,
+        0
+      ],
+      [
+        3073.5,
+        16.699999999999818,
+        0
+      ],
+      [
+        3090.1,
+        16.59999999999991,
+        0
+      ],
+      [
+        3106.8,
+        16.700000000000273,
+        0
+      ],
+      [
+        3123.5,
+        16.699999999999818,
+        0
+      ],
+      [
+        3140.2,
+        16.699999999999818,
+        0
+      ],
+      [
+        3156.9,
+        16.700000000000273,
+        0
+      ],
+      [
+        3173.5,
+        16.59999999999991,
+        0
+      ],
+      [
+        3190.2,
+        16.699999999999818,
+        0
+      ],
+      [
+        3206.9,
+        16.700000000000273,
+        0
+      ],
+      [
+        3223.5,
+        16.59999999999991,
+        0
+      ],
+      [
+        3240.2,
+        16.699999999999818,
+        0
+      ],
+      [
+        3256.8,
+        16.600000000000364,
+        0
+      ],
+      [
+        3273.5,
+        16.699999999999818,
+        0
+      ],
+      [
+        3290.1,
+        16.59999999999991,
+        0
+      ],
+      [
+        3306.8,
+        16.700000000000273,
+        0
+      ],
+      [
+        3323.5,
+        16.699999999999818,
+        0
+      ],
+      [
+        3340.1,
+        16.59999999999991,
+        0
+      ],
+      [
+        3356.8,
+        16.700000000000273,
+        0
+      ],
+      [
+        3373.5,
+        16.699999999999818,
+        0
+      ],
+      [
+        3390.2,
+        16.699999999999818,
+        0
+      ],
+      [
+        3406.8,
+        16.600000000000364,
+        0
+      ],
+      [
+        3423.5,
+        16.699999999999818,
+        0
+      ],
+      [
+        3440.1,
+        16.59999999999991,
+        0
+      ],
+      [
+        3456.8,
+        16.700000000000273,
+        0
+      ],
+      [
+        3473.5,
+        16.699999999999818,
+        0
+      ],
+      [
+        3490.2,
+        16.699999999999818,
+        0
+      ],
+      [
+        3506.9,
+        16.700000000000273,
+        0
+      ],
+      [
+        3523.5,
+        16.59999999999991,
+        0
+      ],
+      [
+        3540.1,
+        16.59999999999991,
+        0
+      ],
+      [
+        3556.8,
+        16.700000000000273,
+        0
+      ],
+      [
+        3573.5,
+        16.699999999999818,
+        0
+      ],
+      [
+        3590.2,
+        16.699999999999818,
+        0
+      ],
+      [
+        3606.9,
+        16.700000000000273,
+        0
+      ],
+      [
+        3623.5,
+        16.59999999999991,
+        0
+      ],
+      [
+        3640.2,
+        16.699999999999818,
+        0
+      ],
+      [
+        3656.8,
+        16.600000000000364,
+        0
+      ],
+      [
+        3673.5,
+        16.699999999999818,
+        0
+      ],
+      [
+        3690.1,
+        16.59999999999991,
+        0
+      ],
+      [
+        3706.8,
+        16.700000000000273,
+        0
+      ],
+      [
+        3723.4,
+        16.59999999999991,
+        0
+      ],
+      [
+        3740.2,
+        16.799999999999727,
+        0
+      ],
+      [
+        3756.8,
+        16.600000000000364,
+        0
+      ],
+      [
+        3773.5,
+        16.699999999999818,
+        0
+      ],
+      [
+        3790.1,
+        16.59999999999991,
+        0
+      ],
+      [
+        3806.8,
+        16.700000000000273,
+        0
+      ],
+      [
+        3823.5,
+        16.699999999999818,
+        0
+      ],
+      [
+        3840.1,
+        16.59999999999991,
+        0
+      ],
+      [
+        3856.8,
+        16.700000000000273,
+        0
+      ],
+      [
+        3873.5,
+        16.699999999999818,
+        0
+      ],
+      [
+        3890.2,
+        16.699999999999818,
+        0
+      ],
+      [
+        3906.8,
+        16.600000000000364,
+        0
+      ],
+      [
+        3923.5,
+        16.699999999999818,
+        0
+      ],
+      [
+        3940.1,
+        16.59999999999991,
+        0
+      ],
+      [
+        3956.8,
+        16.700000000000273,
+        0
+      ],
+      [
+        3973.4,
+        16.59999999999991,
+        0
+      ],
+      [
+        3990.1,
+        16.699999999999818,
+        0
+      ],
+      [
+        4006.8,
+        16.700000000000273,
+        0
+      ],
+      [
+        4023.4,
+        16.59999999999991,
+        0
+      ],
+      [
+        4040.1,
+        16.699999999999818,
+        0
+      ],
+      [
+        4056.8,
+        16.700000000000273,
+        0
+      ],
+      [
+        4073.4,
+        16.59999999999991,
+        0
+      ],
+      [
+        4090.1,
+        16.699999999999818,
+        0
+      ],
+      [
+        4106.8,
+        16.700000000000273,
+        0
+      ],
+      [
+        4123.4,
+        16.599999999999454,
+        0
+      ],
+      [
+        4140.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        4156.8,
+        16.699999999999818,
+        0
+      ],
+      [
+        4173.5,
+        16.699999999999818,
+        0
+      ],
+      [
+        4190.1,
+        16.600000000000364,
+        0
+      ],
+      [
+        4206.8,
+        16.699999999999818,
+        0
+      ],
+      [
+        4223.4,
+        16.599999999999454,
+        0
+      ],
+      [
+        4240.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        4256.8,
+        16.699999999999818,
+        0
+      ],
+      [
+        4273.5,
+        16.699999999999818,
+        0
+      ],
+      [
+        4290.1,
+        16.600000000000364,
+        0
+      ],
+      [
+        4306.8,
+        16.699999999999818,
+        0
+      ],
+      [
+        4323.4,
+        16.599999999999454,
+        0
+      ],
+      [
+        4340.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        4356.8,
+        16.699999999999818,
+        0
+      ],
+      [
+        4373.5,
+        16.699999999999818,
+        0
+      ],
+      [
+        4390.1,
+        16.600000000000364,
+        0
+      ],
+      [
+        4406.7,
+        16.599999999999454,
+        0
+      ],
+      [
+        4423.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        4440.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        4456.8,
+        16.699999999999818,
+        0
+      ],
+      [
+        4473.4,
+        16.599999999999454,
+        0
+      ],
+      [
+        4490.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        4506.8,
+        16.699999999999818,
+        0
+      ],
+      [
+        4523.5,
+        16.699999999999818,
+        0
+      ],
+      [
+        4540.1,
+        16.600000000000364,
+        0
+      ],
+      [
+        4556.8,
+        16.699999999999818,
+        0
+      ],
+      [
+        4573.4,
+        16.599999999999454,
+        0
+      ],
+      [
+        4590.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        4606.7,
+        16.599999999999454,
+        0
+      ],
+      [
+        4623.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        4640.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        4656.7,
+        16.599999999999454,
+        0
+      ],
+      [
+        4673.5,
+        16.800000000000182,
+        0
+      ],
+      [
+        4690.1,
+        16.600000000000364,
+        0
+      ],
+      [
+        4706.8,
+        16.699999999999818,
+        0
+      ],
+      [
+        4723.4,
+        16.599999999999454,
+        0
+      ],
+      [
+        4740.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        4756.7,
+        16.599999999999454,
+        0
+      ],
+      [
+        4773.5,
+        16.800000000000182,
+        0
+      ],
+      [
+        4790.1,
+        16.600000000000364,
+        0
+      ],
+      [
+        4806.8,
+        16.699999999999818,
+        0
+      ],
+      [
+        4823.4,
+        16.599999999999454,
+        0
+      ],
+      [
+        4840.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        4856.7,
+        16.599999999999454,
+        0
+      ],
+      [
+        4873.5,
+        16.800000000000182,
+        0
+      ],
+      [
+        4890.1,
+        16.600000000000364,
+        0
+      ],
+      [
+        4906.8,
+        16.699999999999818,
+        0
+      ],
+      [
+        4923.5,
+        16.699999999999818,
+        0
+      ],
+      [
+        4940.1,
+        16.600000000000364,
+        0
+      ],
+      [
+        4956.7,
+        16.599999999999454,
+        0
+      ],
+      [
+        4973.5,
+        16.800000000000182,
+        0
+      ],
+      [
+        4990.1,
+        16.600000000000364,
+        0
+      ],
+      [
+        5006.7,
+        16.599999999999454,
+        0
+      ],
+      [
+        5023.5,
+        16.800000000000182,
+        0
+      ],
+      [
+        5040.1,
+        16.600000000000364,
+        0
+      ],
+      [
+        5056.8,
+        16.699999999999818,
+        0
+      ],
+      [
+        5073.4,
+        16.599999999999454,
+        0
+      ],
+      [
+        5090.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        5106.8,
+        16.699999999999818,
+        0
+      ],
+      [
+        5123.4,
+        16.599999999999454,
+        0
+      ],
+      [
+        5140.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        5156.8,
+        16.699999999999818,
+        0
+      ],
+      [
+        5173.4,
+        16.599999999999454,
+        0
+      ],
+      [
+        5190.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        5206.8,
+        16.699999999999818,
+        0
+      ],
+      [
+        5223.5,
+        16.699999999999818,
+        0
+      ],
+      [
+        5240,
+        16.5,
+        0
+      ],
+      [
+        5256.7,
+        16.699999999999818,
+        0
+      ],
+      [
+        5273.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        5290,
+        16.600000000000364,
+        0
+      ],
+      [
+        5306.7,
+        16.699999999999818,
+        0
+      ],
+      [
+        5323.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        5340.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        5356.7,
+        16.599999999999454,
+        0
+      ],
+      [
+        5373.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        5390.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        5406.7,
+        16.599999999999454,
+        0
+      ],
+      [
+        5423.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        5440.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        5456.8,
+        16.699999999999818,
+        0
+      ],
+      [
+        5473.4,
+        16.599999999999454,
+        0
+      ],
+      [
+        5490.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        5506.8,
+        16.699999999999818,
+        0
+      ],
+      [
+        5523.4,
+        16.599999999999454,
+        0
+      ],
+      [
+        5540.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        5556.7,
+        16.599999999999454,
+        0
+      ],
+      [
+        5573.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        5590.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        5606.7,
+        16.599999999999454,
+        0
+      ],
+      [
+        5623.3,
+        16.600000000000364,
+        0
+      ],
+      [
+        5640.1,
+        16.800000000000182,
+        0
+      ],
+      [
+        5656.7,
+        16.599999999999454,
+        0
+      ],
+      [
+        5673.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        5690.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        5706.7,
+        16.599999999999454,
+        0
+      ],
+      [
+        5723.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        5740.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        5756.7,
+        16.599999999999454,
+        0
+      ],
+      [
+        5773.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        5790,
+        16.600000000000364,
+        0
+      ],
+      [
+        5806.7,
+        16.699999999999818,
+        0
+      ],
+      [
+        5823.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        5840.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        5856.7,
+        16.599999999999454,
+        0
+      ],
+      [
+        5873.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        5890.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        5906.7,
+        16.599999999999454,
+        0
+      ],
+      [
+        5923.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        5940.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        5956.7,
+        16.599999999999454,
+        0
+      ],
+      [
+        5973.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        5990,
+        16.600000000000364,
+        0
+      ],
+      [
+        6006.7,
+        16.699999999999818,
+        0
+      ],
+      [
+        6023.3,
+        16.600000000000364,
+        0
+      ],
+      [
+        6040.1,
+        16.800000000000182,
+        0
+      ],
+      [
+        6056.7,
+        16.599999999999454,
+        0
+      ],
+      [
+        6073.3,
+        16.600000000000364,
+        0
+      ],
+      [
+        6090,
+        16.699999999999818,
+        0
+      ],
+      [
+        6106.7,
+        16.699999999999818,
+        0
+      ],
+      [
+        6123.3,
+        16.600000000000364,
+        0
+      ],
+      [
+        6140,
+        16.699999999999818,
+        0
+      ],
+      [
+        6156.7,
+        16.699999999999818,
+        0
+      ],
+      [
+        6173.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        6190.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        6206.7,
+        16.599999999999454,
+        0
+      ],
+      [
+        6223.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        6240.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        6256.7,
+        16.599999999999454,
+        0
+      ],
+      [
+        6273.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        6290.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        6306.7,
+        16.599999999999454,
+        0
+      ],
+      [
+        6323.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        6340.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        6356.7,
+        16.599999999999454,
+        0
+      ],
+      [
+        6373.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        6390,
+        16.600000000000364,
+        0
+      ],
+      [
+        6406.7,
+        16.699999999999818,
+        0
+      ],
+      [
+        6423.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        6440,
+        16.600000000000364,
+        0
+      ],
+      [
+        6456.6,
+        16.600000000000364,
+        0
+      ],
+      [
+        6473.3,
+        16.699999999999818,
+        0
+      ],
+      [
+        6490,
+        16.699999999999818,
+        0
+      ],
+      [
+        6506.7,
+        16.699999999999818,
+        0
+      ],
+      [
+        6523.3,
+        16.600000000000364,
+        0
+      ],
+      [
+        6540.1,
+        16.800000000000182,
+        0
+      ],
+      [
+        6556.7,
+        16.599999999999454,
+        0
+      ],
+      [
+        6573.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        6590.1,
+        16.700000000000728,
+        0
+      ],
+      [
+        6606.7,
+        16.599999999999454,
+        0
+      ],
+      [
+        6623.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        6640,
+        16.600000000000364,
+        0
+      ],
+      [
+        6656.7,
+        16.699999999999818,
+        0
+      ],
+      [
+        6673.3,
+        16.600000000000364,
+        0
+      ],
+      [
+        6690,
+        16.699999999999818,
+        0
+      ],
+      [
+        6706.7,
+        16.699999999999818,
+        0
+      ],
+      [
+        6723.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        6740,
+        16.600000000000364,
+        0
+      ],
+      [
+        6756.7,
+        16.699999999999818,
+        0
+      ],
+      [
+        6773.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        6790,
+        16.600000000000364,
+        0
+      ],
+      [
+        6806.7,
+        16.699999999999818,
+        0
+      ],
+      [
+        6823.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        6840,
+        16.600000000000364,
+        0
+      ],
+      [
+        6856.7,
+        16.699999999999818,
+        0
+      ],
+      [
+        6873.3,
+        16.600000000000364,
+        0
+      ],
+      [
+        6890,
+        16.699999999999818,
+        0
+      ],
+      [
+        6906.7,
+        16.699999999999818,
+        0
+      ],
+      [
+        6923.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        6940,
+        16.600000000000364,
+        0
+      ],
+      [
+        6956.7,
+        16.699999999999818,
+        0
+      ],
+      [
+        6973.3,
+        16.600000000000364,
+        0
+      ],
+      [
+        6990.1,
+        16.800000000000182,
+        0
+      ],
+      [
+        7006.7,
+        16.599999999999454,
+        0
+      ],
+      [
+        7023.3,
+        16.600000000000364,
+        0
+      ],
+      [
+        7040,
+        16.699999999999818,
+        0
+      ],
+      [
+        7056.6,
+        16.600000000000364,
+        0
+      ],
+      [
+        7073.4,
+        16.799999999999272,
+        0
+      ],
+      [
+        7090,
+        16.600000000000364,
+        0
+      ],
+      [
+        7106.6,
+        16.600000000000364,
+        0
+      ],
+      [
+        7123.4,
+        16.799999999999272,
+        0
+      ],
+      [
+        7140,
+        16.600000000000364,
+        0
+      ],
+      [
+        7156.7,
+        16.699999999999818,
+        0
+      ],
+      [
+        7173.3,
+        16.600000000000364,
+        0
+      ],
+      [
+        7190,
+        16.699999999999818,
+        0
+      ],
+      [
+        7206.6,
+        16.600000000000364,
+        0
+      ],
+      [
+        7223.4,
+        16.799999999999272,
+        0
+      ],
+      [
+        7240,
+        16.600000000000364,
+        0
+      ],
+      [
+        7256.7,
+        16.699999999999818,
+        0
+      ],
+      [
+        7273.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        7290,
+        16.600000000000364,
+        0
+      ],
+      [
+        7306.6,
+        16.600000000000364,
+        0
+      ],
+      [
+        7323.4,
+        16.799999999999272,
+        0
+      ],
+      [
+        7340,
+        16.600000000000364,
+        0
+      ],
+      [
+        7356.7,
+        16.699999999999818,
+        0
+      ],
+      [
+        7373.3,
+        16.600000000000364,
+        0
+      ],
+      [
+        7390,
+        16.699999999999818,
+        0
+      ],
+      [
+        7406.6,
+        16.600000000000364,
+        0
+      ],
+      [
+        7423.3,
+        16.699999999999818,
+        0
+      ],
+      [
+        7440,
+        16.699999999999818,
+        0
+      ],
+      [
+        7456.7,
+        16.699999999999818,
+        0
+      ],
+      [
+        7473.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        7490,
+        16.600000000000364,
+        0
+      ],
+      [
+        7506.6,
+        16.600000000000364,
+        0
+      ],
+      [
+        7523.3,
+        16.699999999999818,
+        0
+      ],
+      [
+        7540,
+        16.699999999999818,
+        0
+      ],
+      [
+        7556.7,
+        16.699999999999818,
+        0
+      ],
+      [
+        7573.3,
+        16.600000000000364,
+        0
+      ],
+      [
+        7590,
+        16.699999999999818,
+        0
+      ],
+      [
+        7606.7,
+        16.699999999999818,
+        0
+      ],
+      [
+        7623.4,
+        16.699999999999818,
+        0
+      ],
+      [
+        7639.9,
+        16.5,
+        0
+      ]
+    ],
+    "canvasCount": 1,
+    "hasFocus": true,
+    "controlMode": null,
+    "visibility": "visible"
+  },
+  "browser": "152.0.7977.83",
+  "errors": [],
+  "views": {
+    "spawn": {
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0.65
+      },
+      "yaw": 0,
+      "pitch": 0.2,
+      "distance": 3.8
+    },
+    "diagonal": {
+      "position": {
+        "x": 0.3,
+        "y": 0,
+        "z": 0.1
+      },
+      "yaw": 0.64,
+      "pitch": 0.28,
+      "distance": 5.5
+    },
+    "reading": {
+      "position": {
+        "x": 2.4,
+        "y": 0,
+        "z": -1.0
+      },
+      "yaw": 0.55,
+      "pitch": 0.05,
+      "distance": 2.3
+    },
+    "cabinet": {
+      "position": {
+        "x": -0.7,
+        "y": 0,
+        "z": -2.1
+      },
+      "yaw": -0.08,
+      "pitch": 0.1,
+      "distance": 2.6
+    },
+    "synthesis": {
+      "position": {
+        "x": -3.7,
+        "y": 0,
+        "z": 1.7
+      },
+      "yaw": 0.25,
+      "pitch": 0.14,
+      "distance": 2.5
+    },
+    "phone": {
+      "position": {
+        "x": 3.7,
+        "y": 0,
+        "z": 1.6
+      },
+      "yaw": -2.5,
+      "pitch": 0.13,
+      "distance": 2.4
+    },
+    "hearth": {
+      "position": {
+        "x": 2.5,
+        "y": 0,
+        "z": 0.4
+      },
+      "yaw": -1.4,
+      "pitch": 0.05,
+      "distance": 2.6
+    }
+  }
+}

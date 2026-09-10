@@ -1,0 +1,13 @@
+{
+  "source": "https://github.com/openai/plugins/tree/main/plugins/game-studio",
+  "version": "0.1.2",
+  "acquired": "2026-09-10 Asia/Shanghai",
+  "archiveSHA256": "5b7df35bb7ce2bdfec072d36340c3ba60a80e8206f2a17b1b3f25822f8977507",
+  "usedSkills": [
+    "three-webgl-game",
+    "web-3d-asset-pipeline",
+    "game-ui-frontend",
+    "game-playtest"
+  ],
+  "status": "Read from official source; not installed as an account plugin; metadata declares MIT"
+}

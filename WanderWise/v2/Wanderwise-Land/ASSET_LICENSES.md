@@ -1,3 +1,9 @@
+# 当前写实小屋资产（1.2.0）
+
+Poly Haven：Arm Chair 01、Gothic Cabinet 01、Shelf 01、Wood Floor、Plastered Wall 02，CC0。作者、原文件、获取时间与 SHA-256 见 `assets-source/polyhaven/manifest.json` 和 `docs/realistic-home/ASSETS.md`。新增建筑、定制设施、布料法线及可复现脚本为本项目 MIT。Rapier 0.19.3 为 Apache-2.0，许可随 `frontend/vendor/rapier/LICENSE` 提供。Three.js 0.186.0 为 MIT。旧 KayKit 文件仅保留供旧版本/回滚，不是当前小屋加载资产。
+
+以下保留历史版本的许可说明。
+
 ---
 title: "素材、来源与许可清单"
 date: 2026-09-09

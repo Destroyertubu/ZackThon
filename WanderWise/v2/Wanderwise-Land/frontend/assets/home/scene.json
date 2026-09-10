@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "stage": "full",
-  "model": "/static/assets/home/home-full.glb",
+  "stage": "realistic-full",
+  "model": "/static/assets/home/home-realistic-full.glb",
   "bounds": {
     "minX": -5.82,
     "maxX": 5.82,

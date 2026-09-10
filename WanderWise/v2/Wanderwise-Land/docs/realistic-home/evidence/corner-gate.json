@@ -1,0 +1,78 @@
+{
+  "checks": [
+    "Real GLB PBR textures have separate color/data semantics; runtime shadows enabled",
+    "Actual keyboard movement, capsule obstacle stop, jump and landing",
+    "Nearby cabinet click opens original bag and isolates panel input"
+  ],
+  "errors": [],
+  "browser": "152.0.7977.83",
+  "actualMovement": {
+    "page": "home",
+    "renderer": "three-webgl2",
+    "sceneState": "ready",
+    "sceneKind": "home",
+    "sceneStage": "realistic-corner",
+    "eye": [
+      -0.9500402612103384,
+      1.48164108922169,
+      -0.3452420685481594
+    ],
+    "target": "cabinet",
+    "active": true,
+    "facilities": [
+      {
+        "id": "cabinet",
+        "position": {
+          "x": -0.949999988079071,
+          "y": 1.649999976158142,
+          "z": -3.549999952316284
+        }
+      },
+      {
+        "id": "door",
+        "position": {
+          "x": -3.299999952316284,
+          "y": 1.5,
+          "z": -4.550000190734863
+        }
+      },
+      {
+        "id": "journal",
+        "position": {
+          "x": 2.1500000953674316,
+          "y": 1.2000000476837158,
+          "z": -2.9000000953674316
+        }
+      }
+    ],
+    "assetBytes": 9994424,
+    "position": {
+      "x": -0.9500377468464734,
+      "y": 0.0022516774370586745,
+      "z": -3.362900080746681,
+      "yaw": -0.0
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0.1,
+      "distance": 3
+    },
+    "metrics": {
+      "drawCalls": 94,
+      "triangles": 160444,
+      "geometries": 49,
+      "textures": 21,
+      "programs": 11,
+      "labels": 2,
+      "fps": 9,
+      "medianFps": 59.9,
+      "p95ms": 1166.6,
+      "rawFrameMs": 1166.6
+    },
+    "pending": 0,
+    "worldVersion": null,
+    "nodeCount": null,
+    "modal": null
+  },
+  "jumpY": 0.5483349489405072
+}

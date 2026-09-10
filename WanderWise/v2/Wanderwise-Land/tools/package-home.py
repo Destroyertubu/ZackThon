@@ -15,7 +15,7 @@ for folder in ['frontend','backend','cloud','netlify','demo-data','contracts','d
   if any(x in ['__pycache__','node_modules','.netlify','input','.pytest_cache'] for x in rel.parts):continue
   if p.suffix in ['.pyc','.blend1','.blend2','.log','.secret','.local'] or '.env' in p.name and not p.name.endswith('.example'):continue
   if p.name.endswith(('.sqlite3','.sqlite3-wal','.sqlite3-shm')):continue
-  if 'evidence' in rel.parts and (p.name=='failure.png' or p.name.startswith(('corner-first','full-','acceptance-failure'))):continue
+  if 'evidence' in rel.parts and (p.name=='failure.png' or p.name.startswith(('corner-first','acceptance-failure')) or ('home-upgrade' in rel.parts and p.name.startswith('full-'))):continue
   files[rel.as_posix()]=p
 backup=ROOT.parent/'rollback-before-home-upgrade/wanderwise-v2-before-home.tar.gz'
 if backup.exists():
@@ -27,6 +27,11 @@ if roaming_backup.exists():
  expected=json.loads((ROOT/'docs/roaming-update/BASELINE.json').read_text())['sha256']
  if hashlib.sha256(roaming_backup.read_bytes()).hexdigest()!=expected:raise SystemExit('Unexpected roaming backup hash')
  files['rollback/frontend-before-roaming.tar.gz']=roaming_backup
+realistic_backup=ROOT.parent/'rollback-before-realistic-home.tar'
+if realistic_backup.exists():
+ expected=json.loads((ROOT/'docs/realistic-home/BASELINE.json').read_text())['sha256']
+ if hashlib.sha256(realistic_backup.read_bytes()).hexdigest()!=expected:raise SystemExit('Unexpected realistic backup hash')
+ files['rollback/before-realistic-home.tar']=realistic_backup
 manifest={'version':(ROOT/'VERSION').read_text().strip(),'createdAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'purpose':'Local home upgrade, not deployed; no user data or credentials','files':[{'file':name,'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for name,p in sorted(files.items())]}
 (ROOT/'MANIFEST.home.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2))
 files['MANIFEST.home.json']=ROOT/'MANIFEST.home.json';A.output.parent.mkdir(parents=True,exist_ok=True)

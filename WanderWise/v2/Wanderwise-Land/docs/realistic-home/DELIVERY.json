@@ -1,0 +1,19 @@
+{
+  "version": "1.2.0-realistic-home",
+  "status": "local_implemented_and_browser_tested",
+  "publicDeployment": "not_performed",
+  "sourceBranch": "v2",
+  "runtimePackage": {
+    "file": "/Users/gauss/Desktop/SuperTechMagician/SolarMaster/ZackThon/WanderWise/v2/Wanderwise_Realistic_Home_Runtime_20260910.zip",
+    "files": 57,
+    "bytes": 8094675,
+    "sha256": "a1026659538395434377317be65091b0443d9e0f1da4322243f04986bc4cfca0"
+  },
+  "modelSHA256": "d32d06525bc40a81935557a3a58088cf7a6465adb6e0fec10bc2171db63f03a9",
+  "acceptanceStatus": "passed",
+  "report": "TEST_REPORT.md",
+  "screenshots": "GALLERY.md",
+  "sourceScene": "../../assets-source/home-realistic-full.blend",
+  "buildScript": "../../tools/build-realistic-home.py",
+  "rollback": "BASELINE.json"
+}

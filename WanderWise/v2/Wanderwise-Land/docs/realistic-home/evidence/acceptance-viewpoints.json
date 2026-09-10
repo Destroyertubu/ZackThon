@@ -1,0 +1,202 @@
+{
+  "facility-cabinet": {
+    "position": {
+      "x": -0.76,
+      "y": 0,
+      "z": -1.5
+    },
+    "yaw": 0.09241889671008204,
+    "pitch": 0,
+    "distance": 3.3
+  },
+  "facility-synthesis": {
+    "position": {
+      "x": -2.35,
+      "y": 0,
+      "z": 0.95
+    },
+    "yaw": 1.5951817348336386,
+    "pitch": 0,
+    "distance": 3.3
+  },
+  "facility-journal": {
+    "position": {
+      "x": 1.05,
+      "y": 0,
+      "z": -1.55
+    },
+    "yaw": -0.6837093194964837,
+    "pitch": 0,
+    "distance": 3.3
+  },
+  "facility-phone": {
+    "position": {
+      "x": 3.2,
+      "y": 0,
+      "z": 1.1
+    },
+    "yaw": -2.2379874941110818,
+    "pitch": 0,
+    "distance": 3.3
+  },
+  "facility-door": {
+    "position": {
+      "x": -3.2,
+      "y": 0,
+      "z": -2.5
+    },
+    "yaw": 0.04874182357697173,
+    "pitch": 0,
+    "distance": 3.3
+  },
+  "near-quote": {
+    "position": {
+      "x": -1.8,
+      "y": 0,
+      "z": -1.7000000000000002
+    },
+    "yaw": 0,
+    "pitch": 0,
+    "distance": 3.8
+  },
+  "anchor": {
+    "position": {
+      "x": -1.8,
+      "y": 0,
+      "z": -1.7000000000000002
+    },
+    "yaw": 0,
+    "pitch": 0,
+    "distance": 3.8
+  },
+  "behind-phone": {
+    "position": {
+      "x": 4.8,
+      "y": 0,
+      "z": 4.4
+    },
+    "yaw": 0,
+    "pitch": 0,
+    "distance": 2
+  },
+  "near-wall-0": {
+    "position": {
+      "x": -5.4,
+      "y": 0,
+      "z": -2.45
+    },
+    "yaw": 0.0,
+    "pitch": 0,
+    "distance": 4
+  },
+  "near-wall-1": {
+    "position": {
+      "x": -5.4,
+      "y": 0,
+      "z": -2.45
+    },
+    "yaw": 0.7853981633974483,
+    "pitch": 0,
+    "distance": 4
+  },
+  "near-wall-2": {
+    "position": {
+      "x": -5.4,
+      "y": 0,
+      "z": -2.45
+    },
+    "yaw": 1.5707963267948966,
+    "pitch": 0,
+    "distance": 4
+  },
+  "near-wall-3": {
+    "position": {
+      "x": -5.4,
+      "y": 0,
+      "z": -2.45
+    },
+    "yaw": 2.356194490192345,
+    "pitch": 0,
+    "distance": 4
+  },
+  "near-wall-4": {
+    "position": {
+      "x": -5.4,
+      "y": 0,
+      "z": -2.45
+    },
+    "yaw": 3.141592653589793,
+    "pitch": 0,
+    "distance": 4
+  },
+  "near-wall-5": {
+    "position": {
+      "x": -5.4,
+      "y": 0,
+      "z": -2.45
+    },
+    "yaw": 3.9269908169872414,
+    "pitch": 0,
+    "distance": 4
+  },
+  "near-wall-6": {
+    "position": {
+      "x": -5.4,
+      "y": 0,
+      "z": -2.45
+    },
+    "yaw": 4.71238898038469,
+    "pitch": 0,
+    "distance": 4
+  },
+  "near-wall-7": {
+    "position": {
+      "x": -5.4,
+      "y": 0,
+      "z": -2.45
+    },
+    "yaw": 5.497787143782138,
+    "pitch": 0,
+    "distance": 4
+  },
+  "final-diagonal": {
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "yaw": -0.85,
+    "pitch": 0.33,
+    "distance": 6
+  },
+  "final-window-detail": {
+    "position": {
+      "x": 1.1,
+      "y": 0,
+      "z": -1.1
+    },
+    "yaw": -0.38,
+    "pitch": 0.12,
+    "distance": 3.8
+  },
+  "final-hearth-detail": {
+    "position": {
+      "x": 3,
+      "y": 0,
+      "z": 1.4
+    },
+    "yaw": -1.2,
+    "pitch": 0.2,
+    "distance": 4
+  },
+  "soak": {
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0.65
+    },
+    "yaw": 0,
+    "pitch": 0.22,
+    "distance": 3.8
+  }
+}
