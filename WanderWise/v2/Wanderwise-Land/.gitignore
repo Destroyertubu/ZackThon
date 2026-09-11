@@ -18,3 +18,7 @@ official-skill-local/
 deploy/cloud.env
 dist/
 .netlify/
+# Blender automatic save backups are not release assets.
+*.blend1
+*.blend2
+releases/

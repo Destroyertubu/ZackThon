@@ -1,0 +1,242 @@
+[
+  {
+    "id": "ArmChair_01",
+    "author": {
+      "Kirill Sannikov": "All"
+    },
+    "officialSource": "https://polyhaven.com/a/ArmChair_01",
+    "version": 1585605600,
+    "resolution": "2k",
+    "retrievedAt": "2026-09-09T18:26:47.856506+00:00",
+    "license": "CC0-1.0",
+    "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "files": [
+      {
+        "file": "assets-source/polyhaven/ArmChair_01/textures/Armchair_01_nor_gl_2k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/ArmChair_01/Armchair_01_nor_gl_2k.jpg",
+        "bytes": 1482566,
+        "sha256": "0bce11bc21a3259e13429e65bedc1cf28d2a672fc6dde6dc86f45e8b8f8a9af4"
+      },
+      {
+        "file": "assets-source/polyhaven/ArmChair_01/ArmChair_01.bin",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/ArmChair_01/ArmChair_01.bin",
+        "bytes": 154012,
+        "sha256": "42a4206ea8bb3f7c3c1500ca3e408e084e8687cd3cc9cbf095b3344e215e0db6"
+      },
+      {
+        "file": "assets-source/polyhaven/ArmChair_01/textures/Armchair_01_diff_2k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/ArmChair_01/Armchair_01_diff_2k.jpg",
+        "bytes": 723200,
+        "sha256": "d45d6f6328a924b5099deb7ed88023ab066128a376ee2d16f48149872cec47de"
+      },
+      {
+        "file": "assets-source/polyhaven/ArmChair_01/textures/Armchair_01_arm_2k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/2k/ArmChair_01/Armchair_01_arm_2k.jpg",
+        "bytes": 442886,
+        "sha256": "9f5011595cfc5ba523ac385b0bf978c5e455dcf9f9fb6f53d4bfcb4159224e39"
+      },
+      {
+        "file": "assets-source/polyhaven/ArmChair_01/ArmChair_01_2k.gltf",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/2k/ArmChair_01/ArmChair_01_2k.gltf",
+        "bytes": 2643,
+        "sha256": "fef57c24069f77767605f865332cb6b4bfa4b78352b230ce75ee66ed5566a9eb"
+      }
+    ],
+    "modifications": "Sources unchanged. Derived Blender scene normalizes transforms and packs PBR maps; see build script.",
+    "distribution": "CC0 source files plus embedded images in runtime GLB"
+  },
+  {
+    "id": "GothicCabinet_01",
+    "author": {
+      "Kirill Sannikov": "All"
+    },
+    "officialSource": "https://polyhaven.com/a/GothicCabinet_01",
+    "version": 1585605600,
+    "resolution": "1k",
+    "retrievedAt": "2026-09-09T18:26:46.284459+00:00",
+    "license": "CC0-1.0",
+    "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "files": [
+      {
+        "file": "assets-source/polyhaven/GothicCabinet_01/GothicCabinet_01.bin",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/GothicCabinet_01/GothicCabinet_01.bin",
+        "bytes": 486532,
+        "sha256": "f1019b130872cad82d5bf5e27528a980fabbd69a9128340e5eb7530ea2d7c17b"
+      },
+      {
+        "file": "assets-source/polyhaven/GothicCabinet_01/textures/GothicCabinet_01_nor_gl_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/GothicCabinet_01/GothicCabinet_01_nor_gl_1k.jpg",
+        "bytes": 169970,
+        "sha256": "8c413ff4acbc3b4c7b58cb08e9a921f1781817a24533e0e9af6880ef40bfd68c"
+      },
+      {
+        "file": "assets-source/polyhaven/GothicCabinet_01/textures/GothicCabinet_01_diff_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/GothicCabinet_01/GothicCabinet_01_diff_1k.jpg",
+        "bytes": 136344,
+        "sha256": "9b9586d9a840045d3f27ea4237ec56d713212fb877aceb2d0fc1cb75c7d59b98"
+      },
+      {
+        "file": "assets-source/polyhaven/GothicCabinet_01/textures/GothicCabinet_01_arm_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/GothicCabinet_01/GothicCabinet_01_arm_1k.jpg",
+        "bytes": 213632,
+        "sha256": "46b4a66b23836d37d5771ec024abfdc935c7b2bb17d73e2d802abca37edb6994"
+      },
+      {
+        "file": "assets-source/polyhaven/GothicCabinet_01/GothicCabinet_01_1k.gltf",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/GothicCabinet_01/GothicCabinet_01_1k.gltf",
+        "bytes": 8968,
+        "sha256": "1b3506f78e263c66e90d4a84b9efa883fe0bb02a13ff8ead2b3a265024e045ce"
+      }
+    ],
+    "modifications": "Sources unchanged. Derived Blender scene normalizes transforms and packs PBR maps; see build script.",
+    "distribution": "CC0 source files plus embedded images in runtime GLB"
+  },
+  {
+    "id": "Shelf_01",
+    "author": {
+      "Gabriel Radi\u0107": "All"
+    },
+    "officialSource": "https://polyhaven.com/a/Shelf_01",
+    "version": 1585605600,
+    "resolution": "1k",
+    "retrievedAt": "2026-09-09T18:26:45.239412+00:00",
+    "license": "CC0-1.0",
+    "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "files": [
+      {
+        "file": "assets-source/polyhaven/Shelf_01/textures/Shelf_01_diff_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/Shelf_01/Shelf_01_diff_1k.jpg",
+        "bytes": 153220,
+        "sha256": "875bb8110dec4f409d9127cba95f7c0ead02bdfeef6dd47232df939e4de35a5c"
+      },
+      {
+        "file": "assets-source/polyhaven/Shelf_01/Shelf_01.bin",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/Shelf_01/Shelf_01.bin",
+        "bytes": 12676,
+        "sha256": "21ee76dda6320ba423e76d192cfd38885e334ae394c03978d092f96b508f175b"
+      },
+      {
+        "file": "assets-source/polyhaven/Shelf_01/textures/Shelf_01_nor_gl_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/Shelf_01/Shelf_01_nor_gl_1k.jpg",
+        "bytes": 231393,
+        "sha256": "c817d7966974be2da13e4b0a57918e8e142edc50eb41d438229c3bad70df0f91"
+      },
+      {
+        "file": "assets-source/polyhaven/Shelf_01/textures/Shelf_01_arm_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/Shelf_01/Shelf_01_arm_1k.jpg",
+        "bytes": 205542,
+        "sha256": "d5d180b15c48ed6ab7b27a663de8f399f813ed0c32ff2706520d677a1e387cdc"
+      },
+      {
+        "file": "assets-source/polyhaven/Shelf_01/Shelf_01_1k.gltf",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/Shelf_01/Shelf_01_1k.gltf",
+        "bytes": 2617,
+        "sha256": "715bce6ff1886eccdd43d558f5cf9242a24396e0eb9e8ae391905186bb339e52"
+      }
+    ],
+    "modifications": "Sources unchanged. Derived Blender scene normalizes transforms and packs PBR maps; see build script.",
+    "distribution": "CC0 source files plus embedded images in runtime GLB"
+  },
+  {
+    "id": "wood_planks_grey",
+    "author": {
+      "Rob Tuytel": "All"
+    },
+    "officialSource": "https://polyhaven.com/a/wood_planks_grey",
+    "version": 1632182400,
+    "resolution": "1k",
+    "retrievedAt": "2026-09-09T18:26:49.651696+00:00",
+    "license": "CC0-1.0",
+    "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "files": [
+      {
+        "file": "assets-source/polyhaven/wood_planks_grey/textures/wood_planks_grey_arm_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/wood_planks_grey/wood_planks_grey_arm_1k.jpg",
+        "bytes": 155198,
+        "sha256": "0464853147811dd6dcf9f286ca3753fb63fa654d081ae708070fbf0fd4614d97"
+      },
+      {
+        "file": "assets-source/polyhaven/wood_planks_grey/textures/wood_planks_grey_diff_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/wood_planks_grey/wood_planks_grey_diff_1k.jpg",
+        "bytes": 228279,
+        "sha256": "d758be23e8fe7bfbd73bc4ab257cfd59406e1835f6557c12a67cd4fdb15de0d8"
+      },
+      {
+        "file": "assets-source/polyhaven/wood_planks_grey/textures/wood_planks_grey_nor_gl_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/wood_planks_grey/wood_planks_grey_nor_gl_1k.jpg",
+        "bytes": 157419,
+        "sha256": "5e570e57d688b016b217b9e8e0592f9a8b3364406e22bf6cd775da990452bdb6"
+      }
+    ],
+    "modifications": "Sources unchanged. Derived Blender scene normalizes transforms and packs PBR maps; see build script.",
+    "distribution": "CC0 source files plus embedded images in runtime GLB"
+  },
+  {
+    "id": "plastered_wall_02",
+    "author": {
+      "Charlotte Baglioni": "All"
+    },
+    "officialSource": "https://polyhaven.com/a/plastered_wall_02",
+    "version": 1705536000,
+    "resolution": "1k",
+    "retrievedAt": "2026-09-09T18:26:51.573122+00:00",
+    "license": "CC0-1.0",
+    "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "files": [
+      {
+        "file": "assets-source/polyhaven/plastered_wall_02/textures/plastered_wall_02_nor_gl_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/plastered_wall_02/plastered_wall_02_nor_gl_1k.jpg",
+        "bytes": 960241,
+        "sha256": "0f1b4ea0c4707ea133f133c020923bddd8610a43a153281dad15d49f39ad9624"
+      },
+      {
+        "file": "assets-source/polyhaven/plastered_wall_02/textures/plastered_wall_02_diff_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/plastered_wall_02/plastered_wall_02_diff_1k.jpg",
+        "bytes": 436395,
+        "sha256": "0a316ffd3f953a902325c06afb5a5863bbf71d13a353f9d85378562adca79603"
+      },
+      {
+        "file": "assets-source/polyhaven/plastered_wall_02/textures/plastered_wall_02_arm_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/plastered_wall_02/plastered_wall_02_arm_1k.jpg",
+        "bytes": 548372,
+        "sha256": "4cc478e82ac6bcfb1962ddba5e5fd13e70fd26164480b83c8ec33770f5b3ee63"
+      }
+    ],
+    "modifications": "Sources unchanged. Derived Blender scene normalizes transforms and packs PBR maps; see build script.",
+    "distribution": "CC0 source files plus embedded images in runtime GLB"
+  },
+  {
+    "id": "wood_floor",
+    "author": {
+      "Dimitrios Savva": "All"
+    },
+    "officialSource": "https://polyhaven.com/a/wood_floor",
+    "version": 1698105600,
+    "resolution": "1k",
+    "retrievedAt": "2026-09-09T18:36:45.020683+00:00",
+    "license": "CC0-1.0",
+    "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "files": [
+      {
+        "file": "assets-source/polyhaven/wood_floor/textures/wood_floor_nor_gl_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/wood_floor/wood_floor_nor_gl_1k.jpg",
+        "bytes": 423303,
+        "sha256": "452247f0d0d1b7fc7f8324ff3b6ed60bcc6de1405f4284eeb8d9bce90d4939c2"
+      },
+      {
+        "file": "assets-source/polyhaven/wood_floor/textures/wood_floor_diff_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/wood_floor/wood_floor_diff_1k.jpg",
+        "bytes": 734493,
+        "sha256": "2a1c07687b6dbb214c4b9213739c6d92d425f1f0fc8ab3ac157f105d78240789"
+      },
+      {
+        "file": "assets-source/polyhaven/wood_floor/textures/wood_floor_arm_1k.jpg",
+        "url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/wood_floor/wood_floor_arm_1k.jpg",
+        "bytes": 447855,
+        "sha256": "a84d9457fa35a76cf8a41da8bcef55387230c6b236819de878799585eda76059"
+      }
+    ],
+    "modifications": "Sources unchanged. Derived Blender scene normalizes transforms and packs PBR maps; see build script.",
+    "distribution": "CC0 source files plus embedded images in runtime GLB"
+  }
+]

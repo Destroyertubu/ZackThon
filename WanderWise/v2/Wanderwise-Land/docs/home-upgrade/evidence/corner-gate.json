@@ -1,0 +1,1461 @@
+{
+  "status": "passed",
+  "checks": [
+    "real keyboard movement and jump",
+    "textured real furniture and runtime shadow map",
+    "left click real cabinet opens existing bag panel"
+  ],
+  "browser": "152.0.7977.83",
+  "errors": [],
+  "scene": {
+    "page": "home",
+    "renderer": "three-webgl2",
+    "sceneState": "ready",
+    "sceneKind": "home",
+    "sceneStage": "corner",
+    "eye": [
+      -0.76,
+      0.3,
+      1.137436825296177
+    ],
+    "target": "cabinet",
+    "active": false,
+    "facilities": [
+      {
+        "id": "cabinet",
+        "position": {
+          "x": -0.7599999904632568,
+          "y": 1.7000000476837158,
+          "z": -3.8399999141693115
+        }
+      },
+      {
+        "id": "door",
+        "position": {
+          "x": -3.200000047683716,
+          "y": 1.649999976158142,
+          "z": -4.679999828338623
+        }
+      },
+      {
+        "id": "journal",
+        "position": {
+          "x": 2.3499999046325684,
+          "y": 1.25,
+          "z": -2.799999952316284
+        }
+      }
+    ],
+    "assetBytes": 4469212,
+    "mode2d": false,
+    "position": {
+      "x": -0.76,
+      "y": 0,
+      "z": -1.5,
+      "yaw": -0.0
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": -0.5,
+      "distance": 3
+    },
+    "metrics": {
+      "drawCalls": 82,
+      "triangles": 153802,
+      "geometries": 42,
+      "textures": 6,
+      "programs": 9,
+      "labels": 2,
+      "fps": 56,
+      "medianFps": 59.9,
+      "p95ms": 17.6,
+      "rawFrameMs": 50.30000000000018
+    },
+    "pending": 0,
+    "worldVersion": null,
+    "nodeCount": null,
+    "modal": "bag"
+  },
+  "inspection": {
+    "meshes": [
+      {
+        "name": "COL_cabinet",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_ceiling",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_door_leaf",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_door_lintel",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_journal_chair",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_journal_desk",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_north53",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_north-095",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_north-515",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_side6",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_side-6",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_south",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_window_glass",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_window_header",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "COL_window_sill",
+        "visible": false,
+        "castShadow": false,
+        "receiveShadow": false,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "",
+            "roughness": 1,
+            "metalness": 1,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube213",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 1316,
+        "materials": [
+          {
+            "name": "oak edge",
+            "roughness": 0.7300000190734863,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube213_1",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 7144,
+        "materials": [
+          {
+            "name": "plank0",
+            "roughness": 0.8399999737739563,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube213_2",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 7144,
+        "materials": [
+          {
+            "name": "plank1",
+            "roughness": 0.8399999737739563,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube213_3",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 7332,
+        "materials": [
+          {
+            "name": "plank2",
+            "roughness": 0.8399999737739563,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube213_4",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 7332,
+        "materials": [
+          {
+            "name": "plank3",
+            "roughness": 0.8399999737739563,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube213_5",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 7144,
+        "materials": [
+          {
+            "name": "plank4",
+            "roughness": 0.8399999737739563,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube213_6",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 1880,
+        "materials": [
+          {
+            "name": "cream plaster",
+            "roughness": 0.9200000166893005,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube213_7",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 564,
+        "materials": [
+          {
+            "name": "sage linen",
+            "roughness": 0.949999988079071,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube213_8",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 6204,
+        "materials": [
+          {
+            "name": "warm oak",
+            "roughness": 0.7799999713897705,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube288",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 1880,
+        "materials": [
+          {
+            "name": "oak edge",
+            "roughness": 0.7300000190734863,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube288_1",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 1504,
+        "materials": [
+          {
+            "name": "warm oak",
+            "roughness": 0.7799999713897705,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube288_2",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 1880,
+        "materials": [
+          {
+            "name": "sage linen",
+            "roughness": 0.949999988079071,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube288_3",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 12120,
+        "materials": [
+          {
+            "name": "brass",
+            "roughness": 0.36000001430511475,
+            "metalness": 0.7200000286102295,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube288_4",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 1880,
+        "materials": [
+          {
+            "name": "paper",
+            "roughness": 0.9200000166893005,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube288_5",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 1504,
+        "materials": [
+          {
+            "name": "deep teal",
+            "roughness": 0.8199999928474426,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube397",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 564,
+        "materials": [
+          {
+            "name": "oak edge",
+            "roughness": 0.7300000190734863,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube397_1",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 188,
+        "materials": [
+          {
+            "name": "brass",
+            "roughness": 0.36000001430511475,
+            "metalness": 0.7200000286102295,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube401",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 376,
+        "materials": [
+          {
+            "name": "sage linen",
+            "roughness": 0.949999988079071,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube401_1",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 188,
+        "materials": [
+          {
+            "name": "deep teal",
+            "roughness": 0.8199999928474426,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube401_2",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 1504,
+        "materials": [
+          {
+            "name": "warm oak",
+            "roughness": 0.7799999713897705,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube401_3",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 44,
+        "materials": [
+          {
+            "name": "brass",
+            "roughness": 0.36000001430511475,
+            "metalness": 0.7200000286102295,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cone001",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 336,
+        "materials": [
+          {
+            "name": "green",
+            "roughness": 0.9200000166893005,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cone001_1",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 12,
+        "materials": [
+          {
+            "name": "sky",
+            "roughness": 1,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cone001_2",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 308,
+        "materials": [
+          {
+            "name": "oak edge",
+            "roughness": 0.7300000190734863,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube273",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 188,
+        "materials": [
+          {
+            "name": "deep teal",
+            "roughness": 0.8199999928474426,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube273_1",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 168,
+        "materials": [
+          {
+            "name": "furniture_texture",
+            "roughness": 0.8500000238418579,
+            "metalness": 0,
+            "map": true,
+            "mapColorSpace": "srgb",
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube273_2",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 384,
+        "materials": [
+          {
+            "name": "furniture_texture.001",
+            "roughness": 0.8500000238418579,
+            "metalness": 0,
+            "map": true,
+            "mapColorSpace": "srgb",
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube273_3",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 376,
+        "materials": [
+          {
+            "name": "sage linen",
+            "roughness": 0.949999988079071,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube273_4",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 88,
+        "materials": [
+          {
+            "name": "brass",
+            "roughness": 0.36000001430511475,
+            "metalness": 0.7200000286102295,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube273_5",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 392,
+        "materials": [
+          {
+            "name": "furniture_texture.002",
+            "roughness": 0.8500000238418579,
+            "metalness": 0,
+            "map": true,
+            "mapColorSpace": "srgb",
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube273_6",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 136,
+        "materials": [
+          {
+            "name": "paper",
+            "roughness": 0.9200000166893005,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube273_7",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 144,
+        "materials": [
+          {
+            "name": "ink",
+            "roughness": 0.8700000047683716,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube273_8",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 476,
+        "materials": [
+          {
+            "name": "ceramic",
+            "roughness": 0.4699999988079071,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "Cube273_9",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 92,
+        "materials": [
+          {
+            "name": "oak edge",
+            "roughness": 0.7300000190734863,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "folded_linen",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 1792,
+        "materials": [
+          {
+            "name": "curtain",
+            "roughness": 0.9800000190734863,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "folded_linen_1",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 940,
+        "materials": [
+          {
+            "name": "warm oak",
+            "roughness": 0.7799999713897705,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "folded_linen_2",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 752,
+        "materials": [
+          {
+            "name": "oak edge",
+            "roughness": 0.7300000190734863,
+            "metalness": 0,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "folded_linen_3",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 44,
+        "materials": [
+          {
+            "name": "brass",
+            "roughness": 0.36000001430511475,
+            "metalness": 0.7200000286102295,
+            "map": false,
+            "mapColorSpace": null,
+            "normalMapColorSpace": null
+          }
+        ]
+      },
+      {
+        "name": "folded_linen_4",
+        "visible": true,
+        "castShadow": true,
+        "receiveShadow": true,
+        "triangles": 448,
+        "materials": [
+          {
+            "name": "furniture_texture.003",
+            "roughness": 0.8500000238418579,
+            "metalness": 0,
+            "map": true,
+            "mapColorSpace": "srgb",
+            "normalMapColorSpace": null
+          }
+        ]
+      }
+    ],
+    "colliders": [
+      {
+        "id": "COL_cabinet",
+        "min": [
+          -1.6399999856948853,
+          0,
+          -4.864999860525131
+        ],
+        "max": [
+          0.12000000476837158,
+          3.319999933242798,
+          -3.9549998342990875
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_ceiling",
+        "min": [
+          -6.150000095367432,
+          4.399999998509884,
+          -5.150000095367432
+        ],
+        "max": [
+          6.150000095367432,
+          4.600000001490116,
+          5.150000095367432
+        ],
+        "player": false,
+        "camera": true,
+        "interaction": false
+      },
+      {
+        "id": "COL_door_leaf",
+        "min": [
+          -4.180000066757202,
+          0,
+          -5.155000150203705
+        ],
+        "max": [
+          -2.2200000286102295,
+          3.0799999237060547,
+          -5.025000154972076
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_door_lintel",
+        "min": [
+          -4.300000071525574,
+          3.0499998927116394,
+          -5.170000001788139
+        ],
+        "max": [
+          -2.100000023841858,
+          4.399999916553497,
+          -4.829999998211861
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_journal_chair",
+        "min": [
+          1.9899999499320984,
+          0,
+          -2.879999965429306
+        ],
+        "max": [
+          2.60999995470047,
+          1.100000023841858,
+          -2.179999977350235
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_journal_desk",
+        "min": [
+          1.119999885559082,
+          0,
+          -4.5200000405311584
+        ],
+        "max": [
+          3.5799999237060547,
+          0.8799999952316284,
+          -2.880000054836273
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_north53",
+        "min": [
+          4.600000202655792,
+          0,
+          -5.170000001788139
+        ],
+        "max": [
+          6.000000178813934,
+          4.400000095367432,
+          -4.829999998211861
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_north-095",
+        "min": [
+          -2.199999988079071,
+          0,
+          -5.170000001788139
+        ],
+        "max": [
+          0.30000001192092896,
+          4.400000095367432,
+          -4.829999998211861
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_north-515",
+        "min": [
+          -6.0000001192092896,
+          0,
+          -5.170000001788139
+        ],
+        "max": [
+          -4.300000071525574,
+          4.400000095367432,
+          -4.829999998211861
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_side6",
+        "min": [
+          5.840000003576279,
+          0,
+          -5.150000095367432
+        ],
+        "max": [
+          6.159999996423721,
+          4.400000095367432,
+          5.150000095367432
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_side-6",
+        "min": [
+          -6.159999996423721,
+          0,
+          -5.150000095367432
+        ],
+        "max": [
+          -5.840000003576279,
+          4.400000095367432,
+          5.150000095367432
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_south",
+        "min": [
+          -6.150000095367432,
+          0,
+          4.840000003576279
+        ],
+        "max": [
+          6.150000095367432,
+          4.400000095367432,
+          5.159999996423721
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_window_glass",
+        "min": [
+          0.375,
+          1.350000023841858,
+          -5.050000000745058
+        ],
+        "max": [
+          4.425000190734863,
+          3.649999976158142,
+          -4.949999999254942
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": false
+      },
+      {
+        "id": "COL_window_header",
+        "min": [
+          0.35000014305114746,
+          3.6500000953674316,
+          -5.170000001788139
+        ],
+        "max": [
+          4.450000047683716,
+          4.400000095367432,
+          -4.829999998211861
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      },
+      {
+        "id": "COL_window_sill",
+        "min": [
+          0.35000014305114746,
+          0,
+          -5.170000001788139
+        ],
+        "max": [
+          4.450000047683716,
+          1.350000023841858,
+          -4.829999998211861
+        ],
+        "player": true,
+        "camera": true,
+        "interaction": true
+      }
+    ],
+    "bounds": {
+      "minX": -5.82,
+      "maxX": 5.82,
+      "minZ": -4.91,
+      "maxZ": 4.82
+    },
+    "shadowEnabled": true,
+    "lights": [
+      {
+        "type": "HemisphereLight",
+        "castShadow": false,
+        "visible": true
+      },
+      {
+        "type": "AmbientLight",
+        "castShadow": false,
+        "visible": true
+      },
+      {
+        "type": "DirectionalLight",
+        "castShadow": true,
+        "visible": true
+      },
+      {
+        "type": "PointLight",
+        "castShadow": false,
+        "visible": true
+      },
+      {
+        "type": "PointLight",
+        "castShadow": false,
+        "visible": true
+      }
+    ],
+    "frameTimes": [
+      0.0001,
+      0.017600000000000022,
+      0.015699999999999933,
+      0.01680000000000007,
+      0.01669999999999993,
+      0.016600000000000024,
+      0.0175,
+      0.016600000000000024,
+      0.016700000000000045,
+      0.016,
+      0.017299999999999954,
+      0.016799999999999954,
+      0.016600000000000024,
+      0.016600000000000024,
+      0.0165,
+      0.016899999999999978,
+      0.016700000000000045,
+      0.01669999999999993,
+      0.016600000000000024,
+      0.016600000000000024,
+      0.016100000000000024,
+      0.01719999999999993,
+      0.016700000000000045,
+      0.016700000000000045,
+      0.016,
+      0.01669999999999993,
+      0.01710000000000002,
+      0.016799999999999954,
+      0.015800000000000067,
+      0.016899999999999978,
+      0.017400000000000092,
+      0.01669999999999982,
+      0.016300000000000182,
+      0.017,
+      0.01659999999999991,
+      0.016700000000000045,
+      0.016700000000000045,
+      0.01669999999999982,
+      0.016600000000000135,
+      0.015799999999999953,
+      0.0175,
+      0.01609999999999991,
+      0.017300000000000183,
+      0.016299999999999953,
+      0.017,
+      0.015899999999999862,
+      0.017400000000000092,
+      0.016700000000000045,
+      0.016700000000000045,
+      0.01669999999999982,
+      0.016600000000000135,
+      0.016700000000000045,
+      0.01669999999999982,
+      0.016600000000000135,
+      0.016700000000000045,
+      0.01659999999999991,
+      0.016700000000000045,
+      0.01609999999999991,
+      0.017200000000000045,
+      0.015799999999999953,
+      0.11710000000000013,
+      0.01709999999999991,
+      0.016700000000000045,
+      0.016700000000000045,
+      0.01669999999999982,
+      0.016600000000000135,
+      0.016399999999999863,
+      0.016800000000000183,
+      0.016799999999999954,
+      0.016700000000000045,
+      0.01669999999999982,
+      0.016600000000000135,
+      0.016200000000000044,
+      0.01709999999999991,
+      0.016700000000000045,
+      0.016700000000000045,
+      0.015899999999999862,
+      0.017400000000000092,
+      0.016700000000000045,
+      0.01659999999999991,
+      0.016700000000000045,
+      0.016700000000000045,
+      0.01659999999999991,
+      0.016700000000000045,
+      0.016700000000000045,
+      0.01659999999999991,
+      0.01669999999999982,
+      0.016700000000000274,
+      0.01659999999999991,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01659999999999991,
+      0.01679999999999973,
+      0.015800000000000182,
+      0.017599999999999907,
+      0.01659999999999991,
+      0.016700000000000274,
+      0.01659999999999991,
+      0.01669999999999982,
+      0.016700000000000274,
+      0.01659999999999991,
+      0.01669999999999982,
+      0.016700000000000274,
+      0.01590000000000009,
+      0.017399999999999635,
+      0.016700000000000274,
+      0.01659999999999991,
+      0.01669999999999982,
+      0.09940000000000009,
+      0.017200000000000274,
+      0.01609999999999991,
+      0.03390000000000009,
+      0.01669999999999982,
+      0.01569999999999982,
+      0.017700000000000275,
+      0.01659999999999991,
+      0.01669999999999982,
+      0.016700000000000274,
+      0.01659999999999991,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01679999999999973,
+      0.01659999999999991,
+      0.016700000000000274,
+      0.01669999999999982,
+      0.01659999999999991,
+      0.03340000000000009,
+      0.01659999999999991,
+      0.016600000000000364,
+      0.01679999999999973,
+      0.01659999999999991,
+      0.016,
+      0.016700000000000274,
+      0.016900000000000092,
+      0.017,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016700000000000274,
+      0.01640000000000009,
+      0.016899999999999638,
+      0.016600000000000364,
+      0.01669999999999982,
+      0.01669999999999982,
+      0.016600000000000364,
+      0.01679999999999973,
+      0.01659999999999991,
+      0.015700000000000273,
+      0.017599999999999907,
+      0.01659999999999991,
+      0.01640000000000009,
+      0.01709999999999991,
+      0.01659999999999991,
+      0.016700000000000274,
+      0.016299999999999728,
+      0.016100000000000364,
+      0.017599999999999907,
+      0.01569999999999982,
+      0.0175,
+      0.015800000000000182,
+      0.017599999999999907,
+      0.01590000000000009,
+      0.017400000000000092,
+      0.01659999999999991,
+      0.01609999999999991,
+      0.017400000000000092,
+      0.01669999999999982,
+      0.016300000000000182,
+      0.016900000000000092,
+      0.11669999999999982
+    ],
+    "canvasCount": 1,
+    "hasFocus": true,
+    "controlMode": "locked",
+    "visibility": "visible"
+  }
+}

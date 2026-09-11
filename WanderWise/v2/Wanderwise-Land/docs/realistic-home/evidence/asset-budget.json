@@ -1,0 +1,18 @@
+{
+  "file": "frontend/assets/home/home-realistic-full.glb",
+  "bytes": 10461572,
+  "gzipBytes": 6666290,
+  "visualTriangles": 84574,
+  "nodes": 65,
+  "materials": 18,
+  "textures": 16,
+  "images": 16,
+  "facilities": [
+    "INTERACT_cabinet",
+    "INTERACT_door",
+    "INTERACT_journal",
+    "INTERACT_phone",
+    "INTERACT_synthesis"
+  ],
+  "colliders": 30
+}

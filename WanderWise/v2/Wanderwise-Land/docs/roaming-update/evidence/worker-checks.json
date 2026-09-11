@@ -1,0 +1,85 @@
+{
+  "status": "passed",
+  "checks": [
+    "Failed worker keeps prior scene and movement, then terminates",
+    "Rapid scene switch cancels expansion; late result cannot overwrite home",
+    "10 worker updates preserve controls/visit state and stable GPU resource counts",
+    "Disposal aborts in-flight worker without a late update"
+  ],
+  "errors": [],
+  "details": {
+    "failure": {
+      "same": true,
+      "active": true,
+      "busy": false,
+      "status": "ready",
+      "live": 0
+    },
+    "race": {
+      "update": false,
+      "home": true,
+      "kind": "home",
+      "workers": 0
+    },
+    "repeated": {
+      "active": true,
+      "camera": {
+        "yaw": 0.43,
+        "pitch": 0.2,
+        "distance": 4
+      },
+      "keys": [
+        "KeyQ"
+      ],
+      "visited": 7.799899999999997,
+      "resources": [
+        {
+          "geometries": 3,
+          "textures": 5
+        },
+        {
+          "geometries": 3,
+          "textures": 5
+        },
+        {
+          "geometries": 3,
+          "textures": 5
+        },
+        {
+          "geometries": 3,
+          "textures": 5
+        },
+        {
+          "geometries": 3,
+          "textures": 5
+        },
+        {
+          "geometries": 3,
+          "textures": 5
+        },
+        {
+          "geometries": 3,
+          "textures": 5
+        },
+        {
+          "geometries": 3,
+          "textures": 5
+        },
+        {
+          "geometries": 3,
+          "textures": 5
+        },
+        {
+          "geometries": 3,
+          "textures": 5
+        }
+      ],
+      "workers": 0
+    },
+    "disposed": {
+      "updated": false,
+      "workers": 0
+    }
+  },
+  "scope": "Dedicated engine fixture; separate roaming_browser.py exercises actual application and backend"
+}

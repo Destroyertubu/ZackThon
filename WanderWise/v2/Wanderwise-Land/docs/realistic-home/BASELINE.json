@@ -1,0 +1,8 @@
+{
+  "baselineCommit": "980fadb8",
+  "archive": "/Users/gauss/Desktop/SuperTechMagician/SolarMaster/ZackThon/WanderWise/v2/rollback-before-realistic-home.tar",
+  "sha256": "6a48ca02d64428ca55fc840b57ae01431502be841b369fb1113f83f01f6fc542",
+  "contents": "Git tracked project source before this upgrade, no visitor database or credentials",
+  "browserScreenshot": "evidence/before.png",
+  "camera": "evidence/before.json"
+}

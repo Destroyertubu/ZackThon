@@ -1,0 +1,433 @@
+{
+  "status": "passed",
+  "checks": [
+    "cold home ready and one canvas",
+    "spatial left-click cabinet -> bag",
+    "spatial left-click synthesis -> synthesis",
+    "spatial left-click journal -> journal",
+    "spatial left-click phone -> phone",
+    "phone remains honestly unavailable",
+    "spatial left-click door -> seed",
+    "Chinese input isolated from movement",
+    "door enters real preset world",
+    "real reader, collection dedup and article field",
+    "same bag, deduplication and private anchor",
+    "existing manual synthesis and insight save",
+    "saved home, refresh, collection and journal",
+    "opaque wall blocks facility targeting",
+    "eight near-wall camera angles remain inside room",
+    "low quality remains usable",
+    "focus loss pauses movement",
+    "10 real home/world round trips",
+    "at least 20 minutes continuous browser operation"
+  ],
+  "browser": "152.0.7977.83",
+  "device": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M5, Unspecified Version)",
+    "dpr": 1,
+    "viewport": [
+      1920,
+      1080
+    ],
+    "headed": true
+  },
+  "network": "localhost HTTP; fresh browser context, no disk browser cache; OS filesystem cache not cleared",
+  "coldSecondsToReadyAndFirstRender": 2.5655477909604087,
+  "startupTransfers": [
+    {
+      "name": "/static/style.css",
+      "transferSize": 21232,
+      "encodedBodySize": 20932,
+      "decodedBodySize": 20932
+    },
+    {
+      "name": "/static/app.js",
+      "transferSize": 76258,
+      "encodedBodySize": 75958,
+      "decodedBodySize": 75958
+    },
+    {
+      "name": "/static/storage.js",
+      "transferSize": 5328,
+      "encodedBodySize": 5028,
+      "decodedBodySize": 5028
+    },
+    {
+      "name": "/static/engine/math.js",
+      "transferSize": 2562,
+      "encodedBodySize": 2262,
+      "decodedBodySize": 2262
+    },
+    {
+      "name": "/static/assets/mark.svg",
+      "transferSize": 635,
+      "encodedBodySize": 335,
+      "decodedBodySize": 335
+    },
+    {
+      "name": "/api/v1/session/guest",
+      "transferSize": 684,
+      "encodedBodySize": 384,
+      "decodedBodySize": 384
+    },
+    {
+      "name": "/api/v1/seeds",
+      "transferSize": 1788,
+      "encodedBodySize": 1488,
+      "decodedBodySize": 1488
+    },
+    {
+      "name": "/api/v1/bag",
+      "transferSize": 415,
+      "encodedBodySize": 115,
+      "decodedBodySize": 115
+    },
+    {
+      "name": "/static/assets/mark.svg",
+      "transferSize": 0,
+      "encodedBodySize": 335,
+      "decodedBodySize": 335
+    },
+    {
+      "name": "/api/v1/anchors",
+      "transferSize": 381,
+      "encodedBodySize": 81,
+      "decodedBodySize": 81
+    },
+    {
+      "name": "/static/engine/engine.js",
+      "transferSize": 17055,
+      "encodedBodySize": 16755,
+      "decodedBodySize": 16755
+    },
+    {
+      "name": "/static/engine/interaction.js",
+      "transferSize": 1913,
+      "encodedBodySize": 1613,
+      "decodedBodySize": 1613
+    },
+    {
+      "name": "/static/engine/world-update.js",
+      "transferSize": 2315,
+      "encodedBodySize": 2015,
+      "decodedBodySize": 2015
+    },
+    {
+      "name": "/static/engine/renderer-three.js",
+      "transferSize": 10604,
+      "encodedBodySize": 10304,
+      "decodedBodySize": 10304
+    },
+    {
+      "name": "/static/engine/home-scene.js",
+      "transferSize": 5069,
+      "encodedBodySize": 4769,
+      "decodedBodySize": 4769
+    },
+    {
+      "name": "/static/engine/scenes.js",
+      "transferSize": 9496,
+      "encodedBodySize": 9196,
+      "decodedBodySize": 9196
+    },
+    {
+      "name": "/static/engine/geometry.js",
+      "transferSize": 1995,
+      "encodedBodySize": 1695,
+      "decodedBodySize": 1695
+    },
+    {
+      "name": "/static/vendor/three/three.module.js",
+      "transferSize": 663072,
+      "encodedBodySize": 662772,
+      "decodedBodySize": 662772
+    },
+    {
+      "name": "/static/engine/terrain.js",
+      "transferSize": 831,
+      "encodedBodySize": 531,
+      "decodedBodySize": 531
+    },
+    {
+      "name": "/static/engine/home-physics.js",
+      "transferSize": 2616,
+      "encodedBodySize": 2316,
+      "decodedBodySize": 2316
+    },
+    {
+      "name": "/static/vendor/three/GLTFLoader.js",
+      "transferSize": 117868,
+      "encodedBodySize": 117568,
+      "decodedBodySize": 117568
+    },
+    {
+      "name": "/static/vendor/rapier/rapier.mjs",
+      "transferSize": 2239019,
+      "encodedBodySize": 2238719,
+      "decodedBodySize": 2238719
+    },
+    {
+      "name": "/static/vendor/three/BufferGeometryUtils.js",
+      "transferSize": 38024,
+      "encodedBodySize": 37724,
+      "decodedBodySize": 37724
+    },
+    {
+      "name": "/static/vendor/three/SkeletonUtils.js",
+      "transferSize": 11847,
+      "encodedBodySize": 11547,
+      "decodedBodySize": 11547
+    },
+    {
+      "name": "/static/vendor/three/three.core.js",
+      "transferSize": 1458413,
+      "encodedBodySize": 1458113,
+      "decodedBodySize": 1458113
+    },
+    {
+      "name": "/static/assets/home/scene.json",
+      "transferSize": 677,
+      "encodedBodySize": 377,
+      "decodedBodySize": 377
+    },
+    {
+      "name": "/static/assets/home/home-realistic-full.glb",
+      "transferSize": 10461872,
+      "encodedBodySize": 10461572,
+      "decodedBodySize": 10461572
+    },
+    {
+      "name": "/static/engine/render-qa.js",
+      "transferSize": 2127,
+      "encodedBodySize": 1827,
+      "decodedBodySize": 1827
+    },
+    {
+      "name": "/static/assets/mark.svg",
+      "transferSize": 0,
+      "encodedBodySize": 335,
+      "decodedBodySize": 335
+    },
+    {
+      "name": "/api/v1/bag",
+      "transferSize": 415,
+      "encodedBodySize": 115,
+      "decodedBodySize": 115
+    },
+    {
+      "name": "/api/v1/anchors",
+      "transferSize": 381,
+      "encodedBodySize": 81,
+      "decodedBodySize": 81
+    }
+  ],
+  "lowQuality": {
+    "drawCalls": 136,
+    "triangles": 140726,
+    "geometries": 84,
+    "textures": 23,
+    "programs": 15,
+    "labels": 3,
+    "fps": 60,
+    "medianFps": 59.9,
+    "p95ms": 17.2,
+    "rawFrameMs": 16.700000000000728
+  },
+  "soakSeconds": 1202.9195621670224,
+  "roundTrips": [
+    {
+      "round": 1,
+      "metrics": {
+        "drawCalls": 150,
+        "triangles": 155500,
+        "geometries": 82,
+        "textures": 20,
+        "programs": 10,
+        "labels": 0,
+        "fps": 60,
+        "medianFps": 59.9,
+        "p95ms": 16.8,
+        "rawFrameMs": 16.799999999999272
+      },
+      "status": "ready"
+    },
+    {
+      "round": 2,
+      "metrics": {
+        "drawCalls": 150,
+        "triangles": 155500,
+        "geometries": 82,
+        "textures": 20,
+        "programs": 10,
+        "labels": 0,
+        "fps": 61,
+        "medianFps": 59.9,
+        "p95ms": 16.8,
+        "rawFrameMs": 16.600000000002183
+      },
+      "status": "ready"
+    },
+    {
+      "round": 3,
+      "metrics": {
+        "drawCalls": 150,
+        "triangles": 155500,
+        "geometries": 82,
+        "textures": 20,
+        "programs": 10,
+        "labels": 0,
+        "fps": 61,
+        "medianFps": 59.9,
+        "p95ms": 16.9,
+        "rawFrameMs": 16.899999999997817
+      },
+      "status": "ready"
+    },
+    {
+      "round": 4,
+      "metrics": {
+        "drawCalls": 150,
+        "triangles": 155500,
+        "geometries": 82,
+        "textures": 20,
+        "programs": 10,
+        "labels": 0,
+        "fps": 66,
+        "medianFps": 65.8,
+        "p95ms": 15.2,
+        "rawFrameMs": 15.19999995231774
+      },
+      "status": "ready"
+    },
+    {
+      "round": 5,
+      "metrics": {
+        "drawCalls": 150,
+        "triangles": 155500,
+        "geometries": 82,
+        "textures": 20,
+        "programs": 10,
+        "labels": 0,
+        "fps": 37,
+        "medianFps": 59.9,
+        "p95ms": 17.6,
+        "rawFrameMs": 450.09999999999854
+      },
+      "status": "ready"
+    },
+    {
+      "round": 6,
+      "metrics": {
+        "drawCalls": 150,
+        "triangles": 155500,
+        "geometries": 82,
+        "textures": 20,
+        "programs": 10,
+        "labels": 0,
+        "fps": 37,
+        "medianFps": 59.9,
+        "p95ms": 33.3,
+        "rawFrameMs": 466.59999999999854
+      },
+      "status": "ready"
+    },
+    {
+      "round": 7,
+      "metrics": {
+        "drawCalls": 150,
+        "triangles": 155500,
+        "geometries": 82,
+        "textures": 20,
+        "programs": 10,
+        "labels": 0,
+        "fps": 40,
+        "medianFps": 59.9,
+        "p95ms": 17.6,
+        "rawFrameMs": 350.1000000000022
+      },
+      "status": "ready"
+    },
+    {
+      "round": 8,
+      "metrics": {
+        "drawCalls": 150,
+        "triangles": 155500,
+        "geometries": 82,
+        "textures": 20,
+        "programs": 10,
+        "labels": 0,
+        "fps": 37,
+        "medianFps": 59.9,
+        "p95ms": 33.4,
+        "rawFrameMs": 400
+      },
+      "status": "ready"
+    },
+    {
+      "round": 9,
+      "metrics": {
+        "drawCalls": 150,
+        "triangles": 155500,
+        "geometries": 82,
+        "textures": 20,
+        "programs": 10,
+        "labels": 0,
+        "fps": 38,
+        "medianFps": 59.9,
+        "p95ms": 17.6,
+        "rawFrameMs": 467.5
+      },
+      "status": "ready"
+    },
+    {
+      "round": 10,
+      "metrics": {
+        "drawCalls": 150,
+        "triangles": 155500,
+        "geometries": 82,
+        "textures": 20,
+        "programs": 10,
+        "labels": 0,
+        "fps": 37,
+        "medianFps": 59.9,
+        "p95ms": 17.5,
+        "rawFrameMs": 416.70000000000437
+      },
+      "status": "ready"
+    }
+  ],
+  "resourceBaseline": {
+    "drawCalls": 150,
+    "triangles": 155500,
+    "geometries": 82,
+    "textures": 20,
+    "programs": 10,
+    "labels": 0,
+    "fps": 60,
+    "medianFps": 59.9,
+    "p95ms": 17,
+    "rawFrameMs": 16.599999999998545
+  },
+  "resourceFinal": {
+    "drawCalls": 148,
+    "triangles": 154772,
+    "geometries": 83,
+    "textures": 20,
+    "programs": 10,
+    "labels": 0,
+    "fps": 60,
+    "medianFps": 59.9,
+    "p95ms": 16.8,
+    "rawFrameMs": 16.699999999953434
+  },
+  "performance": {
+    "sampleCount": 71826,
+    "medianFps": 59.880239521125056,
+    "p95ms": 17.399999999906868,
+    "includesSceneChanges": true,
+    "rawFrameTimes": true
+  },
+  "errors": [],
+  "sourceModelSha256": "d32d06525bc40a81935557a3a58088cf7a6465adb6e0fec10bc2171db63f03a9"
+}

@@ -40,7 +40,7 @@ async def guard(request,call_next):
     res=await call_next(request)
     res.headers['X-Content-Type-Options']='nosniff'
     res.headers['Referrer-Policy']='strict-origin-when-cross-origin'
-    res.headers['Content-Security-Policy']="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+    res.headers['Content-Security-Policy']="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
     if request.url.path.startswith('/api/'): res.headers['Cache-Control']='no-store'
     return res
 

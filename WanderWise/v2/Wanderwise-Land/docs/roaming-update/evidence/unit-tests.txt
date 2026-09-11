@@ -1,0 +1,33 @@
+✔ GLB 2 container, embedded images and finite accessor bounds (5.224292ms)
+✔ actual GLB retains whitelist facilities, safe spawn and Y-up metre scale (1.483834ms)
+✔ all facility approaches share a traversable space; door is under ten seconds away (8.005208ms)
+✔ room bounds replace old hardcoded boundary without clipping a legitimate route (4.7525ms)
+✔ collision layers distinguish glass, frame, door leaf and camera ceiling (0.616917ms)
+✔ visible geometry and startup artifact have bounded size (11.114292ms)
+✔ nearby quote is readable outside the camera and without label LOD (1.525292ms)
+✔ nearby quote wins over topic, closest quote wins deterministically (0.298083ms)
+✔ walls and range still prevent reading or facility activation (0.233583ms)
+✔ same-tab reload preserves the lease ID and waits before its first API request (5.571292ms)
+✔ a duplicate tab changes its copied identity while the existing page keeps its lease (2.662458ms)
+✔ simultaneous instances with a copied ID elect one owner before either sends HTTP (4.664167ms)
+✔ a restored page re-checks an identity that another active page has claimed (2.059125ms)
+✔ without BroadcastChannel each page has a fresh ID and uses existing lease takeover (3.061917ms)
+✔ blocked sessionStorage still permits requests with distinct in-memory identities (2.02625ms)
+✔ seeded randomness is reproducible and bounded (1.631708ms)
+✔ normalized diagonal has the same movement speed (0.211875ms)
+✔ camera projection points its center toward the target (0.557333ms)
+✔ obstacle ray intersection and missed rays (0.268125ms)
+✔ navigation uses connected paths, not direct movement (7.967875ms)
+✔ home has four facilities and a door, finite geometry (16.3545ms)
+✔ world geometry is deterministic and all trail samples are level (383.002208ms)
+✔ simple character collision blocks a wall without blocking open space (0.430292ms)
+✔ character mesh visibly changes from idle to walking (2.450583ms)
+✔ V cycles three navigation states without moving the player (0.692459ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 710.373083

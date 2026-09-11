@@ -1,3 +1,4 @@
+import {terrainFunctions} from './terrain.js';
 import {Geometry,color} from './geometry.js';
 import {random,segmentDistance,clamp,dist} from './math.js';
 const C={grass:color('#739977'),forest:color('#244e45'),leaf:color('#3e7259'),leafLight:color('#729777'),wood:color('#675242'),bark:color('#725342'),sand:color('#c4b593'),stone:color('#9ea994'),gold:color('#eab969'),cream:color('#eee3c9'),lake:color('#699f9b'),dark:color('#34483c')};
@@ -45,8 +46,8 @@ export function buildScene(kind,world=null,field=null){
    nodes=kind==='field'?field.sections.map((s,i)=>({id:s.id,title:s.title,topicId:world.nodes[0].topicId,position:s.position,biome:'ruins',section:s,contentIds:[field.contentId],excerptIds:[s.excerptId]})):world.nodes;
    links=kind==='field'?field.relations.map(l=>({...l,kind:'path',waypoints:[nodes.find(n=>n.id===l.source).position,nodes.find(n=>n.id===l.target).position]})):world.walkableLinks;
    boundary=Math.max(90,...nodes.map(n=>Math.max(Math.abs(n.position.x),Math.abs(n.position.z))+40));
-   let clearance=(x,z)=>Math.min(Math.hypot(x,z)-9,...nodes.map(n=>Math.hypot(x-n.position.x,z-n.position.z)-8),...links.map(l=>segmentDistance(x,z,l.waypoints[0],l.waypoints.at(-1))-3.5));
-   height=(x,z)=>{let weight=clamp(clearance(x,z)/15,0,1);return Math.max(0,Math.sin(x*.055+1)*Math.cos(z*.052)*3.3+Math.sin(x*.11+z*.07)*1.5)*weight};
+   const terrain=terrainFunctions(nodes,links),clearance=terrain.clearance;
+   height=terrain.height;
    let gridBound=Math.ceil(boundary/3)*3,segments=Math.ceil(gridBound*2/3),step=3;
    for(let iz=0;iz<segments;iz++)for(let ix=0;ix<segments;ix++){let x=-gridBound+ix*step,z=-gridBound+iz*step,h=height(x,z),shade=.9+rng()*.15,col=C.grass.map(v=>v*shade);g.quad([x,h,z],[x,height(x,z+step),z+step],[x+step,height(x+step,z+step),z+step],[x+step,height(x+step,z),z],col)}
    // Trails are real traversable terrain. No disconnected floating islands.

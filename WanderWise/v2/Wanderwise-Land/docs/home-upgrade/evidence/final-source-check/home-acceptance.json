@@ -1,0 +1,402 @@
+{
+  "status": "passed",
+  "checks": [
+    "cold home ready and one canvas",
+    "spatial left-click cabinet -> bag",
+    "spatial left-click synthesis -> synthesis",
+    "spatial left-click journal -> journal",
+    "spatial left-click phone -> phone",
+    "phone remains honestly unavailable",
+    "spatial left-click door -> seed",
+    "Chinese input isolated from movement",
+    "door enters real preset world",
+    "reader collection and true article field",
+    "same bag, deduplication and private anchor",
+    "existing manual synthesis and insight save",
+    "saved home, refresh, collection and journal",
+    "opaque wall blocks facility targeting",
+    "eight near-wall camera angles remain inside room",
+    "low quality remains usable",
+    "focus loss pauses movement",
+    "10 real home/world round trips"
+  ],
+  "browser": "152.0.7977.83",
+  "device": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M5, Unspecified Version)",
+    "dpr": 1,
+    "viewport": [
+      1920,
+      1080
+    ],
+    "headed": true
+  },
+  "network": "localhost HTTP; fresh browser context, no disk browser cache; OS filesystem cache not cleared",
+  "coldSecondsToReadyAndFirstRender": 0.7203756669769064,
+  "startupTransfers": [
+    {
+      "name": "/static/style.css",
+      "transferSize": 21812,
+      "encodedBodySize": 21512,
+      "decodedBodySize": 21512
+    },
+    {
+      "name": "/static/app.js",
+      "transferSize": 77809,
+      "encodedBodySize": 77509,
+      "decodedBodySize": 77509
+    },
+    {
+      "name": "/static/storage.js",
+      "transferSize": 5328,
+      "encodedBodySize": 5028,
+      "decodedBodySize": 5028
+    },
+    {
+      "name": "/static/engine/math.js",
+      "transferSize": 2562,
+      "encodedBodySize": 2262,
+      "decodedBodySize": 2262
+    },
+    {
+      "name": "/static/assets/mark.svg",
+      "transferSize": 635,
+      "encodedBodySize": 335,
+      "decodedBodySize": 335
+    },
+    {
+      "name": "/api/v1/session/guest",
+      "transferSize": 684,
+      "encodedBodySize": 384,
+      "decodedBodySize": 384
+    },
+    {
+      "name": "/api/v1/seeds",
+      "transferSize": 1788,
+      "encodedBodySize": 1488,
+      "decodedBodySize": 1488
+    },
+    {
+      "name": "/api/v1/bag",
+      "transferSize": 415,
+      "encodedBodySize": 115,
+      "decodedBodySize": 115
+    },
+    {
+      "name": "/static/assets/mark.svg",
+      "transferSize": 0,
+      "encodedBodySize": 335,
+      "decodedBodySize": 335
+    },
+    {
+      "name": "/api/v1/anchors",
+      "transferSize": 381,
+      "encodedBodySize": 81,
+      "decodedBodySize": 81
+    },
+    {
+      "name": "/static/engine/engine.js",
+      "transferSize": 16377,
+      "encodedBodySize": 16077,
+      "decodedBodySize": 16077
+    },
+    {
+      "name": "/static/engine/renderer-three.js",
+      "transferSize": 7406,
+      "encodedBodySize": 7106,
+      "decodedBodySize": 7106
+    },
+    {
+      "name": "/static/engine/scenes.js",
+      "transferSize": 9689,
+      "encodedBodySize": 9389,
+      "decodedBodySize": 9389
+    },
+    {
+      "name": "/static/engine/geometry.js",
+      "transferSize": 1995,
+      "encodedBodySize": 1695,
+      "decodedBodySize": 1695
+    },
+    {
+      "name": "/static/engine/home-scene.js",
+      "transferSize": 4703,
+      "encodedBodySize": 4403,
+      "decodedBodySize": 4403
+    },
+    {
+      "name": "/static/vendor/three/three.module.js",
+      "transferSize": 663072,
+      "encodedBodySize": 662772,
+      "decodedBodySize": 662772
+    },
+    {
+      "name": "/static/vendor/three/GLTFLoader.js",
+      "transferSize": 117868,
+      "encodedBodySize": 117568,
+      "decodedBodySize": 117568
+    },
+    {
+      "name": "/static/vendor/three/BufferGeometryUtils.js",
+      "transferSize": 38024,
+      "encodedBodySize": 37724,
+      "decodedBodySize": 37724
+    },
+    {
+      "name": "/static/vendor/three/SkeletonUtils.js",
+      "transferSize": 11847,
+      "encodedBodySize": 11547,
+      "decodedBodySize": 11547
+    },
+    {
+      "name": "/static/vendor/three/three.core.js",
+      "transferSize": 1458413,
+      "encodedBodySize": 1458113,
+      "decodedBodySize": 1458113
+    },
+    {
+      "name": "/static/assets/home/scene.json",
+      "transferSize": 658,
+      "encodedBodySize": 358,
+      "decodedBodySize": 358
+    },
+    {
+      "name": "/static/assets/home/home-full.glb",
+      "transferSize": 5157192,
+      "encodedBodySize": 5156892,
+      "decodedBodySize": 5156892
+    },
+    {
+      "name": "/static/engine/render-qa.js",
+      "transferSize": 2127,
+      "encodedBodySize": 1827,
+      "decodedBodySize": 1827
+    },
+    {
+      "name": "/static/assets/mark.svg",
+      "transferSize": 0,
+      "encodedBodySize": 335,
+      "decodedBodySize": 335
+    },
+    {
+      "name": "/api/v1/bag",
+      "transferSize": 415,
+      "encodedBodySize": 115,
+      "decodedBodySize": 115
+    },
+    {
+      "name": "/api/v1/anchors",
+      "transferSize": 381,
+      "encodedBodySize": 81,
+      "decodedBodySize": 81
+    }
+  ],
+  "lowQuality": {
+    "drawCalls": 115,
+    "triangles": 177600,
+    "geometries": 62,
+    "textures": 4,
+    "programs": 8,
+    "labels": 0,
+    "fps": 60,
+    "medianFps": 59.9,
+    "p95ms": 17.6,
+    "rawFrameMs": 15.700000000000728
+  },
+  "soakSeconds": 16.189265582943335,
+  "roundTrips": [
+    {
+      "round": 1,
+      "metrics": {
+        "drawCalls": 115,
+        "triangles": 177600,
+        "geometries": 62,
+        "textures": 4,
+        "programs": 9,
+        "labels": 0,
+        "fps": 63,
+        "medianFps": 59.9,
+        "p95ms": 17.7,
+        "rawFrameMs": 17.200000000000728
+      },
+      "status": "ready"
+    },
+    {
+      "round": 2,
+      "metrics": {
+        "drawCalls": 115,
+        "triangles": 177600,
+        "geometries": 62,
+        "textures": 4,
+        "programs": 9,
+        "labels": 0,
+        "fps": 62,
+        "medianFps": 59.9,
+        "p95ms": 17.5,
+        "rawFrameMs": 16.600000000002183
+      },
+      "status": "ready"
+    },
+    {
+      "round": 3,
+      "metrics": {
+        "drawCalls": 115,
+        "triangles": 177600,
+        "geometries": 62,
+        "textures": 4,
+        "programs": 9,
+        "labels": 0,
+        "fps": 60,
+        "medianFps": 59.9,
+        "p95ms": 17.6,
+        "rawFrameMs": 17.600000000002183
+      },
+      "status": "ready"
+    },
+    {
+      "round": 4,
+      "metrics": {
+        "drawCalls": 115,
+        "triangles": 177600,
+        "geometries": 62,
+        "textures": 4,
+        "programs": 9,
+        "labels": 0,
+        "fps": 61,
+        "medianFps": 60.2,
+        "p95ms": 17.7,
+        "rawFrameMs": 16.700000000000728
+      },
+      "status": "ready"
+    },
+    {
+      "round": 5,
+      "metrics": {
+        "drawCalls": 115,
+        "triangles": 177600,
+        "geometries": 62,
+        "textures": 4,
+        "programs": 9,
+        "labels": 0,
+        "fps": 64,
+        "medianFps": 59.9,
+        "p95ms": 17,
+        "rawFrameMs": 16.799999999999272
+      },
+      "status": "ready"
+    },
+    {
+      "round": 6,
+      "metrics": {
+        "drawCalls": 115,
+        "triangles": 177600,
+        "geometries": 62,
+        "textures": 4,
+        "programs": 9,
+        "labels": 0,
+        "fps": 61,
+        "medianFps": 59.9,
+        "p95ms": 17.7,
+        "rawFrameMs": 15.700000000000728
+      },
+      "status": "ready"
+    },
+    {
+      "round": 7,
+      "metrics": {
+        "drawCalls": 115,
+        "triangles": 177600,
+        "geometries": 62,
+        "textures": 4,
+        "programs": 9,
+        "labels": 0,
+        "fps": 63,
+        "medianFps": 59.9,
+        "p95ms": 17.6,
+        "rawFrameMs": 17.600000000002183
+      },
+      "status": "ready"
+    },
+    {
+      "round": 8,
+      "metrics": {
+        "drawCalls": 115,
+        "triangles": 177600,
+        "geometries": 62,
+        "textures": 4,
+        "programs": 9,
+        "labels": 0,
+        "fps": 60,
+        "medianFps": 59.9,
+        "p95ms": 16.7,
+        "rawFrameMs": 16.700000000000728
+      },
+      "status": "ready"
+    },
+    {
+      "round": 9,
+      "metrics": {
+        "drawCalls": 115,
+        "triangles": 177600,
+        "geometries": 62,
+        "textures": 4,
+        "programs": 9,
+        "labels": 0,
+        "fps": 62,
+        "medianFps": 59.9,
+        "p95ms": 17.6,
+        "rawFrameMs": 17
+      },
+      "status": "ready"
+    },
+    {
+      "round": 10,
+      "metrics": {
+        "drawCalls": 115,
+        "triangles": 177600,
+        "geometries": 62,
+        "textures": 4,
+        "programs": 9,
+        "labels": 0,
+        "fps": 60,
+        "medianFps": 59.9,
+        "p95ms": 17.5,
+        "rawFrameMs": 16.80000000000291
+      },
+      "status": "ready"
+    }
+  ],
+  "resourceBaseline": {
+    "drawCalls": 115,
+    "triangles": 177600,
+    "geometries": 62,
+    "textures": 4,
+    "programs": 9,
+    "labels": 0,
+    "fps": 60,
+    "medianFps": 59.9,
+    "p95ms": 17.5,
+    "rawFrameMs": 17.5
+  },
+  "resourceFinal": {
+    "drawCalls": 115,
+    "triangles": 177600,
+    "geometries": 62,
+    "textures": 4,
+    "programs": 9,
+    "labels": 0,
+    "fps": 60,
+    "medianFps": 59.9,
+    "p95ms": 17.5,
+    "rawFrameMs": 17.5
+  },
+  "performance": {
+    "sampleCount": 947,
+    "medianFps": 59.880239520968516,
+    "p95ms": 17.599999999998545,
+    "includesSceneChanges": true,
+    "rawFrameTimes": true
+  },
+  "errors": [],
+  "sourceModelSha256": "475b82f8abc5b1ad777b5e0653e514546ab0df22b8949840441c2f2ba8b5fc59"
+}

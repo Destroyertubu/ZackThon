@@ -1,0 +1,14 @@
+✔ GLB 2 container, embedded images and finite accessor bounds (2.164375ms)
+✔ actual GLB retains whitelist facilities, safe spawn and Y-up metre scale (0.977916ms)
+✔ all facility approaches share a traversable space; door is under ten seconds away (5.830209ms)
+✔ room bounds replace old hardcoded boundary without clipping a legitimate route (0.28625ms)
+✔ collision layers distinguish glass, frame, door leaf and camera ceiling (0.168208ms)
+✔ visible geometry and startup artifact have bounded size (0.149375ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 159.713333

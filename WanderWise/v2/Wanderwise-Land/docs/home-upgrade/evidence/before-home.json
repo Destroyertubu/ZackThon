@@ -1,0 +1,32 @@
+{
+  "page": "home",
+  "renderer": "native-webgl2",
+  "mode2d": false,
+  "position": {
+    "x": 0,
+    "y": 0,
+    "z": 3.6,
+    "yaw": 0
+  },
+  "camera": {
+    "yaw": 0,
+    "pitch": 0.22,
+    "distance": 5
+  },
+  "metrics": {
+    "drawCalls": 5,
+    "triangles": 1923,
+    "fps": 60
+  },
+  "pending": 0,
+  "worldVersion": null,
+  "nodeCount": null,
+  "modal": null,
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+  "dpr": 1,
+  "viewport": [
+    1920,
+    1080
+  ],
+  "browser": "152.0.7977.83"
+}

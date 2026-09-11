@@ -1,0 +1,6 @@
+
+> wanderwise-land@1.1.0-home.1 build:cloud
+> node tools/check_frontend.mjs && node tools/build-netlify.mjs
+
+18 ES modules passed syntax checks. Frontend is already the distributable; same-origin vendored libraries included; no build required by Python users.
+Netlify public artifact prepared (frontend assets only).

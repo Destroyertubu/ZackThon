@@ -1,0 +1,73 @@
+{
+  "page": "home",
+  "renderer": "three-webgl2",
+  "sceneState": "ready",
+  "sceneKind": "home",
+  "sceneStage": "corner",
+  "eye": [
+    0,
+    1.6637509309456135,
+    4.513114727974621
+  ],
+  "target": null,
+  "active": false,
+  "facilities": [
+    {
+      "id": "cabinet",
+      "position": {
+        "x": -0.7599999904632568,
+        "y": 1.7000000476837158,
+        "z": -3.8399999141693115
+      }
+    },
+    {
+      "id": "door",
+      "position": {
+        "x": -3.200000047683716,
+        "y": 1.649999976158142,
+        "z": -4.679999828338623
+      }
+    },
+    {
+      "id": "journal",
+      "position": {
+        "x": 2.3499999046325684,
+        "y": 1.25,
+        "z": -2.799999952316284
+      }
+    }
+  ],
+  "assetBytes": 4446952,
+  "mode2d": false,
+  "position": {
+    "x": 0,
+    "y": 0,
+    "z": 2.3499999046325684,
+    "yaw": 0
+  },
+  "camera": {
+    "yaw": 0,
+    "pitch": 0.22,
+    "distance": 3.8
+  },
+  "metrics": {
+    "drawCalls": 79,
+    "triangles": 152960,
+    "geometries": 40,
+    "textures": 4,
+    "programs": 8,
+    "labels": 0,
+    "fps": 6,
+    "medianFps": 57.8,
+    "p95ms": 1149.9,
+    "rawFrameMs": 1149.8999999999999
+  },
+  "pending": 0,
+  "worldVersion": null,
+  "nodeCount": null,
+  "modal": null,
+  "browser": "152.0.7977.83",
+  "secondsToReady": 0.2524174590362236,
+  "pageErrors": [],
+  "consoleErrors": []
+}

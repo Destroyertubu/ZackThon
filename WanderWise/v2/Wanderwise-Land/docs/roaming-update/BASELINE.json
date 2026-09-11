@@ -1,0 +1,6 @@
+{
+  "backup": "../rollback-before-roaming-update/frontend-before-roaming.tar.gz",
+  "sha256": "b29f07b033bc31ba5f536f65d3e6efd1b1742ee37c9d0fec31ffc76f5cbadba5",
+  "previousVersion": "1.1.0-home.1",
+  "scope": "Frontend only; no user data or credentials"
+}

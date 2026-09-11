@@ -1,0 +1,13 @@
+{
+  "file": "home-walkthrough.webm",
+  "errors": [],
+  "viewport": [
+    1920,
+    1080
+  ],
+  "recordedSize": [
+    1280,
+    720
+  ],
+  "actions": "Actual W/S walking, right-drag camera, Space jump, Escape pause and original journal panel; no QA teleports"
+}

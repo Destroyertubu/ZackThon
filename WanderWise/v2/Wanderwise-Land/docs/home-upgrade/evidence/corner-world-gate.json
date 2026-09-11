@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "checks": [
+    "real world geometry on Three renderer",
+    "real article field on Three renderer",
+    "return checkpoint",
+    "saved collection survives home and refresh"
+  ],
+  "errors": [],
+  "browser": "152.0.7977.83"
+}
