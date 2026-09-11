@@ -1,0 +1,234 @@
+{
+  "environment": "offline Chromium; synthetic answers; memory journal; mocked AI responses; no paid API calls",
+  "checks": [
+    "120 answer nodes retained",
+    "default AI disabled",
+    "raw XYZ projection used, no screen repulsion",
+    "1..8 world-anchored holograms visible",
+    "drag rotation sensitivity responds to user setting",
+    "Shift-drag pans instead of rotating",
+    "wheel moves camera inward with perspective",
+    "camera range maps slider consistently",
+    "sliders preview force coefficient live",
+    "closing settings discards unsaved preview",
+    "saturated theme applied and stored",
+    "morandi theme applied and stored",
+    "custom palette enters custom mode and protects contrast",
+    "palette exports typed JSON without API keys",
+    "click opens real source body without automatic rotation",
+    "selected literal excerpt saved to knowledge journal",
+    "semantic visits, not mouse motion, populate trajectory",
+    "trajectory has clickable SVG map",
+    "AI performs exactly two batched calls",
+    "AI repairs bad keyword, caps at eight, preserves IDs/bookmarks",
+    "AI-picked quote is an exact source substring",
+    "manual AI undo restores old labels and preserves all answers",
+    "failed second pass does not partially rename or relink graph",
+    "obsolete answer-pool generation discards late AI result",
+    "incremental loading keeps all 500 answer nodes",
+    "all twelve 500-answer views have finite coordinates and exact projection",
+    "all twelve views honor eight-hologram budget",
+    "system reduced-motion preference is respected",
+    "resized viewport remains operable",
+    "no uncaught browser JavaScript exceptions"
+  ],
+  "views500": [
+    {
+      "view": 0,
+      "answers": 500,
+      "visible": 520,
+      "cards": 3,
+      "overlaps": 0,
+      "projectionShift": 0,
+      "drawMs": 24.09999999962747,
+      "finite": true
+    },
+    {
+      "view": 1,
+      "answers": 500,
+      "visible": 520,
+      "cards": 2,
+      "overlaps": 0,
+      "projectionShift": 0,
+      "drawMs": 26.699999999720603,
+      "finite": true
+    },
+    {
+      "view": 2,
+      "answers": 500,
+      "visible": 510,
+      "cards": 4,
+      "overlaps": 0,
+      "projectionShift": 0,
+      "drawMs": 23.299999999813735,
+      "finite": true
+    },
+    {
+      "view": 3,
+      "answers": 500,
+      "visible": 513,
+      "cards": 5,
+      "overlaps": 0,
+      "projectionShift": 0,
+      "drawMs": 27.199999999720603,
+      "finite": true
+    },
+    {
+      "view": 4,
+      "answers": 500,
+      "visible": 515,
+      "cards": 4,
+      "overlaps": 0,
+      "projectionShift": 0,
+      "drawMs": 31.200000000186265,
+      "finite": true
+    },
+    {
+      "view": 5,
+      "answers": 500,
+      "visible": 513,
+      "cards": 3,
+      "overlaps": 0,
+      "projectionShift": 0,
+      "drawMs": 19.5,
+      "finite": true
+    },
+    {
+      "view": 6,
+      "answers": 500,
+      "visible": 519,
+      "cards": 5,
+      "overlaps": 0,
+      "projectionShift": 0,
+      "drawMs": 36.3000000002794,
+      "finite": true
+    },
+    {
+      "view": 7,
+      "answers": 500,
+      "visible": 516,
+      "cards": 3,
+      "overlaps": 0,
+      "projectionShift": 0,
+      "drawMs": 24.90000000037253,
+      "finite": true
+    },
+    {
+      "view": 8,
+      "answers": 500,
+      "visible": 516,
+      "cards": 3,
+      "overlaps": 0,
+      "projectionShift": 0,
+      "drawMs": 23.800000000279397,
+      "finite": true
+    },
+    {
+      "view": 9,
+      "answers": 500,
+      "visible": 520,
+      "cards": 4,
+      "overlaps": 0,
+      "projectionShift": 0,
+      "drawMs": 29.199999999720603,
+      "finite": true
+    },
+    {
+      "view": 10,
+      "answers": 500,
+      "visible": 520,
+      "cards": 4,
+      "overlaps": 0,
+      "projectionShift": 0,
+      "drawMs": 22.300000000279397,
+      "finite": true
+    },
+    {
+      "view": 11,
+      "answers": 500,
+      "visible": 517,
+      "cards": 4,
+      "overlaps": 0,
+      "projectionShift": 0,
+      "drawMs": 23.899999999906868,
+      "finite": true
+    }
+  ],
+  "errors": [],
+  "aiMock": {
+    "label": "预算规划",
+    "accepted": 8,
+    "requests": 2,
+    "quotes": true,
+    "kept": true,
+    "telemetry": {
+      "requests": 2,
+      "durationMs": 61.299999999813735,
+      "cached": false
+    },
+    "audit": [
+      {
+        "id": "k-1jaryk",
+        "oldLabel": "src",
+        "label": "预算规划",
+        "reason": "网页元数据不是主题；支持句讨论支出与储备。",
+        "terms": [
+          "预算规划",
+          "预算",
+          "支出",
+          "应急储备"
+        ],
+        "accepted": [
+          {
+            "id": "900000",
+            "quote": "每月先弄清钱流向哪里，比急着挑理财产品更重要。",
+            "score": 0.65
+          },
+          {
+            "id": "900016",
+            "quote": "记账不是为了给每一杯奶茶定罪，而是看清固定支出、弹性支出和应急储备。",
+            "score": 0.65
+          },
+          {
+            "id": "900032",
+            "quote": "把收入和支出写进表格，给房租和意外开销留下预算，定期检查自己的现金流。",
+            "score": 0.65
+          },
+          {
+            "id": "900048",
+            "quote": "每月先弄清钱流向哪里，比急着挑理财产品更重要。",
+            "score": 0.65
+          },
+          {
+            "id": "900064",
+            "quote": "记账不是为了给每一杯奶茶定罪，而是看清固定支出、弹性支出和应急储备。",
+            "score": 0.65
+          },
+          {
+            "id": "900080",
+            "quote": "把收入和支出写进表格，给房租和意外开销留下预算，定期检查自己的现金流。",
+            "score": 0.65
+          },
+          {
+            "id": "900096",
+            "quote": "每月先弄清钱流向哪里，比急着挑理财产品更重要。",
+            "score": 0.65
+          },
+          {
+            "id": "900112",
+            "quote": "记账不是为了给每一杯奶茶定罪，而是看清固定支出、弹性支出和应急储备。",
+            "score": 0.65
+          }
+        ],
+        "stats": {
+          "pool": 120,
+          "matched": 8,
+          "sent": 8,
+          "selectivity": 0.06666666666666667,
+          "threshold": 0.1
+        }
+      }
+    ]
+  },
+  "draw500MedianMs": 24.5
+}

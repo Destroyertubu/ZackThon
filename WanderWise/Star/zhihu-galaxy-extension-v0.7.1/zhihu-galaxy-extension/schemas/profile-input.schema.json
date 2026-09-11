@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Inactive profile input contract v1",
+  "description": "Current API only returns not_implemented with empty observations. Future activation requires explicit consent and a new contract version.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "status",
+    "subjectId",
+    "consent",
+    "observationSchema",
+    "observations",
+    "inferredTraits",
+    "embedding"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "status": {
+      "const": "not_implemented"
+    },
+    "subjectId": {
+      "type": "null"
+    },
+    "consent": {
+      "type": "object",
+      "required": [
+        "profiling",
+        "sharing"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "profiling": {
+          "const": false
+        },
+        "sharing": {
+          "const": false
+        }
+      }
+    },
+    "observationSchema": {
+      "const": "schemas/profile-input.schema.json"
+    },
+    "observations": {
+      "type": "array",
+      "maxItems": 0,
+      "items": {
+        "$ref": "#/$defs/reservedObservation"
+      }
+    },
+    "inferredTraits": {
+      "type": "null"
+    },
+    "embedding": {
+      "type": "null"
+    }
+  },
+  "$defs": {
+    "reservedObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eventId",
+        "kind",
+        "questionId",
+        "nodeId",
+        "at"
+      ],
+      "properties": {
+        "eventId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "kind": {
+          "enum": [
+            "visit",
+            "read",
+            "bookmark",
+            "open_source"
+          ]
+        },
+        "questionId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "nodeId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dwellMs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "explicitlyUseful": {
+          "type": "boolean"
+        },
+        "source": {
+          "enum": [
+            "pointer",
+            "keyboard",
+            "search",
+            "review",
+            "preview",
+            "panel"
+          ]
+        }
+      }
+    }
+  }
+}

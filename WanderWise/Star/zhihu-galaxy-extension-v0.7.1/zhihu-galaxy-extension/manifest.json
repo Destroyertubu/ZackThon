@@ -1,0 +1,62 @@
+{
+  "manifest_version": 3,
+  "name": "知乎问题星系 · Zhihu Galaxy",
+  "version": "0.7.1",
+  "description": "三维力布局与全息原文选段；自定义配色、引力斥力与旋转速度；可选 AI 关键词校对、原文复核与本地知识航迹。",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://www.zhihu.com/*",
+    "https://zhihu.com/*",
+    "http://127.0.0.1:8765/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "开启知乎问题星系",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.zhihu.com/*",
+        "https://zhihu.com/*"
+      ],
+      "js": [
+        "core.js",
+        "trail-store.js",
+        "spatial.js",
+        "ai-semantic.js",
+        "engine.js",
+        "experience.js",
+        "galaxy3d.js",
+        "ai-client.js",
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "minimum_chrome_version": "114",
+  "optional_host_permissions": [
+    "https://*/*",
+    "http://127.0.0.1/*",
+    "http://localhost/*"
+  ],
+  "options_page": "ai-settings.html"
+}

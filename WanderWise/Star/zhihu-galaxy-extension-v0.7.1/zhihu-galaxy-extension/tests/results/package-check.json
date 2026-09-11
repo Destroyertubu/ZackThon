@@ -1,0 +1,12 @@
+{
+  "version": "0.7.0",
+  "javascriptFilesChecked": 13,
+  "localReferencesChecked": 31,
+  "nodeTestsPassed": 58,
+  "browserChecksPassed": 30,
+  "optionsChecksPassed": 7,
+  "schemaFilesChecked": 4,
+  "realZhihuOrPaidAPITested": false,
+  "testData": "synthetic",
+  "renderer": "XYZ perspective Canvas + CSS matrix3d holograms"
+}

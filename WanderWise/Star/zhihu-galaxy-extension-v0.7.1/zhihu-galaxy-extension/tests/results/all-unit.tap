@@ -1,0 +1,358 @@
+TAP version 13
+# Subtest: old bridge is rejected before sending excerpts
+ok 1 - old bridge is rejected before sending excerpts
+  ---
+  duration_ms: 20.185853
+  type: 'test'
+  ...
+# Subtest: new bridge always receives explicit legacy AI denial
+ok 2 - new bridge always receives explicit legacy AI denial
+  ---
+  duration_ms: 1.919026
+  type: 'test'
+  ...
+# Subtest: untrusted bridge caller never sends network traffic
+ok 3 - untrusted bridge caller never sends network traffic
+  ---
+  duration_ms: 0.546184
+  type: 'test'
+  ...
+# Subtest: settings clamp dangerous and non-finite values
+ok 4 - settings clamp dangerous and non-finite values
+  ---
+  duration_ms: 1.214753
+  type: 'test'
+  ...
+# Subtest: zero attraction and zero repulsion are real zeros
+ok 5 - zero attraction and zero repulsion are real zeros
+  ---
+  duration_ms: 0.269907
+  type: 'test'
+  ...
+# Subtest: settings preserve random seed and reject unknown provider-like properties
+ok 6 - settings preserve random seed and reject unknown provider-like properties
+  ---
+  duration_ms: 0.195045
+  type: 'test'
+  ...
+# Subtest: three palette schemes and custom hex validation
+ok 7 - three palette schemes and custom hex validation
+  ---
+  duration_ms: 0.141444
+  type: 'test'
+  ...
+# Subtest: text contrast auto-correction works for dark and light custom backgrounds
+ok 8 - text contrast auto-correction works for dark and light custom backgrounds
+  ---
+  duration_ms: 0.34455
+  type: 'test'
+  ...
+# Subtest: votes priority is shared and deterministic
+ok 9 - votes priority is shared and deterministic
+  ---
+  duration_ms: 1.010595
+  type: 'test'
+  ...
+# Subtest: latest priority recognizes Unix seconds and ISO dates
+ok 10 - latest priority recognizes Unix seconds and ISO dates
+  ---
+  duration_ms: 0.226852
+  type: 'test'
+  ...
+# Subtest: random order is stable for one seed and changes with seed
+ok 11 - random order is stable for one seed and changes with seed
+  ---
+  duration_ms: 1.0336
+  type: 'test'
+  ...
+# Subtest: answer scale changes answers only
+ok 12 - answer scale changes answers only
+  ---
+  duration_ms: 0.306523
+  type: 'test'
+  ...
+# Subtest: physics works on all three dimensions and remains finite
+ok 13 - physics works on all three dimensions and remains finite
+  ---
+  duration_ms: 6.665139
+  type: 'test'
+  ...
+# Subtest: attraction draws linked nodes closer than attraction=0
+ok 14 - attraction draws linked nodes closer than attraction=0
+  ---
+  duration_ms: 19.290573
+  type: 'test'
+  ...
+# Subtest: repulsion separates a close pair more than repulsion=0
+ok 15 - repulsion separates a close pair more than repulsion=0
+  ---
+  duration_ms: 2.540894
+  type: 'test'
+  ...
+# Subtest: freezing physics leaves XYZ unchanged
+ok 16 - freezing physics leaves XYZ unchanged
+  ---
+  duration_ms: 0.346163
+  type: 'test'
+  ...
+# Subtest: coincident nodes do not generate NaN
+ok 17 - coincident nodes do not generate NaN
+  ---
+  duration_ms: 0.64244
+  type: 'test'
+  ...
+# Subtest: bounded layout sleeps after its iteration budget
+ok 18 - bounded layout sleeps after its iteration budget
+  ---
+  duration_ms: 0.17237
+  type: 'test'
+  ...
+# Subtest: changing settings never changes IDs or duplicates points
+ok 19 - changing settings never changes IDs or duplicates points
+  ---
+  duration_ms: 0.62287
+  type: 'test'
+  ...
+# Subtest: incremental world layout leaves existing coordinates unchanged
+ok 20 - incremental world layout leaves existing coordinates unchanged
+  ---
+  duration_ms: 0.417951
+  type: 'test'
+  ...
+# Subtest: hologram matrix projects its real XYZ plane exactly
+ok 21 - hologram matrix projects its real XYZ plane exactly
+  ---
+  duration_ms: 0.272771
+  type: 'test'
+  ...
+# Subtest: hologram planes behind camera are culled
+ok 22 - hologram planes behind camera are culled
+  ---
+  duration_ms: 0.102425
+  type: 'test'
+  ...
+# Subtest: scan input contains no author, note, URL, trail or whole-answer body
+ok 23 - scan input contains no author, note, URL, trail or whole-answer body
+  ---
+  duration_ms: 0.445092
+  type: 'test'
+  ...
+# Subtest: invalid / vague labels fail repair validation
+ok 24 - invalid / vague labels fail repair validation
+  ---
+  duration_ms: 0.329938
+  type: 'test'
+  ...
+# Subtest: scan validation rejects unknown IDs, duplicates and collisions
+ok 25 - scan validation rejects unknown IDs, duplicates and collisions
+  ---
+  duration_ms: 0.388897
+  type: 'test'
+  ...
+# Subtest: first AI pass may return no repair without error
+ok 26 - first AI pass may return no repair without error
+  ---
+  duration_ms: 0.111969
+  type: 'test'
+  ...
+# Subtest: malformed scan response does not silently succeed
+ok 27 - malformed scan response does not silently succeed
+  ---
+  duration_ms: 0.221404
+  type: 'test'
+  ...
+# Subtest: local index rejects the unrelated sports documents
+ok 28 - local index rejects the unrelated sports documents
+  ---
+  duration_ms: 4.423906
+  type: 'test'
+  ...
+# Subtest: candidate cap is enforced before API transmission
+ok 29 - candidate cap is enforced before API transmission
+  ---
+  duration_ms: 1.965497
+  type: 'test'
+  ...
+# Subtest: local recall respects latest / votes / deterministic random preference
+ok 30 - local recall respects latest / votes / deterministic random preference
+  ---
+  duration_ms: 2.659123
+  type: 'test'
+  ...
+# Subtest: snippets are exact substrings, never AI-generated
+ok 31 - snippets are exact substrings, never AI-generated
+  ---
+  duration_ms: 0.136456
+  type: 'test'
+  ...
+# Subtest: second pass ignores hallucinated IDs and invalid snippet indices
+ok 32 - second pass ignores hallucinated IDs and invalid snippet indices
+  ---
+  duration_ms: 2.23939
+  type: 'test'
+  ...
+# Subtest: second pass caps at eight and reapplies global priority
+ok 33 - second pass caps at eight and reapplies global priority
+  ---
+  duration_ms: 1.809762
+  type: 'test'
+  ...
+# Subtest: duplicate accepted answers are deduplicated
+ok 34 - duplicate accepted answers are deduplicated
+  ---
+  duration_ms: 1.611192
+  type: 'test'
+  ...
+# Subtest: no accepted evidence means no graph patch
+ok 35 - no accepted evidence means no graph patch
+  ---
+  duration_ms: 2.412751
+  type: 'test'
+  ...
+# Subtest: injected text is data in a user JSON message, not a new system prompt
+ok 36 - injected text is data in a user JSON message, not a new system prompt
+  ---
+  duration_ms: 0.222606
+  type: 'test'
+  ...
+# Subtest: strict JSON parser rejects trailing prose and excessive output
+ok 37 - strict JSON parser rejects trailing prose and excessive output
+  ---
+  duration_ms: 0.283938
+  type: 'test'
+  ...
+# Subtest: async index can be cancelled without sending candidate requests
+ok 38 - async index can be cancelled without sending candidate requests
+  ---
+  duration_ms: 0.456469
+  type: 'test'
+  ...
+# Subtest: async and sync retrieval are identical
+ok 39 - async and sync retrieval are identical
+  ---
+  duration_ms: 20.804236
+  type: 'test'
+  ...
+# Subtest: journal settings whitelist excludes credentials
+ok 40 - journal settings whitelist excludes credentials
+  ---
+  duration_ms: 1.230107
+  type: 'test'
+  ...
+# Subtest: profile interface is still opt-in, inactive and contains no inferences
+ok 41 - profile interface is still opt-in, inactive and contains no inferences
+  ---
+  duration_ms: 0.113721
+  type: 'test'
+  ...
+# Subtest: public config never contains the secret
+ok 42 - public config never contains the secret
+  ---
+  duration_ms: 5.842857
+  type: 'test'
+  ...
+# Subtest: other extensions / origins cannot run AI
+ok 43 - other extensions / origins cannot run AI
+  ---
+  duration_ms: 1.167802
+  type: 'test'
+  ...
+# Subtest: content scripts cannot write credentials
+ok 44 - content scripts cannot write credentials
+  ---
+  duration_ms: 1.191048
+  type: 'test'
+  ...
+# Subtest: disabled / unconsented configuration never sends content
+ok 45 - disabled / unconsented configuration never sends content
+  ---
+  duration_ms: 1.951806
+  type: 'test'
+  ...
+# Subtest: missing endpoint permission fails before fetch
+ok 46 - missing endpoint permission fails before fetch
+  ---
+  duration_ms: 2.384178
+  type: 'test'
+  ...
+# Subtest: successful call is authenticated in worker only and does not forward cookies
+ok 47 - successful call is authenticated in worker only and does not forward cookies
+  ---
+  duration_ms: 24.82846
+  type: 'test'
+  ...
+# Subtest: old endpoint credential is not sent to another base URL
+ok 48 - old endpoint credential is not sent to another base URL
+  ---
+  duration_ms: 0.938526
+  type: 'test'
+  ...
+# Subtest: connection tests are restricted to independent options page
+ok 49 - connection tests are restricted to independent options page
+  ---
+  duration_ms: 1.207232
+  type: 'test'
+  ...
+# Subtest: unknown semantic tasks cannot become arbitrary requests
+ok 50 - unknown semantic tasks cannot become arbitrary requests
+  ---
+  duration_ms: 1.029483
+  type: 'test'
+  ...
+# Subtest: HTTP provider error bodies including echoed secrets are never returned
+ok 51 - HTTP provider error bodies including echoed secrets are never returned
+  ---
+  duration_ms: 1.635549
+  type: 'test'
+  ...
+# Subtest: malformed provider responses produce safe errors
+ok 52 - malformed provider responses produce safe errors
+  ---
+  duration_ms: 1.510449
+  type: 'test'
+  ...
+# Subtest: token-truncated JSON is rejected
+ok 53 - token-truncated JSON is rejected
+  ---
+  duration_ms: 0.973048
+  type: 'test'
+  ...
+# Subtest: response size is bounded
+ok 54 - response size is bounded
+  ---
+  duration_ms: 1.362816
+  type: 'test'
+  ...
+# Subtest: caller cancellation aborts only its active request
+ok 55 - caller cancellation aborts only its active request
+  ---
+  duration_ms: 1.403859
+  type: 'test'
+  ...
+# Subtest: configured request limit is enforced without auto retry
+ok 56 - configured request limit is enforced without auto retry
+  ---
+  duration_ms: 7.920222
+  type: 'test'
+  ...
+# Subtest: HTTPS required, loopback HTTP permitted, embedded credentials forbidden
+ok 57 - HTTPS required, loopback HTTP permitted, embedded credentials forbidden
+  ---
+  duration_ms: 1.400964
+  type: 'test'
+  ...
+# Subtest: OpenAI and Qwen adapters set their intended limits and flags
+ok 58 - OpenAI and Qwen adapters set their intended limits and flags
+  ---
+  duration_ms: 2.39221
+  type: 'test'
+  ...
+1..58
+# tests 58
+# suites 0
+# pass 58
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 147.150238

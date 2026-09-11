@@ -1,0 +1,13 @@
+{
+  "environment": "mock Chrome APIs; no real key or API used",
+  "checks": [
+    "defaults off",
+    "provider presets change base/model",
+    "Qwen asks for account endpoint",
+    "permission before save",
+    "key field cleared after save",
+    "test-connection button",
+    "no JS exceptions"
+  ],
+  "errors": []
+}
