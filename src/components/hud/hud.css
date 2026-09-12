@@ -1,0 +1,39 @@
+/* HUD 局部动画（仅存于此目录，不动全局样式） */
+
+@keyframes hud-toast {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 12px);
+  }
+  12% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  80% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -8px);
+  }
+}
+
+.hud-toast {
+  animation: hud-toast 2.2s ease forwards;
+}
+
+@keyframes hud-panel-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.hud-panel-enter {
+  animation: hud-panel-enter 0.18s ease-out;
+}

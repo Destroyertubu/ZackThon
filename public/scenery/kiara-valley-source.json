@@ -1,0 +1,14 @@
+{
+  "asset_id": "kiara_7_late-afternoon",
+  "name": "Kiara 7 Late-Afternoon",
+  "authors": {
+    "Greg Zaal": "All"
+  },
+  "license": "CC0-1.0",
+  "asset_url": "https://polyhaven.com/a/kiara_7_late-afternoon",
+  "license_url": "https://polyhaven.com/license",
+  "download_url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/extra/Tonemapped%20JPG/kiara_7_late-afternoon.jpg",
+  "original_md5": "6550397ffb525b479643d513b4b7897c",
+  "derived_file": "kiara-valley-4k.jpg",
+  "processing": "Original 8192x4096 tonemapped JPEG downsampled to 4096x2048 with Lanczos, JPEG quality 92. No watermark removal or AI generation."
+}
