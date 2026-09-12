@@ -211,6 +211,12 @@ export default function Backdrop() {
     leafMaterial.color.set('#8c9c69')
     leafMaterial.roughness = 1
     leafMaterial.envMapIntensity = 0.4
+    // Poly Haven foliage uses an RGBA cutout map. Alpha testing preserves
+    // crisp leaf silhouettes without transparent sorting artefacts.
+    leafMaterial.transparent = false
+    leafMaterial.alphaTest = 0.35
+    leafMaterial.depthWrite = true
+    leafMaterial.side = THREE.DoubleSide
     const leafGeometry = leafSource.geometry.clone()
     // Only the real leaf mesh is reused, without its indoor pot or soil.
     leafGeometry.translate(0, 0.1, 0)

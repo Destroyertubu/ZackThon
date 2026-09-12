@@ -150,9 +150,9 @@ export default function Experience() {
         <color attach="background" args={['#9aaeb4']} />
         <fog attach="fog" args={['#c8b99a', 38, 105]} />
         <Suspense fallback={null}>
-          {/* soft IBL so metals / glass / crystal have something real to reflect */}
-          <Environment files="/textures/kloppenheim_06_puresky_1k.hdr" environmentIntensity={0.35} />
-          <Lighting shadowMapSize={quality.shadowMapSize} />
+          {/* Match the room IBL to the Kiara valley panorama used outside. */}
+          <Environment files="/textures/kiara_7_late-afternoon_1k.hdr" environmentIntensity={0.35} />
+          <Lighting shadowMapSize={quality.shadowMapSize} crystalShadow={quality.postprocessing} />
           <Backdrop />
           <Room />
           <Balcony />
