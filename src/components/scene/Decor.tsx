@@ -24,7 +24,7 @@ function Banner({
     const pos = g.attributes.position
     for (let i = 0; i < pos.count; i++) {
       const x = pos.getX(i)
-      let y = pos.getY(i)
+      const y = pos.getY(i)
       // fold the lower triangle into the pointed bottom (plane y in [-0.56, -0.29])
       if (y < -0.29) {
         const f = (y + 0.56) / 0.27 // 1 at y=-0.29 → 0 at the tip

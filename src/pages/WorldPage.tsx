@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Canvas } from '@react-three/fiber'
 import type { PointerLockControls as PointerLockControlsImpl } from 'three-stdlib'
-import { useGameStore } from '@/state/gameStore'
+import { getQualityProfile, useGameStore } from '@/state/gameStore'
 import WorldPanels from '@/components/panels/WorldPanels'
 import GameHUD from '@/components/hud/GameHUD'
 import WorldScene from '@/components/world/WorldScene'
@@ -41,6 +41,8 @@ function collectFocused() {
 export default function WorldPage() {
   const navigate = useNavigate()
   const seed = useGameStore((s) => s.seed)
+  const qualityMode = useGameStore((s) => s.qualityMode)
+  const quality = getQualityProfile(qualityMode)
   const panel = useGameStore((s) => s.panel)
   const realmWorkId = useGameStore((s) => s.realmWorkId)
   const [locked, setLocked] = useState(false)
@@ -116,7 +118,7 @@ export default function WorldPage() {
   return (
     <div className="relative h-screen w-screen overflow-hidden bg-[#05070f]">
       <Canvas
-        dpr={[1, 1.75]}
+        dpr={quality.dprMax === 1 ? 1 : [1, quality.dprMax]}
         camera={{ fov: 72, near: 0.1, far: 900, position: [0, 14, 78] }}
         gl={{ antialias: true, powerPreference: 'high-performance', toneMappingExposure: 1.35 }}
       >

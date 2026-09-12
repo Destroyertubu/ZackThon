@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components -- this module is the shared scene-prop catalog. */
 import { memo, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
@@ -53,7 +54,7 @@ flameCoreMat.color.multiplyScalar(3.0)
 
 export const Flame = memo(function Flame({ scale = 1 }: { scale?: number }) {
   const ref = useRef<THREE.Mesh>(null)
-  const offset = useMemo(() => Math.random() * 10, [])
+  const offset = useMemo(() => mulberry32(Math.round(scale * 1000) + 17)() * 10, [scale])
   useFrame(({ clock }) => {
     const m = ref.current
     if (!m) return
@@ -192,22 +193,23 @@ export function BookStack({
 }) {
   const books = useMemo(() => {
     const rng = mulberry32(seed)
-    let y = 0
-    return Array.from({ length: count }, () => {
+    return Array.from({ length: count }).reduce<{
+      items: { y: number; h: number; w: number; d: number; color: string; rot: number }[]
+      y: number
+    }>((acc) => {
       const h = 0.035 + rng() * 0.03
       const w = 0.2 + rng() * 0.1
       const d = 0.28 + rng() * 0.1
       const item = {
-        y: y + h / 2,
+        y: acc.y + h / 2,
         h,
         w,
         d,
         color: BOOK_SPINES[Math.floor(rng() * BOOK_SPINES.length)],
         rot: (rng() - 0.5) * 0.5,
       }
-      y += h
-      return item
-    })
+      return { items: [...acc.items, item], y: acc.y + h }
+    }, { items: [], y: 0 }).items
   }, [count, seed])
   return (
     <group position={position} scale={scale}>

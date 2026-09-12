@@ -8,7 +8,7 @@ import { Object3D } from 'three'
  *  7. display-cabinet interior point  8. display-cabinet front fill
  * All other flames / lanterns are HDR-emissive + Bloom.
  */
-export default function Lighting() {
+export default function Lighting({ shadowMapSize = 2048, crystalShadow = true }: { shadowMapSize?: 1024 | 2048; crystalShadow?: boolean }) {
   // A real scene target keeps the sun aimed through the glazing at floor level.
   const sunlightTarget = useMemo(() => new Object3D(), [])
   return (
@@ -24,7 +24,7 @@ export default function Lighting() {
         position={[3.5, 6.5, -11]}
         target={sunlightTarget}
         castShadow
-        shadow-mapSize={[4096, 4096]}
+        shadow-mapSize={[shadowMapSize, shadowMapSize]}
         shadow-camera-left={-8.5}
         shadow-camera-right={8.5}
         shadow-camera-top={8.5}
@@ -33,7 +33,7 @@ export default function Lighting() {
         shadow-camera-far={26}
         shadow-bias={-0.00015}
         shadow-normalBias={0.035}
-        shadow-radius={4}
+        shadow-radius={shadowMapSize === 1024 ? 2 : 4}
       />
 
       {/* crystal — teal focal light */}
@@ -43,8 +43,8 @@ export default function Lighting() {
         distance={9}
         decay={1.6}
         position={[0, 1.7, 0]}
-        castShadow
-        shadow-mapSize={[1024, 1024]}
+        castShadow={crystalShadow}
+        shadow-mapSize={[shadowMapSize, shadowMapSize]}
         shadow-bias={-0.001}
         shadow-normalBias={0.02}
       />

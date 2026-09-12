@@ -106,6 +106,9 @@ interface AssetProps {
   hangTop?: boolean
   position?: [number, number, number]
   rotation?: [number, number, number]
+  /** Expensive shadow casting is opt-in for small decor (books/plants disable it). */
+  castShadow?: boolean
+  receiveShadow?: boolean
   matTweak?: MatTweak
   children?: React.ReactNode
 }
@@ -119,6 +122,8 @@ export function AssetModel({
   hangTop = false,
   position = [0, 0, 0],
   rotation = [0, 0, 0],
+  castShadow = true,
+  receiveShadow = true,
   matTweak,
   children,
 }: AssetProps) {
@@ -146,7 +151,7 @@ export function AssetModel({
   return (
     <group position={position} rotation={rotation}>
       <group ref={ref} scale={s} position={offset.clone().multiplyScalar(s)}>
-        <Clone object={target} castShadow receiveShadow />
+        <Clone object={target} castShadow={castShadow} receiveShadow={receiveShadow} />
       </group>
       {children}
     </group>
@@ -225,6 +230,7 @@ export function AssetBook({
       height={height}
       position={position}
       rotation={rotation}
+      castShadow={false}
     />
   )
 }
@@ -253,8 +259,13 @@ export function AssetBookRow({
       rotY: number
     }[] = []
     let x = -width / 2
+    let previousIdx = -1
     while (x < width / 2 - 0.05) {
-      const idx = Math.floor(rng() * 20)
+      // Avoid visually obvious repeated scan books while preserving the
+      // deterministic layout generated from the shelf seed.
+      let idx = Math.floor(rng() * 20)
+      if (idx === previousIdx) idx = (idx + 1 + Math.floor(rng() * 19)) % 20
+      previousIdx = idx
       const w = BOOK_W[idx] * k
       const lying = rng() < 0.14 && x + 0.24 < width / 2
       arr.push({
@@ -317,15 +328,18 @@ export function AssetBookStack({
 }) {
   const books = useMemo(() => {
     const rng = mulberry32(seed)
-    let y = 0
-    return Array.from({ length: count }, (_, i) => {
+    const raw = Array.from({ length: count }, (_, i) => {
       const idx = Math.floor(rng() * 20)
       const h = 0.24 * scale * (i % 2 ? 0.9 : 1)
       const w = BOOK_W[idx] * (h / BOOK_NATIVE_H) // vertical thickness when lying
-      const item = { idx, rot: (rng() - 0.5) * 0.6, y: y + w / 2, h }
-      y += w + 0.002
-      return item
+      return { idx, rot: (rng() - 0.5) * 0.6, w, h }
     })
+    return raw.map((book, i) => ({
+      idx: book.idx,
+      rot: book.rot,
+      h: book.h,
+      y: raw.slice(0, i).reduce((sum, previous) => sum + previous.w + 0.002, 0) + book.w / 2,
+    }))
   }, [count, seed, scale])
   return (
     <group position={position}>

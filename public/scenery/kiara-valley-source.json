@@ -8,6 +8,9 @@
   "asset_url": "https://polyhaven.com/a/kiara_7_late-afternoon",
   "license_url": "https://polyhaven.com/license",
   "download_url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/extra/Tonemapped%20JPG/kiara_7_late-afternoon.jpg",
+  "hdr_download_url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/kiara_7_late-afternoon_1k.hdr",
+  "hdr_file": "../textures/kiara_7_late-afternoon_1k.hdr",
+  "hdr_sha256": "d17787e1e404b601e2ec5a2e5910aa739130ad25477d1da8220cec4ca7291eb5",
   "original_md5": "6550397ffb525b479643d513b4b7897c",
   "derived_file": "kiara-valley-4k.jpg",
   "processing": "Original 8192x4096 tonemapped JPEG downsampled to 4096x2048 with Lanczos, JPEG quality 92. No watermark removal or AI generation."

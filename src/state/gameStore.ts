@@ -12,6 +12,26 @@ import { expandNode, generateWorld, hashString, seededRandom } from '@/lib/world
 
 export const uid = () => Math.random().toString(36).slice(2, 10)
 
+export type QualityMode = 'auto' | 'fine' | 'smooth'
+
+export interface QualityProfile {
+  dprMax: number
+  shadowMapSize: 1024 | 2048
+  postprocessing: boolean
+}
+
+/** Resolve the user-facing quality mode to renderer settings once per render. */
+export function getQualityProfile(mode: QualityMode): QualityProfile {
+  if (mode === 'fine') return { dprMax: 1.5, shadowMapSize: 2048, postprocessing: true }
+  if (mode === 'smooth') return { dprMax: 1, shadowMapSize: 1024, postprocessing: false }
+  // Auto keeps desktop detail while avoiding high DPR/post effects on touch devices.
+  const isTouch = typeof navigator !== 'undefined'
+    && (navigator.maxTouchPoints > 0 || /Android|iPhone|iPad|Mobile/i.test(navigator.userAgent))
+  return isTouch
+    ? { dprMax: 1, shadowMapSize: 1024, postprocessing: false }
+    : { dprMax: 1.5, shadowMapSize: 2048, postprocessing: true }
+}
+
 /* ---------- 内置同频人（漫行者） ---------- */
 const COMPANION_SEED: Array<Omit<Companion, 'resonance' | 'anchors'>> = [
   { id: 'c1', name: '看山的猫', avatar: '🦊', motto: '长路本身，已是圆满。', visitedWords: ['成长', '孤独', '时间', '脑洞', '职场'] },
@@ -53,6 +73,9 @@ function buildCompanions(myWords: string[]): Companion[] {
 /* ---------- Store ---------- */
 
 export interface GameState {
+  qualityMode: QualityMode
+  setQualityMode: (mode: QualityMode) => void
+
   works: WorkItem[]
   setWorks: (w: WorkItem[]) => void
 
@@ -115,6 +138,9 @@ export interface GameState {
 export const useGameStore = create<GameState>()(
   persist(
     (set, get) => ({
+      qualityMode: 'auto',
+      setQualityMode: (qualityMode) => set({ qualityMode }),
+
       works: [],
       setWorks: (works) => set({ works }),
 
@@ -248,6 +274,7 @@ export const useGameStore = create<GameState>()(
     {
       name: 'wanderwise-game-v1',
       partialize: (s) => ({
+        qualityMode: s.qualityMode,
         seed: s.seed,
         nodes: s.nodes,
         visitedWords: s.visitedWords,

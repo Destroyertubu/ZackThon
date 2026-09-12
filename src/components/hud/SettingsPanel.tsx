@@ -4,8 +4,11 @@ import { Settings } from 'lucide-react'
 import PanelShell from './PanelShell'
 import { getAccessSecret, getQuota, setAccessSecret } from '@/lib/zhihu'
 import type { QuotaItem } from '@/lib/zhihu'
+import { getQualityProfile, useGameStore, type QualityMode } from '@/state/gameStore'
 
 export default function SettingsPanel() {
+  const qualityMode = useGameStore((s) => s.qualityMode)
+  const setQualityMode = useGameStore((s) => s.setQualityMode)
   const [secret, setSecret] = useState(() => getAccessSecret())
   const [saved, setSaved] = useState(() => getAccessSecret() !== '')
   const [quota, setQuota] = useState<QuotaItem[] | null>(null)
@@ -41,6 +44,38 @@ export default function SettingsPanel() {
 
   return (
     <PanelShell title="设置" icon={<Settings className="h-4 w-4" />}>
+      <fieldset className="mb-5 border-b border-[#c9973f]/20 pb-5">
+        <legend className="mb-2 text-sm tracking-widest text-[#e8dcc0]">画质</legend>
+        <div className="grid grid-cols-3 gap-2" role="radiogroup" aria-label="画质模式">
+          {(['auto', 'fine', 'smooth'] as const).map((mode: QualityMode) => {
+            const active = qualityMode === mode
+            const label = mode === 'auto' ? '自动' : mode === 'fine' ? '精细' : '流畅'
+            return (
+              <button
+                key={mode}
+                type="button"
+                role="radio"
+                aria-checked={active}
+                onClick={() => setQualityMode(mode)}
+                className={`h-9 rounded-md border px-2 text-sm tracking-widest transition-colors ${
+                  active
+                    ? 'border-[#c9973f]/80 bg-[#c9973f]/20 text-[#c9973f]'
+                    : 'border-[#c9973f]/25 text-[#8a8f9c] hover:border-[#c9973f]/50 hover:bg-white/5 hover:text-[#e8dcc0]'
+                }`}
+              >
+                {label}
+              </button>
+            )
+          })}
+        </div>
+        <p className="mt-2 text-xs leading-relaxed text-[#8a8f9c]">
+          当前渲染：{(() => {
+            const profile = getQualityProfile(qualityMode)
+            return `${profile.dprMax === 1 ? 'DPR 1' : 'DPR ≤ 1.5'} · ${profile.shadowMapSize}px 阴影${profile.postprocessing ? ' · 后处理开启' : ' · 后处理关闭'}`
+          })()}
+        </p>
+      </fieldset>
+
       <label htmlFor="access-secret" className="mb-1.5 block text-sm tracking-widest text-[#e8dcc0]">
         Access Secret
       </label>

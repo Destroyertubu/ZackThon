@@ -55,12 +55,12 @@ function RealmScene({ work }: { work: WorkItem }) {
     return r
   }, [])
   const center = useMemo(() => new THREE.Vector2(0, 0), [])
+  const registerCache = useRef(new Map<string, (obj: THREE.Object3D | null) => void>())
 
   // 稳定的 ref 回调：避免重渲染时重复注册命中代理
   const register = useMemo<RegisterFn>(() => {
-    const cache = new Map<string, (obj: THREE.Object3D | null) => void>()
     return (key, kind, index) => {
-      let cb = cache.get(key)
+      let cb = registerCache.current.get(key)
       if (!cb) {
         cb = (obj) => {
           if (!obj) return
@@ -68,7 +68,7 @@ function RealmScene({ work }: { work: WorkItem }) {
           obj.userData.realmIndex = index
           interactives.current.push(obj)
         }
-        cache.set(key, cb)
+        registerCache.current.set(key, cb)
       }
       return cb
     }

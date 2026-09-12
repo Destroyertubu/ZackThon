@@ -71,7 +71,9 @@ function LeafInstances({ leaves, geo }: { leaves: LeafInstance[]; geo: THREE.Pla
     m.instanceMatrix.needsUpdate = true
     if (m.instanceColor) m.instanceColor.needsUpdate = true
   }, [leaves])
-  return <instancedMesh ref={ref} args={[geo, leafMat, leaves.length]} castShadow frustumCulled={false} />
+  // Foliage is densely instanced; receiving light is useful, casting every
+  // leaf into the cabin shadow map is not. Keep it out of the shadow pass.
+  return <instancedMesh ref={ref} args={[geo, leafMat, leaves.length]} receiveShadow={false} castShadow={false} frustumCulled={false} />
 }
 
 type PlantType = 'monstera' | 'fern' | 'bush'
@@ -104,6 +106,7 @@ export function PottedPlant({
       height={heightPerScale * scale}
       position={position}
       rotation={[0, rotY, 0]}
+      castShadow={false}
     />
   )
 }

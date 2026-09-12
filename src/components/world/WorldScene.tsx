@@ -53,7 +53,7 @@ export default function WorldScene() {
     r.far = 160
     return r
   }, [])
-  const pickables = useMemo(() => [] as THREE.Object3D[], [])
+  const pickablesRef = useRef<THREE.Object3D[]>([])
 
   useFrame(({ camera }, delta) => {
     const s = useGameStore.getState()
@@ -99,6 +99,7 @@ export default function WorldScene() {
       rayAcc.current = 0
       const group = groupRef.current
       if (!group) return
+      const pickables = pickablesRef.current
       pickables.length = 0
       group.traverse((o) => {
         if (o.userData.pick) pickables.push(o)
