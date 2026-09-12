@@ -2,12 +2,12 @@ import { useEffect, useMemo } from 'react'
 import { useGLTF, useTexture } from '@react-three/drei'
 import * as THREE from 'three'
 
-const PANORAMA = './scenery/kiara-valley-4k.jpg'
-const FOLIAGE = './models/potted_plant_02/potted_plant_02_1k.gltf'
+const PANORAMA = '/scenery/kiara-valley-4k.jpg'
+const FOLIAGE = '/models/potted_plant_02/potted_plant_02_1k.gltf'
 const ROCK_MAPS = [
-  './textures/rock_face_diff_1k.jpg',
-  './textures/rock_face_nor_gl_1k.jpg',
-  './textures/rock_face_rough_1k.jpg',
+  '/textures/rock_face_diff_1k.jpg',
+  '/textures/rock_face_nor_gl_1k.jpg',
+  '/textures/rock_face_rough_1k.jpg',
 ]
 
 /** A deterministic landscape: re-entering the room never moves a rock or plant. */

@@ -6,7 +6,7 @@ import * as THREE from 'three'
  * different repeat/offset so GPU memory stays at one copy per file.
  */
 
-const BASE = './textures/'
+const BASE = '/textures/'
 const loader = new THREE.TextureLoader()
 
 const sourceCache = new Map<string, THREE.Texture>()

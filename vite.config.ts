@@ -9,7 +9,7 @@ const inspectorDomTags = new Set('a article aside b blockquote br button canvas 
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: './',
+  base: '/',
   plugins: [inspectAttr({
     predicate: (node) => node.type === 'JSXElement'
       && node.openingElement.name.type === 'JSXIdentifier'

@@ -10,6 +10,7 @@ import type { HomeInteraction } from '@/components/home/player/navigation'
 import { HOME_SPAWN, homeCameraTuning } from '@/components/home/player/config'
 import { useNavigate } from 'react-router'
 import { useGameStore } from '@/state/gameStore'
+import { getQualityProfile } from '@/state/gameStore'
 import PhoneBooth from '@/components/home/PhoneBooth'
 import Room from './Room'
 import RoundTable from './RoundTable'
@@ -123,6 +124,8 @@ function LoaderOverlay() {
 
 export default function Experience() {
   const navigate = useNavigate()
+  const qualityMode = useGameStore((s) => s.qualityMode)
+  const quality = useMemo(() => getQualityProfile(qualityMode), [qualityMode])
   const input = useMemo<HomeInput>(() => ({ keys: new Set() }), [])
   const [nearby, setNearby] = useState<HomeInteraction | null>(null)
   const interact = useCallback((spot: HomeInteraction) => {
@@ -136,7 +139,7 @@ export default function Experience() {
       <LoaderOverlay />
       <Canvas
         shadows
-        dpr={[1, 2]}
+        dpr={quality.dprMax === 1 ? 1 : [1, quality.dprMax]}
         gl={{ antialias: true }}
         camera={{ position: [HOME_SPAWN[0], 1.85, 4.3], fov: homeCameraTuning().fov, near: 0.05, far: 120 }}
         onCreated={({ gl }) => {
@@ -148,8 +151,8 @@ export default function Experience() {
         <fog attach="fog" args={['#c8b99a', 38, 105]} />
         <Suspense fallback={null}>
           {/* soft IBL so metals / glass / crystal have something real to reflect */}
-          <Environment files="./textures/kloppenheim_06_puresky_1k.hdr" environmentIntensity={0.35} />
-          <Lighting />
+          <Environment files="/textures/kloppenheim_06_puresky_1k.hdr" environmentIntensity={0.35} />
+          <Lighting shadowMapSize={quality.shadowMapSize} />
           <Backdrop />
           <Room />
           <Balcony />
@@ -162,12 +165,14 @@ export default function Experience() {
           <HotspotLayer />
           <HomePlayer input={input} onNearby={setNearby} onInteract={interact} />
         </Suspense>
-        <EffectComposer multisampling={0}>
-          <N8AO halfRes aoRadius={1.1} intensity={1.6} distanceFalloff={1.6} quality="performance" />
-          <Bloom mipmapBlur intensity={0.55} luminanceThreshold={1.0} luminanceSmoothing={0.25} />
-          <Vignette eskil={false} offset={0.22} darkness={0.38} />
-          <SMAA />
-        </EffectComposer>
+        {quality.postprocessing && (
+          <EffectComposer multisampling={0}>
+            <N8AO halfRes aoRadius={1.1} intensity={1.6} distanceFalloff={1.6} quality="performance" />
+            <Bloom mipmapBlur intensity={0.55} luminanceThreshold={1.0} luminanceSmoothing={0.25} />
+            <Vignette eskil={false} offset={0.22} darkness={0.38} />
+            <SMAA />
+          </EffectComposer>
+        )}
       </Canvas>
 
       <HomeControls input={input} nearby={nearby} interact={interact} />
