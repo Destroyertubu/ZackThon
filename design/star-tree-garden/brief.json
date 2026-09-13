@@ -1,0 +1,151 @@
+{
+  "name": "星树花园",
+  "runtime": "/observatory",
+  "approval": {
+    "source": "User selected concept 1 and explicitly requested design and construction",
+    "userText": "按照星树花园开始设计和构建",
+    "date": "2026-09-13",
+    "latestUserText": "对比光影和布景，优先开源素材；星系更绚丽并有动效，丰富调酒布景"
+  },
+  "purpose": "A rooftop garden connecting the cabin, exploration world and thought-cocktail workshop.",
+  "visualLanguage": [
+    "satin walnut, aged brass and narrow diagonal deck boards",
+    "complete mature Jacaranda crown and bark-attached stars",
+    "photographed ivy, blue flowers, moss rocks and layered ferns",
+    "cool real star maps against localized warm lantern pools"
+  ],
+  "composition": {
+    "boundary": "Existing circular timber rooftop, radius 12.15 m, walk radius 11.2 m",
+    "symmetry": "Circular deck and railing; diagonal staggered narrow boards and asymmetric furnishings",
+    "hero": "7.85 m mature Jacaranda at [-2,0,-2],11.33m broad crown, roots at planter soil +0.33m",
+    "arrival": [
+      3.65,
+      1.7,
+      7.15
+    ],
+    "viewTarget": [
+      0.7,
+      1.95,
+      -2.9
+    ],
+    "camera": "First-person eye height 1.7m; landscape vertical FOV68, portrait76",
+    "circulation": "Continuous level timber floor; walk around the planter and bench to the bar, telescope and two gates"
+  },
+  "objects": [
+    {
+      "id": "tree",
+      "position": [
+        -2,
+        0,
+        -2
+      ],
+      "purpose": "Main visual focus and support for nine star lanterns",
+      "materials": "CC0 Jacaranda, all116084 original leaf islands,438168 triangles, local Draco, remeasured branch attachments"
+    },
+    {
+      "id": "galaxy-gateway",
+      "position": [
+        2.7,
+        0,
+        -6.8
+      ],
+      "purpose": "Click or nearby E enters the existing world; onboarding prompt when no seed",
+      "opening": "Near-round organic brass arch; total width6.24m, height5.685m, feet ±2.25m",
+      "materials": "Hubble M51 CC-BY4 photograph on a concave shader surface;990 animated GPU stars"
+    },
+    {
+      "id": "thought-bar",
+      "position": [
+        -6.65,
+        0,
+        1.4
+      ],
+      "purpose": "Mix two example knowledge ingredients and save a recipe",
+      "materials": "Walnut cabinet, brass trim, lathed glass bottles, five distinct particle shapes"
+    },
+    {
+      "id": "crescent-bench",
+      "position": [
+        -2,
+        0,
+        -2
+      ],
+      "purpose": "Resting furniture facing the open garden",
+      "footprint": "Radius 2.27–2.82 m, arc -0.85 to 0.68 rad"
+    },
+    {
+      "id": "woven-swing",
+      "position": [
+        -5.2,
+        0,
+        -4.8
+      ],
+      "purpose": "Quiet resting corner",
+      "support": "Visible independent branch-shaped frame and suspension ropes"
+    },
+    {
+      "id": "telescope",
+      "position": [
+        8,
+        0,
+        -1.2
+      ],
+      "purpose": "Physical observing landmark; retained local brass instrument",
+      "rotationY": -2.0
+    },
+    {
+      "id": "home-gateway",
+      "position": [
+        7.3,
+        0,
+        -3.8
+      ],
+      "purpose": "Returns specifically to /home with balcony-observatory spawn",
+      "opening": "Solid two-sided arched timber door with a small real destination window; E from either side, collision radius0.95m"
+    },
+    {
+      "id": "reading-chair",
+      "position": [
+        6.6,
+        0,
+        1.7
+      ],
+      "rotationY": -0.8,
+      "materials": "Existing CC0 ArmChair01 with woven rug",
+      "collisionRadius": 0.67
+    }
+  ],
+  "atmosphere": [
+    "Slow leaf breeze",
+    "Gently swinging hanging stars",
+    "Localized warm fireflies",
+    "Subtle distant mist",
+    "Slow spiral movement inside the star gate"
+  ],
+  "performance": {
+    "heroTriangleCeiling": 500000,
+    "heroTriangles": 438168,
+    "vegetation": "All mature-tree leaf islands retained in optimized curved cards; repeated ferns, flowers and real ivy use instancing;6ivy batches",
+    "quality": "Existing auto/fine/smooth tiers and reduced-motion support",
+    "paidServiceBudget": 0,
+    "remoteRuntimeAssetRequests": 0,
+    "runtimeDecoder": "Local Draco assets; no CDN requests",
+    "heroBytes": 13912936
+  },
+  "stateContract": {
+    "existingJourneyStore": "Unchanged eight persisted exploration fields plus existing qualityMode preference",
+    "recipes": "Separate wanderwise-garden-recipes-v1, up to 12 recipes",
+    "sampleIngredients": true
+  },
+  "review": {
+    "authoring": "Direct R3F runtime composition; optimized Blender GLBs only for scanned plants",
+    "productionCameraEvidence": "artifacts/star-tree-garden/v2/final-production.png",
+    "otherViews": "artifacts/star-tree-garden/v2/scene-review.json",
+    "navigation": "npm run test:observatory",
+    "interactions": "artifacts/star-tree-garden/v2/browser-report.json",
+    "production": "artifacts/star-tree-garden/v2/production-report.json",
+    "motion": "artifacts/star-tree-garden/v2/motion-report.json"
+  },
+  "revision": "reference-lighting-and-set-v2",
+  "reference": "reference/approved-target.png"
+}

@@ -1,0 +1,141 @@
+{
+  "licenseUrl": "https://polyhaven.com/license",
+  "sources": [
+    {
+      "id": "wooden_stool_01",
+      "page": "https://polyhaven.com/a/wooden_stool_01",
+      "license": "CC0-1.0",
+      "author": "Kuutti Siitonen"
+    },
+    {
+      "id": "brass_goblets",
+      "page": "https://polyhaven.com/a/brass_goblets",
+      "license": "CC0-1.0",
+      "author": "Tina"
+    },
+    {
+      "id": "poly_wool_herringbone",
+      "page": "https://polyhaven.com/a/poly_wool_herringbone",
+      "license": "CC0-1.0",
+      "author": "Rico Cilliers / colormass",
+      "usage": "throw blanket and upholstery scanned diffuse/normal/roughness"
+    }
+  ],
+  "downloaded": [
+    {
+      "file": "/tmp/wanderwise-fixture-sources/wooden_stool_01/wooden_stool_01_1k.gltf",
+      "bytes": 2715,
+      "md5": "6a3c9169ce7ade1796efca8b88c75c50",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/wooden_stool_01/wooden_stool_01_1k.gltf"
+    },
+    {
+      "file": "/tmp/wanderwise-fixture-sources/wooden_stool_01/textures/wooden_stool_01_diff_1k.jpg",
+      "bytes": 233863,
+      "md5": "11e0ab4da421bf248e8d9de2c34a95fb",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wooden_stool_01/wooden_stool_01_diff_1k.jpg"
+    },
+    {
+      "file": "/tmp/wanderwise-fixture-sources/wooden_stool_01/textures/wooden_stool_01_rough_1k.jpg",
+      "bytes": 203406,
+      "md5": "339c0ab3c8c1618a0ebcd281004ea5ba",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wooden_stool_01/wooden_stool_01_rough_1k.jpg"
+    },
+    {
+      "file": "/tmp/wanderwise-fixture-sources/wooden_stool_01/wooden_stool_01.bin",
+      "bytes": 290924,
+      "md5": "883e9617a69e90be7e19447dca83041c",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/wooden_stool_01/wooden_stool_01.bin"
+    },
+    {
+      "file": "/tmp/wanderwise-fixture-sources/wooden_stool_01/textures/wooden_stool_01_nor_gl_1k.jpg",
+      "bytes": 230812,
+      "md5": "99541327d77d7f8a740aad45ff86760f",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wooden_stool_01/wooden_stool_01_nor_gl_1k.jpg"
+    },
+    {
+      "file": "/tmp/wanderwise-fixture-sources/brass_goblets/brass_goblets_1k.gltf",
+      "bytes": 7782,
+      "md5": "9e76131d099b3dcdadb82c1d2d8bd536",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/brass_goblets/brass_goblets_1k.gltf"
+    },
+    {
+      "file": "/tmp/wanderwise-fixture-sources/brass_goblets/textures/brass_goblet_03_nor_gl_1k.jpg",
+      "bytes": 340910,
+      "md5": "6f2a231d3514d414d60abcba0d9250f6",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/brass_goblets/brass_goblet_03_nor_gl_1k.jpg"
+    },
+    {
+      "file": "/tmp/wanderwise-fixture-sources/brass_goblets/textures/brass_goblet_01_arm_1k.jpg",
+      "bytes": 548137,
+      "md5": "c9bdf5da73aef25e691da7a35e788873",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/brass_goblets/brass_goblet_01_arm_1k.jpg"
+    },
+    {
+      "file": "/tmp/wanderwise-fixture-sources/brass_goblets/textures/brass_goblet_01_nor_gl_1k.jpg",
+      "bytes": 465530,
+      "md5": "3089d0223399a4c52e8dabc046c09d57",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/brass_goblets/brass_goblet_01_nor_gl_1k.jpg"
+    },
+    {
+      "file": "/tmp/wanderwise-fixture-sources/brass_goblets/textures/brass_goblet_02_diff_1k.jpg",
+      "bytes": 656888,
+      "md5": "5eadfe540b3eab26739ba84f61b95fc7",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/brass_goblets/brass_goblet_02_diff_1k.jpg"
+    },
+    {
+      "file": "/tmp/wanderwise-fixture-sources/brass_goblets/brass_goblets.bin",
+      "bytes": 261728,
+      "md5": "56e8be5f54fa2f3567abc1ea7d0f3fbc",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/brass_goblets/brass_goblets.bin"
+    },
+    {
+      "file": "/tmp/wanderwise-fixture-sources/brass_goblets/textures/brass_goblet_01_diff_1k.jpg",
+      "bytes": 653366,
+      "md5": "0d4d1e7376965e48539a1fc27b17e1cd",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/brass_goblets/brass_goblet_01_diff_1k.jpg"
+    },
+    {
+      "file": "/tmp/wanderwise-fixture-sources/brass_goblets/textures/brass_goblet_03_arm_1k.jpg",
+      "bytes": 355069,
+      "md5": "28de0acc731a5acf1c07b505a753c3f6",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/brass_goblets/brass_goblet_03_arm_1k.jpg"
+    },
+    {
+      "file": "/tmp/wanderwise-fixture-sources/brass_goblets/textures/brass_goblet_02_arm_1k.jpg",
+      "bytes": 544177,
+      "md5": "253f069532a05cb23540fa3cf1b84866",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/brass_goblets/brass_goblet_02_arm_1k.jpg"
+    },
+    {
+      "file": "/tmp/wanderwise-fixture-sources/brass_goblets/textures/brass_goblet_02_nor_gl_1k.jpg",
+      "bytes": 409051,
+      "md5": "96d50a779c628ac10a1ac50eb5a52a3c",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/brass_goblets/brass_goblet_02_nor_gl_1k.jpg"
+    },
+    {
+      "file": "/tmp/wanderwise-fixture-sources/brass_goblets/textures/brass_goblet_03_diff_1k.jpg",
+      "bytes": 533840,
+      "md5": "ea621239d3e707d4fdbfd0f0c1266d71",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/brass_goblets/brass_goblet_03_diff_1k.jpg"
+    },
+    {
+      "file": "public/textures/garden-fixtures/poly_wool_herringbone_diff_1k.jpg",
+      "bytes": 942966,
+      "md5": "5c0981092ba0129d5951720ea23d50c2",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/poly_wool_herringbone/poly_wool_herringbone_diff_1k.jpg"
+    },
+    {
+      "file": "public/textures/garden-fixtures/poly_wool_herringbone_nor_gl_1k.jpg",
+      "bytes": 1045151,
+      "md5": "a6371d03b033a1c20e1c2758136ac757",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/poly_wool_herringbone/poly_wool_herringbone_nor_gl_1k.jpg"
+    },
+    {
+      "file": "public/textures/garden-fixtures/poly_wool_herringbone_rough_1k.jpg",
+      "bytes": 857426,
+      "md5": "9f85f667517ee9c7f3cc85214058a7d8",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/poly_wool_herringbone/poly_wool_herringbone_rough_1k.jpg"
+    }
+  ],
+  "processing": "Source checksums verified against official API; see local output report for model selection."
+}

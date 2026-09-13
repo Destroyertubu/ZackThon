@@ -1,0 +1,16 @@
+[
+  {
+    "file": "bar-stool.glb",
+    "bytes": 962200,
+    "triangles": 10946,
+    "selection": "wooden_stool_01",
+    "adjustment": "Legs elongated below seat, original wood scan and seat thickness preserved"
+  },
+  {
+    "file": "brass-goblet.glb",
+    "bytes": 1749600,
+    "triangles": 3072,
+    "selection": "brass_goblet_01",
+    "adjustment": "Only the first goblet exported; unused goblets/materials removed"
+  }
+]

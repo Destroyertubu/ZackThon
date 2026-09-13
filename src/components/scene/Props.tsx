@@ -55,14 +55,16 @@ flameCoreMat.color.multiplyScalar(3.0)
 export const Flame = memo(function Flame({ scale = 1 }: { scale?: number }) {
   const ref = useRef<THREE.Mesh>(null)
   const offset = useMemo(() => mulberry32(Math.round(scale * 1000) + 17)() * 10, [scale])
+  const motionPreference = useMemo(() => typeof window === 'undefined' ? null : window.matchMedia('(prefers-reduced-motion: reduce)'), [])
   useFrame(({ clock }) => {
     const m = ref.current
     if (!m) return
+    if (motionPreference?.matches) { m.scale.setScalar(scale); return }
     const t = clock.elapsedTime * 9 + offset
     m.scale.setScalar(scale * (1 + Math.sin(t) * 0.12 + Math.sin(t * 1.7) * 0.06))
   })
   return (
-    <mesh ref={ref} geometry={flameGeo} material={flameMat}>
+    <mesh ref={ref} name="candle-flame" geometry={flameGeo} material={flameMat} scale={scale}>
       <mesh geometry={flameGeo} material={flameCoreMat} scale={0.45} position={[0, -0.01, 0]} />
     </mesh>
   )

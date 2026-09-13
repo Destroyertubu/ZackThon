@@ -8,7 +8,10 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "test:home": "node scripts/test-home-navigation.mjs",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:observatory": "node scripts/test-observatory-navigation.mjs",
+    "test:look": "node scripts/test-scene-look.mjs",
+    "test:garden": "node scripts/test-garden-recipes.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

@@ -1,4 +1,4 @@
-import { Suspense, useCallback, useMemo, useRef, useState } from 'react'
+import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Environment, Html, useProgress } from '@react-three/drei'
@@ -7,8 +7,8 @@ import HomePlayer from '@/components/home/player/HomePlayer'
 import HomeControls from '@/components/home/player/HomeControls'
 import type { HomeInput } from '@/components/home/player/HomePlayer'
 import type { HomeInteraction } from '@/components/home/player/navigation'
-import { HOME_SPAWN, homeCameraTuning } from '@/components/home/player/config'
-import { useNavigate } from 'react-router'
+import { BALCONY_SPAWN, HOME_SPAWN, homeCameraTuning } from '@/components/home/player/config'
+import { useLocation, useNavigate } from 'react-router'
 import { useGameStore } from '@/state/gameStore'
 import { getQualityProfile } from '@/state/gameStore'
 import PhoneBooth from '@/components/home/PhoneBooth'
@@ -124,15 +124,33 @@ function LoaderOverlay() {
 
 export default function Experience() {
   const navigate = useNavigate()
+  const location = useLocation()
+  const initialSpawn = (location.state as { spawn?: string } | null)?.spawn === 'balcony-observatory' ? BALCONY_SPAWN : HOME_SPAWN
   const qualityMode = useGameStore((s) => s.qualityMode)
   const quality = useMemo(() => getQualityProfile(qualityMode), [qualityMode])
   const input = useMemo<HomeInput>(() => ({ keys: new Set() }), [])
   const [nearby, setNearby] = useState<HomeInteraction | null>(null)
+  const [transitioning, setTransitioning] = useState(false)
+  const transitionTimer = useRef<number | null>(null)
+  useEffect(() => () => {
+    if (transitionTimer.current !== null) window.clearTimeout(transitionTimer.current)
+  }, [])
+  const enterObservatory = useCallback(() => {
+    if (transitioning) return
+    setTransitioning(true)
+    input.keys.clear()
+    useGameStore.getState().closePanel()
+    transitionTimer.current = window.setTimeout(() => {
+      navigate('/observatory', { state: { spawn: 'balcony-observatory' } })
+    }, 1200)
+  }, [input, navigate, transitioning])
   const interact = useCallback((spot: HomeInteraction) => {
+    if (transitioning) return
     input.keys.clear()
     if (spot.id === 'world') navigate('/world')
+    else if (spot.id === 'observatory') enterObservatory()
     else useGameStore.getState().openPanel(spot.id)
-  }, [navigate, input])
+  }, [navigate, input, enterObservatory, transitioning])
   return (
     <div className="relative h-[100dvh] w-full overflow-hidden bg-[#0a0c10]">
       <style>{hotspotCss}</style>
@@ -155,7 +173,7 @@ export default function Experience() {
           <Lighting shadowMapSize={quality.shadowMapSize} crystalShadow={quality.postprocessing} />
           <Backdrop />
           <Room />
-          <Balcony />
+          <Balcony onObservatory={enterObservatory} />
           <RoundTable />
           <DeskArea />
           <DisplayCabinet />
@@ -163,7 +181,7 @@ export default function Experience() {
           <Decor />
           <Atmosphere />
           <HotspotLayer />
-          <HomePlayer input={input} onNearby={setNearby} onInteract={interact} />
+          <HomePlayer input={input} initialSpawn={initialSpawn} onNearby={setNearby} onInteract={interact} />
         </Suspense>
         {quality.postprocessing && (
           <EffectComposer multisampling={0}>
@@ -176,6 +194,15 @@ export default function Experience() {
       </Canvas>
 
       <HomeControls input={input} nearby={nearby} interact={interact} />
+      {transitioning && (
+        <div className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center bg-[#05070f]/75 opacity-100 transition-opacity duration-700">
+          <div className="text-center">
+            <div className="mx-auto mb-5 h-20 w-20 animate-pulse rounded-full border border-[#9ed7dc]/70 bg-[#9ed7dc]/10 shadow-[0_0_50px_rgba(126,216,220,0.45)]" />
+            <p className="font-serif text-sm tracking-[0.35em] text-[#d8c9a3]">星光之门已开启</p>
+            <p className="mt-2 text-xs tracking-widest text-[#9ed7dc]/80">正在前往屋顶观测台</p>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

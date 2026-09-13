@@ -96,6 +96,7 @@ export const HOME_INTERACTIONS = [
   { id: 'journal', label: '漫行者日志', x: -4.2, z: 1.7, radius: 2.0 },
   { id: 'phone', label: '同频电话亭', x: 4.75, z: -0.7, radius: 1.7 },
   { id: 'world', label: '启程探索', x: 3.65, z: 5, radius: 1.45 },
+  { id: 'observatory', label: '前往观星台', x: 1.6, z: -7.2, radius: 0.86 },
 ] as const
 export type HomeInteraction = (typeof HOME_INTERACTIONS)[number]
 export function nearestInteraction(position: Vector3): HomeInteraction | null {

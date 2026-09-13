@@ -1,0 +1,5 @@
+.travel-gateway-label { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 9px 15px; border: 1px solid #c8a97599; border-radius: 3px; color: #f1e6cc; background: #15232ded; box-shadow: 0 4px 16px #0003; font-family: 'Songti SC', 'STSong', Georgia, serif; font-size: 15px; letter-spacing: .1em; white-space: nowrap; cursor: pointer; touch-action: manipulation; }
+.travel-gateway-label.to-home { background: #30271fed; }
+.travel-gateway-label > svg { flex: none; color: #dabc83; }
+.travel-gateway-label small { display: block; margin-top: 5px; font-family: 'PingFang SC', sans-serif; font-size: 9px; letter-spacing: .06em; color: #c0bda9; }
+.travel-gateway-label:hover, .travel-gateway-label:focus-visible { border-color: #f2d59d; background: #4c402a; outline: none; }

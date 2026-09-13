@@ -1,0 +1,538 @@
+{
+  "license": "CC0-1.0",
+  "verifiedAt": "2026-09-13",
+  "assets": [
+    {
+      "file": "brass-lantern.glb",
+      "bytes": 3165132,
+      "nodes": [
+        {
+          "name": "brass_diya_lantern",
+          "triangles": 4100,
+          "min": [
+            -0.06152009963989258,
+            0,
+            -0.06150227040052414
+          ],
+          "max": [
+            0.06152009963989258,
+            0.1334214210510254,
+            0.06150227040052414
+          ],
+          "dimensions": [
+            0.12304019927978516,
+            0.1334214210510254,
+            0.12300454080104828
+          ]
+        },
+        {
+          "name": "brass_diya_lantern_connection",
+          "triangles": 588,
+          "min": [
+            -0.011977809481322765,
+            0.1290413737297058,
+            -0.008130064234137535
+          ],
+          "max": [
+            0.01196662150323391,
+            0.15178155899047852,
+            0.008171250112354755
+          ],
+          "dimensions": [
+            0.023944430984556675,
+            0.022740185260772705,
+            0.01630131434649229
+          ]
+        }
+      ],
+      "triangles": 4688
+    },
+    {
+      "file": "moss-rocks.glb",
+      "bytes": 638352,
+      "nodes": [
+        {
+          "name": "moss_rock_1",
+          "triangles": 2200,
+          "min": [
+            -1.117722749710083,
+            0,
+            -1.6896188259124756
+          ],
+          "max": [
+            1.117722749710083,
+            1.4805760383605957,
+            1.6896188259124756
+          ],
+          "dimensions": [
+            2.235445499420166,
+            1.4805760383605957,
+            3.379237651824951
+          ]
+        },
+        {
+          "name": "moss_rock_2",
+          "triangles": 2200,
+          "min": [
+            -1.053353190422058,
+            0,
+            -1.039792776107788
+          ],
+          "max": [
+            1.0533533096313477,
+            1.0999629497528076,
+            1.039792776107788
+          ],
+          "dimensions": [
+            2.1067065000534058,
+            1.0999629497528076,
+            2.079585552215576
+          ]
+        },
+        {
+          "name": "moss_rock_3",
+          "triangles": 2199,
+          "min": [
+            -1.0687793493270874,
+            0,
+            -1.3792763948440552
+          ],
+          "max": [
+            1.068779468536377,
+            1.2572894096374512,
+            1.3792763948440552
+          ],
+          "dimensions": [
+            2.1375588178634644,
+            1.2572894096374512,
+            2.7585527896881104
+          ]
+        }
+      ],
+      "triangles": 6599
+    },
+    {
+      "file": "periwinkle.glb",
+      "bytes": 2002444,
+      "nodes": [
+        {
+          "name": "periwinkle_flower_clump",
+          "triangles": 3078,
+          "min": [
+            -0.055553287267684937,
+            0,
+            -0.07044721394777298
+          ],
+          "max": [
+            0.05555325746536255,
+            0.2057981938123703,
+            0.07044721394777298
+          ],
+          "dimensions": [
+            0.11110654473304749,
+            0.2057981938123703,
+            0.14089442789554596
+          ]
+        },
+        {
+          "name": "periwinkle_trailing_sprig",
+          "triangles": 1478,
+          "min": [
+            -0.051470279693603516,
+            0,
+            -0.04471154138445854
+          ],
+          "max": [
+            0.05147024989128113,
+            0.15972968935966492,
+            0.04471154138445854
+          ],
+          "dimensions": [
+            0.10294052958488464,
+            0.15972968935966492,
+            0.08942308276891708
+          ]
+        }
+      ],
+      "triangles": 4556
+    }
+  ],
+  "additionalTextureAssets": [
+    {
+      "name": "Leaf Set 029",
+      "creator": "ambientCG / Lennart Demes",
+      "license": "CC0-1.0",
+      "source": "https://ambientcg.com/view?id=LeafSet029",
+      "licenseURL": "https://docs.ambientcg.com/license/",
+      "downloadURL": "https://ambientcg.com/get?file=LeafSet029_1K-JPG.zip",
+      "downloadBytes": 4001320,
+      "downloadSHA256": "27e0fcca8359a6669a5bd4ec990dfa70b3bf17d6d3826777d2b447ebe56aee6f",
+      "method": "Photometric Stereo",
+      "atlasDimensionsMeters": [
+        0.25,
+        0.25
+      ],
+      "verifiedAt": "2026-09-13",
+      "files": [
+        {
+          "file": "ivy-color.jpg",
+          "bytes": 644962,
+          "sha256": "c61738000b13050886ba9319d0ca03a7cc788e1c74a126d7d16ed6726788a3ea"
+        },
+        {
+          "file": "ivy-opacity.jpg",
+          "bytes": 83614,
+          "sha256": "867d996a827252881ce8ca666f45c2090f016061d764a851491e459cb062f721"
+        },
+        {
+          "file": "ivy-normal.jpg",
+          "bytes": 445521,
+          "sha256": "0e5544419ec21728805d0653d8642c256f750cdfed1c8b8eb295fdd8107320ea"
+        }
+      ],
+      "runtimeBytes": 1174097,
+      "runtimeGeometry": {
+        "leafCount": 1490,
+        "leafCardTriangles": 4,
+        "branchTriangles": 5170,
+        "renderedTriangles": 11130
+      }
+    }
+  ],
+  "totalDeployedBytes": 6980025,
+  "sources": [
+    {
+      "id": "rock_moss_set_01",
+      "url": "https://polyhaven.com/a/rock_moss_set_01",
+      "manifest": {
+        "source": {
+          "include": {
+            "textures/rock_moss_set_01_nor_gl_1k.jpg": {
+              "size": 209975,
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/rock_moss_set_01/rock_moss_set_01_nor_gl_1k.jpg",
+              "md5": "eb7ebd31ad08e78d0497900652ff1568"
+            },
+            "rock_moss_set_01.bin": {
+              "size": 1466380,
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/rock_moss_set_01/rock_moss_set_01.bin",
+              "md5": "207a51c9f56d34732e9814bbf9cc07b1"
+            },
+            "textures/rock_moss_set_01_rough_1k.jpg": {
+              "size": 82624,
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/rock_moss_set_01/rock_moss_set_01_rough_1k.jpg",
+              "md5": "ed9d8a2c863262f76f881346e8047c6a"
+            },
+            "textures/rock_moss_set_01_diff_1k.jpg": {
+              "size": 168099,
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/rock_moss_set_01/rock_moss_set_01_diff_1k.jpg",
+              "md5": "b8742301e6b4bc5683d2de712e83f772"
+            }
+          },
+          "size": 9987,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/rock_moss_set_01/rock_moss_set_01_1k.gltf",
+          "md5": "75113cc1c21806cca5d8badad4737af7"
+        },
+        "extras": {},
+        "info": {
+          "donated": true,
+          "date_published": 1625069057,
+          "name": "Rock Moss Set 01",
+          "type": 2,
+          "staging": null,
+          "authors": {
+            "Kless Gyzen": "All"
+          },
+          "categories": [
+            "rocks",
+            "nature",
+            "collection: pine_forest"
+          ],
+          "tags": [
+            "rocks",
+            "outdoor",
+            "stones",
+            "pebbles",
+            "rock",
+            "dirt"
+          ],
+          "max_resolution": [
+            8192,
+            8192
+          ],
+          "polycount": 63127,
+          "texel_density": 606.028316455845,
+          "dimensions": [
+            8004.603862762451,
+            6948.764801025391,
+            1768.319845199585
+          ],
+          "sponsors": [
+            "82322099"
+          ],
+          "files_hash": "3d61828e10ef81512a639c8064c9a51a75165b5a",
+          "description": "Free 8K set of mossy forest rocks: six weathered stones with varied silhouettes, earthy textures, subtle green moss, dirt and realistic erosion.",
+          "category_id": "75be0f95-5fbf-5ce3-94a8-4b929bf42fb6",
+          "category": "Nature/Rocks & Stone/Stone Sets",
+          "collections": [
+            "pine_forest"
+          ],
+          "attributes": {
+            "condition": [
+              "weathered"
+            ],
+            "material": [
+              "stone"
+            ]
+          },
+          "img_version": "e99703c4",
+          "download_count": 83573,
+          "thumbnail_url": "https://cdn.polyhaven.com/asset_img/thumbs/rock_moss_set_01.png?width=256&height=256&v=e99703c4"
+        }
+      }
+    },
+    {
+      "id": "periwinkle_plant",
+      "url": "https://polyhaven.com/a/periwinkle_plant",
+      "manifest": {
+        "source": {
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/periwinkle_plant/periwinkle_plant_1k.gltf",
+          "md5": "7a736c4dc3906ea9dbed2baacf6c0b7d",
+          "size": 15189,
+          "include": {
+            "textures/periwinkle_plant_nor_gl_1k.jpg": {
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/periwinkle_plant/periwinkle_plant_nor_gl_1k.jpg",
+              "md5": "10e7ee6a4ccf292564237c2b31a5a4be",
+              "size": 418428
+            },
+            "textures/periwinkle_plant_diff_1k.jpg": {
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/periwinkle_plant/periwinkle_plant_diff_1k.jpg",
+              "md5": "32b2cba340cf12c976f0fb4c26cc5721",
+              "size": 349879
+            },
+            "textures/periwinkle_plant_arm_1k.jpg": {
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/periwinkle_plant/periwinkle_plant_arm_1k.jpg",
+              "md5": "3c9e09319e49893167ea0ab009b09526",
+              "size": 281673
+            },
+            "periwinkle_plant.bin": {
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/periwinkle_plant/periwinkle_plant.bin",
+              "md5": "dd2ff3280b0d69c3b03fed2753a6ee84",
+              "size": 1859752
+            }
+          }
+        },
+        "extras": {
+          "opacity": {
+            "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/1k/periwinkle_plant/periwinkle_plant_opacity_1k.png",
+            "md5": "4386b4cf7a9cc7d79ad1db812b1d8e50",
+            "size": 86094
+          }
+        },
+        "info": {
+          "type": 2,
+          "name": "Periwinkle Plant",
+          "categories": [
+            "nature",
+            "ground cover",
+            "plants",
+            "flowers"
+          ],
+          "tags": [
+            "small flowers",
+            "shrub",
+            "bush",
+            "spring",
+            "botanical",
+            "garden plant",
+            "foliage",
+            "leaf",
+            "leaves",
+            "meadow",
+            "wildflower"
+          ],
+          "authors": {
+            "Amal Kumar": "All"
+          },
+          "donated": true,
+          "max_resolution": [
+            4096,
+            4096
+          ],
+          "polycount": 67388,
+          "files_hash": "914403d31fda1dc15ff457e71e96ab7476134019",
+          "texel_density": 25989.965028703602,
+          "dimensions": [
+            1248.7584352493286,
+            334.93997156620026,
+            410.85796465631574
+          ],
+          "date_published": 1754438400,
+          "staging": null,
+          "description": "Free 4K periwinkle plant model with small pink flowers, realistic leaves and branch variations, perfect for gardens, meadows, groundcover and botanical scenes.",
+          "lods": true,
+          "category_id": "081de04a-c797-537e-abf1-c0ce1a92552f",
+          "category": "Nature/Plants/Wildflowers",
+          "attributes": {
+            "condition": [
+              "clean"
+            ],
+            "lods": true,
+            "material": [
+              "plant"
+            ]
+          },
+          "img_version": "06e03d2d",
+          "download_count": 11829,
+          "thumbnail_url": "https://cdn.polyhaven.com/asset_img/thumbs/periwinkle_plant.png?width=256&height=256&v=06e03d2d"
+        }
+      }
+    },
+    {
+      "id": "brass_diya_lantern",
+      "url": "https://polyhaven.com/a/brass_diya_lantern",
+      "manifest": {
+        "source": {
+          "include": {
+            "textures/brass_diya_lantern_nor_gl_1k.jpg": {
+              "size": 263044,
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/brass_diya_lantern/brass_diya_lantern_nor_gl_1k.jpg",
+              "md5": "532e464289bf6788d2f943c3e47c73ab"
+            },
+            "textures/brass_diya_lantern_arm_1k.jpg": {
+              "size": 704276,
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/brass_diya_lantern/brass_diya_lantern_arm_1k.jpg",
+              "md5": "25c3e0ffce574e9748754354b5e4eed0"
+            },
+            "brass_diya_lantern.bin": {
+              "size": 455708,
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/brass_diya_lantern/brass_diya_lantern.bin",
+              "md5": "1e09f3575cab311415e85fd76256a067"
+            },
+            "textures/brass_diya_lantern_diff_1k.jpg": {
+              "size": 536573,
+              "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/brass_diya_lantern/brass_diya_lantern_diff_1k.jpg",
+              "md5": "322aec4839a32604193352a4a55616c6"
+            }
+          },
+          "size": 10202,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/brass_diya_lantern/brass_diya_lantern_1k.gltf",
+          "md5": "b63559d7be74c31db17a87f81f5b0f41"
+        },
+        "extras": {
+          "opacity": {
+            "size": 286310,
+            "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/1k/brass_diya_lantern/brass_diya_lantern_opacity_1k.png",
+            "md5": "8368bac757207a1084b675f7b29ed528"
+          }
+        },
+        "info": {
+          "donated": true,
+          "type": 2,
+          "tags": [
+            "lighting",
+            "brass",
+            "metal",
+            "lamp",
+            "candle",
+            "light",
+            "cultural",
+            "hanging"
+          ],
+          "name": "Brass Diya Lantern",
+          "categories": [
+            "decorative",
+            "lighting"
+          ],
+          "authors": {
+            "Bhargav Kubal": "All"
+          },
+          "date_published": 1639526400,
+          "staging": null,
+          "max_resolution": [
+            8192,
+            8192
+          ],
+          "polycount": 12742,
+          "texel_density": 20723.980962316098,
+          "dimensions": [
+            123.00453707575798,
+            123.00454080104828,
+            380.8239474892616
+          ],
+          "files_hash": "c8a70bbd5dd2708135a561576d895436844aaa25",
+          "description": "Free 8K model of a hanging brass diya lantern featuring aged patina, hexagonal glass panels, star-shaped vents, a chain suspension, and a lit oil bowl.",
+          "category_id": "68f93037-d68a-5cb0-b10f-920243f9adbe",
+          "category": "Lighting/Portable/Oil Lamps",
+          "attributes": {
+            "condition": [
+              "worn"
+            ],
+            "material": [
+              "brass",
+              "glass"
+            ]
+          },
+          "img_version": "48c72cf4",
+          "download_count": 13715,
+          "thumbnail_url": "https://cdn.polyhaven.com/asset_img/thumbs/brass_diya_lantern.png?width=256&height=256&v=48c72cf4"
+        }
+      }
+    }
+  ],
+  "sceneBudget": {
+    "parts": [
+      {
+        "name": "moss_rock_1",
+        "instances": 4,
+        "trianglesPerInstance": 2200,
+        "renderedTriangles": 8800
+      },
+      {
+        "name": "moss_rock_2",
+        "instances": 4,
+        "trianglesPerInstance": 2200,
+        "renderedTriangles": 8800
+      },
+      {
+        "name": "moss_rock_3",
+        "instances": 4,
+        "trianglesPerInstance": 2199,
+        "renderedTriangles": 8796
+      },
+      {
+        "name": "periwinkle_flower_clump",
+        "instances": 16,
+        "trianglesPerInstance": 3078,
+        "renderedTriangles": 49248
+      },
+      {
+        "name": "existing_armchair",
+        "instances": 1,
+        "renderedTriangles": 5626
+      },
+      {
+        "name": "woven_rug",
+        "instances": 1,
+        "renderedTriangles": 7152
+      },
+      {
+        "name": "photographed_ivy",
+        "instances": 1,
+        "renderedTriangles": 11130
+      }
+    ],
+    "baseGardenDetailsTriangles": 99552,
+    "optionalLanternTrianglesEach": 4688,
+    "recommendedMaximumLanterns": 8,
+    "withEightLanternsTriangles": 137056,
+    "limit": 200000
+  },
+  "additionalObstacles": [
+    {
+      "x": 6.6,
+      "z": 1.7,
+      "radius": 0.67,
+      "reason": "reading armchair"
+    }
+  ]
+}

@@ -29,9 +29,9 @@ export default function HomeControls({ input, nearby, interact }: {
           ) : <span key={i} />)}
         </div>
         <div className="order-first w-full rounded-xl border border-white/10 bg-black/65 px-4 py-3 text-xs leading-6 text-[#c9c3b5] backdrop-blur-md sm:order-none sm:w-auto">
-          <p className="font-serif tracking-widest text-[#e4bd71]">家园漫步 · 第三人称</p>
+          <p className="font-serif tracking-widest text-[#e4bd71]">家园漫步 · 第一人称</p>
           <p className="text-[#c9c3b5]">沿窗边的阳光，走上山景阳台</p>
-          <p className="hidden sm:block">WASD 移动 · Shift 快走 · 拖动视角 · 滚轮远近 · E 交互 · C 镜头归正</p>
+          <p className="hidden sm:block">WASD 移动 · 鼠标环顾 · Esc 释放 / F 恢复 · E 交互 · C 归正</p>
           <p className="sm:hidden">方向键行走 · 拖动环顾 · 点击提示交互</p>
         </div>
         <button type="button" onClick={() => { input.keys.add('KeyC') }} className="pointer-events-auto shrink-0 rounded-full border border-[#c9973f]/40 bg-black/65 px-3 py-2 text-xs text-[#e4bd71]">镜头归正</button>

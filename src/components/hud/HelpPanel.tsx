@@ -39,8 +39,8 @@ export default function HelpPanel() {
         ))}
       </div>
 
-      <h3 className="mb-2 mt-5 text-sm tracking-widest text-[#e8dcc0]">小屋 · 第三人称</h3>
-      <p className="text-xs leading-6 text-[#8a8f9c]">WASD / 方向键行走，Shift 快走；按住鼠标拖动环顾，滚轮调整镜头远近，C 归正镜头。靠近家具按 E 或点击金色标记打开功能，Esc 关闭面板。触屏可用左下角方向键行走、拖动场景环顾。</p>
+      <h3 className="mb-2 mt-5 text-sm tracking-widest text-[#e8dcc0]">小屋 · 第一人称</h3>
+      <p className="text-xs leading-6 text-[#8a8f9c]">WASD / 方向键行走，Shift 快走；进入场景后移动鼠标即可环顾，Esc 释放鼠标、F 恢复环顾，C 归正镜头。靠近家具按 E 或点击金色标记打开功能，Esc 关闭面板。触屏可用左下角方向键行走、拖动场景环顾。</p>
 
       <h3 className="mb-2 mt-5 text-sm tracking-widest text-[#e8dcc0]">玩法</h3>
       <div className="space-y-2.5">

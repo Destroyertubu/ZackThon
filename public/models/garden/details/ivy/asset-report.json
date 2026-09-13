@@ -1,0 +1,40 @@
+{
+  "name": "Leaf Set 029",
+  "creator": "ambientCG / Lennart Demes",
+  "license": "CC0-1.0",
+  "source": "https://ambientcg.com/view?id=LeafSet029",
+  "licenseURL": "https://docs.ambientcg.com/license/",
+  "downloadURL": "https://ambientcg.com/get?file=LeafSet029_1K-JPG.zip",
+  "downloadBytes": 4001320,
+  "downloadSHA256": "27e0fcca8359a6669a5bd4ec990dfa70b3bf17d6d3826777d2b447ebe56aee6f",
+  "method": "Photometric Stereo",
+  "atlasDimensionsMeters": [
+    0.25,
+    0.25
+  ],
+  "verifiedAt": "2026-09-13",
+  "files": [
+    {
+      "file": "ivy-color.jpg",
+      "bytes": 644962,
+      "sha256": "c61738000b13050886ba9319d0ca03a7cc788e1c74a126d7d16ed6726788a3ea"
+    },
+    {
+      "file": "ivy-opacity.jpg",
+      "bytes": 83614,
+      "sha256": "867d996a827252881ce8ca666f45c2090f016061d764a851491e459cb062f721"
+    },
+    {
+      "file": "ivy-normal.jpg",
+      "bytes": 445521,
+      "sha256": "0e5544419ec21728805d0653d8642c256f750cdfed1c8b8eb295fdd8107320ea"
+    }
+  ],
+  "runtimeBytes": 1174097,
+  "runtimeGeometry": {
+    "leafCount": 1490,
+    "leafCardTriangles": 4,
+    "branchTriangles": 5170,
+    "renderedTriangles": 11130
+  }
+}

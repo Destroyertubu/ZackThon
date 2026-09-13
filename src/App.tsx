@@ -3,6 +3,7 @@ import Onboarding from './pages/Onboarding'
 import WorldPage from './pages/WorldPage'
 import HomePage from './pages/HomePage'
 import CanvasPage from './pages/CanvasPage'
+import ObservatoryPage from './pages/ObservatoryPage'
 
 export default function App() {
   return (
@@ -11,6 +12,7 @@ export default function App() {
       <Route path="/world" element={<WorldPage />} />
       <Route path="/home" element={<HomePage />} />
       <Route path="/canvas" element={<CanvasPage />} />
+      <Route path="/observatory" element={<ObservatoryPage />} />
     </Routes>
   )
 }

@@ -3,13 +3,14 @@ import { Link } from 'react-router'
 import { CircleHelp, Settings } from 'lucide-react'
 import { useGameStore } from '@/state/gameStore'
 
-export type HudArea = 'world' | 'home' | 'canvas' | 'onboarding'
+export type HudArea = 'world' | 'home' | 'canvas' | 'onboarding' | 'observatory'
 
 const AREA_SUBTITLE: Record<HudArea, string> = {
   world: '词云大世界',
   home: '家园 · 山间书房',
   canvas: '个人画布',
   onboarding: '启程',
+  observatory: '屋顶观测台',
 }
 
 const NAV_ITEMS: Array<{ area: HudArea; label: string; to: string }> = [

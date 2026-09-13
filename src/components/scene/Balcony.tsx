@@ -4,6 +4,7 @@ import { AssetLantern, AssetModel } from './Assets'
 import { BALCONY, BALCONY_RAILS } from './roomEnvelope'
 import type { ShellPanel } from './roomEnvelope'
 import { pbrMaps, SETS, timberMaterial } from './pbr'
+import TravelGateway from './TravelGateway'
 
 /** Every rail is rendered from the same volume used by movement and camera collision. */
 function Railing({ panel, material }: { panel: ShellPanel; material: THREE.Material }) {
@@ -30,7 +31,7 @@ function Railing({ panel, material }: { panel: ShellPanel; material: THREE.Mater
   )
 }
 
-export default function Balcony() {
+export default function Balcony({ onObservatory }: { onObservatory: () => void }) {
   const materials = useMemo(() => ({
     deck: new THREE.MeshStandardMaterial({
       ...pbrMaps(SETS.floorDeck, 2.8, 1.6), color: '#cbb590', roughness: 0.9,
@@ -61,6 +62,8 @@ export default function Balcony() {
         </group>
       ))}
       {BALCONY_RAILS.map((panel, i) => <Railing key={i} panel={panel} material={materials.wood} />)}
+
+      <TravelGateway destination="observatory" position={[1.6, 0, -7.2]} rotation={-0.2} onActivate={onObservatory} />
 
       {/* A narrow reading bench stays against the left railing, outside the main path. */}
       <group position={[-2.53, 0, -6.65]}>

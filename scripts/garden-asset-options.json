@@ -1,0 +1,23 @@
+{
+  "treeHeight": 4.55686472915113,
+  "canopySpread": 1.3,
+  "canopySpreadStartHeight": 0.35,
+  "canopySpreadFullHeight": 1.55,
+  "leafIslandRetention": 1.0,
+  "trunkThicknessFactor": 1.45,
+  "leafAlphaCutoff": 0.3,
+  "leafCardBendWindow": 0.35,
+  "leafCardMaxExtentRatio": 1.4,
+  "leafCardUvFitTolerance": 0.08,
+  "treeTriangleLimit": 220000,
+  "triangleBudgets": {
+    "star_tree_trunk": 25000,
+    "star_tree_branches": 45000,
+    "star_tree_leaves": 149000
+  },
+  "runtimeReference": {
+    "height": 7,
+    "position": [-2, 0.37, -2],
+    "rotationY": -0.45
+  }
+}
