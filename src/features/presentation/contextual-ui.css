@@ -53,3 +53,23 @@ html.ww-contextual-ui .collection-tree-entry > svg {
   color: #ffe18a;
   filter: drop-shadow(0 0 5px #ffc34b80);
 }
+
+.ww-jump-control {
+  position: absolute;
+  right: max(18px, env(safe-area-inset-right));
+  bottom: max(92px, env(safe-area-inset-bottom));
+  z-index: 25;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  pointer-events: auto;
+  touch-action: none;
+  border-radius: 50%;
+  border: 1px solid #eed0a070;
+  background: #1e2a2fc9;
+  color: #ffe18a;
+  backdrop-filter: blur(8px);
+}
+.ww-jump-control:disabled { opacity: .35; }
+@media (hover: hover) and (pointer: fine) { .ww-jump-control { display: none !important; } }

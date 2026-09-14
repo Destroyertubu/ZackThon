@@ -5,6 +5,7 @@ import type { WebGLRenderer } from 'three'
 import { useGameStore } from '@/state/gameStore'
 import { HOME_SPAWN, HOME_YAW, homeCameraTuning, RUN_SPEED, WALK_SPEED } from './config'
 import { bindSceneLook } from '../../scene/controls/bindSceneLook'
+import { createJumpMotion, startJump, stepJump } from '../../scene/controls/jumpMotion'
 import { moveFirstPersonOnFloor, nearestInteraction } from './navigation'
 import type { HomeInteraction } from './navigation'
 
@@ -29,6 +30,7 @@ export default function HomePlayer({ input, onNearby, onInteract, initialSpawn =
   const panel = useGameStore((s) => s.panel)
   const player = useRef<Group>(null)
   const position = useRef(new Vector3(...initialSpawn))
+  const jump = useRef(createJumpMotion(HOME_SPAWN[1]))
   const heading = useRef(initialYaw + Math.PI)
   const tuning = useMemo(() => homeCameraTuning(), [])
   const view = useRef({ yaw: initialYaw, pitch: tuning.pitch })
@@ -51,7 +53,7 @@ export default function HomePlayer({ input, onNearby, onInteract, initialSpawn =
     // Postprocessing performs several render calls: measure the complete frame in dev.
     if (import.meta.env.DEV) setFrameInfoReset(gl, false)
     canvas.setAttribute('tabindex', '0')
-    canvas.setAttribute('aria-label', '第一人称小屋：WASD 移动，鼠标移动环顾，Esc 释放，F 恢复，E 交互')
+    canvas.setAttribute('aria-label', '第一人称小屋：WASD 移动，空格跳跃，鼠标移动环顾，Esc 释放，F 恢复，E 交互')
     canvas.style.setProperty('touch-action', 'none')
     canvas.style.setProperty('outline', 'none')
     const look = bindSceneLook(canvas, {
@@ -68,8 +70,9 @@ export default function HomePlayer({ input, onNearby, onInteract, initialSpawn =
         if (useGameStore.getState().panel) useGameStore.getState().closePanel()
         return
       }
-      if (useGameStore.getState().panel || isTyping(event.target)) return
+      if (useGameStore.getState().panel || document.hidden || event.altKey || event.ctrlKey || event.metaKey || isTyping(event.target)) return
       if (MOVE_KEYS.includes(event.code)) { event.preventDefault(); input.keys.add(event.code) }
+      if (event.code === 'Space') { event.preventDefault(); if (!event.repeat) input.keys.add('Space') }
       if (event.code === 'KeyE' && !event.repeat && nearby.current) { event.preventDefault(); clear(); onInteract(nearby.current) }
       if (event.code === 'KeyC') input.keys.add('KeyC')
     }
@@ -121,6 +124,10 @@ export default function HomePlayer({ input, onNearby, onInteract, initialSpawn =
     const dx = (Math.cos(viewState.yaw) * right - Math.sin(viewState.yaw) * forward) / length * speed * dt
     const dz = (-Math.sin(viewState.yaw) * right - Math.cos(viewState.yaw) * forward) / length * speed * dt
     const oldX = p.x, oldZ = p.z
+    if (!panel && !document.hidden) {
+      if (keys.delete('Space')) startJump(jump.current)
+      p.y = stepJump(jump.current, HOME_SPAWN[1], dt)
+    }
     moveFirstPersonOnFloor(p, camera.position, dx, dz, tuning.eyeHeight)
     const moved = Math.hypot(p.x - oldX, p.z - oldZ) > 0.0001
     if (moved) heading.current = Math.atan2(p.x - oldX, p.z - oldZ)
@@ -145,6 +152,7 @@ export default function HomePlayer({ input, onNearby, onInteract, initialSpawn =
         gl.domElement.setAttribute('data-home-player', JSON.stringify({
           position: p.toArray(), camera: camera.position.toArray(), eye: [p.x, p.y + tuning.eyeHeight, p.z],
           yaw: viewState.yaw, pitch: viewState.pitch, nearby: spot?.id ?? null, paused: !!panel,
+          jumpHeight: jump.current.height, grounded: jump.current.grounded,
           render: { calls: gl.info.render.calls, triangles: gl.info.render.triangles, geometries: gl.info.memory.geometries, textures: gl.info.memory.textures },
         }))
       }

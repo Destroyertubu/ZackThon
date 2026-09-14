@@ -301,7 +301,8 @@ test('a newly imported legacy snapshot restores its world once, while invalid fi
     assert.deepEqual(useGameStore.getState().visitedWords, ['导入后继续探索'])
     const parsed = readLegacyGameState({ state: { startWorld: 'not a function', nodes: [{ id: 'bad', position: ['broken'] }], visitedWords: ['合法字段'], seed: { rawInput: 'x', topics: 'invalid', createdAt: 1 } } })
     assert.deepEqual(parsed, { visitedWords: ['合法字段'] })
-    assert.equal(typeof useGameStore.getState().startWorld, 'function')
+    assert.equal('startWorld' in useGameStore.getState(), false)
+    assert.equal(typeof useGameStore.getState().collect, 'function')
   } finally { disconnect() }
 })
 

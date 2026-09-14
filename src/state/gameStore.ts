@@ -8,7 +8,7 @@ import type {
   BackpackItem, Companion, IdeaAnchor, ItemLink, JourneyRecord,
   PanelId, TopicNode, TrailPoint, WorkItem, WorldSeed,
 } from '@/types/game'
-import { expandNode, generateWorld, hashString, seededRandom } from '@/lib/worldGen'
+import { expandNode, hashString, seededRandom } from '@/lib/worldGen'
 
 export const uid = () => Math.random().toString(36).slice(2, 10)
 
@@ -95,8 +95,6 @@ export interface GameState {
 
   seed: WorldSeed | null
   nodes: TopicNode[]
-  /** 生成新世界（清空旧的扩展） */
-  startWorld: (rawInput: string, topics: string[]) => void
   /** 展开某话题词的关联词 */
   expandTopic: (nodeId: string) => void
   getWork: (workId: string) => WorkItem | undefined
@@ -160,17 +158,6 @@ export const useGameStore = create<GameState>()(
 
       seed: null,
       nodes: [],
-      startWorld: (rawInput, topics) => {
-        const works = get().works
-        set({
-          seed: { rawInput, topics, createdAt: Date.now() },
-          nodes: generateWorld(topics, works),
-          visitedWords: [],
-          trail: [],
-          realmWorkId: null,
-        })
-        get().refreshCompanions()
-      },
       expandTopic: (nodeId) => {
         const { nodes, works } = get()
         const node = nodes.find((n) => n.id === nodeId)

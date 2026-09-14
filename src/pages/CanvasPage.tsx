@@ -47,9 +47,9 @@ export default function CanvasPage() {
             <p className="mt-1 text-xs text-[#8a8f9c]">见自己 · 见众生 · 见天地 —— 画布替你记得。</p>
           </div>
           <nav className="flex items-center gap-3">
-            <button type="button" onClick={() => navigate('/world')} className={navBtn}>
+            <button type="button" onClick={() => navigate('/galaxy')} className={navBtn}>
               <Globe size={14} />
-              词云世界
+              探索星系
             </button>
             <button type="button" onClick={() => navigate('/home')} className={navBtn}>
               <Home size={14} />
@@ -93,7 +93,7 @@ export default function CanvasPage() {
             </p>
             <button
               type="button"
-              onClick={() => navigate('/world')}
+              onClick={() => navigate('/galaxy')}
               className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#c9973f] px-8 py-3 font-serif tracking-[0.2em] text-[#0a0c10] transition-colors hover:bg-[#e0b25a]"
             >
               启程探索

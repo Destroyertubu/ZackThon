@@ -14,7 +14,7 @@ const AREA_SUBTITLE: Record<HudArea, string> = {
 }
 
 const NAV_ITEMS = [
-  { area: 'onboarding', label: '启程', to: '/', icon: Compass },
+  { area: 'observatory', label: '观星台', to: '/observatory', icon: Compass },
   { area: 'world', label: '镜海', to: '/land', icon: Waves },
   { area: 'home', label: '家园', to: '/home', icon: House },
   { area: 'canvas', label: '画布', to: '/canvas', icon: Palette },

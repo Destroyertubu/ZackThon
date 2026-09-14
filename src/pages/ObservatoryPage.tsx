@@ -3,6 +3,7 @@ import SceneReviewTools from '@/features/journeys/scene/SceneReviewTools'
 import StarlightPath from '@/features/typography/StarlightPath'
 import LivingWords from '@/features/typography/LivingWords'
 import DirectionIcon from '@/features/presentation/DirectionIcon'
+import JumpButton from '@/features/presentation/JumpButton'
 import ReadingLight from '@/features/typography/ReadingLight'
 import CollectionTreeScene, { TOPICS_PER_PAGE, LEAVES_PER_PAGE } from '@/components/observatory/CollectionTreeScene'
 import CollectionTreeControls from '@/components/observatory/CollectionTreeControls'
@@ -307,6 +308,7 @@ export default function ObservatoryPage() {
         onPointerUp={() => input.current.keys.delete(key)} onPointerCancel={() => input.current.keys.delete(key)} onLostPointerCapture={() => input.current.keys.delete(key)}>
         <DirectionIcon code={key}/></button> : <span key={i} />)}
     </div>}
+    {touch && ready && !blocked && <JumpButton onJump={() => input.current.keys.add('Space')}/>}
     {panel === 'settings' && <SettingsPanel />}
     {treeOpen && <div inert={!!readingLeaf}><CollectionTreeControls ready={personalReady} error={personalError}
       collectionCount={personalData.collections.length} topicCount={topics.length} selectedTopicLabel={selectedTopic?.label ?? null}

@@ -4,6 +4,7 @@ import { useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 import type { ScenePose } from '@/features/personal/types'
 import { bindSceneLook } from '../scene/controls/bindSceneLook'
+import { createJumpMotion, resetJump, startJump, stepJump } from '../scene/controls/jumpMotion'
 import { useGameStore } from '@/state/gameStore'
 import { canUseCollectionTree, canUseGalaxyGate, canUseReturnGate, canUseThoughtBar, getObservatoryInteraction, moveOnObservatory, OBSERVATORY_EYE_HEIGHT, OBSERVATORY_LOOK_AT, OBSERVATORY_SPAWN } from './layout'
 import { canUseTidePool, moonBridgeHeight } from './starTideLayout'
@@ -26,6 +27,13 @@ function attachLookBridge(input: ObservatoryInput, pauseLook?: () => void, resum
   input.pauseLook = pauseLook; input.resumeLook = resumeLook
 }
 function attachPoseBridge(input: ObservatoryInput, capturePose?: () => ScenePose) { input.capturePose = capturePose }
+
+/** Return anchors describe the floor position, never a transient airborne eye. */
+function walkingPose(camera: THREE.Camera, reading: CollectionTreeCameraView | null = null, workshop?: THREE.Quaternion): ScenePose {
+  const pose = captureObservatoryPose(camera, reading, workshop)
+  pose.position[1] = OBSERVATORY_EYE_HEIGHT + moonBridgeHeight(pose.position[0], pose.position[2])
+  return pose
+}
 
 const MOVE_CODES = new Set(['KeyW', 'KeyA', 'KeyS', 'KeyD', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ShiftLeft', 'ShiftRight'])
 const typing = (target: EventTarget | null) => target instanceof HTMLElement && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName))
@@ -51,6 +59,7 @@ export default function ObservatoryRig({ workshopOpen = false, treeOpen = false,
   const treeView = useRef<CollectionTreeCameraView | null>(null)
   const workshopView = useRef<{original: THREE.Quaternion; target: THREE.Quaternion} | null>(null)
   const poseTimer = useRef(0)
+  const jump = useRef(createJumpMotion())
   useEffect(() => {
     if (camera instanceof THREE.PerspectiveCamera) {
       const fov = size.width < size.height ? 76 : 68
@@ -66,9 +75,11 @@ export default function ObservatoryRig({ workshopOpen = false, treeOpen = false,
     camera.lookAt(...OBSERVATORY_LOOK_AT)
     view.current.setFromQuaternion(camera.quaternion, 'YXZ')
     if(initialPose){camera.position.set(...initialPose.position);view.current.set(initialPose.pitch,initialPose.yaw,0,'YXZ');camera.quaternion.setFromEuler(view.current)}
-    attachPoseBridge(controller, () => captureObservatoryPose(camera, treeView.current, workshopView.current?.original))
+    const ground = moonBridgeHeight(camera.position.x, camera.position.z)
+    resetJump(jump.current, ground); camera.position.setY(OBSERVATORY_EYE_HEIGHT + ground)
+    attachPoseBridge(controller, () => walkingPose(camera, treeView.current, workshopView.current?.original))
     canvas.setAttribute('tabindex', '0')
-    canvas.setAttribute('aria-label', '星树花园：鼠标移动环顾，Esc 释放，F 恢复，WASD 行走，靠近星门、调酒角、收藏树或回程门按 E，H 返回小屋')
+    canvas.setAttribute('aria-label', '星树花园：鼠标移动环顾，Esc 释放，F 恢复，WASD 行走，空格跳跃，靠近星门、调酒角、收藏树或回程门按 E，H 返回小屋')
     canvas.style.setProperty('touch-action', 'none')
     const bindLook = () => bindSceneLook(canvas, {
       isPaused: () => !input.current.active || !!treeView.current || !!useGameStore.getState().panel,
@@ -92,7 +103,7 @@ export default function ObservatoryRig({ workshopOpen = false, treeOpen = false,
         useGameStore.getState().closePanel()
         return
       }
-      if (useGameStore.getState().panel || treeView.current || !input.current.active || e.altKey || e.ctrlKey || e.metaKey || typing(e.target)) return
+      if (useGameStore.getState().panel || treeView.current || !input.current.active || document.hidden || e.altKey || e.ctrlKey || e.metaKey || typing(e.target)) return
       if (!e.repeat && e.code === 'KeyH') { e.preventDefault(); clear(); onReturnHome(); return }
       if (!e.repeat && e.code === 'KeyE') {
         const { x, z } = camera.position
@@ -102,8 +113,9 @@ export default function ObservatoryRig({ workshopOpen = false, treeOpen = false,
       }
       if (!input.current.active || (e.target instanceof HTMLElement && e.target.closest('button, a'))) return
       if (MOVE_CODES.has(e.code)) { input.current.keys.add(e.code); e.preventDefault() }
+      if (e.code === 'Space') { e.preventDefault(); if (!e.repeat) input.current.keys.add('Space') }
     }
-    const keyUp = (e: KeyboardEvent) => input.current.keys.delete(e.code)
+    const keyUp = (e: KeyboardEvent) => { if (e.code !== 'Space') input.current.keys.delete(e.code) }
     const blur = () => { clear(); if (document.pointerLockElement === canvas) document.exitPointerLock() }
     const visibility = () => { if (document.hidden) blur() }
     const unsubscribe = useGameStore.subscribe((state, previous) => {
@@ -139,7 +151,7 @@ export default function ObservatoryRig({ workshopOpen = false, treeOpen = false,
       treeView.current = beginCollectionTreeView(camera)
       input.current.keys.clear(); input.current.pauseLook?.()
       poseTimer.current = 0
-      onPose?.(captureObservatoryPose(camera, treeView.current))
+      onPose?.(walkingPose(camera, treeView.current))
     } else if (!treeOpen && treeView.current) {
       restoreCollectionTreeView(camera, treeView.current, view.current)
       treeView.current = null
@@ -162,13 +174,15 @@ export default function ObservatoryRig({ workshopOpen = false, treeOpen = false,
       workshopView.current = null
     }
     if (!workshopOpen && !treeOpen) poseTimer.current+=delta
-    if(!treeOpen && !workshopOpen && poseTimer.current>.75){poseTimer.current=0;if(new URLSearchParams(window.location.search).get('visualReview')!=='1')onPose?.(captureObservatoryPose(camera))}
+    if(!treeOpen && !workshopOpen && poseTimer.current>.75){poseTimer.current=0;if(new URLSearchParams(window.location.search).get('visualReview')!=='1')onPose?.(walkingPose(camera))}
     if (consumeReset(input.current) && !treeOpen && !workshopOpen) {
       camera.position.set(...OBSERVATORY_SPAWN); camera.lookAt(...OBSERVATORY_LOOK_AT)
+      resetJump(jump.current, moonBridgeHeight(camera.position.x, camera.position.z))
       view.current.setFromQuaternion(camera.quaternion, 'YXZ'); input.current.keys.clear()
     }
-    if (!treeOpen && !workshopOpen && input.current.active && !useGameStore.getState().panel) {
+    if (!treeOpen && !workshopOpen && input.current.active && !useGameStore.getState().panel && !document.hidden) {
       const keys = input.current.keys
+      if (keys.delete('Space')) startJump(jump.current)
       const right = Number(keys.has('KeyD') || keys.has('ArrowRight')) - Number(keys.has('KeyA') || keys.has('ArrowLeft'))
       const forward = Number(keys.has('KeyW') || keys.has('ArrowUp')) - Number(keys.has('KeyS') || keys.has('ArrowDown'))
       const speed = keys.has('ShiftLeft') || keys.has('ShiftRight') ? 3.8 : 2.4
@@ -176,7 +190,7 @@ export default function ObservatoryRig({ workshopOpen = false, treeOpen = false,
       moveOnObservatory(camera.position,
         (Math.cos(view.current.y) * right - Math.sin(view.current.y) * forward) * step,
         (-Math.sin(view.current.y) * right - Math.cos(view.current.y) * forward) * step)
-      camera.position.setY(OBSERVATORY_EYE_HEIGHT + moonBridgeHeight(camera.position.x,camera.position.z))
+      camera.position.setY(OBSERVATORY_EYE_HEIGHT + stepJump(jump.current, moonBridgeHeight(camera.position.x,camera.position.z), delta))
     }
     // Prompts represent the player, never the floating reading camera.
     const playerPosition = treeView.current?.originalPosition ?? camera.position
@@ -196,6 +210,7 @@ export default function ObservatoryRig({ workshopOpen = false, treeOpen = false,
         diagnostics.current = 0
         gl.domElement.setAttribute('data-observatory-camera', JSON.stringify({
           position: camera.position.toArray(), yaw: view.current.y, pitch: view.current.x,
+          jumpHeight: jump.current.height, grounded: jump.current.grounded,
           locked: document.pointerLockElement === gl.domElement, active: input.current.active,
           nearHome: nextNearHome, nearGalaxy: nextNearGalaxy, nearWorkshop: nextNearWorkshop, nearTree: nextNearTree, treeOpen,
           paused: treeOpen || workshopOpen || !input.current.active || !!useGameStore.getState().panel, dpr: gl.getPixelRatio(), calls: gl.info.render.calls,
