@@ -11,12 +11,14 @@ type ElementTree = { type?: unknown; props?: Record<string, unknown> };
 /** Execute the real scene's hooks/listeners with a renderer boundary, retaining
  * its real Three geometry/materials and transition implementation. No DOM or
  * GPU is required, so lifecycle events can be dispatched deterministically. */
-test('the actual scene retains search effects through visibility/context pauses and disposes them on unmount', async () => {
+for (const showcase of [false, true]) test(`the actual scene retains search effects through visibility/context pauses and disposes them on unmount (showcase=${showcase})`, async () => {
   const effects: (() => void | (() => void))[] = [];
   const cleanups: (() => void)[] = [];
   const frames = new Map<number, FrameRequestCallback>();
   let frameId = 0, renders = 0, rendererDisposals = 0, observerDisconnections = 0;
   let renderedScene: THREE.Scene | undefined;
+  let cameraAdapter: { getState: () => { scene: string; ready: boolean; settled: boolean; yaw: number; frames: number; elapsed: number }; execute: (action: string, payload: Record<string, unknown>) => Promise<unknown> } | undefined;
+  let cameraRegistrations = 0, cameraUnregistrations = 0;
   class Element extends EventTarget {
     clientWidth = 1280;
     clientHeight = 720;
@@ -37,6 +39,10 @@ test('the actual scene retains search effects through visibility/context pauses 
   });
   const harness = {
     effects,
+    register(name: string, adapter: typeof cameraAdapter) {
+      assert.equal(name, 'camera-galaxy'); cameraAdapter = adapter; cameraRegistrations++;
+      return () => { cameraAdapter = undefined; cameraUnregistrations++; };
+    },
     makeRenderer: () => ({
       setPixelRatio() {}, setClearColor() {}, setSize() {},
       render(scene: THREE.Scene, camera: THREE.Camera) {
@@ -86,6 +92,7 @@ test('the actual scene retains search effects through visibility/context pauses 
       './RichText': 'export default "RichText";',
       './CosmicBackdrop': 'export default "CosmicBackdrop";',
       '../lib/rich-text': 'export const hasRichSyntax=()=>false;',
+      '../../showcase/runtime': `export const isShowcase=()=>${showcase}; export const registerShowcaseAdapter=(name,adapter)=>globalThis.__galaxyLifecycleHarness.register(name,adapter);`,
     };
     const compiled = await build({
       entryPoints: [fileURLToPath(new URL('../GalaxyScene.tsx', import.meta.url))],
@@ -112,6 +119,14 @@ test('the actual scene retains search effects through visibility/context pauses 
     for (const effect of effects) { const cleanup = effect(); if (cleanup) cleanups.push(cleanup); }
     step(1000);
     assert.ok(renderedScene);
+    assert.equal(cameraRegistrations, showcase ? 1 : 0);
+    assert.equal(container.dataset.showcaseRendered, showcase ? 'true' : undefined);
+    if (showcase) {
+      assert.equal(cameraAdapter?.getState().ready, true);
+      assert.equal(cameraAdapter?.getState().scene, 'galaxy');
+      assert.equal(cameraAdapter?.getState().frames, 1);
+      assert.equal(cameraAdapter?.getState().elapsed, 0);
+    }
     const transition = renderedScene.getObjectByName('knowledge-search-transition');
     assert.ok(transition, 'the actual component must own the transition in its existing scene');
     const resources = new Set<THREE.BufferGeometry | THREE.Material>();
@@ -125,6 +140,10 @@ test('the actual scene retains search effects through visibility/context pauses 
     resources.forEach(resource => resource.addEventListener('dispose', () => releases++));
     props.voyage = { id: 1, phase: 'collapse', startedAt: 1000 };
     step(1200);
+    if (showcase) {
+      assert.equal(cameraAdapter?.getState().frames, renders);
+      assert.equal(cameraAdapter?.getState().elapsed, 0.2, 'render timing must not use the capped 50 ms animation delta');
+    }
     const dust = transition.getObjectByName('tidal-stellar-fragments') as THREE.Points;
     const attribute = dust.geometry.getAttribute('position') as THREE.BufferAttribute;
     const version = attribute.version;
@@ -135,8 +154,13 @@ test('the actual scene retains search effects through visibility/context pauses 
       assert.equal(frames.size, 0, 'hidden tabs must stop the animation loop');
       assert.equal(releases, 0, 'hiding a live scene must not dispose its transition');
       assert.equal(transition.parent, renderedScene);
+      const metricsBeforeResume = cameraAdapter?.getState();
       document.hidden = false; document.dispatchEvent(new Event('visibilitychange'));
       step(1300 + cycle * 100);
+      if (showcase) {
+        assert.equal(cameraAdapter?.getState().frames, renders);
+        assert.equal(cameraAdapter?.getState().elapsed, metricsBeforeResume?.elapsed, 'hidden time must not accumulate as rendering time');
+      }
     }
     assert.ok(attribute.version > version, 'the restored transition must keep uploading animated fragments');
     assert.equal(transition.children.length, 4);
@@ -155,7 +179,18 @@ test('the actual scene retains search effects through visibility/context pauses 
     step(1800);
     assert.equal(transition.visible, false);
     assert.equal(releases, 0, 'turning off motion retains reusable resources');
+    if (showcase) {
+      const shot = cameraAdapter!.execute('shot', { yaw: 0.4, pitch: 0.2 });
+      step(1816);
+      await shot;
+      assert.equal(cameraAdapter!.getState().settled, true);
+      assert.equal(cameraAdapter!.getState().yaw, 0.4);
+      assert.equal(cameraAdapter!.getState().frames, renders);
+      assert.ok(Math.abs(cameraAdapter!.getState().elapsed - 0.316) < 1e-9);
+    }
     while (cleanups.length) cleanups.pop()!();
+    assert.equal(cameraUnregistrations, cameraRegistrations);
+    assert.equal(container.dataset.showcaseRendered, undefined);
     assert.equal(releases, resources.size, 'final cleanup releases each resource exactly once');
     assert.equal(transition.parent, null);
     assert.equal(transition.children.length, 0);

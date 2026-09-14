@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { isShowcase, registerShowcaseAdapter } from "../../showcase/runtime";
 import * as THREE from "three";
 import type { Answer, Highlight, Question } from "../types";
 import StellarText from "./StellarText";
@@ -296,6 +297,7 @@ export default function GalaxyScene(props: GalaxySceneProps) {
     const canvas = canvasRef.current,
       container = containerRef.current;
     if (!canvas || !container || !layout.length) return;
+    const showcase = isShowcase();
     if (propsRef.current.voyage?.phase === "birth") cameraMemory.current = null;
     let renderer: THREE.WebGLRenderer;
     try {
@@ -368,6 +370,43 @@ export default function GalaxyScene(props: GalaxySceneProps) {
       previousQuestion = propsRef.current.selectedQuestionId,
       previousAnswer = propsRef.current.selectedAnswerId,
       previousStage = stageAt(propsRef.current.depth);
+    let cameraSettled = false;
+    const renderMetrics = { frames: 0, elapsed: 0 };
+    let lastRenderedAt: number | null = null;
+    const cameraState = () => ({
+      scene: "galaxy",
+      ready: !destroyed && !contextLost && container.dataset.showcaseRendered === "true",
+      settled: cameraSettled, depth: propsRef.current.depth, yaw, pitch,
+      position: currentPosition.toArray(), target: target.toArray(), pan: pan.toArray(),
+      frames: renderMetrics.frames, elapsed: renderMetrics.elapsed,
+    });
+    const unregisterShowcaseCamera = showcase ? registerShowcaseAdapter("camera-galaxy", {
+      getState: cameraState,
+      execute: async (action, payload = {}) => {
+        if (action === "state") return cameraState();
+        if (!["ready", "reset", "shot"].includes(action)) throw new Error(`Unknown galaxy camera action: ${action}`);
+        if (action !== "ready") {
+          const nextYaw = action === "reset" ? -0.06 : Number(payload.yaw ?? yawTarget);
+          const nextPitch = action === "reset" ? 0.16 : Number(payload.pitch ?? pitchTarget);
+          if (!Number.isFinite(nextYaw) || !Number.isFinite(nextPitch) || Math.abs(nextPitch) > 1.25) throw new Error("Invalid galaxy camera angle");
+          const nextPan = action === "reset" ? [0, 0, 0] : payload.pan;
+          if (nextPan !== undefined && (!Array.isArray(nextPan) || nextPan.length !== 3 || !nextPan.every(value => typeof value === "number" && Number.isFinite(value)))) throw new Error("Invalid galaxy camera pan");
+          yawTarget = nextYaw; pitchTarget = nextPitch;
+          if (Array.isArray(nextPan)) pan.set(nextPan[0], nextPan[1], nextPan[2]);
+          cameraSettled = false;
+          container.dataset.showcaseSettled = "false";
+        }
+        const started = performance.now();
+        await new Promise(resolve => setTimeout(resolve, 32));
+        while (!destroyed && (!cameraState().ready || !cameraSettled)) {
+          if (contextLost) throw new Error("Galaxy WebGL context was lost");
+          if (performance.now() - started > 15_000) throw new Error("Galaxy camera did not settle");
+          await new Promise(resolve => setTimeout(resolve, 16));
+        }
+        if (destroyed) throw new Error("Galaxy camera was disposed");
+        return cameraState();
+      },
+    }) : undefined;
     const keys = new Set<string>();
     const pointers = new Map<number, { x: number; y: number }>();
     let pointerStart = { x: 0, y: 0 },
@@ -763,9 +802,9 @@ export default function GalaxyScene(props: GalaxySceneProps) {
         pointers.size > 0 ||
         isTyping(document.activeElement) ||
         !!document.querySelector('[role="dialog"]') ||
-        !!container.querySelector(
+        (!showcase && !!container.querySelector(
           ".galaxy-label:hover,.galaxy-label:focus-within,.galaxy-hub:hover,.galaxy-hub:focus-within",
-        );
+        ));
       const paused = reading || latest.reducedMotion || !!voyage;
       if (!paused) elapsed += dt;
       // Only the individual galaxy turns. Its center stays fixed in the cluster,
@@ -863,6 +902,17 @@ export default function GalaxyScene(props: GalaxySceneProps) {
       camera.position.copy(currentPosition);
       camera.lookAt(target);
       camera.updateMatrixWorld();
+      if (showcase) {
+        const tolerance = Math.max(0.015, modelRadius * 0.003);
+        cameraSettled = currentPosition.distanceTo(desiredPosition) < tolerance
+          && target.distanceTo(desiredTarget) < tolerance
+          && Math.abs(yaw - yawTarget) < 0.002 && Math.abs(pitch - pitchTarget) < 0.002;
+        container.dataset.showcaseSettled = String(cameraSettled);
+        container.dataset.showcaseDepth = String(depth);
+        container.dataset.showcaseReset = String(latest.resetToken);
+        container.dataset.showcaseQuestion = latest.selectedQuestionId ?? "";
+        container.dataset.showcaseAnswer = latest.selectedAnswerId ?? "";
+      }
       cameraMemory.current = {
         position: currentPosition.clone(),
         target: target.clone(),
@@ -1023,6 +1073,15 @@ export default function GalaxyScene(props: GalaxySceneProps) {
       writeProjection(level, dt);
       projectionTick++;
       renderer.render(scene, camera);
+      if (showcase) {
+        // Count completed renders using uncapped frame timestamps, independently
+        // of the animation's 50 ms delta cap. Deliberate visibility pauses reset
+        // the interval origin without discarding the cumulative counters.
+        if (lastRenderedAt !== null) renderMetrics.elapsed += Math.max(0, time - lastRenderedAt) / 1000;
+        renderMetrics.frames++;
+        lastRenderedAt = time;
+        container.dataset.showcaseRendered = "true";
+      }
       if (voyage?.phase === "birth" && !voyage.ready) latest.onVoyageReady?.(voyage.id);
     };
     const nearestBody = (x: number, y: number) => {
@@ -1071,6 +1130,7 @@ export default function GalaxyScene(props: GalaxySceneProps) {
       }
     };
     const down = (event: PointerEvent) => {
+      if (showcase) return;
       if (propsRef.current.voyage) return;
       if (event.button !== 0 && event.button !== 2) return;
       canvas.focus({ preventScroll: true });
@@ -1123,6 +1183,7 @@ export default function GalaxyScene(props: GalaxySceneProps) {
       }
     };
     const up = (event: PointerEvent) => {
+      if (showcase) return;
       pointers.delete(event.pointerId);
       if (canvas.hasPointerCapture(event.pointerId))
         canvas.releasePointerCapture(event.pointerId);
@@ -1133,10 +1194,12 @@ export default function GalaxyScene(props: GalaxySceneProps) {
       }
     };
     const double = (event: MouseEvent) => {
+      if (showcase) return;
       const body = nearestBody(event.clientX, event.clientY);
       if (body) selectBody(body, true);
     };
     const keydown = (event: KeyboardEvent) => {
+      if (showcase) return;
       if (
         isTyping(event.target) ||
         !propsRef.current.flightMode ||
@@ -1172,6 +1235,7 @@ export default function GalaxyScene(props: GalaxySceneProps) {
     };
     const visibility = () => {
       hidden = document.hidden || contextLost;
+      if (showcase) lastRenderedAt = null;
       cancelAnimationFrame(frame);
       keys.clear();
       if (!hidden) {
@@ -1183,8 +1247,10 @@ export default function GalaxyScene(props: GalaxySceneProps) {
       event.preventDefault();
       contextLost = true;
       hidden = true;
+      if (showcase) lastRenderedAt = null;
       cancelAnimationFrame(frame);
       setWebglAvailable(false);
+      if (showcase) { container.dataset.showcaseRendered = "false"; container.dataset.showcaseSettled = "false"; }
     };
     const restored = () => {
       contextLost = false;
@@ -1207,6 +1273,12 @@ export default function GalaxyScene(props: GalaxySceneProps) {
     frame = requestAnimationFrame(animate);
     return () => {
       destroyed = true;
+      unregisterShowcaseCamera?.();
+      if (showcase) {
+        delete container.dataset.showcaseRendered; delete container.dataset.showcaseSettled;
+        delete container.dataset.showcaseDepth; delete container.dataset.showcaseReset;
+        delete container.dataset.showcaseQuestion; delete container.dataset.showcaseAnswer;
+      }
       cancelAnimationFrame(frame);
       // Visibility/context pauses retain their GPU resources for the next frame.
       // Detach this owned effect before generic scene traversal to release once.
@@ -1268,6 +1340,7 @@ export default function GalaxyScene(props: GalaxySceneProps) {
     if (!container) return;
     const wheel = (event: WheelEvent) => {
       event.preventDefault();
+      if (isShowcase()) return;
       const latest = propsRef.current;
       if (latest.voyage) return;
       const delta =

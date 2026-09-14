@@ -1,3 +1,5 @@
+import { useShowcaseAdapter } from '@/features/showcase/runtime'
+import ShowcaseCamera from '@/features/showcase/ShowcaseCamera'
 import CocktailVision, { type CocktailPreview } from '@/features/typography/CocktailVision'
 import SceneReviewTools from '@/features/journeys/scene/SceneReviewTools'
 import StarlightPath from '@/features/typography/StarlightPath'
@@ -239,6 +241,27 @@ export default function ObservatoryPage() {
     navigate('/home', { state: { spawn: 'balcony-observatory' } })
   }, [leave, navigate])
 
+  useShowcaseAdapter('observatory', {
+    getState: () => ({ ready, treeOpen, topicId, readingLeaf: readingLeaf?.id, workshopOpen,
+      topics: topics.map(t => ({ id: t.id, label: t.label, leaves: t.leaves.map(l => ({ id: l.id, title: l.title })) })) }),
+    execute: (action, payload = {}) => {
+      if (action === 'openTree') { openTree(); return true }
+      if (action === 'selectTopic') {
+        const index = topics.findIndex(t => t.id === payload.id)
+        if (index < 0) throw new Error('收藏主题不存在')
+        setTopicPage(Math.floor(index / TOPICS_PER_PAGE)); selectTopic(String(payload.id)); return true
+      }
+      if (action === 'readLeaf') { readLeaf(String(payload.id)); return true }
+      if (action === 'closeTree') { closeTree(); return true }
+      if (action === 'openWorkshop') { openWorkshop(); return true }
+      if (action === 'closeWorkshop') { closeWorkshop(); return true }
+      if (action === 'enterGalaxy') { enterWorld(); return true }
+      if (action === 'home') { returnHome(); return true }
+      if (action === 'resonate') { resonate(); return true }
+      throw new Error(`未知观星台演示动作：${action}`)
+    },
+  })
+
   return <main ref={treeDialog} role={treeOpen ? 'dialog' : undefined} aria-modal={treeOpen ? true : undefined} aria-labelledby={treeOpen ? 'collection-tree-title' : undefined} className={`observatory-page ${locked ? 'is-locked' : ''} ${treeOpen ? 'is-collection-tree' : ''}`}>
     <Canvas inert={nonTreeBlocked || !!readingLeaf} shadows={{type:PCF_SHADOW_MAP}} dpr={quality.dprMax === 1 ? 1 : [1, quality.dprMax]}
       camera={{ fov: 68, near: 0.05, far: 240, position: OBSERVATORY_SPAWN }}
@@ -250,6 +273,7 @@ export default function ObservatoryPage() {
           topicPage={shownTopicPage} leafPage={shownLeafPage} onOpen={openTree} onTopic={selectTopic} onLeaf={readLeaf} reducedMotion={reducedMotion}/>}
         <StarlightPath/>
         {workshopOpen && drinkPreview && <CocktailVision {...drinkPreview}/>}
+        <ShowcaseCamera sceneName="observatory"/>
         <ObservatoryRig treeOpen={treeOpen} reducedMotion={reducedMotion} onOpenTree={openTree} onNearTree={setNearTree} workshopOpen={workshopOpen} initialPose={initialPose.current} onPose={onPose} input={input} onReady={onReady} onLockChange={onLockChange} onReturnHome={returnHome} onEnterWorld={enterWorld} onOpenWorkshop={openWorkshop}
           onNearHome={setNearHome} onNearGalaxy={setNearGalaxy} onNearWorkshop={setNearWorkshop} onResonate={resonate} onNearTide={setNearTide}/>
       </Suspense>

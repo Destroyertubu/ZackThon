@@ -15,7 +15,7 @@ export default function GameHUD({ area }: { area: HudArea }) {
   const panel = useGameStore((s) => s.panel)
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-40 select-none">
+    <div className="ww-game-hud pointer-events-none fixed inset-0 z-40 select-none">
       <div className="pointer-events-auto absolute left-4 top-4">
         <BrandCard area={area} />
       </div>

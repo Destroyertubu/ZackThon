@@ -1,0 +1,21 @@
+[Unit]
+Description=Wanderwise isolated showcase recorder
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/code/Wanderwise-showcase
+Environment=NODE_ENV=production
+Environment=SHOWCASE_PORT=4192
+Environment=PATH=%h/.nvm/versions/node/v24.12.0/bin:%h/.local/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=%h/.nvm/versions/node/v24.12.0/bin/node --import tsx server/showcase/index.ts
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=25
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=default.target

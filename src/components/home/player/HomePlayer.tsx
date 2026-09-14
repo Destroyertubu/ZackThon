@@ -1,3 +1,4 @@
+import { isShowcase } from '@/features/showcase/runtime'
 import { useEffect, useMemo, useRef } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import { Group, MathUtils, PerspectiveCamera, Vector3 } from 'three'
@@ -105,6 +106,7 @@ export default function HomePlayer({ input, onNearby, onInteract, initialSpawn =
   }, [gl, input, onInteract, tuning])
 
   useFrame((_, rawDelta) => {
+    if (isShowcase()) return
     const dt = Math.min(rawDelta, 0.05)
     const frame = frameRef.current
     const p = position.current, viewState = view.current, keys = input.keys

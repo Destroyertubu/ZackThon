@@ -1,0 +1,33 @@
+html.ww-showcase, html.ww-showcase * { cursor: none !important; }
+html.ww-showcase .observatory-reticle,
+html.ww-showcase .observatory-header,
+html.ww-showcase .observatory-footer,
+html.ww-showcase .observatory-interact,
+html.ww-showcase .observatory-touch-pad,
+html.ww-showcase .ww-touch-action,
+html.ww-showcase .ww-jump-button,
+html.ww-showcase .ww-home-controls,
+html.ww-showcase .ww-game-hud,
+html.ww-showcase .observatory-return-prompt,
+html.ww-showcase .observatory-walk-controls,
+html.ww-showcase .tide-response-notice,
+html.ww-showcase .ms-world-header,
+html.ww-showcase .ms-world-footer,
+html.ww-showcase .ms-route-progress,
+html.ww-showcase .ms-near-prompt,
+html.ww-showcase .game-hud,
+html.ww-showcase .journey-hud,
+html.ww-showcase .journey-nearby,
+html.ww-showcase .journey-world-credits,
+html.ww-showcase [aria-label="场景验收镜头"] { display: none !important; }
+html.ww-showcase .showcase-transition {
+  position: fixed; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  z-index: 2147483600; pointer-events: none; transition: opacity .35s ease;
+}
+
+html.ww-showcase[data-showcase-shot="finale"] .topbar,
+html.ww-showcase[data-showcase-shot="finale"] .universe-navigation,
+html.ww-showcase[data-showcase-shot="finale"] .context-actions,
+html.ww-showcase[data-showcase-shot="finale"] .camera-controls,
+html.ww-showcase[data-showcase-shot="finale"] .scene-tools,
+html.ww-showcase[data-showcase-shot="finale"] .galaxy-controls { display: none !important; }

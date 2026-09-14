@@ -2,9 +2,10 @@
 import assert from 'node:assert/strict';
 import { afterEach, beforeEach, test } from 'node:test';
 import type { JourneyStop, Reflection, SavedItem } from '../types';
+import { usePersonalStore } from '../../personal/store';
 import {
   exportNotebook, loadCollection, loadJourney, loadReflections,
-  saveCollection, saveJourney, saveReflections,
+  saveCollection, saveJourney, saveReflections, removeReflectionsById,
 } from './storage';
 
 const collection: SavedItem = {
@@ -51,6 +52,31 @@ test('collection, reflections and journey survive a storage roundtrip', () => {
   assert.deepEqual(loadCollection(), [collection]);
   assert.deepEqual(loadReflections(), [reflection]);
   assert.deepEqual(loadJourney(), [journey]);
+});
+
+test('identity deletion preserves unrelated shared note order, timestamps and objects', () => {
+  const own = { id: 'own-note', title: 'My note', text: 'Keep my words', quote: 'Another quote', createdAt: reflection.createdAt, updatedAt: reflection.createdAt };
+  const second = { ...own, id: 'second-note' };
+  const demo = { ...own, id: reflection.id, title: reflection.targetTitle, text: reflection.text };
+  const getState = usePersonalStore.getState, setState = usePersonalStore.setState;
+  let state: ReturnType<typeof getState> = { ...getState(), ready: true, data: { ...getState().data, notes: [own, demo, second] } };
+  // Isolate the persistence bridge from IndexedDB; assert exact surviving store records.
+  usePersonalStore.getState = () => state;
+  usePersonalStore.setState = ((patch: Parameters<typeof setState>[0]) => {
+    const next = typeof patch === 'function' ? patch(state) : patch;
+    state = { ...state, ...next };
+  }) as typeof setState;
+  try {
+    const kept: Reflection = { ...reflection, id: own.id, targetTitle: own.title, text: own.text, quote: own.quote };
+    assert.equal(removeReflectionsById([reflection, kept], [reflection.id]), true);
+    assert.deepEqual(state.data.notes, [own, second]);
+    assert.equal(state.data.notes[0], own);
+    assert.equal(state.data.notes[1], second);
+    assert.deepEqual(JSON.parse(values.get('wanderwise.reflections.v1')!), [kept]);
+  } finally {
+    usePersonalStore.getState = getState;
+    usePersonalStore.setState = setState;
+  }
 });
 
 test('corrupt JSON and malformed record schemas cannot break notebook loading', () => {

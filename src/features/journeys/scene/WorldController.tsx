@@ -1,3 +1,4 @@
+import { isShowcase } from '@/features/showcase/runtime'
 import { useEffect, useLayoutEffect, useRef } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
@@ -144,6 +145,7 @@ export default function WorldController(props: WorldControllerProps) {
   }, [camera, gl, worldId, disabled])
 
   useFrame((_, rawDelta) => {
+    if (isShowcase()) return
     const state = input.current, current = latest.current
     if (current.disabled || document.hidden) return
     const held = (code: string) => state.keyboard.has(code) || state.touch.has(code)

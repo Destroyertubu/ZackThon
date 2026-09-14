@@ -1,0 +1,21 @@
+#!/bin/bash
+set -eu
+umask 0007
+export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/tmp/runtime-ubuntu}"
+until [ -f "${XDG_RUNTIME_DIR}/container-env" ]; do sleep 0.2; done
+. "${XDG_RUNTIME_DIR}/container-env"
+export DISPLAY=:30 MOZ_X11_EGL=1
+until timeout 2 xdpyinfo -display :30 >/dev/null 2>&1; do sleep 0.2; done
+# Xvfb's framebuffer size and its active RandR monitor mode are separate.
+# With no Selkies input service to resize it, the active mode starts at 1280x1024.
+xrandr --newmode 1920x1080 148.50 1920 2008 2052 2200 1080 1084 1089 1125 +hsync +vsync 2>/dev/null || true
+xrandr --addmode screen 1920x1080 2>/dev/null || true
+xrandr --output screen --mode 1920x1080
+python3 /opt/showcase/origin.py &
+task_proxy_pid=$!
+openbox --config-file /opt/wanderwise/openbox.xml &
+task_window_pid=$!
+trap 'kill "$task_proxy_pid" "$task_window_pid" 2>/dev/null || true' EXIT
+mkdir -p /tmp/showcase-profile
+cp /opt/showcase/user.js /tmp/showcase-profile/user.js
+firefox --no-remote --profile /tmp/showcase-profile --kiosk 'http://127.0.0.1:4187/observatory?showcase=1&renderRuntime=rtx'

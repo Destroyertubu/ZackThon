@@ -1,0 +1,11 @@
+{
+  "policies": {
+    "SkipTermsOfUse": true,
+    "DisableTelemetry": true,
+    "DisableFirefoxStudies": true,
+    "DontCheckDefaultBrowser": true,
+    "OverrideFirstRunPage": "",
+    "OverridePostUpdatePage": "",
+    "DisableAppUpdate": true
+  }
+}

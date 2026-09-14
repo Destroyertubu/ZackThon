@@ -1,4 +1,7 @@
 import type { ContentSource } from '../personal/types';
+import { flushPersonalData, usePersonalStore } from '../personal/store';
+import { isShowcase } from '../showcase/runtime';
+import { useGalaxyShowcaseAdapter } from '../showcase/GalaxyAdapter';
 import {
   useCallback,
   useEffect,
@@ -57,6 +60,7 @@ import {
   loadCollection,
   loadJourney,
   loadReflections,
+  removeReflectionsById,
   saveCollection,
   saveJourney,
   saveReflections,
@@ -667,8 +671,8 @@ export default function App({returnLabel="返回观星台",entrySources=EMPTY_EN
     });
     setReflectionText("");
   }
-  function saveReflection(event: FormEvent) {
-    event.preventDefault();
+  function saveReflection(event?: FormEvent) {
+    event?.preventDefault();
     if (!reflectionTarget || !reflectionText.trim()) return;
     const next: Reflection[] = [
       {
@@ -739,6 +743,7 @@ export default function App({returnLabel="返回观星台",entrySources=EMPTY_EN
   }, []);
   useEffect(() => {
     function keyboard(event: KeyboardEvent) {
+      if (isShowcase()) return;
       const editing =
         event.target instanceof Element &&
         event.target.closest(
@@ -968,6 +973,50 @@ export default function App({returnLabel="返回观星台",entrySources=EMPTY_EN
     };
   }
   const departingScene = voyage && voyage.phase !== "birth" ? sceneSnapshot.current : null;
+
+  useGalaxyShowcaseAdapter({
+    state: {
+      query, queryReady: !loading && !error && !voyage && questions.length > 0,
+      answerReady: !answerLoading && !detailLoading,
+      loading, error, questionId: selectedQuestion?.id ?? null, answerId: selectedAnswer?.id ?? null,
+      depth, resetToken, drawer, collectionTab, reader: readerOpen, reflection: !!reflectionTarget,
+      reflectionTarget, reflectionText, selectedParagraph, selectedQuote, saved: isSaved,
+      collection, reflections, journey,
+    },
+    questions, selectedAnswer,
+    selectQuestion: chooseQuestion, selectAnswer: chooseAnswer, setDepth: changeDepth,
+    openReader, toggleSave, openReflection, setReflectionText, saveReflection,
+    currentAnswerTargetIds: () => {
+      if (!selectedAnswer) return [];
+      const ids = new Set([selectedAnswer.id]);
+      // Reloaded reflections point to the shared source's canonical ID.
+      for (const source of Object.values(usePersonalStore.getState().data.sources)) {
+        if (source.id === selectedAnswer.id || source.remoteId === selectedAnswer.id
+          || source.galaxy?.id === selectedAnswer.id || source.galaxy?.answerId === selectedAnswer.id
+          || (selectedAnswer.url && source.url === selectedAnswer.url)) ids.add(source.id);
+      }
+      return [...ids];
+    },
+    removeReflections: (ids) => {
+      const removed = new Set(ids);
+      const next = reflections.filter(item => !removed.has(item.id));
+      setReflections(next);
+      if (!removeReflectionsById(reflections, ids)) throw new Error("本次删除未能同步到浏览器存储");
+    },
+    showDrawer: (next, tab) => { setCollectionTab(tab); setDrawer(next); },
+    revisit: visit,
+    closeOverlays: () => { setDrawer(null); setReaderOpen(false); setReflectionTarget(null); },
+    reset: () => {
+      setDrawer(null); setReaderOpen(false); setReflectionTarget(null); setReflectionText("");
+      setSelectedParagraph(null); setSelectedQuote(undefined); setShowMap(false); setFlightMode(false);
+      changeDepth(0); setResetToken(value => value + 1);
+    },
+    flushPersistence: async () => {
+      await flushPersonalData();
+      const storageError = usePersonalStore.getState().error;
+      if (storageError) throw new Error(storageError);
+    },
+  });
 
   return (
     <main

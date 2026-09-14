@@ -1,3 +1,4 @@
+import { isShowcase } from '@/features/showcase/runtime'
 import { useEffect, useRef } from 'react'
 import type { RefObject } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
@@ -141,6 +142,7 @@ export default function ObservatoryRig({ workshopOpen = false, treeOpen = false,
   }, [camera, gl, input, onReady, onLockChange, onReturnHome, onEnterWorld, onOpenWorkshop, onOpenTree, onResonate, initialPose])
 
   useFrame((_, delta) => {
+    if (isShowcase()) return
     if (treeOpen && !treeView.current) {
       // Restore another temporary view before saving the actual walking camera.
       if (workshopView.current) {

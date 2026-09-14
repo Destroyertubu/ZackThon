@@ -1,0 +1,16 @@
+[Unit]
+Description=Wanderwise showcase private console HTTPS tunnel
+After=network-online.target wanderwise-showcase.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/cloudflared tunnel --url http://127.0.0.1:4192 --no-autoupdate
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=15
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=default.target

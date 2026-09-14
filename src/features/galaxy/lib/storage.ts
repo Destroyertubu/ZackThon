@@ -152,6 +152,14 @@ export const loadCollection = (): SavedItem[] => sharedCollection() ?? read(KEYS
 export const saveCollection = (items: SavedItem[]): boolean => write(KEYS.collection, items, MAX_RECORDS.collection, savedItem, savedIdentity, saveSharedCollection);
 export const loadReflections = (): Reflection[] => sharedReflections() ?? read(KEYS.reflections, MAX_RECORDS.reflections, reflection);
 export const saveReflections = (items: Reflection[]): boolean => write(KEYS.reflections, items, MAX_RECORDS.reflections, reflection,undefined,saveSharedReflections);
+/** Delete explicit identities without re-saving unrelated personal notes. */
+export const removeReflectionsById = (items: Reflection[], ids: string[]): boolean => {
+  const removed = new Set(ids);
+  const next = items.filter(item => !removed.has(item.id));
+  return write(KEYS.reflections, next, MAX_RECORDS.reflections, reflection, undefined, () => {
+    usePersonalStore.setState(state => ({ data: { ...state.data, notes: state.data.notes.filter(note => !removed.has(note.id)) } }));
+  });
+};
 export const loadJourney = (): JourneyStop[] => sharedGalaxyJourney() ?? read(KEYS.journey, MAX_RECORDS.journey, journeyStop);
 export const saveJourney = (items: JourneyStop[]): boolean => write(KEYS.journey, items, MAX_RECORDS.journey, journeyStop,undefined,saveSharedGalaxyJourney);
 

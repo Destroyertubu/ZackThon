@@ -1,3 +1,6 @@
+import { isShowcase } from '@/features/showcase/runtime'
+import showcaseWorks from '@/data/works.json'
+import type { WorkItem } from '@/types/game'
 import { useEffect } from 'react'
 import Experience from '@/components/scene/Experience'
 import HomePanels from '@/components/home/HomePanels'
@@ -12,7 +15,8 @@ export default function HomePage() {
   useEffect(() => {
     if (works.length > 0) return
     // getWorks 内部自带缓存与快照回退，永不 reject
-    getWorks().then(setWorks)
+    if (isShowcase()) setWorks(showcaseWorks as WorkItem[])
+    else getWorks().then(setWorks)
   }, [works.length, setWorks])
 
   return (

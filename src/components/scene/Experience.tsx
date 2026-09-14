@@ -1,3 +1,4 @@
+import ShowcaseCamera from '@/features/showcase/ShowcaseCamera'
 import { MaterialCaustics } from '@/features/typography/LightVfx'
 import InteractionAccent from '@/features/presentation/InteractionAccent'
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react'
@@ -135,6 +136,7 @@ export default function Experience() {
           <Atmosphere />
           <CompanionAtHome />
           <HotspotLayer onLand={enterLand} />
+        <ShowcaseCamera sceneName="home"/>
           <HomePlayer input={input} initialSpawn={initialSpawn} initialYaw={initialYaw} onNearby={setNearby} onInteract={interact} />
         </Suspense>
         {quality.postprocessing && (

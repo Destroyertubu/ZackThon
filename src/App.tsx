@@ -3,12 +3,14 @@ import CanvasPage from './pages/CanvasPage'
 import { lazy, Suspense, useEffect } from 'react'
 import { initializePersonalSpace, usePersonalStore } from './features/personal/store'
 import { connectLegacyInventory } from './features/personal/legacyBridge'
+import { isShowcase } from './features/showcase/runtime'
 
 const HomePage = lazy(() => import('./pages/HomePage'))
 const ObservatoryPage = lazy(() => import('./pages/ObservatoryPage'))
 const JourneyPage = lazy(() => import('./features/journeys/JourneyPage'))
 const LandPage = lazy(() => import('./features/journeys/LandPage'))
 const GalaxyPage = lazy(() => import('./features/galaxy'))
+const ShowcaseWarmup = lazy(() => import('./features/showcase/ShowcaseWarmup'))
 
 export default function App() {
   const ready = usePersonalStore(s => s.ready)
@@ -16,6 +18,7 @@ export default function App() {
   if (!ready) return <main className="grid min-h-screen place-items-center bg-[#101b25] text-[#e8dcc0]" role="status">正在打开你的思想家园…</main>
   return (
     <Suspense fallback={<main className="grid min-h-screen place-items-center bg-[#101b25] text-[#e8dcc0]" role="status">正在展开这片风景…</main>}><Routes>
+      {isShowcase() && <Route path="/showcase/warmup" element={<ShowcaseWarmup />} />}
       <Route path="/" element={<Navigate to="/home" replace />} />
       <Route path="/world" element={<Navigate to="/land" replace />} />
       <Route path="/home" element={<HomePage />} />
