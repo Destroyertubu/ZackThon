@@ -10,9 +10,19 @@ import type { ContentSource, PersonalNote, PersonalWork } from './types'
 import { exportPersonalSpace, importPersonalSpace, usePersonalStore } from './store'
 import SourceCard from './SourceCard'
 import './personal.css'
+import './workspaces.css'
 
-export type PersonalTab = 'search' | 'collections' | 'notes' | 'works' | 'journeys' | 'interests' | 'synthesis'
+export type PersonalTab = 'search' | 'collections' | 'notes' | 'works' | 'journeys' | 'interests' | 'synthesis' | 'reading'
+type Workspace = 'cabinet' | 'synth' | 'journal' | 'mascot' | 'library'
+const WORKSPACES: Record<Workspace,{title:string;description:string;tabs:PersonalTab[]}> = {
+  cabinet:{title:'取出一份曾打动你的材料',description:'资料柜 · 收藏、摘录与独立手记',tabs:['collections','notes']},
+  synth:{title:'把材料，写成自己的观点',description:'思想合成台 · 联系、分歧、反例与新的表达',tabs:['synthesis']},
+  journal:{title:'翻到上次停下的那一页',description:'旅程日志 · 沿原来的停靠点继续出发',tabs:['journeys']},
+  mascot:{title:'和看山一起，把问题问得更清楚',description:'阅读伙伴 · 查找真实讨论与来源',tabs:['search','interests','reading']},
+  library:{title:'在灯下，继续读与写',description:'私人书架 · 最近阅读与自己的作品',tabs:['reading','works']},
+}
 const TABS = [
+  { id: 'reading', name: '灯下续读', icon: BookOpen, subtitle: '回到上次读过的段落，让思绪慢慢接上。' },
   { id: 'search', name: '与看山找寻', icon: Search, subtitle: '把一个问题，放进更辽阔的讨论里。' },
   { id: 'collections', name: '想法收纳柜', icon: Bookmark, subtitle: '在世界里遇见的启发，都有一个安放之处。' },
   { id: 'notes', name: '我的手记', icon: Feather, subtitle: '记下此刻的疑问，也留住想法发生的过程。' },
@@ -26,6 +36,12 @@ const errorText = (error: unknown) => error instanceof Error ? error.message : '
 
 function Empty({ children }: { children: ReactNode }) {
   return <div className="ms-empty"><BookOpen size={28} strokeWidth={1}/><p>{children}</p></div>
+}
+
+function ReadingView() {
+  const data=usePersonalStore(s=>s.data)
+  const recent=Object.entries(data.reading??{}).sort((a,b)=>b[1].updatedAt.localeCompare(a[1].updatedAt)).map(([id,progress])=>({source:data.sources[id],progress})).filter(item=>item.source)
+  return <div className="ms-stack">{recent.length?recent.map(({source,progress})=><section className="library-reading-entry" key={source.id}><p className="ms-eyebrow">上次读到第 {progress.paragraph+1} 段 · {date(progress.updatedAt)}</p><SourceCard source={source}/></section>):<Empty>静读一份收藏后，它会留在这里。作品放在旁边的书架上。</Empty>}</div>
 }
 
 function SearchView() {
@@ -222,7 +238,7 @@ function SynthesisView() {
   </div>
 }
 
-export default function PersonalPanel({ initialTab = 'collections', onClose }: { initialTab?: PersonalTab; onClose?: () => void }) {
+export default function PersonalPanel({ initialTab = 'collections', onClose, workspace }: { initialTab?: PersonalTab; onClose?: () => void; workspace?: Workspace }) {
   const [tab, setTab] = useState<PersonalTab>(initialTab)
   const [transferNotice, setTransferNotice] = useState('')
   const data = usePersonalStore(s => s.data)
@@ -233,14 +249,18 @@ export default function PersonalPanel({ initialTab = 'collections', onClose }: {
   const mounted = useRef(true)
   useEffect(() => { mounted.current = true; return () => { mounted.current = false } }, [])
   const close = onClose ?? closePanel
+  const desk = workspace ? WORKSPACES[workspace] : undefined
+  const tabs = desk ? TABS.filter(item=>desk.tabs.includes(item.id)) : TABS
+  const openSearch = () => workspace ? useGameStore.getState().openPanel('mascot') : setTab('search')
+  const openSynthesis = () => workspace ? useGameStore.getState().openPanel('synth') : setTab('synthesis')
   const active = TABS.find(item => item.id === tab)!
   const counts: Partial<Record<PersonalTab, number>> = { collections: data.collections.length, notes: data.notes.length, works: data.works.length, journeys: data.journeys.length }
-  return <Dialog open onOpenChange={open => { if (!open) close() }}><DialogContent className="ms-personal" showCloseButton={false}>
-    <header className="ms-panel-header"><span className="ms-panel-seal"><BookOpen size={22} strokeWidth={1.3}/></span><div className="ms-grow"><p className="ms-eyebrow">WANDERWISE · 我的精神小屋</p><DialogTitle>把世界的回声，留在这里</DialogTitle><DialogDescription>收藏、手记与作品，保存在当前浏览器的个人空间。</DialogDescription></div><button className="ms-close" onClick={close} aria-label="关闭个人空间"><X size={20}/></button></header>
-    <div className="ms-panel-layout"><nav className="ms-panel-nav" aria-label="个人空间栏目">{TABS.map(({ id, name, icon: Icon }) => <button key={id} aria-current={tab === id ? 'page' : undefined} className={tab === id ? 'is-active' : ''} onClick={() => setTab(id)}><Icon size={17}/><span>{name}</span>{counts[id] !== undefined && <small>{counts[id]}</small>}</button>)}<div className="ms-nav-foot"><span>灯火里，慢慢生长。</span><p>小屋是你的私人空间。</p></div></nav>
+  return <Dialog open onOpenChange={open => { if (!open) close() }}><DialogContent className={`ms-personal ${workspace?`home-workspace workspace-${workspace}`:''}`} showCloseButton={false}>
+    <header className="ms-panel-header"><span className="ms-panel-seal"><BookOpen size={22} strokeWidth={1.3}/></span><div className="ms-grow"><p className="ms-eyebrow">WANDERWISE · 我的精神小屋</p><DialogTitle>{desk?.title ?? '把世界的回声，留在这里'}</DialogTitle><DialogDescription>{desk?.description ?? '收藏、手记与作品，保存在当前浏览器的个人空间。'}</DialogDescription></div><button className="ms-close" onClick={close} aria-label="关闭个人空间"><X size={20}/></button></header>
+    <div className="ms-panel-layout"><nav className="ms-panel-nav" aria-label="个人空间栏目">{tabs.map(({ id, name, icon: Icon }) => <button key={id} aria-current={tab === id ? 'page' : undefined} className={tab === id ? 'is-active' : ''} onClick={() => setTab(id)}><Icon size={17}/><span>{name}</span>{counts[id] !== undefined && <small>{counts[id]}</small>}</button>)}<div className="ms-nav-foot"><span>灯火里，慢慢生长。</span><p>小屋是你的私人空间。</p></div></nav>
       <main className="ms-panel-main" key={tab}><div className="ms-section-heading"><active.icon size={20} strokeWidth={1.4}/><div><h2>{active.name}</h2><p>{active.subtitle}</p></div></div>
         {storageError && <div className="ms-error" role="alert">{storageError}<button className="ms-button" onClick={exportPersonalSpace}><Download size={14}/> 导出个人空间</button></div>}
-        {!ready ? <p className="ms-notice" role="status">正在打开个人空间……</p> : tab === 'search' ? <SearchView/> : tab === 'collections' ? <CollectionsView onSearch={() => setTab('search')}/> : tab === 'notes' ? <NotesView/> : tab === 'works' ? <WorksView onCreate={() => setTab('synthesis')} onClose={close}/> : tab === 'journeys' ? <JourneysView onClose={close}/> : tab === 'interests' ? <InterestsView/> : <SynthesisView/>}
+        {!ready ? <p className="ms-notice" role="status">正在打开个人空间……</p> : tab === 'reading' ? <ReadingView/> : tab === 'search' ? <SearchView/> : tab === 'collections' ? <CollectionsView onSearch={openSearch}/> : tab === 'notes' ? <NotesView/> : tab === 'works' ? <WorksView onCreate={openSynthesis} onClose={close}/> : tab === 'journeys' ? <JourneysView onClose={close}/> : tab === 'interests' ? <InterestsView/> : <SynthesisView/>}
       </main></div>
     <footer className="ms-panel-footer"><span role="status">{transferNotice || '本机保存 · 可导出备份与迁移'}</span><div><button className="ms-button" onClick={exportPersonalSpace}><Download size={14}/> 导出</button><button className="ms-button" onClick={() => fileInput.current?.click()}><Upload size={14}/> 导入</button><input ref={fileInput} type="file" accept="application/json,.json" className="ms-file-input" aria-label="导入个人空间 JSON" onChange={async event => { const file = event.target.files?.[0]; event.target.value = ''; if (!file) return; if (file.size > 12_000_000) { setTransferNotice('文件过大，请选择 12 MB 以内的个人空间 JSON。'); return } try { await importPersonalSpace(await file.text()); if (mounted.current) setTransferNotice('已合并个人空间，原有数据已自动备份。') } catch (error) { if (mounted.current) setTransferNotice(`导入未完成：${errorText(error)}`) } }}/></div></footer>
   </DialogContent></Dialog>

@@ -25,6 +25,9 @@ import Balcony from './Balcony'
 import Backdrop from './Backdrop'
 import CompanionAtHome from '@/components/home/mascot/CompanionAtHome'
 import { usePersonalStore } from '@/features/personal/store'
+import { activateHomeFixture } from '@/components/home/fixtureInteraction'
+
+const PCF_SHADOW_MAP = 1
 
 function HotspotLayer({onLand}:{onLand:()=>void}) {
   const openPanel = useGameStore((s) => s.openPanel)
@@ -36,9 +39,10 @@ function HotspotLayer({onLand}:{onLand:()=>void}) {
       {/* 圆桌中央水晶 → 思维合成台 */}
       <SpatialWords position={[0, .971, 1.15]} text="新的想法" material width={1.65} rotation={[-Math.PI/2,0,0]} onActivate={() => openPanel('synth')} />
       {/* 左侧书桌 → 漫行者日志 */}
-      <SpatialWords position={[-4.2, 1.85, 1.7]} text="继续阅读" width={1.3} billboard onActivate={() => openPanel('journal')} />
+      <SpatialWords position={[-4.2, 1.85, 1.7]} text="继续旅程" width={1.3} billboard onActivate={() => openPanel('journal')} />
+      <SpatialWords position={[-5.15, 2.15, -2.4]} text="灯下续读" width={1.2} billboard onActivate={() => openPanel('library')} />
       {/* 电话亭 → 同频电话亭 */}
-      <SpatialWords position={[4.75, 3.1, -0.7]} text="同频电话亭" width={1.5} billboard onActivate={() => openPanel('phone')} />
+      <SpatialWords position={[4.17, 1.9, -.55]} text="观点回声" width={1.05} billboard onActivate={() => openPanel('phone')} />
       {mascotHints && <SpatialWords position={[-2.95, 1.3, -3.2]} text="刘看山" width={.95} billboard onActivate={() => openPanel('mascot')} />}
       {/* 房间门口 → 镜海群岛 */}
       <SpatialWords position={[3.65, 2.1, 4.75]} text="走进镜海群岛" width={1.7} billboard onActivate={onLand} />
@@ -101,7 +105,7 @@ export default function Experience() {
     <div className="relative h-[100dvh] w-full overflow-hidden bg-[#0a0c10]">
       <LoaderOverlay />
       <Canvas
-        shadows
+        shadows={{type:PCF_SHADOW_MAP}}
         dpr={quality.dprMax === 1 ? 1 : [1, quality.dprMax]}
         gl={{ antialias: true }}
         camera={{ position: [HOME_SPAWN[0], 1.85, 4.3], fov: homeCameraTuning().fov, near: 0.05, far: 240 }}
@@ -119,11 +123,11 @@ export default function Experience() {
           <Backdrop />
           <Room />
           <Balcony onObservatory={enterObservatory} />
-          <RoundTable />
+          <group onClick={e=>activateHomeFixture(e,'synth')}><RoundTable /></group>
           <MaterialCaustics position={[.3,.973,.5]} scale={2.1}/>
           <DeskArea />
-          <DisplayCabinet />
-          <PhoneBooth position={[4.75, 0, -0.7]} rotation={-1.32} />
+          <group onClick={e=>activateHomeFixture(e,'cabinet')}><DisplayCabinet /></group>
+          <group onClick={e=>activateHomeFixture(e,'phone')}><PhoneBooth position={[4.75, 0, -0.7]} rotation={-1.32} /></group>
           <Decor />
           <Atmosphere />
           <CompanionAtHome />

@@ -9,6 +9,7 @@ const source = z.object({ contentType:z.enum(['answer','question','article','web
 export const personalSchema = z.object({
   version: z.literal(1), migrated: z.boolean(), sources: z.record(z.string(), source),
   collectionSeedVersions: z.array(z.string().max(100)).max(100).optional(),
+  reading: z.record(z.string(), z.object({paragraph:z.number().int().min(0).max(100000),updatedAt:z.string().datetime()})).optional(),
   collections: z.array(z.object({id:string,sourceId:string,excerpt:string,createdAt:string,legacyId:string.optional()})).max(5000),
   notes: z.array(z.object({id:string,sourceId:string.optional(),title:string,text:string,quote:string.optional(),createdAt:string,updatedAt:string})).max(5000),
   works: z.array(z.object({id:string,title:string,text:string,sourceIds:z.array(string),journeyId:string.optional(),createdAt:string,kind:z.enum(['idea','journey'])})).max(2000),
@@ -95,6 +96,7 @@ export function validatePersonalData(value: unknown): PersonalData {
   }
   const remap = (id: string) => aliases.get(id) ?? id
   result.sources = normalized
+  if (result.reading) result.reading = Object.fromEntries(Object.entries(result.reading).map(([id, progress])=>[remap(id),progress]).filter(([id])=>typeof id==='string'&&normalized[id]))
   result.collections = result.collections.map((item) => ({ ...item, sourceId: remap(item.sourceId) }))
   result.notes = result.notes.map((note) => note.sourceId ? { ...note, sourceId: remap(note.sourceId) } : note)
   result.works = result.works.map((work) => ({ ...work, sourceIds: [...new Set(work.sourceIds.map(remap))] }))

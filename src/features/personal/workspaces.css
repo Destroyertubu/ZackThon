@@ -1,0 +1,54 @@
+/* Object-specific workspaces keep real, selectable text and the live room visible. */
+html.ww-diegetic .home-workspace .ms-panel-layout{flex-direction:column}
+html.ww-diegetic .home-workspace .ms-panel-nav{flex:0 0 auto;flex-direction:row;padding:4px 30px;gap:28px;overflow-x:auto}
+html.ww-diegetic .home-workspace .ms-panel-nav>button{width:auto;padding:13px 0}
+html.ww-diegetic .home-workspace .ms-nav-foot{display:none}
+html.ww-diegetic .home-workspace .ms-panel-header{padding:30px 32px 15px}
+html.ww-diegetic .home-workspace .ms-panel-main{padding:18px 32px 34px}
+html.ww-diegetic .workspace-synth .ms-panel-nav,html.ww-diegetic .workspace-journal .ms-panel-nav{display:none}
+html.ww-diegetic .workspace-synth .ms-panel-main{max-width:930px;width:100%;margin:0 auto}
+html.ww-diegetic .workspace-synth textarea{line-height:2.15;letter-spacing:.03em}
+html.ww-diegetic .workspace-journal .ms-journey{padding:24px 0 30px;gap:30px}
+html.ww-diegetic .workspace-journal .ms-journey-number{font-family:Georgia,serif;font-size:48px;color:#d5b883}
+html.ww-diegetic .workspace-cabinet .ms-source-grid{column-gap:50px;row-gap:34px}
+html.ww-diegetic .workspace-library .ms-source{max-width:770px;margin:0 auto}
+html.ww-diegetic .library-reading-entry{margin:0 auto;width:min(100%,820px);padding:20px 0}
+html.ww-diegetic .echo-workspace{width:min(1140px,96vw)}
+.echo-main{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:12px 32px 32px;scrollbar-width:thin}
+.echo-search{display:flex;gap:24px;align-items:flex-end;margin:0 0 25px}
+.echo-layout{display:grid;grid-template-columns:255px minmax(0,1fr);gap:42px}
+.echo-dial{display:flex;flex-direction:column;gap:22px;max-height:65dvh;overflow:auto;scrollbar-width:thin;padding-right:12px}
+.echo-dial>button{display:grid;grid-template-columns:28px 1fr;gap:5px 10px;text-align:left;color:#a4b5b4;cursor:pointer;line-height:1.8;padding:4px 0}
+.echo-dial>button>span{color:#ae9970;font-family:Georgia,serif;font-size:22px;grid-row:span 2}
+.echo-dial strong{font-size:13px;font-weight:400}.echo-dial small{font-size:10px;color:#8b9c9c}
+.echo-dial>button.is-active{color:#eed5a4}.echo-dial>button.is-active>span{color:#f1d29b}
+.echo-reading{min-width:0}.echo-reading h2{font-family:Georgia,'Songti SC',serif;font-size:23px;font-weight:400;line-height:1.65;letter-spacing:.06em;color:#e7d9be}
+.echo-voices{display:flex;flex-wrap:wrap;gap:28px;padding:22px 0;color:#b7c6c1}
+.echo-voices button{padding:8px 0;cursor:pointer;font-size:13px}.echo-voices button[aria-pressed=true]{color:#f6d59c;text-decoration:underline;text-underline-offset:9px;text-decoration-thickness:1px}
+.echo-followup{margin-top:27px}.echo-followup>span{display:flex;gap:9px;align-items:center}
+.echo-comparison{display:grid;grid-template-columns:1fr 1fr;gap:27px;padding-top:20px}
+.echo-comparison .ms-source h3{font-size:14px}.echo-comparison .ms-source-summary{max-height:none}
+html.ww-diegetic .echo-workspace .ms-source{padding:12px 0 24px}
+html.ww-diegetic .echo-workspace .ms-source-summary{font-size:14px;line-height:2.1}
+html.ww-diegetic .atelier-vessel-note{position:absolute;right:5%;top:12%;font-size:10px;color:#d2bb92;letter-spacing:.18em}
+html.ww-diegetic .atelier-save-recipe{margin-top:12px}
+html.ww-diegetic .garden-bottle.ingredient-photography{border-radius:5px 5px 8px 8px;transform:scaleX(.88)}
+html.ww-diegetic .garden-bottle.ingredient-philosophy{clip-path:polygon(15% 0,85% 0,92% 27%,79% 50%,94% 76%,90% 100%,10% 100%,6% 76%,21% 50%,8% 27%)}
+html.ww-diegetic .garden-bottle.ingredient-nature{border-radius:45% 45% 30% 30%}
+html.ww-diegetic .garden-bottle.ingredient-music{transform:scaleX(.76) scaleY(1.1)}
+@media(max-width:700px){
+  html.ww-diegetic .home-workspace .ms-panel-header{padding:20px 18px 12px}
+  html.ww-diegetic .home-workspace .ms-panel-nav{padding:0 18px;gap:22px}
+  html.ww-diegetic .home-workspace .ms-panel-main{padding:18px}
+  .echo-main{padding:12px 18px 22px}.echo-layout{display:flex;flex-direction:column;gap:24px}
+  .echo-search{flex-wrap:wrap;gap:10px}.echo-search label{flex-basis:100%}
+  .echo-dial{max-height:165px;gap:15px}.echo-comparison{grid-template-columns:1fr}
+  .echo-reading h2{font-size:20px}.echo-voices{gap:20px}
+  html.ww-diegetic .atelier-vessel-note{display:none}
+}
+.atelier-bottle-shelf{display:flex;gap:8px;justify-content:space-between;margin:0 0 17px}
+.atelier-bottle-shelf button{display:flex;flex-direction:column;align-items:center;gap:7px;flex:1;min-width:0;background:none;border:0;padding:4px;color:#b9ccc7;cursor:pointer;font-size:12px}
+.atelier-bottle-shelf svg{height:72px;width:42px;filter:drop-shadow(0 2px 5px #02131d)}
+.atelier-bottle-shelf small{font-size:9px;color:#c9b087;min-height:15px}
+.atelier-bottle-shelf button[aria-pressed=true] svg{filter:drop-shadow(0 0 6px #dbb87865)}
+@media(max-width:700px){.atelier-bottle-shelf svg{height:50px}.atelier-bottle-shelf{gap:4px}}

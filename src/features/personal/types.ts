@@ -28,6 +28,7 @@ export interface PersonalData {
   migrated: boolean
   /** Applied public starter batches; retained after deleting their collections. */
   collectionSeedVersions?: string[]
+  reading?: Record<string, { paragraph: number; updatedAt: string }>
   sources: Record<string, ContentSource>
   collections: CollectionRecord[]
   notes: PersonalNote[]

@@ -3,6 +3,7 @@ import { Hourglass, Mug, brassMat, brassDarkMat } from './Props'
 import { HangingVine, PottedPlant } from './Plants'
 import { walnutMaterial, darkPlankMaterial, velvetMaterial } from './pbr'
 import { AssetBookRow, AssetBookStack, AssetCandle, AssetModel } from './Assets'
+import { activateHomeFixture } from '@/components/home/fixtureInteraction'
 
 const woodMat = walnutMaterial(2, 1)
 const woodDarkMat = darkPlankMaterial(2, 1, '#96765a')
@@ -164,14 +165,14 @@ export default function DeskArea() {
   return (
     <group>
       {/* desk + chair in the front-left quarter */}
-      <Desk position={[-4.2, 0, 1.7]} rotation={0.35} />
+      <group onClick={e=>activateHomeFixture(e,'journal')}><Desk position={[-4.2, 0, 1.7]} rotation={0.35} /></group>
       {/* scanned green salon chair at the desk */}
       <AssetModel asset="greenChair" height={1.0} position={[-3.85, 0, 2.62]} rotation={[0, 0.35 + Math.PI, 0]} />
       {/* armchair corner, rear-left */}
-      <Armchair position={[-4.1, 0, -2.5]} rotation={0.7} />
+      <group onClick={e=>activateHomeFixture(e,'library')}><Armchair position={[-4.1, 0, -2.5]} rotation={0.7} /></group>
       <SideTable position={[-5.15, 0, -1.55]} />
       {/* bookshelf on the left wall */}
-      <Bookshelf position={[-5.58, 0, -2.4]} rotation={Math.PI / 2} />
+      <group onClick={e=>activateHomeFixture(e,'library')}><Bookshelf position={[-5.58, 0, -2.4]} rotation={Math.PI / 2} /></group>
       {/* gilt oil paintings on the left wall */}
       <AssetModel asset="painting" height={0.72} position={[-5.85, 1.72, -0.4]} rotation={[0, Math.PI / 2, 0]} />
       <AssetModel asset="painting" height={0.5} position={[-5.85, 1.62, 0.62]} rotation={[0, Math.PI / 2, 0.04]} />

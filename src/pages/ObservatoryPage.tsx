@@ -32,6 +32,7 @@ import { Toast } from '@/components/hud/Toast'
 import '@/components/hud/hud.css'
 import './observatory.css'
 
+const PCF_SHADOW_MAP = 1
 const ignoreSceneAction = () => {}
 
 function useMedia(query: string) {
@@ -237,9 +238,9 @@ export default function ObservatoryPage() {
   }, [leave, navigate])
 
   return <main ref={treeDialog} role={treeOpen ? 'dialog' : undefined} aria-modal={treeOpen ? true : undefined} aria-labelledby={treeOpen ? 'collection-tree-title' : undefined} className={`observatory-page ${locked ? 'is-locked' : ''} ${treeOpen ? 'is-collection-tree' : ''}`}>
-    <Canvas inert={nonTreeBlocked || !!readingLeaf} shadows dpr={quality.dprMax === 1 ? 1 : [1, quality.dprMax]}
+    <Canvas inert={nonTreeBlocked || !!readingLeaf} shadows={{type:PCF_SHADOW_MAP}} dpr={quality.dprMax === 1 ? 1 : [1, quality.dprMax]}
       camera={{ fov: 68, near: 0.05, far: 240, position: OBSERVATORY_SPAWN }}
-      gl={{ antialias: false, powerPreference: 'high-performance' }}
+      gl={{ antialias: false, powerPreference: 'high-performance', transmissionResolutionScale: .5 }}
       onCreated={({ gl }) => { gl.toneMapping = THREE.ACESFilmicToneMapping; gl.toneMappingExposure = 1.05 }}>
       <Suspense fallback={null}>
         <ObservatoryScene quiet={blocked} collectionReading={treeOpen} quality={quality} reducedMotion={reducedMotion} onReturnHome={treeOpen ? ignoreSceneAction : returnHome} onEnterWorld={treeOpen ? ignoreSceneAction : enterWorld} onOpenWorkshop={treeOpen ? ignoreSceneAction : openWorkshop} response={response} onResonate={treeOpen ? ignoreSceneAction : resonate} onIngredient={treeOpen ? ignoreSceneAction : selectIngredient}/>

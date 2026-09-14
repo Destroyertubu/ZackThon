@@ -1,4 +1,6 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
+import * as THREE from 'three'
+import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
 import type { ObservatoryMaterials } from './materials'
 import { BoxInstances, Rod, type Instance } from './Primitives'
 import { AssetBookStack, AssetLantern, AssetModel } from '../scene/Assets'
@@ -57,11 +59,20 @@ export function GardenPergola({ materials: m }: { materials: ObservatoryMaterial
     const items: Instance[] = []
     for (const x of [-8.7, -4.6]) for (const z of [-1.1, 3.9]) items.push({ position: [x, 1.85, z], scale: [0.18, 3.7, 0.18] })
     for (const x of [-8.7, -4.6]) items.push({ position: [x, 3.65, 1.4], scale: [0.22, 0.28, 5.55] })
-    for (let i = 0; i < 11; i++) items.push({ position: [-6.65, 3.82, -1.15 + i * 0.5], scale: [4.65, 0.15, 0.11] })
+
     return items
   }, [])
+  const arches = useMemo(() => {
+    const parts = [-1.1, 1.4, 3.9].map(z => new THREE.TubeGeometry(new THREE.CatmullRomCurve3([
+      new THREE.Vector3(-8.7, 3.55, z), new THREE.Vector3(-8.3, 4.12, z),
+      new THREE.Vector3(-6.65, 4.65, z), new THREE.Vector3(-5., 4.12, z), new THREE.Vector3(-4.6, 3.55, z)
+    ]), 72, .068, 12, false))
+    const result = mergeGeometries(parts)!; parts.forEach(p => p.dispose()); return result
+  }, [])
+  useEffect(() => () => arches.dispose(), [arches])
   return <group name="thought-bar-timber-pergola">
     <BoxInstances items={beams} material={m.wood} />
+    <mesh geometry={arches} material={m.walnut} castShadow receiveShadow/>
     <BeamIvy position={[-6.65, 3.82, 3.9]} length={4.3} seed={207} drops={5} />
     <BeamIvy position={[-4.6, 3.78, 1.4]} rotation={[0, Math.PI / 2, 0]} length={5.1} seed={176} drops={4} />
     {[-8.7, -4.6].map(x => <group key={x}>
@@ -70,7 +81,7 @@ export function GardenPergola({ materials: m }: { materials: ObservatoryMaterial
     </group>)}
     <Rod from={[-6.65, 3.6, 1.4]} to={[-6.65, 3.1, 1.4]} radius={.009} material={m.brass} />
     <AssetModel asset="chandelier" height={.6} position={[-6.65, 3.1, 1.4]} hangTop castShadow={false} />
-    <pointLight position={[-6.65, 2.6, 1.4]} color="#ffbc66" intensity={18} distance={7} decay={2} />
+    <pointLight position={[-6.65, 2.6, 1.4]} color="#ffbc66" intensity={11} distance={6} decay={2} />
   </group>
 }
 

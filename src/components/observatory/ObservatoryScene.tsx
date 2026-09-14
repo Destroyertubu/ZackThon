@@ -16,6 +16,7 @@ import { createTideSignal, setAtmosphereQuiet, triggerTide, type AtmosphereRespo
 import type { KnowledgeId } from './gardenRecipes'
 import FrameDiagnostics from '@/features/journeys/scene/FrameDiagnostics'
 import { NIGHT_ART } from '@/features/journeys/scene/sceneArt'
+import AtelierGarden from './AtelierGarden'
 import GardenPerimeter from './GardenPerimeter'
 import GardenShadowSchedule from './GardenShadowSchedule'
 
@@ -34,7 +35,7 @@ export default function ObservatoryScene({ quality, reducedMotion, quiet, collec
     <GardenShadowSchedule smooth={!quality.postprocessing}/>
     <color attach="background" args={['#142331']} />
     <fog attach="fog" args={['#1c2c3d', 45, 175]} />
-    <Environment files="/textures/kiara_7_late-afternoon_1k.hdr" environmentIntensity={NIGHT_ART.environment} environmentRotation={[0, 0.53, 0]} />
+    <Environment files="/textures/kiara_7_late-afternoon_1k.hdr" environmentIntensity={NIGHT_ART.environment + .10} environmentRotation={[0, 0.53, 0]} />
     <hemisphereLight args={[NIGHT_ART.skyFill,NIGHT_ART.groundFill,NIGHT_ART.hemisphere]} />
     <directionalLight position={NIGHT_ART.keyPosition} color={NIGHT_ART.keyColor} intensity={NIGHT_ART.keyIntensity} castShadow
       shadow-mapSize={[quality.shadowMapSize, quality.shadowMapSize]}
@@ -42,6 +43,7 @@ export default function ObservatoryScene({ quality, reducedMotion, quiet, collec
       shadow-camera-near={1} shadow-camera-far={190} shadow-bias={-0.00015} shadow-normalBias={0.035} />
     <directionalLight position={[-8, 7, 4]} color="#ffbc70" intensity={.32} />
     <NightLandscape quality={quality} sunPosition={NIGHT_ART.keyPosition} reducedMotion={reducedMotion} signal={signal} />
+    <AtelierGarden materials={materials}/>
     <Deck materials={materials} />
     <GardenPergola materials={materials} />
     <GardenBeds materials={materials} />
@@ -49,7 +51,7 @@ export default function ObservatoryScene({ quality, reducedMotion, quiet, collec
     <GardenDetails />
     <StarTree materials={materials} reducedMotion={reducedMotion} />
     <TreeSeating materials={materials} reducedMotion={reducedMotion} />
-    <ThoughtBar materials={materials} reducedMotion={reducedMotion} onActivate={onOpenWorkshop} showLabel={!collectionReading} />
+    <ThoughtBar onIngredient={onIngredient} materials={materials} reducedMotion={reducedMotion} onActivate={onOpenWorkshop} showLabel={!collectionReading} />
     <StarTideGarden materials={materials} signal={signal} onResonate={onResonate} onIngredient={onIngredient}/>
     <StarGate materials={materials} reducedMotion={reducedMotion} onActivate={onEnterWorld} showLabel={!collectionReading} />
     <Telescope materials={materials} />

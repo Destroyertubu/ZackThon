@@ -14,22 +14,8 @@ export default function StarTideBotany({ signal }: { signal: TideSignal }) {
     const leaf = new THREE.MeshStandardMaterial({ map: textures[0], alphaMap: textures[1], color: '#6c8059', alphaTest: .45, roughness: .85, side: THREE.DoubleSide, envMapIntensity: .4 })
     const petal = new THREE.MeshStandardMaterial({ color: '#e3d8e6', roughness: .7, metalness: 0, envMapIntensity: .5, emissive: '#786298', emissiveIntensity: .012 })
     const stemsMaterial = new THREE.MeshStandardMaterial({ color: '#746846', roughness: .94 })
-    for (const mat of [leaf, petal]) {
-      mat.onBeforeCompile = shader => {
-        shader.uniforms.tideTime = signal.time
-        shader.vertexShader = 'uniform float tideTime;\n' + shader.vertexShader.replace('#include <project_vertex>', `
-          vec4 botanicalWorld = modelMatrix * instanceMatrix * vec4(transformed, 1.);
-          float sway = sin(tideTime*.72 + botanicalWorld.z*.9 + botanicalWorld.y*1.1);
-          botanicalWorld.x += sway * .038; botanicalWorld.z += cos(tideTime*.51 + botanicalWorld.x) * .023;
-          vec4 mvPosition = viewMatrix * botanicalWorld;
-          gl_Position = projectionMatrix * mvPosition;`)
-      }
-      mat.customProgramCacheKey = () => 'star-tide-botanical-sway-v1'
-    }
     const leafGeometry = makeIvyLeaf(2)
-    // Each 6 cm petal keeps its rounded silhouette; 24 triangles replace 64.
-    // The 1,872 instanced petals and raceme density stay unchanged.
-    const bloomGeometry = new THREE.SphereGeometry(1, 6, 3)
+    const bloomGeometry = new THREE.SphereGeometry(1, 10, 6)
     const positions = bloomGeometry.attributes.position
     for (let i = 0; i < positions.count; i++) {
       const x = positions.getX(i), y = positions.getY(i), z = positions.getZ(i)
@@ -49,12 +35,15 @@ export default function StarTideBotany({ signal }: { signal: TideSignal }) {
         for (let k = 0; k < 4; k++) {
           const a = k * Math.PI / 2 + level * 1.4
           transform.position.copy(centre).add(new THREE.Vector3(Math.cos(a) * radius, (random() - .5) * .06, Math.sin(a) * radius))
+          const pedicel = new THREE.LineCurve3(centre, transform.position.clone().add(new THREE.Vector3(0,.025,0)))
+          stemParts.push(new THREE.TubeGeometry(pedicel,1,.0025,3,false))
           transform.rotation.set(.5 + random() * .7, a, (random() - .5) * .5); transform.scale.setScalar(.75 + random() * .45); transform.updateMatrix()
           bloomMatrices.push(transform.matrix.clone()); bloomColors.push(new THREE.Color(index % 4 ? '#b5a2c3' : '#e9dfe7').multiplyScalar(.75 + random() * .3))
         }
       }
       for (let k = 0; k < 4; k++) {
         transform.position.copy(top).add(new THREE.Vector3((random() - .5) * .5, random() * .09, (random() - .5) * .4))
+        stemParts.push(new THREE.TubeGeometry(new THREE.LineCurve3(top,transform.position.clone()),1,.004,4,false))
         transform.rotation.set(-Math.PI / 3 + random(), random() * 6, random()); transform.scale.setScalar(.24 + random() * .2); transform.updateMatrix(); leafMatrices.push(transform.matrix.clone())
       }
     }

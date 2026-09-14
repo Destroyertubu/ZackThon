@@ -22,7 +22,7 @@ function seeded(seed: number) {
 }
 
 type PlantInstance = { position: Point; height: number; rotation: number }
-function PlantInstances({ url, instances }: { url: string; instances: PlantInstance[] }) {
+export function PlantInstances({ url, instances }: { url: string; instances: PlantInstance[] }) {
   const { scene } = useGLTF(url)
   const ref = useRef<THREE.Group>(null)
   const parts = useMemo(() => {

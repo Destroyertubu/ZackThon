@@ -68,7 +68,7 @@ export default function GardenPerimeter({ materials: m, signal, reducedMotion, d
     const leaf = new THREE.MeshStandardMaterial({ map: textures[0], alphaMap: textures[1], alphaTest: .45, color: '#c3c9b2', roughness: .82, side: THREE.DoubleSide, envMapIntensity: .52 })
     const fern = new THREE.MeshStandardMaterial({ color: '#b8c2a7', roughness: .78, side: THREE.DoubleSide, envMapIntensity: .42 })
     const bloom = new THREE.MeshStandardMaterial({ color: '#f2e9f7', roughness: .62, side: THREE.DoubleSide, envMapIntensity: .65, emissive: '#5b377c', emissiveIntensity: .025 })
-    for (const mat of [leaf, fern, bloom, stem]) bindBotanicalWind(mat, signal, reducedMotion, mat === stem ? .024 : .038)
+    for (const mat of [leaf, fern, bloom, stem]) bindBotanicalWind(mat, signal, true, mat === stem ? .024 : .038)
     const leafGeometry = makeIvyLeaf(2), fernGeometry = perimeterLeafGeometry(), petalGeometry = perimeterLeafGeometry(true)
     leafGeometry.scale(.68, 1, 1); leafGeometry.translate(0, .19, 0)
     const foliage = instancePlants(leafGeometry, leaf, model.leaves)

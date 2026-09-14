@@ -23,9 +23,11 @@ interface PersonalState {
   savePose: (key:string,pose:ScenePose) => void
   setInterests: (interests:string[]) => void
   settings: (settings: Partial<PersonalData['settings']>) => void
+  saveReading: (sourceId: string, paragraph: number) => void
 }
 export const usePersonalStore = create<PersonalState>((set,get)=>({
   ready:false,error:'',data:emptyPersonalData(),
+  saveReading:(sourceId,paragraph)=>{if(!get().data.sources[sourceId]||!Number.isFinite(paragraph))return;set(s=>({data:{...s.data,reading:{...s.data.reading,[sourceId]:{paragraph:Math.max(0,Math.min(100000,Math.floor(paragraph))),updatedAt:now()}}}}))},
   putSource:(value)=>{const source=canonicalSource(value);set(s=>({data:{...s.data,sources:{...s.data.sources,[source.id]:mergeSourceMetadata(s.data.sources[source.id],source)}}}));return source.id},
   collect:(value,excerpt,legacyId)=>{
     const sourceId=get().putSource(value);const existing=get().data.collections.find(c=>c.sourceId===sourceId && c.excerpt===(excerpt??value.summary) && (!legacyId||c.legacyId===legacyId))
@@ -132,6 +134,7 @@ export async function importPersonalSpace(raw:string){
   const sources={...current.sources};for(const source of Object.values(incoming.sources))sources[source.id]=mergeSourceMetadata(sources[source.id],source)
   const data:PersonalData={...current,sources,collections:merge(current.collections,incoming.collections),notes:merge(current.notes,incoming.notes),works:merge(current.works,incoming.works),journeys:merge(current.journeys,incoming.journeys),recipes:merge(current.recipes,incoming.recipes),interests:[...new Set([...current.interests,...incoming.interests])],returnAnchor:current.returnAnchor??incoming.returnAnchor,legacy:{...current.legacy,...incoming.legacy}}
   if (current.collectionSeedVersions || incoming.collectionSeedVersions) data.collectionSeedVersions = [...new Set([...(current.collectionSeedVersions ?? []), ...(incoming.collectionSeedVersions ?? [])])]
+  if(current.reading||incoming.reading){data.reading={...current.reading};for(const [id,progress] of Object.entries(incoming.reading??{})){if(!data.reading[id]||progress.updatedAt>data.reading[id].updatedAt)data.reading[id]=progress}}
   await writeVault(`backup-before-import:${Date.now()}`,current);await writeVault('profile',data);validatePersonalData(await readVault('profile'));usePersonalStore.setState({data})
 }
 export function exportPersonalSpace(){

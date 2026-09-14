@@ -35,9 +35,12 @@ export default function SceneReviewTools() {
       else if(view===5){camera.position.set(-1.5,1.7,22);camera.lookAt(5.2,2.8,20)}
       else if(view===6){camera.position.set(2,1.4,20.2);camera.lookAt(5.2,.8,20)}
     }else{
-      camera.position.set(3.65,1.7,7.15)
-      const a=[.3,.3,1.9,3.5,5.1][view]??.3
-      camera.lookAt(3.65-Math.sin(a)*10,2.2,7.15-Math.cos(a)*10)
+      if(view===5){camera.position.set(-3.9,1.8,1.35);camera.lookAt(-6.65,1.58,1.4)}
+      else if(view===6){camera.position.set(.3,1.7,4.1);camera.lookAt(-2.6,.35,1.1)}
+      else if(view===7){camera.position.set(4.7,1.7,5.8);camera.lookAt(8.8,2.6,2.1)}
+      else {camera.position.set(3.65,1.7,7.15)
+        const a=[.3,.3,1.9,3.5,5.1][view]??.3
+        camera.lookAt(3.65-Math.sin(a)*10,2.2,7.15-Math.cos(a)*10)}
     }
   })
   function reset(){setView(0);tour.current=false;if(original.current){camera.position.copy(original.current.position);camera.quaternion.copy(original.current.quaternion);original.current=null}}
@@ -58,7 +61,7 @@ export default function SceneReviewTools() {
     return ()=>{const root=ui.current;ui.current=null;queueMicrotask(()=>{root?.unmount();element.remove()})}
   },[enabled])
   useEffect(()=>{if(!enabled)return;ui.current?.render(<nav aria-label="场景验收镜头" style={{pointerEvents:'auto',position:'fixed',zIndex:9999,left:24,top:140,color:'#fff',display:'flex',gap:14,fontSize:13,textShadow:'0 1px 3px #000'}}>
-    {(isSunset?[1,2,3,4,5,6]:[1,2,3,4]).map(i=><button key={i} onClick={()=>setView(i)}>镜头 {i}</button>)}
+    {(isSunset?[1,2,3,4,5,6]:[1,2,3,4,5,6,7]).map(i=><button key={i} onClick={()=>setView(i)}>镜头 {i}</button>)}
     <button onClick={reset}>恢复行走</button>
     <button disabled={recording} onClick={()=>record(false)}>{recording?'录制中':'录制水面'}</button>
     <button disabled={recording} onClick={()=>record(true)}>录制行走</button>

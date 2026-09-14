@@ -7,13 +7,15 @@ export default function HomePanels() {
   const panel = useGameStore((s) => s.panel)
   switch (panel) {
     case 'cabinet':
-      return <PersonalPanel key={panel} initialTab="collections" />
+      return <PersonalPanel key={panel} workspace="cabinet" initialTab="collections" />
     case 'synth':
-      return <PersonalPanel key={panel} initialTab="synthesis" />
+      return <PersonalPanel key={panel} workspace="synth" initialTab="synthesis" />
     case 'journal':
-      return <PersonalPanel key={panel} initialTab="journeys" />
+      return <PersonalPanel key={panel} workspace="journal" initialTab="journeys" />
     case 'mascot':
-      return <PersonalPanel key={panel} initialTab="search" />
+      return <PersonalPanel key={panel} workspace="mascot" initialTab="search" />
+    case 'library':
+      return <PersonalPanel key={panel} workspace="library" initialTab="reading" />
     case 'phone':
       return <PhonePanel />
     default:

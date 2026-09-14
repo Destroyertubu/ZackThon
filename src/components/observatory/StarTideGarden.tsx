@@ -7,7 +7,7 @@ import type { TideSignal } from '@/features/journeys/scene/atmosphereMotion'
 import type { ObservatoryMaterials } from './materials'
 import { KNOWLEDGE_INGREDIENTS, type KnowledgeId } from './gardenRecipes'
 import { arcSlab } from './GardenFixtureGeometry'
-import { TIDE_POOL, THOUGHT_SEEDS } from './starTideLayout'
+import { TIDE_POOL, THOUGHT_SEEDS, ATELIER_RILL_POINTS } from './starTideLayout'
 import StarTideBotany from './StarTideBotany'
 
 function poolSurface() {
@@ -26,6 +26,13 @@ function rim(radius: number, height: number) {
     return new THREE.Vector3(TIDE_POOL.x + Math.sin(a) * radius, height, TIDE_POOL.z + Math.cos(a) * radius)
   }))
   return new THREE.TubeGeometry(curve, 100, .026, 8, false)
+}
+
+function atelierRill(width: number, height: number) {
+  const curve=new THREE.CatmullRomCurve3(ATELIER_RILL_POINTS.map(([x,z])=>new THREE.Vector3(x,height,z)))
+  const geometry=new THREE.PlaneGeometry(1,1,48,2),p=geometry.attributes.position,uv=geometry.attributes.uv
+  for(let i=0;i<p.count;i++){const u=uv.getX(i),offset=(uv.getY(i)-.5)*width,center=curve.getPointAt(u),tangent=curve.getTangentAt(u);p.setXYZ(i,center.x-tangent.z*offset,height,center.z+tangent.x*offset)}
+  geometry.computeVertexNormals();return geometry
 }
 
 function ThoughtSeed({ index, materials: m, signal, onIngredient }: { index: number; materials: ObservatoryMaterials; signal: TideSignal; onIngredient: (id: KnowledgeId) => void }) {
@@ -88,7 +95,7 @@ export default function StarTideGarden({ materials: m, signal, onResonate, onIng
         #include <colorspace_fragment>
       }`,
     })
-    const stone = m.slate.clone(); stone.color.set('#4e7774'); stone.roughness = .33; stone.envMapIntensity = .9
+    const stone = m.slate.clone(); stone.color.set('#bdc5b5'); stone.roughness = .4; stone.envMapIntensity = .9
     const bed = arcSlab(TIDE_POOL.inner - .025, TIDE_POOL.outer + .025, TIDE_POOL.start, TIDE_POOL.end, .035); bed.translate(TIDE_POOL.x, .035, TIDE_POOL.z)
     const walls = [TIDE_POOL.inner, TIDE_POOL.outer].map(r => { const g = arcSlab(r - .025, r + .025, TIDE_POOL.start, TIDE_POOL.end, .16); g.translate(TIDE_POOL.x, .16, TIDE_POOL.z); return g })
     const basin = mergeMirrorGeometry([bed, ...walls])
@@ -103,7 +110,7 @@ export default function StarTideGarden({ materials: m, signal, onResonate, onIng
         panel.computeVertexNormals(); roofPanels.push(panel)
       }
     }
-    const roofGlass = new THREE.MeshPhysicalMaterial({ color: '#a5c3be', transparent: true, opacity: .08, roughness: .11, metalness: .3, envMapIntensity: 1.3, clearcoat: 1, side: THREE.DoubleSide, depthWrite: false, forceSinglePass: true })
+    const roofGlass = new THREE.MeshPhysicalMaterial({ color: '#d3dac9', transparent: true, opacity: .14, roughness: .11, metalness: .3, envMapIntensity: 1.3, clearcoat: 1, side: THREE.DoubleSide, depthWrite: false, forceSinglePass: true })
     const random = mirrorRandom(31337), petalPositions: number[] = []
     for (let i = 0; i < 48; i++) petalPositions.push((random() - .5) * 12 - 2, .3 + random() * 6, (random() - .5) * 10)
     const petals = new THREE.BufferGeometry(); petals.setAttribute('position', new THREE.Float32BufferAttribute(petalPositions, 3))
@@ -119,7 +126,10 @@ export default function StarTideGarden({ materials: m, signal, onResonate, onIng
         #include <colorspace_fragment>
       }`,
     })
-    return { water, stone, basin, surface: poolSurface(), innerRim: rim(TIDE_POOL.inner, .185), outerRim: rim(TIDE_POOL.outer, .185), curves: mergeMirrorGeometry(curves), roof: mergeMirrorGeometry(roofPanels), roofGlass, petals, petalMaterial }
+    const rillCurve=new THREE.CatmullRomCurve3(ATELIER_RILL_POINTS.map(([x,z])=>new THREE.Vector3(x,.151,z)))
+    const rillEdges=[-1,1].map(side=>new THREE.TubeGeometry(new THREE.CatmullRomCurve3(Array.from({length:49},(_,i)=>{const p=rillCurve.getPointAt(i/48),t=rillCurve.getTangentAt(i/48);return p.add(new THREE.Vector3(-t.z,0,t.x).multiplyScalar(side*.17))})),56,.036,8,false))
+    return { water, stone, basin, surface: poolSurface(), innerRim: rim(TIDE_POOL.inner, .185), outerRim: rim(TIDE_POOL.outer, .185), curves: mergeMirrorGeometry(curves), roof: mergeMirrorGeometry(roofPanels), roofGlass, petals, petalMaterial,
+      rillSurface:atelierRill(.27,.135),rillBed:atelierRill(.40,.095),rillEdges:mergeMirrorGeometry(rillEdges) }
   }, [m, signal])
   useEffect(() => () => Object.values(resources).forEach(resource => resource.dispose()), [resources])
   useFrame(() => { if (waterLight.current) waterLight.current.intensity = 3 + signal.pulse.value * 11 })
@@ -129,6 +139,9 @@ export default function StarTideGarden({ materials: m, signal, onResonate, onIng
       <mesh geometry={resources.basin} material={resources.stone} receiveShadow castShadow/>
       <mesh geometry={resources.surface} material={resources.water} renderOrder={9}/>
       <mesh geometry={resources.innerRim} material={m.brightBrass}/><mesh geometry={resources.outerRim} material={m.brightBrass}/>
+      <mesh geometry={resources.rillBed} material={resources.stone} receiveShadow/>
+      <mesh geometry={resources.rillEdges} material={resources.stone} castShadow receiveShadow/>
+      <mesh geometry={resources.rillSurface} material={resources.water} renderOrder={9}/>
     </group>
     <pointLight ref={waterLight} position={[-2.35, .32, 1.0]} color="#87d8d0" intensity={3} distance={4.3} decay={2}/>
     <mesh name="curved-greenhouse-brass-ribs" geometry={resources.curves} material={m.brass} castShadow/>

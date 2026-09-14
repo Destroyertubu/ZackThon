@@ -1,7 +1,7 @@
 /** The rooftop has its own floor; the cabin's sealed envelope is never changed. */
 import { GARDEN_DETAIL_OBSTACLES } from './gardenDetailLayout'
 import { GARDEN_PERIMETER_OBSTACLES } from './gardenPerimeterLayout'
-import { canUseTidePool, TIDE_POOL_OBSTACLES } from './starTideLayout'
+import { canUseTidePool, TIDE_POOL_OBSTACLES, ATELIER_RILL_OBSTACLES } from './starTideLayout'
 export const OBSERVATORY_RADIUS = 11.2
 export const OBSERVATORY_EYE_HEIGHT = 1.7
 export const OBSERVATORY_SPAWN: [number, number, number] = [3.65, OBSERVATORY_EYE_HEIGHT, 7.15]
@@ -51,6 +51,7 @@ export const OBSERVATORY_OBSTACLES = [
   ...GARDEN_DETAIL_OBSTACLES,
   ...GARDEN_PERIMETER_OBSTACLES,
   ...TIDE_POOL_OBSTACLES,
+  ...ATELIER_RILL_OBSTACLES,
   // A chain of small footprints follows the crescent bench, leaving its ends open.
   ...[-0.95, -0.5, 0, 0.5, 0.95].map(a => ({ x: -2 + Math.sin(a) * 2.6, z: -2 + Math.cos(a) * 2.6, radius: 0.75 })),
   ...[-0.2, 0.55, 1.3, 2.05, 2.8].map(z => ({ x: -6.65, z, radius: 0.86 })),

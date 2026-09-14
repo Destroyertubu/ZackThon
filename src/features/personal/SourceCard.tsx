@@ -19,7 +19,7 @@ export default function SourceCard({source,onExplore}:{source:ContentSource;onEx
     <p className="ms-source-summary">{source.summary}</p>
     {source.readingGuide&&<p className="ms-reading-guide">一起想想：{source.readingGuide}</p>}
     <div className="ms-source-actions">
-      <button type="button" onClick={()=>setReading(true)}>静读这份材料</button>
+      <button type="button" onClick={()=>{const id=usePersonalStore.getState().putSource(source);usePersonalStore.getState().saveReading(id,data.reading?.[id]?.paragraph??0);setReading(true)}}>{data.reading?.[canonical.id]?'继续静读':'静读这份材料'}</button>
       <button type="button" aria-pressed={!!collected} onClick={()=>collected?usePersonalStore.getState().uncollect(collected.id):usePersonalStore.getState().collect(source)}>{collected?<Check size={14}/>:<Bookmark size={14}/>} {collected?'已收藏':'收藏'}</button>
       <button type="button" onClick={()=>setWriting(v=>!v)}><PenLine size={14}/> {note?'查看笔记':'记下想法'}</button>
       {onExplore&&<button type="button" onClick={()=>onExplore(source)}>在星系中展开</button>}

@@ -3,6 +3,7 @@ import { Bookmark, Check, ChevronDown, ExternalLink, X } from 'lucide-react'
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog'
 import LivingWords from './LivingWords'
 import { useReducedMotion } from './useReducedMotion'
+import { usePersonalStore } from '@/features/personal/store'
 
 interface Props {
   id: string; title: string; author: string; provenance: string; paragraphs: string[]
@@ -21,6 +22,7 @@ export default function ReadingLight({ id, title, author, provenance, paragraphs
     if (!area) return
     let initial = 0
     try { initial = Number(localStorage.getItem(`wanderwise-reading:${id}`)) || 0 } catch { /* Reading works with storage disabled. */ }
+    initial = usePersonalStore.getState().data.reading?.[id]?.paragraph ?? initial
     const nodes = Array.from(area.querySelectorAll<HTMLElement>('[data-reading-paragraph]'))
     initial = Math.max(0, Math.min(nodes.length - 1, initial))
     activeRef.current = initial
@@ -34,6 +36,7 @@ export default function ReadingLight({ id, title, author, provenance, paragraphs
     return () => {
       cancelAnimationFrame(frame); area.removeEventListener('scroll', update)
       try { localStorage.setItem(`wanderwise-reading:${id}`, String(activeRef.current)) } catch { /* Text and collection are independent of reading-position storage. */ }
+      usePersonalStore.getState().saveReading(id, activeRef.current)
     }
   }, [id, scrollArea])
   const next = () => {

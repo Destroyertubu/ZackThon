@@ -6,7 +6,7 @@ import type { ScenePose } from '@/features/personal/types'
 import { bindSceneLook } from '../scene/controls/bindSceneLook'
 import { useGameStore } from '@/state/gameStore'
 import { canUseCollectionTree, canUseGalaxyGate, canUseReturnGate, canUseThoughtBar, getObservatoryInteraction, moveOnObservatory, OBSERVATORY_EYE_HEIGHT, OBSERVATORY_LOOK_AT, OBSERVATORY_SPAWN } from './layout'
-import { canUseTidePool } from './starTideLayout'
+import { canUseTidePool, moonBridgeHeight } from './starTideLayout'
 import { advanceCollectionTreeView, beginCollectionTreeView, captureObservatoryPose, restoreCollectionTreeView } from './collectionTreeCamera'
 import type { CollectionTreeCameraView } from './collectionTreeCamera'
 
@@ -176,7 +176,7 @@ export default function ObservatoryRig({ workshopOpen = false, treeOpen = false,
       moveOnObservatory(camera.position,
         (Math.cos(view.current.y) * right - Math.sin(view.current.y) * forward) * step,
         (-Math.sin(view.current.y) * right - Math.cos(view.current.y) * forward) * step)
-      camera.position.setY(OBSERVATORY_EYE_HEIGHT)
+      camera.position.setY(OBSERVATORY_EYE_HEIGHT + moonBridgeHeight(camera.position.x,camera.position.z))
     }
     // Prompts represent the player, never the floating reading camera.
     const playerPosition = treeView.current?.originalPosition ?? camera.position

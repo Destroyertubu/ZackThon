@@ -1,54 +1,42 @@
-import RealmInGlass from './RealmInGlass'
-import { advanceShader, setUniform } from './vfxAnimation'
-import { LightVapor } from './LightVfx'
 import { useEffect, useMemo, useRef } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
-import { getKnowledgeIngredient, type ThoughtRecipe } from '@/components/observatory/gardenRecipes'
+import { getKnowledgeIngredient, KNOWLEDGE_INGREDIENTS, type ThoughtRecipe } from '@/components/observatory/gardenRecipes'
+import { CraftedCocktail, IngredientDecanter, DRINK_CRAFT, VESSELS } from '@/components/observatory/CocktailCraft'
 import { useReducedMotion } from './useReducedMotion'
-import SpatialWords from './SpatialWords'
+import RealmInGlass from './RealmInGlass'
 
 export interface CocktailPreview { recipe: ThoughtRecipe; mixing: boolean }
 export default function CocktailVision({ recipe, mixing }: CocktailPreview) {
-  const group = useRef<THREE.Group>(null)
-  const { size } = useThree()
-  const reduced = useReducedMotion()
-  const a = getKnowledgeIngredient(recipe.first), b = getKnowledgeIngredient(recipe.second)
-  const resources = useMemo(() => {
-    const glass = new THREE.LatheGeometry([[0,0],[.035,.02],[.10,.09],[.23,.16],[.36,.27],[.43,.39],[.44,.43],[.427,.43],[.416,.39],[.35,.275],[.22,.17],[.09,.105],[0,.08]].map(p=>new THREE.Vector2(...p as [number,number])),64)
-    const liquid = new THREE.ShaderMaterial({
-      uniforms:{time:{value:0},a:{value:new THREE.Color(a.color)},b:{value:new THREE.Color(b.color)},ratio:{value:recipe.firstPercent/100},mixing:{value:0}},
-      vertexShader:`varying vec2 vUv;uniform float time;uniform float mixing;void main(){vUv=uv;vec3 p=position;p.z+=sin(length(uv-.5)*40.-time*2.)*.005*(1.+mixing);gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.);}`,
-      fragmentShader:`varying vec2 vUv;uniform float time;uniform vec3 a;uniform vec3 b;uniform float ratio;uniform float mixing;void main(){vec2 p=vUv-.5;float r=length(p);float wave=sin(r*85.-time*(2.+mixing*3.));float swirl=sin(atan(p.y,p.x)*3.+r*16.-time*.5)*.5+.5;vec3 c=mix(a,b,smoothstep(ratio-.3,ratio+.3,swirl));c+=vec3(.55,.38,.13)*pow(max(0.,wave),16.)*.55;float edge=smoothstep(.37,.5,r);gl_FragColor=vec4(c*(.8+mixing*.4)+edge*vec3(.4,.28,.1),.94);}`,
-      transparent:true,side:THREE.DoubleSide,depthWrite:false,
-    })
-    const curve = new THREE.CatmullRomCurve3([new THREE.Vector3(-.72,.7,-.06),new THREE.Vector3(-.52,.54,.02),new THREE.Vector3(-.30,.65,.04),new THREE.Vector3(0,.37,0)])
-    const stream = new THREE.TubeGeometry(curve,48,.006,5,false)
-    return {glass,liquid,stream}
-  },[a.color,b.color,recipe.firstPercent])
-  useEffect(()=>()=>{resources.glass.dispose();resources.liquid.dispose();resources.stream.dispose()},[resources])
+  const group=useRef<THREE.Group>(null), pouring=useRef<THREE.Group>(null), miniature=useRef<THREE.Group>(null)
+  const elapsed=useRef(0), wasMixing=useRef(false)
+  const {size}=useThree(), reduced=useReducedMotion()
+  const a=getKnowledgeIngredient(recipe.first),b=getKnowledgeIngredient(recipe.second)
+  const def=VESSELS[DRINK_CRAFT[recipe.name].vessel]
+  const resources=useMemo(()=>({stream:new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(-.43,.99,0),new THREE.Vector3(-.30,.71,0),new THREE.Vector3(-.08,.42,0)]),36,.006,6,false)}),[])
+  useEffect(()=>()=>resources.stream.dispose(),[resources])
   useFrame(({camera},delta)=>{
     if(!group.current)return
+    if(mixing&&!wasMixing.current)elapsed.current=0
+    wasMixing.current=mixing
+    if(mixing)elapsed.current+=Math.min(delta,.08)
     group.current.position.copy(camera.position);group.current.quaternion.copy(camera.quaternion)
-    group.current.translateX(size.width<700?0:.62);group.current.translateY(size.width<700?.3:-.33);group.current.translateZ(-2.7)
-    if(!reduced)advanceShader(resources.liquid,delta)
-    setUniform(resources.liquid,'mixing',THREE.MathUtils.damp(resources.liquid.uniforms.mixing.value,mixing?1:0,3,Math.min(delta,.05)))
+    group.current.translateX(size.width<700?0:.62);group.current.translateY(size.width<700?.09:-.66);group.current.translateZ(-2.5)
+    if(pouring.current){pouring.current.visible=mixing&&!reduced&&elapsed.current<2.4;pouring.current.scale.y=.92+Math.sin(elapsed.current*2)*.04}
+    if(miniature.current)miniature.current.visible=mixing&&(reduced||elapsed.current>2.8)
   })
+  const indices=[recipe.first,recipe.second].map(id=>KNOWLEDGE_INGREDIENTS.findIndex(i=>i.id===id))
   return <group ref={group} name="living-cocktail-preview" scale={size.width<700?.7:1}>
-    <group rotation={[.28,0,0]}>
-    <mesh geometry={resources.glass}><meshPhysicalMaterial color="#e4f4ff" transparent opacity={.08} metalness={0} roughness={.035} clearcoat={1} side={THREE.DoubleSide} depthWrite={false}/></mesh>
-    <mesh position={[0,.375,0]} rotation={[-Math.PI/2,0,0]} material={resources.liquid}><circleGeometry args={[.412,80]}/></mesh>
-    <mesh position={[0,-.24,0]}><cylinderGeometry args={[.014,.022,.49,20]}/><meshStandardMaterial color="#c9a976" roughness={.24} metalness={.8}/></mesh>
-    <mesh position={[0,-.497,0]}><cylinderGeometry args={[.21,.23,.018,40]}/><meshStandardMaterial color="#c9a976" roughness={.22} metalness={.8}/></mesh>
-    <mesh position={[0,.426,0]} rotation={[Math.PI/2,0,0]}><torusGeometry args={[.434,.006,8,80]}/><meshBasicMaterial color="#e9cf97" toneMapped={false}/></mesh>
-    <mesh geometry={resources.stream}><meshBasicMaterial color={a.color} transparent opacity={mixing?.85:.3}/></mesh>
-    <mesh geometry={resources.stream} scale={[-1,1,1]}><meshBasicMaterial color={b.color} transparent opacity={mixing?.85:.3}/></mesh>
+    <group scale={3.0} rotation={[.34,0,0]}><CraftedCocktail detailed name={recipe.name} reducedMotion={reduced} mixing={mixing}/></group>
+    <mesh position={[0,-.022,0]} rotation={[.34,0,0]}><cylinderGeometry args={[.39,.37,.024,80]}/><meshStandardMaterial color="#7e897b" roughness={.48} metalness={.08}/></mesh>
+    <group ref={pouring} position={[0,def.lip*3-.49,0]} visible={false}>
+      {indices.map((index,i)=><group key={i}>
+        <group position={[i?.74:-.74,1.18,-.01]} rotation={[0,0,i?2.12:-2.12]} scale={.64}><IngredientDecanter detailed index={index}/></group>
+        <mesh geometry={resources.stream} scale={[i?-1:1,1,1]}><meshPhysicalMaterial color={i?b.color:a.color} transparent opacity={.55} roughness={.06} clearcoat={1} depthWrite={false}/></mesh>
+      </group>)}
     </group>
-    <SpatialWords text={a.name} position={[-.6,.88,0]} width={.4} color={a.color}/>
-    <SpatialWords text={b.name} position={[.6,.88,0]} width={.4} color={b.color}/>
-    {mixing&&<SpatialWords key={recipe.name} text={recipe.name} position={[0,1.15,0]} width={1.8} color="#ffdbab"/>}
-    {mixing && <RealmInGlass recipe={recipe}/>}
-    <LightVapor color={a.color} active={mixing}/>
-    <pointLight position={[0,.6,.5]} intensity={.7} distance={2} color={a.color}/>
+    <group ref={miniature} position={[0,def.lip*3-.40,-.10]} scale={.53} visible={false}><RealmInGlass key={recipe.name} recipe={recipe}/></group>
+    <pointLight position={[-.5,1.4,1]} intensity={1.9} distance={3} color="#e7ddc8"/>
+    <pointLight position={[.7,.7,.2]} intensity={.55} distance={2.5} color="#86bace"/>
   </group>
 }

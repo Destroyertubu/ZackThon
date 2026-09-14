@@ -121,7 +121,8 @@ export type PanelId =
   | 'synth' // 思维合成台（家园）
   | 'journal' // 漫行者日志（家园）
   | 'mascot' // 刘看山与个人空间
-  | 'phone' // 同频电话亭（家园）
+  | 'phone' // 观点回声电话亭（家园）
+  | 'library' // 书架与阅读椅
   | 'settings'
   | 'help'
   | null

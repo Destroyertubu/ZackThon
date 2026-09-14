@@ -23,6 +23,8 @@ import CoastlineRocks, { COAST_PATCH_SHORES } from './CoastlineRocks'
 import SunsetAssets from './SunsetAssets'
 import { advanceWorldUniform } from './worldAnimation'
 
+const PCF_SHADOW_MAP = 1
+
 const SUNSET_WATER_SHORES=[...SUNSET_SHORES,...COAST_PATCH_SHORES]
 const NIGHT_REALMS = new Set(['moonlight-andante','blue-hour-shutter','echo-paradox','forest-lento'])
 function LoadingWorld() {
@@ -61,7 +63,7 @@ export default function WorldCanvas({world,initialPose,initialStationId,onPose,o
   },[world,art.keyColor,canonicalRatio])
   const camera=useMemo(()=>({position:world.spawn.position,fov:61,near:.08,far:260}),[world])
   return <div className="journey-world-canvas" style={{position:'absolute',inset:0,overflow:'hidden',background:world.palette.skyTop}}>
-    <Canvas frameloop="always" camera={camera} dpr={[1,profile.dprMax]} shadows gl={{antialias:true,alpha:false,powerPreference:'high-performance'}} onCreated={({gl})=>{
+    <Canvas frameloop="always" camera={camera} dpr={[1,profile.dprMax]} shadows={{type:PCF_SHADOW_MAP}} gl={{antialias:true,alpha:false,powerPreference:'high-performance'}} onCreated={({gl})=>{
       gl.toneMapping=THREE.ACESFilmicToneMapping;gl.toneMappingExposure=art.exposure
       gl.outputColorSpace=THREE.SRGBColorSpace
     }}>
