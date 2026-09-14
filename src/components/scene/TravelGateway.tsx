@@ -1,4 +1,5 @@
 import SpatialWords from '@/features/typography/SpatialWords'
+import InteractionAccent from '@/features/presentation/InteractionAccent'
 import { useEffect, useMemo, useState } from 'react'
 import { Clone, useGLTF, useTexture } from '@react-three/drei'
 import type { ThreeEvent } from '@react-three/fiber'
@@ -18,7 +19,7 @@ export default function TravelGateway({ destination, position, rotation = 0, onA
   onActivate: () => void
 }) {
   const { nodes } = useGLTF(`/models/${PH.painting}.gltf`)
-  const source = useTexture(`/textures/travel/${destination}-window.jpg`)
+  const source = useTexture(`/textures/travel/${destination}-window-unlettered.jpg`)
   const [hovered, setHovered] = useState(false)
   const home = destination === 'home'
   const label = home ? '返回小屋' : '前往观星台'
@@ -75,6 +76,7 @@ export default function TravelGateway({ destination, position, rotation = 0, onA
       </group>)}
     </group>
     <SpatialWords text={label} position={[0, 1.92, .16]} width={1.45} onActivate={onActivate}/>
+    <InteractionAccent position={[0, .25, .05]} size={1.25} onActivate={onActivate}/>
 
     <pointLight position={[0, 1.4, 0.4]} color={home ? '#ffd09a' : '#b7d8ea'} intensity={0.65} distance={2.2} decay={2} />
   </group>

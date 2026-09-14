@@ -173,12 +173,15 @@ export default function StarGate({ materials: m, reducedMotion, onActivate, show
     </group>)}
     <pointLight position={[0, 2.5, .85]} color="#9cbafa" intensity={7} distance={8} decay={2} />
     <pointLight position={[0, 4.4, .32]} color="#ffc976" intensity={4} distance={5} decay={2} />
-    {showLabel && <SpatialWords text="进入星系" position={[0, 1.4, .72]} width={2.8} distance={9} onActivate={onActivate}/>}
+    {showLabel && <SpatialWords text="进入星系" position={[0, 1.4, .72]} width={2.8} distance={2.55} onActivate={onActivate}/>}
+    <NearbySceneContent distance={2.55} enabled={showLabel}>
     <Html position={[0, -.02, .55]} center distanceFactor={8} zIndexRange={[9, 0]}>
       <div style={{ width: 330, padding: '5px 8px', fontSize: 9, lineHeight: 1.45, color: '#c6c1ac', background: 'transparent', border: 'none', borderRadius: 3, textAlign: 'center', pointerEvents: 'auto' }}>
         <a href="https://esahubble.org/images/heic0506a/" target="_blank" rel="noreferrer" style={{ color: '#e2c995', textDecoration: 'none' }} onClick={event => event.stopPropagation()}>M51 · NASA, ESA, S. Beckwith (STScI), and The Hubble Heritage Team (STScI/AURA)</a>
         <span style={{ display: 'block', fontSize: 8 }}>旋转与色彩为艺术演绎 · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer" style={{ color: '#b2bed2' }} onClick={event => event.stopPropagation()}>CC BY 4.0</a></span>
       </div>
     </Html>
+    </NearbySceneContent>
   </group>
 }
+import NearbySceneContent from '@/features/presentation/NearbySceneContent'

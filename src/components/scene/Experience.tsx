@@ -1,5 +1,5 @@
 import { MaterialCaustics } from '@/features/typography/LightVfx'
-import SpatialWords from '@/features/typography/SpatialWords'
+import InteractionAccent from '@/features/presentation/InteractionAccent'
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { Canvas } from '@react-three/fiber'
@@ -32,20 +32,21 @@ const PCF_SHADOW_MAP = 1
 function HotspotLayer({onLand}:{onLand:()=>void}) {
   const openPanel = useGameStore((s) => s.openPanel)
   const mascotHints = usePersonalStore(s => s.data.settings.mascotHints)
+  const panel = useGameStore(s => s.panel)
   return (
     <group>
       {/* 展示柜 → 想法收纳柜 */}
-      <SpatialWords position={[4.3, 2.34, -4.01]} text="我的收藏" material width={1.7} onActivate={() => openPanel('cabinet')} />
+      <InteractionAccent position={[4.3, .75, -4.01]} disabled={!!panel} onActivate={() => openPanel('cabinet')} />
       {/* 圆桌中央水晶 → 思维合成台 */}
-      <SpatialWords position={[0, .971, 1.15]} text="新的想法" material width={1.65} rotation={[-Math.PI/2,0,0]} onActivate={() => openPanel('synth')} />
+      <InteractionAccent position={[0, .984, 1.15]} size={1.7} rotation={[-Math.PI/2,0,0]} disabled={!!panel} onActivate={() => openPanel('synth')} />
       {/* 左侧书桌 → 漫行者日志 */}
-      <SpatialWords position={[-4.2, 1.85, 1.7]} text="继续旅程" width={1.3} billboard onActivate={() => openPanel('journal')} />
-      <SpatialWords position={[-5.15, 2.15, -2.4]} text="灯下续读" width={1.2} billboard onActivate={() => openPanel('library')} />
+      <InteractionAccent position={[-4.2, .801, 1.97]} rotation={[-Math.PI/2,0,.35]} disabled={!!panel} onActivate={() => openPanel('journal')} />
+      <InteractionAccent position={[-5.2, 1.2, -2.4]} rotation={[0,Math.PI/2,0]} disabled={!!panel} onActivate={() => openPanel('library')} />
       {/* 电话亭 → 同频电话亭 */}
-      <SpatialWords position={[4.17, 1.9, -.55]} text="观点回声" width={1.05} billboard onActivate={() => openPanel('phone')} />
-      {mascotHints && <SpatialWords position={[-2.95, 1.3, -3.2]} text="刘看山" width={.95} billboard onActivate={() => openPanel('mascot')} />}
+      <InteractionAccent position={[4.214, 1.55, -.563]} rotation={[0,-1.32,0]} disabled={!!panel} onActivate={() => openPanel('phone')} />
+      {mascotHints && <InteractionAccent position={[-2.95, .1, -2.62]} rotation={[-Math.PI/2,0,0]} disabled={!!panel} onActivate={() => openPanel('mascot')} />}
       {/* 房间门口 → 镜海群岛 */}
-      <SpatialWords position={[3.65, 2.1, 4.75]} text="走进镜海群岛" width={1.7} billboard onActivate={onLand} />
+      <InteractionAccent position={[3.65, 1.35, 4.74]} rotation={[0,Math.PI,0]} disabled={!!panel} onActivate={onLand} />
     </group>
   )
 }

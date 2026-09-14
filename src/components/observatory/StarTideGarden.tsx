@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { useFrame, type ThreeEvent } from '@react-three/fiber'
 import { Html } from '@react-three/drei'
 import * as THREE from 'three'
+import NearbySceneContent from '@/features/presentation/NearbySceneContent'
 import { mergeMirrorGeometry, mirrorRandom } from '@/features/journeys/scene/MirrorGeometry'
 import type { TideSignal } from '@/features/journeys/scene/atmosphereMotion'
 import type { ObservatoryMaterials } from './materials'
@@ -63,7 +64,7 @@ function ThoughtSeed({ index, materials: m, signal, onIngredient }: { index: num
         <mesh geometry={resources.spiral} material={resources.glow}/>
         <mesh rotation={[.3, .3, Math.PI / 6]} scale={[.48, 1, .48]} material={resources.glow}><icosahedronGeometry args={[.12, 1]}/></mesh>
       </group>
-      {hovered && <Html center position={[0, -.42, 0]} style={{ pointerEvents: 'none' }}><div className="tide-seed-label">{ingredient.name}<small>选入这一杯</small></div></Html>}
+      {hovered && <NearbySceneContent distance={2.6}><Html center position={[0, -.42, 0]} style={{ pointerEvents: 'none' }}><div className="tide-seed-label">{ingredient.name}<small>选入这一杯</small></div></Html></NearbySceneContent>}
     </group>
   </group>
 }

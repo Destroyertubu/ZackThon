@@ -6,6 +6,7 @@ import type { CollectionTreeTopic } from '../../features/personal/collectionTree
 import { GARDEN_TREE_ANCHORS, type GardenTreePoint } from './gardenTreeShape'
 import { COLLECTION_TREE_CAMERA_POSITION, COLLECTION_TREE_LOOK_AT } from './collectionTreeCamera'
 import GardenHalos, { type HaloPoint } from './GardenHalos'
+import { Leaf, Sparkles, BookOpen } from 'lucide-react'
 import './collection-tree-scene.css'
 
 export const TOPICS_PER_PAGE = 6
@@ -14,6 +15,7 @@ export { COLLECTION_TREE_CAMERA_POSITION, COLLECTION_TREE_LOOK_AT } from './coll
 
 export interface CollectionTreeSceneProps {
   open: boolean
+  near?: boolean
   topics: CollectionTreeTopic[]
   selectedTopicId: string | null
   selectedLeafId: string | null
@@ -154,7 +156,7 @@ function wordsStyle(width: number, delay = 0): CSSProperties {
 }
 
 /** Canvas child: personal collections become readable, connected branches of the existing tree. */
-export default function CollectionTreeScene({ open, topics, selectedTopicId, selectedLeafId, topicPage, leafPage,
+export default function CollectionTreeScene({ open, near = false, topics, selectedTopicId, selectedLeafId, topicPage, leafPage,
   onOpen, onTopic, onLeaf, reducedMotion }: CollectionTreeSceneProps) {
   const width = useThree(state => state.size.width), height = useThree(state => state.size.height)
   const camera = useThree(state => state.camera)
@@ -195,9 +197,9 @@ export default function CollectionTreeScene({ open, topics, selectedTopicId, sel
           <button type="button" className="collection-tree-entry" data-collection-tree-control="open"
             aria-label="打开我的星树，查看收藏" onPointerDown={STOP} onPointerUp={STOP} onKeyDown={STOP_ACTIVATION}
             onClick={event => { event.stopPropagation(); onOpen() }}>
-            <span className="collection-tree-entry-star" aria-hidden="true">✧</span>
-            <strong>我的星树</strong>
-            <small>{topics.length ? '收藏在枝间生长' : '让一次心动在这里生根'}</small>
+            <Leaf size={28} aria-hidden="true"/>
+            {near && <><strong>我的星树</strong>
+              <small><span className="ww-keyboard-action">E · </span><span className="ww-touch-action">点击 · </span>查看收藏</small></>}
           </button>
         </div>
       </Html>
@@ -211,7 +213,7 @@ export default function CollectionTreeScene({ open, topics, selectedTopicId, sel
               aria-pressed={topic.id === selectedTopicId} aria-label={`${topic.label}，${topic.leaves.length}片收藏叶`}
               onPointerDown={STOP} onPointerUp={STOP} onKeyDown={STOP_ACTIVATION} onWheel={STOP}
               onClick={event => { event.stopPropagation(); onTopic(topic.id) }} title={topic.label}>
-              <strong>{topic.label}</strong><small>{topic.leaves.length} 片星叶</small>
+              <Sparkles size={24} aria-hidden="true"/><strong>{topic.label}</strong><small>{topic.leaves.length} 片星叶</small>
             </button>
           </div>
         </Html>
@@ -227,7 +229,7 @@ export default function CollectionTreeScene({ open, topics, selectedTopicId, sel
               aria-pressed={leaf.id === selectedLeafId} aria-label={`阅读收藏：${leaf.title}`}
               onPointerDown={STOP} onPointerUp={STOP} onKeyDown={STOP_ACTIVATION} onWheel={STOP}
               onClick={event => { event.stopPropagation(); onLeaf(leaf.id) }} title={leaf.title}>
-              <strong>{leaf.title}</strong>
+              <BookOpen size={24} aria-hidden="true"/><strong>{leaf.title}</strong>
               <small className="collection-tree-leaf-kind">{leaf.excerptKind === 'excerpt' ? '我的摘录'
                 : leaf.excerptKind === 'summary' ? leaf.source?.kind === 'curated' ? '精选导读' : leaf.source?.kind === 'excerpt' ? '来源节选' : '来源摘要'
                   : '收藏线索'}</small>

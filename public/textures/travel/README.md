@@ -1,5 +1,7 @@
 # Travel gateway destination views
 
+- Current text-free entry views (2026-09-14): `home-window-unlettered.jpg` and `observatory-window-unlettered.jpg`, captured from the running local scenes at 720 × 970, JPEG quality 92. Both gateways now use these versioned files so older previews with baked captions cannot survive browser caching. Previous captures remain as references. Capture/visual audit: `artifacts/text-free-20260914/capture-assets.mjs`.
+
 - `home-window.jpg` and `observatory-window.jpg`: screenshots of this application's actual `/home` and `/observatory` scenes, captured without HUD at 720 × 970, JPEG quality 92.
 - Capture script: `artifacts/observatory-return/capture-destinations.mjs` (local ignored QA artifact).
 - On 2026-09-13, `observatory-window.jpg` was refreshed from the implemented Star Tree Garden using `artifacts/star-tree-garden/capture-views.mjs`. It remains an actual local scene capture, at 720 × 970 with no HUD.

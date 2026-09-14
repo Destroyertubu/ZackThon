@@ -41,7 +41,7 @@ function archTrim(width: number, bottom: number, spring: number, top: number, ra
 export default function GardenHomeDoor({ materials: m, onActivate, showLabel = true }: {
   materials: ObservatoryMaterials; onActivate: () => void; showLabel?: boolean
 }) {
-  const source = useTexture('/textures/travel/home-window.jpg')
+  const source = useTexture('/textures/travel/home-window-unlettered.jpg')
   const [hovered, setHovered] = useState(false)
   const resources = useMemo(() => {
     const frame = archOutline(1.38, 0.075, 2.145, 2.40)
@@ -114,6 +114,8 @@ export default function GardenHomeDoor({ materials: m, onActivate, showLabel = t
       <mesh position={[0, 2.314, 0.159]} material={m.brass}><torusGeometry args={[0.037, 0.008, 7, 24]} /></mesh>
     </group>
     {showLabel && <SpatialWords text="回家" position={[0, 2.08, .17]} width={.85} material onActivate={onActivate}/>}
+    <InteractionAccent position={[0, 1.43, .17]} disabled={!showLabel} onActivate={onActivate}/>
     <pointLight position={[0, 1.34, 0.23]} color="#ffbd70" intensity={hovered ? 1.4 : 1.1} distance={2.5} decay={2} />
   </group>
 }
+import InteractionAccent from '@/features/presentation/InteractionAccent'

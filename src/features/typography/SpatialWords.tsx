@@ -4,6 +4,7 @@ import { useFrame } from '@react-three/fiber'
 import { Html } from '@react-three/drei'
 import * as THREE from 'three'
 import { useReducedMotion } from './useReducedMotion'
+import NearbySceneContent from '@/features/presentation/NearbySceneContent'
 
 type Point = [number, number, number]
 interface Props {
@@ -19,7 +20,13 @@ interface Props {
 }
 
 /** Alpha-only glyphs share the world's depth buffer. One point batch gathers into their strokes. */
-export default function SpatialWords({ text, position, rotation, width = 1.7, color = '#f6d29a', distance = 7, material = false, billboard = false, onActivate }: Props) {
+export default function SpatialWords(props: Props) {
+  return <NearbySceneContent position={props.position} rotation={props.rotation} distance={props.distance ?? 2.6}>
+    <VisibleSpatialWords {...props} position={[0, 0, 0]} rotation={undefined}/>
+  </NearbySceneContent>
+}
+
+function VisibleSpatialWords({ text, position, rotation, width = 1.7, color = '#f6d29a', distance = 2.6, material = false, billboard = false, onActivate }: Props) {
   const group = useRef<THREE.Group>(null)
   const reduced = useReducedMotion()
   const hovered = useRef(false)

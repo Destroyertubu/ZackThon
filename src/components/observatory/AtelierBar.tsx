@@ -81,7 +81,9 @@ export default function AtelierBar({materials:m,reducedMotion,onActivate,onIngre
     {[0,1,2].map(i=><mesh key={i} position={[-1.41+i*.041,1.109,.23]} rotation={[Math.PI/2,.1,i*.4]}><torusGeometry args={[.034,.006,6,28]}/><meshStandardMaterial color="#d5ac40" roughness={.7}/></mesh>)}
     <AssetLantern height={.38} position={[-1.57,1.075,-.23]}/>
     {showLabel && <SpatialWords text="调一杯思想" position={[0,2.88,-.40]} width={2} onActivate={onActivate}/>}
+    <InteractionAccent position={[0, .7, .923]} size={.9} disabled={!showLabel} quiet={reducedMotion} onActivate={onActivate}/>
     <pointLight position={[0,2.18,-.12]} color="#fce4b9" intensity={2.4} distance={3.7} decay={2}/>
     <pointLight position={[1.5,1.7,.68]} color="#a3c6df" intensity={.9} distance={2.5} decay={2}/>
   </group>
 }
+import InteractionAccent from '@/features/presentation/InteractionAccent'

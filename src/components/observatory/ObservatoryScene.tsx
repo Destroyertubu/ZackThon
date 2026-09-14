@@ -19,6 +19,7 @@ import { NIGHT_ART } from '@/features/journeys/scene/sceneArt'
 import AtelierGarden from './AtelierGarden'
 import GardenPerimeter from './GardenPerimeter'
 import GardenShadowSchedule from './GardenShadowSchedule'
+import InteractionAccent from '@/features/presentation/InteractionAccent'
 
 export default function ObservatoryScene({ quality, reducedMotion, quiet, collectionReading = false, onReturnHome, onEnterWorld, onOpenWorkshop, response, onResonate, onIngredient }: {
   quality: QualityProfile; reducedMotion: boolean; onReturnHome: () => void
@@ -51,11 +52,13 @@ export default function ObservatoryScene({ quality, reducedMotion, quiet, collec
     <GardenDetails />
     <StarTree materials={materials} reducedMotion={reducedMotion} />
     <TreeSeating materials={materials} reducedMotion={reducedMotion} />
-    <ThoughtBar onIngredient={onIngredient} materials={materials} reducedMotion={reducedMotion} onActivate={onOpenWorkshop} showLabel={!collectionReading} />
+    <ThoughtBar onIngredient={onIngredient} materials={materials} reducedMotion={reducedMotion} onActivate={onOpenWorkshop} showLabel={!collectionReading && !quiet} />
     <StarTideGarden materials={materials} signal={signal} onResonate={onResonate} onIngredient={onIngredient}/>
-    <StarGate materials={materials} reducedMotion={reducedMotion} onActivate={onEnterWorld} showLabel={!collectionReading} />
+    <InteractionAccent position={[-2, .18, 1.5]} rotation={[-Math.PI/2,0,0]} size={1.7} disabled={quiet} quiet={reducedMotion} onActivate={() => onResonate()}/>
+    <StarGate materials={materials} reducedMotion={reducedMotion} onActivate={onEnterWorld} showLabel={!collectionReading && !quiet} />
+    <InteractionAccent position={[2.7, .14, -5.8]} rotation={[-Math.PI/2,0,0]} size={2.4} disabled={quiet} quiet={reducedMotion} onActivate={onEnterWorld}/>
     <Telescope materials={materials} />
-    <GardenHomeDoor materials={materials} onActivate={onReturnHome} showLabel={!collectionReading} />
+    <GardenHomeDoor materials={materials} onActivate={onReturnHome} showLabel={!collectionReading && !quiet} />
     <GardenLighting materials={materials} reducedMotion={reducedMotion} />
     {quality.postprocessing ? <EffectComposer multisampling={0}>
       <N8AO halfRes aoRadius={0.55} intensity={1.3} distanceFalloff={1.3} quality="performance" />

@@ -9,9 +9,10 @@
   toolbar.setAttribute('aria-label', '云端漫游控制');
   Object.assign(toolbar.style, { position: 'fixed', bottom: '6px', right: '18px', zIndex: '10000', display: 'flex', gap: '16px',
     font: '12px system-ui', color: '#d4eadf', textShadow: '0 1px 3px #000' });
-  function button(label, action) {
-    const b = document.createElement('button'); b.type = 'button'; b.textContent = label;
-    Object.assign(b.style, { border: '0', padding: '5px 0', color: 'inherit', background: 'transparent', font: 'inherit', cursor: 'pointer' });
+  function button(label, path, action) {
+    const b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', label);
+    b.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">${path}</svg>`;
+    Object.assign(b.style, { border: '0', padding: '10px', minWidth: '44px', minHeight: '44px', color: '#ffdc87', background: 'transparent', cursor: 'pointer' });
     b.addEventListener('click', action); toolbar.append(b); return b;
   }
   const message = (type, data = {}) => window.postMessage({ type, ...data }, location.origin);
@@ -23,7 +24,8 @@
   function applyMode() {
     message('settings', { settings: { framerate: 60, video_bitrate: mode === 'fine' ? 16000 : 8000,
       rate_control_mode: 'cbr', video_streaming_mode: true, video_fullcolor: false } });
-    quality.textContent = mode === 'fine' ? '精细画面 · 切换流畅' : '流畅优先 · 切换精细';
+    quality.setAttribute('aria-label', mode === 'fine' ? '精细画面 · 切换流畅' : '流畅优先 · 切换精细');
+    quality.setAttribute('aria-pressed', String(mode === 'fine'));
     localStorage.setItem(preference, mode);
   }
   async function enterLook() {
@@ -36,7 +38,7 @@
       catch (error) { if (error.name !== 'NotSupportedError') throw error; await target.requestPointerLock(); }
       // Send before the next movement frame; server processes the F then m2 in order.
       restoreRemoteLook(); autoLook = true;
-    } catch { hint.textContent = '按 F 恢复鼠标漫游'; }
+    } catch { hint.setAttribute('aria-label', '按 F 恢复鼠标漫游'); }
     finally { requesting = false; }
   }
   function releaseLook() {
@@ -48,16 +50,17 @@
     autoLook = false;
     if (document.pointerLockElement) { keepRemoteInterface = true; document.exitPointerLock(); }
   }
-  const hint = button('F 漫游 · Esc 释放鼠标', () => { if (document.pointerLockElement) releaseLook(); else void enterLook(); });
-  const quality = button('流畅优先 · 切换精细', () => {
+  const hint = button('F 漫游 · Esc 释放鼠标', '<rect x="6" y="2" width="12" height="20" rx="6"/><path d="M12 2v7"/>', () => { if (document.pointerLockElement) releaseLook(); else void enterLook(); });
+  const quality = button('流畅优先 · 切换精细', '<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4M6 10l3-3 4 5 3-3 2 2"/>', () => {
     mode = mode === 'smooth' ? 'fine' : 'smooth'; applyMode();
     surface()?.focus({ preventScroll: true });
   });
-  const metrics = document.createElement('output'); metrics.style.alignSelf = 'center'; toolbar.append(metrics);
+  const metrics = document.createElement('output'); metrics.style.display = 'none'; toolbar.append(metrics);
   document.body.append(toolbar);
   document.addEventListener('pointerlockchange', () => {
     const locked = !!document.pointerLockElement;
-    hint.textContent = locked ? '正在漫游 · Esc 释放鼠标' : 'F 漫游 · Esc 释放鼠标';
+    hint.setAttribute('aria-label', locked ? '正在漫游 · Esc 释放鼠标' : 'F 漫游 · Esc 释放鼠标');
+    hint.setAttribute('aria-pressed', String(locked));
     if (!locked) {
       autoLook = false;
       // Opening a reading/mixing panel must not immediately close it with Esc.

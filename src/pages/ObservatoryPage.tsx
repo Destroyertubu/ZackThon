@@ -2,6 +2,7 @@ import CocktailVision, { type CocktailPreview } from '@/features/typography/Cock
 import SceneReviewTools from '@/features/journeys/scene/SceneReviewTools'
 import StarlightPath from '@/features/typography/StarlightPath'
 import LivingWords from '@/features/typography/LivingWords'
+import DirectionIcon from '@/features/presentation/DirectionIcon'
 import ReadingLight from '@/features/typography/ReadingLight'
 import CollectionTreeScene, { TOPICS_PER_PAGE, LEAVES_PER_PAGE } from '@/components/observatory/CollectionTreeScene'
 import CollectionTreeControls from '@/components/observatory/CollectionTreeControls'
@@ -244,7 +245,7 @@ export default function ObservatoryPage() {
       onCreated={({ gl }) => { gl.toneMapping = THREE.ACESFilmicToneMapping; gl.toneMappingExposure = 1.05 }}>
       <Suspense fallback={null}>
         <ObservatoryScene quiet={blocked} collectionReading={treeOpen} quality={quality} reducedMotion={reducedMotion} onReturnHome={treeOpen ? ignoreSceneAction : returnHome} onEnterWorld={treeOpen ? ignoreSceneAction : enterWorld} onOpenWorkshop={treeOpen ? ignoreSceneAction : openWorkshop} response={response} onResonate={treeOpen ? ignoreSceneAction : resonate} onIngredient={treeOpen ? ignoreSceneAction : selectIngredient}/>
-        {!nonTreeBlocked && <CollectionTreeScene open={treeOpen} topics={topics} selectedTopicId={selectedTopic?.id ?? null} selectedLeafId={readingLeaf?.id ?? null}
+        {!nonTreeBlocked && <CollectionTreeScene open={treeOpen} near={nearTree && !nearHome && !nearGalaxy && !nearWorkshop && !nearTide} topics={topics} selectedTopicId={selectedTopic?.id ?? null} selectedLeafId={readingLeaf?.id ?? null}
           topicPage={shownTopicPage} leafPage={shownLeafPage} onOpen={openTree} onTopic={selectTopic} onLeaf={readLeaf} reducedMotion={reducedMotion}/>}
         <StarlightPath/>
         {workshopOpen && drinkPreview && <CocktailVision {...drinkPreview}/>}
@@ -304,7 +305,7 @@ export default function ObservatoryPage() {
       {(['', 'KeyW', '', 'KeyA', 'KeyS', 'KeyD'] as const).map((key, i) => key ? <button key={key} type="button" aria-label={{ KeyW: '向前走', KeyA: '向左走', KeyS: '向后走', KeyD: '向右走' }[key]}
         onPointerDown={e => { e.preventDefault(); e.currentTarget.setPointerCapture(e.pointerId); input.current.keys.add(key) }}
         onPointerUp={() => input.current.keys.delete(key)} onPointerCancel={() => input.current.keys.delete(key)} onLostPointerCapture={() => input.current.keys.delete(key)}>
-        {{ KeyW: '↑', KeyA: '←', KeyS: '↓', KeyD: '→' }[key]}</button> : <span key={i} />)}
+        <DirectionIcon code={key}/></button> : <span key={i} />)}
     </div>}
     {panel === 'settings' && <SettingsPanel />}
     {treeOpen && <div inert={!!readingLeaf}><CollectionTreeControls ready={personalReady} error={personalError}

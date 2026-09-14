@@ -22,6 +22,7 @@ import { SUNSET_PRACTICAL_LIGHTS, SUNSET_SHORES } from './sunsetLayout'
 import CoastlineRocks, { COAST_PATCH_SHORES } from './CoastlineRocks'
 import SunsetAssets from './SunsetAssets'
 import { advanceWorldUniform } from './worldAnimation'
+import InteractionAccent from '@/features/presentation/InteractionAccent'
 
 const PCF_SHADOW_MAP = 1
 
@@ -81,6 +82,9 @@ export default function WorldCanvas({world,initialPose,initialStationId,onPose,o
       </Suspense>
       <Suspense fallback={<LoadingWorld/>}>
         <WorldModel world={world} reducedMotion={still} onReady={onReady}/>
+        {onInteract && world.stations.map(station => <InteractionAccent key={station.id}
+          position={[station.position[0],station.position[1]+.073,station.position[2]]} rotation={[-Math.PI/2,0,0]}
+          size={2.4} disabled={disabled} quiet={still} onActivate={() => onInteract(station.id)}/>)}
         {world.id!=='sunset-boulevard'&&<WorldAtmosphere rain={world.id==='blue-hour-shutter'} reducedMotion={still} color={world.id==='forest-lento'?'#c4e7b2':night?'#c8c8df':'#f5d7b0'}/>}
         <WorldController world={world} initialPose={initialPose} initialStationId={initialStationId} onPose={onPose} onNearStation={onNearStation} onInteract={onInteract} onCaptureReady={onCaptureReady} disabled={disabled}/>
       </Suspense>

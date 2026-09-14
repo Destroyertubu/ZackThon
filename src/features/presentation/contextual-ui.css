@@ -1,0 +1,55 @@
+/* Walking chrome stays quiet. Do not target body text, dialogs, fields, readers,
+   galaxy labels or nearby prompts: these carry the actual interaction/content. */
+html.ww-contextual-ui :is(.observatory-identity, .observatory-location, .ww-home-instructions,
+  .ms-world-header > div, .ms-world-footer > span) { display: none !important; }
+html.ww-contextual-ui .observatory-header { justify-content: flex-end; }
+
+html.ww-contextual-ui :is(.observatory-nav, .garden-footer-actions) button {
+  font-size: 0 !important;
+  letter-spacing: 0 !important;
+  min-width: 44px;
+  min-height: 44px;
+  gap: 0 !important;
+  padding: 10px !important;
+}
+html.ww-contextual-ui :is(.observatory-nav, .garden-footer-actions) button > :is(span, kbd) {
+  display: none !important;
+}
+html.ww-contextual-ui .observatory-world-button { width: 44px; }
+html.ww-contextual-ui :is(.ms-world-header > nav, .ms-world-footer) > button {
+  font-size: 0;
+  min-width: 44px;
+  min-height: 44px;
+  gap: 0;
+}
+html.ww-contextual-ui :is(.ms-land-compass, .ms-route-progress) > span { display: none; }
+html.ww-contextual-ui .ms-land-compass button { font-size: 0; gap: 0; min-width: 44px; }
+html.ww-contextual-ui body > output[aria-label="云渲染状态"] { display: none; }
+html.ww-contextual-ui :is(.ww-home-controls button, .ww-hud-label a) {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+html.ww-contextual-ui .observatory-touch-pad button { display: grid; place-items: center; }
+.ww-interaction-action { gap: 10px; }
+.ww-touch-action { display: none; }
+@media (pointer: coarse) {
+  .ww-keyboard-action { display: none; }
+  .ww-touch-action { display: inline; }
+}
+
+/* Amber affordances survive the text correction, without recoloring galaxies. */
+html.ww-contextual-ui :is(.observatory-page, .ww-home-controls, .ms-world-page) :is(button:not(:disabled), a[href]):is(:hover, :focus-visible) {
+  color: #ffe6a1;
+  filter: drop-shadow(0 0 6px #ffc34b66);
+}
+html.ww-contextual-ui :is(.observatory-page, .ww-home-controls, .ms-world-page) :is(button:not(:disabled), a[href]):focus-visible {
+  outline: 1px solid #ffdb7b;
+  outline-offset: 5px;
+}
+html.ww-contextual-ui .collection-tree-entry > svg {
+  color: #ffe18a;
+  filter: drop-shadow(0 0 5px #ffc34b80);
+}
