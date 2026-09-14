@@ -1,0 +1,47 @@
+[
+  {
+    "role": "diffuse",
+    "file": "patterned_cobblestone_diff_2k.webp",
+    "upstream": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/patterned_cobblestone/patterned_cobblestone_diff_2k.jpg",
+    "license": "CC0-1.0",
+    "author": "Rob Tuytel / Poly Haven",
+    "resolution": [
+      2048,
+      2048
+    ],
+    "metersPerTile": 2.5,
+    "processing": "WebP from verified upstream at unchanged 2048x2048, quality 72, method 6",
+    "sha256": "dd03eb6ff62ffbb06a9b199145a53f2b59da73edee659eb1486874dc555851ad",
+    "bytes": 504098
+  },
+  {
+    "role": "normal",
+    "file": "patterned_cobblestone_nor_gl_2k.webp",
+    "upstream": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/patterned_cobblestone/patterned_cobblestone_nor_gl_2k.jpg",
+    "license": "CC0-1.0",
+    "author": "Rob Tuytel / Poly Haven",
+    "resolution": [
+      2048,
+      2048
+    ],
+    "metersPerTile": 2.5,
+    "processing": "WebP from verified upstream at unchanged 2048x2048, quality 80, method 6",
+    "sha256": "e32427cd8c9b71aa1dccf419f3b64f716c6c390555a3ce5ec1e06a10e98e273e",
+    "bytes": 1055600
+  },
+  {
+    "role": "roughness",
+    "file": "patterned_cobblestone_rough_2k.webp",
+    "upstream": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/patterned_cobblestone/patterned_cobblestone_rough_2k.jpg",
+    "license": "CC0-1.0",
+    "author": "Rob Tuytel / Poly Haven",
+    "resolution": [
+      2048,
+      2048
+    ],
+    "metersPerTile": 2.5,
+    "processing": "WebP from verified upstream at unchanged 2048x2048, quality 70, method 6",
+    "sha256": "28f0a9cac7d9f478cf0e0ff5c9fcf322ca31c31e6913c3569503b6adfd0245c4",
+    "bytes": 256626
+  }
+]

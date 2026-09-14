@@ -1,0 +1,63 @@
+{
+  "providedBy": "user",
+  "rights": "Original character/reference owners; not CC0",
+  "archives": [
+    {
+      "source": "/Users/gauss/Desktop/SuperTechMagician/SolarMaster/ZackThon/漫知录/看山三视图.zip",
+      "bytes": 76105,
+      "sha256": "77b379d758c996e37a7571050c2687d52aa72aaed3034c7f348f84c7f66b3b06"
+    },
+    {
+      "source": "/Users/gauss/Desktop/SuperTechMagician/SolarMaster/ZackThon/漫知录/刘看山动态.zip",
+      "bytes": 5634357,
+      "sha256": "f568fa507b0d0d7f7b54e1b4437b10145a4b0afee182789708218ff1296e1ef6"
+    }
+  ],
+  "originalExtractedReferences": [
+    {
+      "file": "33f11967cc145627560c3db70c7d3ab8.jpg",
+      "bytes": 54213,
+      "sha256": "805a50a7a512a61789bc61176978df253488ed25ef929107536441e54e850d56"
+    },
+    {
+      "file": "c8d9642e1d6a402907200a8fed6c0fc3.jpg",
+      "bytes": 45401,
+      "sha256": "54ab0f350f9dc88d22a750cdf781ec39ff14cae5d4ea245dca133250370220ad"
+    },
+    {
+      "file": "de232c5a0202dd7512ec1b7bddd150d8.jpg",
+      "bytes": 46866,
+      "sha256": "110ebbb19424e5b7bd007aa894c1757757532218564df47425471f662e736de5"
+    },
+    {
+      "file": "待机_5秒_320x320_20fps_透明.gif",
+      "bytes": 973881,
+      "sha256": "e18748d708aba1d82917f41462bbbf2f120615b60d6e15b3c5d448a444d2ae12"
+    },
+    {
+      "file": "打招呼_4秒_320x320_20fps_透明.gif",
+      "bytes": 980029,
+      "sha256": "7cc8d9525a78503b0e746b0d3a9950fd94ab8c89439b3329bf729fc2a2470964"
+    },
+    {
+      "file": "晃悠_320x320_3秒_20fps_透明.gif",
+      "bytes": 961040,
+      "sha256": "c1a3bfc35af4b9faa1807ec75d6a4a4662ee7e8a3fd89cdcc2ebe863f107ce9e"
+    },
+    {
+      "file": "电脑_6秒_320x320_20fps_透明.gif",
+      "bytes": 964116,
+      "sha256": "bf1a7bc0d28dc954d449e5d84ec0345f01ee0c57b56346aafc230cb669a0ef0e"
+    },
+    {
+      "file": "瞌睡_5秒_320x320_20fps_透明.gif",
+      "bytes": 973593,
+      "sha256": "3fffc7dd4f76b58d57a7d921f5c2a05fe01bf0621c5f9f68b9f5dc9a4e053a59"
+    },
+    {
+      "file": "运球_4秒_320x320_20fps_透明.gif",
+      "bytes": 976293,
+      "sha256": "a026fa4a76682fe6e3c04dd68b05b05e6c64cdbb39bd86749be1f1369f313812"
+    }
+  ]
+}

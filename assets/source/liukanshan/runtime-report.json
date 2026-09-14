@@ -1,0 +1,43 @@
+{
+  "errors": [],
+  "checks": [
+    {
+      "state": "idle",
+      "animated": false,
+      "joints": 12,
+      "unchanged": true
+    },
+    {
+      "state": "greeting",
+      "animated": false,
+      "joints": 12,
+      "unchanged": true
+    },
+    {
+      "state": "searching",
+      "animated": false,
+      "joints": 12,
+      "unchanged": true
+    },
+    {
+      "state": "reading",
+      "animated": false,
+      "joints": 12,
+      "unchanged": true
+    },
+    {
+      "state": "collected",
+      "animated": false,
+      "joints": 12,
+      "unchanged": true
+    }
+  ],
+  "states": [
+    "idle",
+    "greeting",
+    "searching",
+    "reading",
+    "collected"
+  ],
+  "localModel": "/models/liukanshan/liukanshan.glb"
+}

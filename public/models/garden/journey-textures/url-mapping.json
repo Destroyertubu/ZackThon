@@ -1,0 +1,156 @@
+[
+  {
+    "sourceUrl": "/textures/wood_floor_deck_diff_1k.jpg",
+    "url": "/models/garden/journey-textures/wood_floor_deck_diff_1k.webp",
+    "beforeBytes": 925789,
+    "afterBytes": 247084,
+    "size": [
+      1024,
+      1024
+    ],
+    "losslessPixels": false
+  },
+  {
+    "sourceUrl": "/textures/wood_floor_deck_nor_gl_1k.jpg",
+    "url": "/models/garden/journey-textures/wood_floor_deck_nor_gl_1k.webp",
+    "beforeBytes": 665094,
+    "afterBytes": 80188,
+    "size": [
+      1024,
+      1024
+    ],
+    "losslessPixels": false
+  },
+  {
+    "sourceUrl": "/textures/wood_table_001_diff_1k.jpg",
+    "url": "/models/garden/journey-textures/wood_table_001_diff_1k.webp",
+    "beforeBytes": 215573,
+    "afterBytes": 151444,
+    "size": [
+      1024,
+      1024
+    ],
+    "losslessPixels": false
+  },
+  {
+    "sourceUrl": "/textures/wood_table_001_nor_gl_1k.jpg",
+    "url": "/models/garden/journey-textures/wood_table_001_nor_gl_1k.webp",
+    "beforeBytes": 51927,
+    "afterBytes": 13892,
+    "size": [
+      1024,
+      1024
+    ],
+    "losslessPixels": false
+  },
+  {
+    "sourceUrl": "/textures/rock_face_diff_1k.jpg",
+    "url": "/models/garden/journey-textures/rock_face_diff_1k.webp",
+    "beforeBytes": 732721,
+    "afterBytes": 139014,
+    "size": [
+      1024,
+      1024
+    ],
+    "losslessPixels": false
+  },
+  {
+    "sourceUrl": "/textures/rock_face_nor_gl_1k.jpg",
+    "url": "/models/garden/journey-textures/rock_face_nor_gl_1k.webp",
+    "beforeBytes": 1139857,
+    "afterBytes": 334974,
+    "size": [
+      1024,
+      1024
+    ],
+    "losslessPixels": false
+  },
+  {
+    "sourceUrl": "/textures/rock_face_rough_1k.jpg",
+    "url": "/models/garden/journey-textures/rock_face_rough_1k.webp",
+    "beforeBytes": 224371,
+    "afterBytes": 4922,
+    "size": [
+      1024,
+      1024
+    ],
+    "losslessPixels": false
+  },
+  {
+    "sourceUrl": "/textures/plastered_wall_04_diff_1k.jpg",
+    "url": "/models/garden/journey-textures/plastered_wall_04_diff_1k.webp",
+    "beforeBytes": 299230,
+    "afterBytes": 8854,
+    "size": [
+      1024,
+      1024
+    ],
+    "losslessPixels": false
+  },
+  {
+    "sourceUrl": "/models/garden/details/ivy/ivy-color.jpg",
+    "url": "/models/garden/journey-textures/ivy-color.webp",
+    "beforeBytes": 644962,
+    "afterBytes": 41232,
+    "size": [
+      1024,
+      1024
+    ],
+    "losslessPixels": false
+  },
+  {
+    "sourceUrl": "/models/garden/details/ivy/ivy-opacity.jpg",
+    "url": "/models/garden/journey-textures/ivy-opacity.webp",
+    "beforeBytes": 83614,
+    "afterBytes": 29090,
+    "size": [
+      1024,
+      1024
+    ],
+    "losslessPixels": true
+  },
+  {
+    "sourceUrl": "/scenery/star-garden/milkyway-nasa-4k.jpg",
+    "url": "/models/garden/journey-textures/milkyway-nasa-4k.webp",
+    "beforeBytes": 2923401,
+    "afterBytes": 323046,
+    "size": [
+      2048,
+      1024
+    ],
+    "losslessPixels": false
+  },
+  {
+    "sourceUrl": "./assets/jacaranda-bark.jpg",
+    "url": "/models/garden/journey-textures/jacaranda-bark.webp",
+    "beforeBytes": 477420,
+    "afterBytes": 289460,
+    "size": [
+      1024,
+      1024
+    ],
+    "losslessPixels": false
+  },
+  {
+    "sourceUrl": "./assets/jacaranda-bark-normal.jpg",
+    "url": "/models/garden/journey-textures/jacaranda-bark-normal.webp",
+    "beforeBytes": 742252,
+    "afterBytes": 353154,
+    "size": [
+      1024,
+      1024
+    ],
+    "losslessPixels": false
+  },
+  {
+    "sourceUrl": "./assets/jacaranda-leaves.png",
+    "url": "/models/garden/journey-textures/jacaranda-leaves.webp",
+    "beforeBytes": 1116245,
+    "afterBytes": 832960,
+    "size": [
+      1024,
+      1024
+    ],
+    "losslessPixels": true
+  }
+]

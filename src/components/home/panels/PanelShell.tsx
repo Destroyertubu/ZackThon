@@ -44,7 +44,7 @@ export default function PanelShell({ icon: Icon, title, subtitle, children, widt
       <DialogContent
         showCloseButton={false}
         className={cn(
-          'flex max-h-[86vh] flex-col gap-0 overflow-hidden rounded-xl border-[#c9973f]/30 bg-black/60 p-0 text-[#e8dcc0] shadow-[0_0_60px_rgba(201,151,63,0.12)] backdrop-blur-md',
+          'ww-open-surface flex max-h-[86vh] flex-col gap-0 overflow-hidden rounded-xl border-[#c9973f]/30 bg-black/60 p-0 text-[#e8dcc0] shadow-[0_0_60px_rgba(201,151,63,0.12)] backdrop-blur-md',
           widthClass ?? 'sm:max-w-2xl'
         )}
       >

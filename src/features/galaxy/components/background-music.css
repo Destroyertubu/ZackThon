@@ -1,0 +1,89 @@
+/* Scoped from Wood3307/Wanderwise. See UPSTREAM.md for the pinned version. */
+.galaxy-page .background-music {
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: #9fb4b7;
+  pointer-events: auto;
+}
+.galaxy-page .background-music audio { display: none; }
+.galaxy-page .music-toggle,.galaxy-page 
+.music-settings-toggle,.galaxy-page 
+.music-mute {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 30px;
+  padding: 0;
+  color: inherit;
+}
+.galaxy-page .music-toggle { width: 25px; }
+.galaxy-page .music-settings-toggle { width: 15px; color: #79979f; }
+.galaxy-page .music-mute { width: 24px; flex-shrink: 0; }
+.galaxy-page .music-toggle:hover,.galaxy-page 
+.music-settings-toggle:hover,.galaxy-page 
+.music-mute:hover,.galaxy-page 
+.background-music.is-playing { color: #d6efea; }
+.galaxy-page .music-toggle:focus-visible,.galaxy-page 
+.music-settings-toggle:focus-visible,.galaxy-page 
+.music-mute:focus-visible {
+  outline: 1px solid #a6dce8;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.galaxy-page .music-glimmer {
+  position: absolute;
+  bottom: 0;
+  left: 8px;
+  width: 9px;
+  height: 1px;
+  opacity: 0;
+  background: #c5f5ef;
+  box-shadow: 0 0 9px 1px #99e0e96e;
+  transition: opacity 240ms ease;
+}
+.galaxy-page .is-playing .music-glimmer { opacity: 0.85; }
+.galaxy-page .music-projection {
+  position: absolute;
+  top: 43px;
+  right: -3px;
+  z-index: 8;
+  width: 218px;
+  padding: 15px 17px 12px;
+  background: linear-gradient(145deg, #102534ed, #06131af2);
+  backdrop-filter: blur(18px);
+  border-top: 1px solid #a6dce868;
+  box-shadow: 0 12px 35px #0005, 0 -7px 20px -15px #bcefff;
+}
+.galaxy-page .music-projection::before {
+  content: "";
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  top: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e0fbff, transparent);
+  box-shadow: 0 0 10px #a6dce896;
+  pointer-events: none;
+}
+.galaxy-page .music-track { display: flex; flex-direction: column; gap: 6px; padding-left: 4px; }
+.galaxy-page .music-track > span { color: #daeff1; font-size: 11px; letter-spacing: 2.2px; }
+.galaxy-page .music-track > small { color: #93adb6; font-size: 10px; letter-spacing: 0.6px; }
+.galaxy-page .music-volume-row { display: flex; align-items: center; gap: 9px; margin-top: 9px; }
+.galaxy-page .music-volume-row input {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  height: 20px;
+  accent-color: #b9e1e4;
+  cursor: pointer;
+}
+.galaxy-page .music-volume-row output { width: 29px; text-align: right; color: #9ab8c1; font-size: 10px; }
+.galaxy-page .music-error { margin: 9px 0 0; font-size: 11px; color: #ead1bc; line-height: 1.7; }
+.galaxy-page .music-status { margin: 9px 0 0; font-size: 11px; color: #9ab8c1; line-height: 1.7; }
+@media (max-width: 760px) {
+  .galaxy-page .music-projection { top: 39px; right: -25px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .galaxy-page .music-glimmer { transition: none; }
+}

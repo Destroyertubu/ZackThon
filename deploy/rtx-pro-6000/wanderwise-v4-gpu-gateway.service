@@ -1,0 +1,15 @@
+[Unit]
+Description=Wanderwise isolated GPU stream and app gateway
+After=wanderwise-v4.service
+Wants=wanderwise-v4.service
+
+[Service]
+WorkingDirectory=%h/code/Wanderwise-v4
+ExecStart=%h/.nvm/versions/node/v24.12.0/bin/node deploy/rtx-pro-6000/gpu/gateway.mjs
+Restart=on-failure
+RestartSec=3
+UMask=0007
+NoNewPrivileges=true
+
+[Install]
+WantedBy=default.target

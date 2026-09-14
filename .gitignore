@@ -9,3 +9,5 @@ artifacts/
 *.log
 *.tmp
 *.local
+/tmp/
+*.blend[0-9]

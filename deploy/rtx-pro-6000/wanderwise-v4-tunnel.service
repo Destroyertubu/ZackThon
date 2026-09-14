@@ -1,0 +1,16 @@
+[Unit]
+Description=Wanderwise v4 public HTTPS tunnel
+After=network-online.target wanderwise-v4.service
+Wants=network-online.target wanderwise-v4.service
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/cloudflared tunnel --no-autoupdate --url http://127.0.0.1:4187 --protocol http2
+Restart=on-failure
+RestartSec=10
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=default.target

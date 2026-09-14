@@ -164,7 +164,7 @@ const viewpoints = [
   ['home front', homeX + Math.sin(homeYaw) * 1.2, homeZ + Math.cos(homeYaw) * 1.2],
   ['home rear', homeX - Math.sin(homeYaw) * 1.2, homeZ - Math.cos(homeYaw) * 1.2],
   ['reading chair approach', chairX + Math.sin(READING_CHAIR_ROTATION), chairZ + Math.cos(READING_CHAIR_ROTATION)],
-  ['north rail', 0, -10], ['east rail', 10, 2.5], ['west rail', -10, 0], ['south rail', 0, 10],
+  ['galaxy horizon opening', 2.7, -9.8], ['east garden walk', 9.25, 2.5], ['west garden walk', -9.3, 0], ['south rail', 0, 10],
 ]
 for (const [label, x, z] of viewpoints) {
   assert.ok(canStandOnObservatory(x, z), `${label} must have room to stand`)

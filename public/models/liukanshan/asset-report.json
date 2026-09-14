@@ -1,0 +1,38 @@
+{
+  "file": "liukanshan.glb",
+  "bytes": 1306120,
+  "sha256": "641685eeb9661899eb8e19ea4b10e9cffcd1593e7daec2c1fc3488c1fe1e8215",
+  "triangles": 48589,
+  "meshCount": 16,
+  "boundsYUp": {
+    "min": [
+      -0.2605580985546112,
+      5.8598947362042964e-05,
+      -0.24900001287460327
+    ],
+    "max": [
+      0.26045915484428406,
+      0.8225055932998657,
+      0.3330000340938568
+    ]
+  },
+  "joints": [
+    "liukanshan_root",
+    "body_joint",
+    "eye_R_joint",
+    "arm_R_joint",
+    "forearm_R_joint",
+    "leg_R_joint",
+    "eye_L_joint",
+    "arm_L_joint",
+    "forearm_L_joint",
+    "leg_L_joint",
+    "tail_joint",
+    "mascot_laptop",
+    "laptop_lid"
+  ],
+  "source": "User-provided 看山三视图.zip and 刘看山动态.zip",
+  "license": "Character/reference rights belong to their original owners; user-provided material, NOT CC0.",
+  "animations": "R3F named joint poses: idle, greeting/wave, searching/computer, reading/doze, collected/nod.",
+  "geometry": "Section-loft body, smoothly fused rounded ears and tapered muzzle; swept limbs with rounded fingers; physical eyes/nose/tail/laptop."
+}

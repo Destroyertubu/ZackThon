@@ -7,7 +7,7 @@ export type HudArea = 'world' | 'home' | 'canvas' | 'onboarding' | 'observatory'
 
 const AREA_SUBTITLE: Record<HudArea, string> = {
   world: '词云大世界',
-  home: '家园 · 山间书房',
+  home: '家园 · 镜海书房',
   canvas: '个人画布',
   onboarding: '启程',
   observatory: '屋顶观测台',
@@ -15,14 +15,14 @@ const AREA_SUBTITLE: Record<HudArea, string> = {
 
 const NAV_ITEMS: Array<{ area: HudArea; label: string; to: string }> = [
   { area: 'onboarding', label: '启程', to: '/' },
-  { area: 'world', label: '世界', to: '/world' },
+  { area: 'world', label: '镜海', to: '/land' },
   { area: 'home', label: '家园', to: '/home' },
   { area: 'canvas', label: '画布', to: '/canvas' },
 ]
 
 export function BrandCard({ area }: { area: HudArea }) {
   return (
-    <div className="rounded-xl border border-[#c9973f]/30 bg-black/60 px-4 py-2.5 backdrop-blur-md">
+    <div className="ww-hud-label rounded-xl border border-[#c9973f]/30 bg-black/60 px-4 py-2.5 backdrop-blur-md">
       <div className="font-serif text-base tracking-[0.25em] text-[#e8dcc0]">
         漫思 <span className="text-[#c9973f]">Wanderwise</span>
       </div>
@@ -35,7 +35,7 @@ export function TopNav({ area }: { area: HudArea }) {
   const openPanel = useGameStore((s) => s.openPanel)
 
   return (
-    <nav className="flex items-center gap-1 rounded-xl border border-[#c9973f]/30 bg-black/60 px-2 py-1.5 backdrop-blur-md">
+    <nav className="ww-hud-label flex items-center gap-1 rounded-xl border border-[#c9973f]/30 bg-black/60 px-2 py-1.5 backdrop-blur-md">
       {NAV_ITEMS.map((item) => (
         <Link
           key={item.to}

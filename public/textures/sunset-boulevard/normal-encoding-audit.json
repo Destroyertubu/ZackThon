@@ -1,0 +1,8 @@
+{
+  "sample": "Every fourth pixel in x/y, original JPEG vs WebP decoded RGB interpreted as tangent-space normals",
+  "samples": 262144,
+  "meanDegrees": 3.6604769229888916,
+  "p95Degrees": 8.708374977111816,
+  "p99Degrees": 12.498046875,
+  "maxDegrees": 34.634220123291016
+}

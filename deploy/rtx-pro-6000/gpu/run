@@ -1,0 +1,20 @@
+#!/bin/bash
+set -eu
+umask 0007
+export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/tmp/runtime-ubuntu}"
+until [ -f "${XDG_RUNTIME_DIR}/container-env" ]; do sleep 0.5; done
+. "${XDG_RUNTIME_DIR}/container-env"
+export DISPLAY=:20
+export MOZ_X11_EGL=1
+until [ -S /tmp/.X11-unix/X20 ]; do sleep 0.5; done
+python3 /opt/wanderwise/origin.py &
+origin_pid=$!
+# Docker may start before the user's web/gateway services after a host reboot.
+until curl -fsS --max-time 3 http://127.0.0.1:4187/api/health >/dev/null 2>&1; do sleep 1; done
+openbox --config-file /opt/wanderwise/openbox.xml &
+window_pid=$!
+trap 'kill "$origin_pid" "$window_pid" 2>/dev/null || true' EXIT
+mkdir -p /home/ubuntu/wanderwise-profile
+cp /opt/wanderwise/user.js /home/ubuntu/wanderwise-profile/user.js
+# Firefox retains its sandbox; no server desktop or address bar is presented.
+firefox --no-remote --profile /home/ubuntu/wanderwise-profile --kiosk "http://127.0.0.1:4187/observatory?renderRuntime=rtx"

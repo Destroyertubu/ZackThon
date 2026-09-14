@@ -1,3 +1,4 @@
+import SpatialWords from '@/features/typography/SpatialWords'
 import { useEffect, useLayoutEffect, useMemo, useRef } from 'react'
 import { RoundedBox } from '@react-three/drei'
 import { useFrame, type ThreeEvent } from '@react-three/fiber'
@@ -152,7 +153,7 @@ function BottleThoughts({ index, reducedMotion }: { index: number; reducedMotion
 }
 
 /** A single, human-scale cabinet faces east towards the main garden path. */
-export function ThoughtBar({ materials: m, reducedMotion, onActivate }: FixturesProps & { onActivate: () => void }) {
+export function ThoughtBar({ materials: m, reducedMotion, onActivate, showLabel = true }: FixturesProps & { onActivate: () => void; showLabel?: boolean }) {
   const resources = useMemo(() => {
     const label = labelTexture()
     return {
@@ -223,8 +224,7 @@ export function ThoughtBar({ materials: m, reducedMotion, onActivate }: Fixtures
       {[-0.053, 0.053].map(hx => <mesh key={hx} position={[hx, 0.368, 0.055]} material={m.brass}><sphereGeometry args={[0.015, 8, 6]} /></mesh>)}
       {i !== 0 && <mesh position={[-0.437, 0.09, 0.02]} material={m.brass}><boxGeometry args={[0.012, 0.61, 0.025]} /></mesh>}
     </group>)}
-    <mesh position={[0, 1.264, -0.17]} material={m.brass}><boxGeometry args={[0.76, 0.15, 0.023]} /></mesh>
-    <mesh position={[0, 1.264, -0.156]} material={resources.ink}><planeGeometry args={[0.72, 0.134]} /></mesh>
+    {showLabel && <SpatialWords text="调一杯思想" position={[0, 2.4, -.1]} width={2} onActivate={onActivate}/>}
     <mesh position={[0, 0.125, 0.47]} material={m.brass}><boxGeometry args={[2.7, 0.035, 0.032]} /></mesh>
     <mesh position={[0, 1.395, -0.57]} material={m.brass}><boxGeometry args={[2.67, 0.025, 0.021]} /></mesh>
     {KNOWLEDGE_INGREDIENTS.map((ingredient, i) => <group key={ingredient.id} name={`knowledge-bottle-${ingredient.id}`} position={[(i - (KNOWLEDGE_INGREDIENTS.length - 1) / 2) * 0.47, 1.385, -0.38]} scale={[1, i % 2 ? 0.88 : 1, 1]}>

@@ -15,7 +15,7 @@ import { DetailedGardenLantern } from './GardenDetails'
 import TreeJewelry from './TreeJewelry'
 
 const FERN_URL = '/models/garden/fern-02.glb'
-const FLOWER_URL = '/models/garden/flowers.glb'
+const FLOWER_URL = '/models/garden/optimized/flowers.glb'
 function seeded(seed: number) {
   let value = seed
   return () => { value = (Math.imul(value, 1664525) + 1013904223) >>> 0; return value / 4294967296 }
@@ -98,7 +98,7 @@ export function GardenBeds({ materials: m }: { materials: ObservatoryMaterials }
     <BoxInstances items={plants.planks} material={m.walnut} />
     <PlantInstances url={FERN_URL} instances={plants.ferns} />
     <PlantInstances url={FLOWER_URL} instances={plants.flowers} />
-    <AssetModel asset="plantBig" height={1.4} position={[-8.3, 0, .1]} castShadow={false} />
+    <AssetModel asset="plantBig" variant="observatory" height={1.4} position={[-8.3, 0, .1]} castShadow={false} />
     <AssetModel asset="plantMid" height={1.0} position={[-5.7, 0, 3.45]} castShadow={false} />
   </group>
 }

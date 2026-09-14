@@ -120,6 +120,7 @@ export type PanelId =
   | 'cabinet' // 想法收纳柜（家园）
   | 'synth' // 思维合成台（家园）
   | 'journal' // 漫行者日志（家园）
+  | 'mascot' // 刘看山与个人空间
   | 'phone' // 同频电话亭（家园）
   | 'settings'
   | 'help'

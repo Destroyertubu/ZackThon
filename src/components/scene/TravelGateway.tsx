@@ -1,8 +1,8 @@
+import SpatialWords from '@/features/typography/SpatialWords'
 import { useEffect, useMemo, useState } from 'react'
-import { Clone, Html, useGLTF, useTexture } from '@react-three/drei'
+import { Clone, useGLTF, useTexture } from '@react-three/drei'
 import type { ThreeEvent } from '@react-three/fiber'
 import * as THREE from 'three'
-import { ArrowUpRight, House, Sparkles } from 'lucide-react'
 import { PH } from './Assets'
 import { pbrMaps, SETS } from './pbr'
 import './travel-gateway.css'
@@ -74,12 +74,8 @@ export default function TravelGateway({ destination, position, rotation = 0, onA
         </mesh>)}
       </group>)}
     </group>
-    <Html position={[0, 1.92, 0.14]} center occlude zIndexRange={[8, 0]}>
-      <button type="button" className={`travel-gateway-label ${home ? 'to-home' : ''}`} onClick={e => { e.stopPropagation(); onActivate() }}>
-        {home ? <House size={16} strokeWidth={1.5} /> : <Sparkles size={16} strokeWidth={1.5} />}
-        <span>{label}<small>点击传送 · 靠近按 E</small></span><ArrowUpRight size={15} strokeWidth={1.5} />
-      </button>
-    </Html>
+    <SpatialWords text={label} position={[0, 1.92, .16]} width={1.45} onActivate={onActivate}/>
+
     <pointLight position={[0, 1.4, 0.4]} color={home ? '#ffd09a' : '#b7d8ea'} intensity={0.65} distance={2.2} decay={2} />
   </group>
 }

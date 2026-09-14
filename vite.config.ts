@@ -16,7 +16,11 @@ export default defineConfig({
       && inspectorDomTags.has(node.openingElement.name.name),
   }), react()],
   server: {
-    port: 3000,
+    host: '127.0.0.1',
+    port: 4173,
+    strictPort: true,
+    fs: { deny: ['**/.env', '**/.env.*', '**/*.{crt,pem}', '**/.git/**', '**/artifacts/**', '**/server/**'] },
+    proxy: { '/api': { target: 'http://127.0.0.1:4188', changeOrigin: false } },
   },
   resolve: {
     alias: {

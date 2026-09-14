@@ -1,6 +1,9 @@
 import { useLayoutEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 import { Clone, useGLTF } from '@react-three/drei'
+import { useLoader } from '@react-three/fiber'
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js'
 import { Flame, mulberry32 } from './Props'
 
 /* ================= Poly Haven asset registry ================= */
@@ -31,6 +34,11 @@ export const PH = {
 
 export type AssetKey = keyof typeof PH
 const urlOf = (key: AssetKey) => `/models/${PH[key]}.gltf`
+const OBSERVATORY_ASSET_URLS: Partial<Record<AssetKey, string>> = {
+  plantBig: '/models/garden/optimized/potted-plant-01.glb',
+}
+const observatoryAssetLoader = new GLTFLoader().setDRACOLoader(
+  new DRACOLoader().setDecoderPath('/models/garden/draco/').setWorkerLimit(1))
 
 /* ================= measurement cache ================= */
 interface Measure {
@@ -58,9 +66,9 @@ type MatTweak = (mat: THREE.Material) => void
 
 /** shared per-asset material adjustments (materials are shared across clones, so run once) */
 const tweaked = new Set<string>()
-function tweakMaterials(key: AssetKey, root: THREE.Object3D, extra?: MatTweak) {
-  if (tweaked.has(key)) return
-  tweaked.add(key)
+function tweakMaterials(key: AssetKey, root: THREE.Object3D, extra?: MatTweak, cacheKey: string = key) {
+  if (tweaked.has(cacheKey)) return
+  tweaked.add(cacheKey)
   root.traverse((o) => {
     const mesh = o as THREE.Mesh
     if (!mesh.isMesh) return
@@ -94,6 +102,8 @@ function tweakMaterials(key: AssetKey, root: THREE.Object3D, extra?: MatTweak) {
 /* ================= core component ================= */
 interface AssetProps {
   asset: AssetKey
+  /** Explicit route-owned runtime variant; cabin callers keep the original asset. */
+  variant?: 'observatory'
   /** pick a single named node out of the gltf scene */
   node?: string
   /** normalize: fit bounding box to this height (meters) */
@@ -113,7 +123,25 @@ interface AssetProps {
   children?: React.ReactNode
 }
 
-export function AssetModel({
+export function AssetModel(props: AssetProps) {
+  const optimized = props.variant === 'observatory' ? OBSERVATORY_ASSET_URLS[props.asset] : undefined
+  return optimized ? <ObservatoryAssetModel {...props} sourceUrl={optimized} /> : <OriginalAssetModel {...props} />
+}
+
+function OriginalAssetModel(props: AssetProps) {
+  const sourceUrl = urlOf(props.asset)
+  const { scene } = useGLTF(sourceUrl)
+  return <AssetModelView {...props} scene={scene} cacheKey={sourceUrl} />
+}
+
+function ObservatoryAssetModel({ sourceUrl, ...props }: AssetProps & { sourceUrl: string }) {
+  const { scene } = useLoader(observatoryAssetLoader, sourceUrl)
+  return <AssetModelView {...props} scene={scene} cacheKey={sourceUrl} />
+}
+
+function AssetModelView({
+  scene,
+  cacheKey,
   asset,
   node,
   height,
@@ -126,8 +154,7 @@ export function AssetModel({
   receiveShadow = true,
   matTweak,
   children,
-}: AssetProps) {
-  const { scene } = useGLTF(urlOf(asset))
+}: AssetProps & { scene: THREE.Group; cacheKey: string }) {
   const ref = useRef<THREE.Group>(null)
 
   const target = useMemo(() => {
@@ -137,16 +164,16 @@ export function AssetModel({
   }, [scene, node, asset])
 
   const { s, offset } = useMemo(() => {
-    const m = measure(target, `${asset}:${node ?? '*'}`)
+    const m = measure(target, `${cacheKey}:${node ?? '*'}`)
     const base = height ? height / m.size.y : maxDim ? maxDim / Math.max(m.size.x, m.size.y, m.size.z) : 1
     const s = base * scale
     const yAnchor = hangTop ? m.max.y : m.min.y
     return { s, offset: new THREE.Vector3(-m.center.x, -yAnchor, -m.center.z) }
-  }, [target, asset, node, height, maxDim, scale, hangTop])
+  }, [target, cacheKey, node, height, maxDim, scale, hangTop])
 
   useLayoutEffect(() => {
-    if (ref.current) tweakMaterials(asset, ref.current, matTweak)
-  }, [asset, matTweak])
+    if (ref.current) tweakMaterials(asset, ref.current, matTweak, cacheKey)
+  }, [asset, matTweak, cacheKey])
 
   return (
     <group position={position} rotation={rotation}>
@@ -376,7 +403,5 @@ export function AssetLantern({
   )
 }
 
-/* ================= preloads ================= */
-for (const key of Object.keys(PH) as AssetKey[]) {
-  useGLTF.preload(urlOf(key))
-}
+// AssetModel's useGLTF loads the selected model when it is actually rendered.
+// Importing this registry must not download every cabin asset on unrelated routes.

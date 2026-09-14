@@ -7,7 +7,7 @@ import { TREE_POSITION } from './layout'
 import { advanceUniform } from './animation'
 import { GARDEN_TREE_ROOT_Y } from './gardenTreeShape'
 
-const TREE_URL = '/models/garden/jacaranda-mature.glb'
+const TREE_URL = '/models/garden/jacaranda-journey.glb'
 // A dedicated loader prevents other useGLTF calls from resetting a shared decoder to a CDN.
 const treeDecoder = new DRACOLoader().setDecoderPath('/models/garden/draco/').setWorkerLimit(2)
 const treeLoader = new GLTFLoader().setDRACOLoader(treeDecoder)

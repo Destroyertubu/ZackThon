@@ -1,0 +1,355 @@
+{
+  "assets": [
+    {
+      "file": "potted-plant-01.glb",
+      "source": "public/models/potted_plant_01/potted_plant_01_1k.gltf",
+      "bytes": 1361744,
+      "sha256": "0d23e034de03c8a9ce7d5c07333ff82c4c7a8128d3065e8ede29c0316bc8336d",
+      "geometryByteIdenticalToInput": true,
+      "imagePixelsIdentical": true,
+      "resolutionChanged": false,
+      "materialsAndNodeNamesUnchanged": true,
+      "images": [
+        {
+          "name": "potted_plant_01_leaves_nor_gl_1k",
+          "size": [
+            512,
+            512
+          ],
+          "beforeBytes": 46166,
+          "afterBytes": 46166,
+          "codecChanged": false,
+          "decodedPixelsIdentical": true,
+          "alphaPreserved": true
+        },
+        {
+          "name": "potted_plant_01_leaves_diff_1k",
+          "size": [
+            512,
+            512
+          ],
+          "beforeBytes": 315306,
+          "afterBytes": 189756,
+          "codecChanged": true,
+          "decodedPixelsIdentical": true,
+          "alphaPreserved": true
+        },
+        {
+          "name": "potted_plant_01_leaves_rough_1k",
+          "size": [
+            512,
+            512
+          ],
+          "beforeBytes": 26696,
+          "afterBytes": 26696,
+          "codecChanged": false,
+          "decodedPixelsIdentical": true,
+          "alphaPreserved": true
+        },
+        {
+          "name": "potted_plant_01_pot_nor_gl_1k",
+          "size": [
+            512,
+            512
+          ],
+          "beforeBytes": 42509,
+          "afterBytes": 42509,
+          "codecChanged": false,
+          "decodedPixelsIdentical": true,
+          "alphaPreserved": true
+        },
+        {
+          "name": "potted_plant_01_pot_diff_1k",
+          "size": [
+            512,
+            512
+          ],
+          "beforeBytes": 49942,
+          "afterBytes": 49942,
+          "codecChanged": false,
+          "decodedPixelsIdentical": true,
+          "alphaPreserved": true
+        },
+        {
+          "name": "potted_plant_01_pot_rough_1k",
+          "size": [
+            512,
+            512
+          ],
+          "beforeBytes": 44648,
+          "afterBytes": 44648,
+          "codecChanged": false,
+          "decodedPixelsIdentical": true,
+          "alphaPreserved": true
+        }
+      ],
+      "geometry": [
+        {
+          "bufferView": 0,
+          "bytes": 549408,
+          "sha256": "dc772e99f025dcfa806b4f1382060dc196b4c43d8bc23f0a999b4699d03dc8b5"
+        },
+        {
+          "bufferView": 4,
+          "bytes": 347170,
+          "sha256": "c07da778fcb1e11b5deec0f3d88fbe2b7efe2a7fdf0e62b954ba462672823c57"
+        },
+        {
+          "bufferView": 8,
+          "bytes": 25607,
+          "sha256": "5054d15353aac1a679aa1b1db2c80fb2601ad1c50b3a50f10068951cd2ee0cb5"
+        },
+        {
+          "bufferView": 9,
+          "bytes": 35156,
+          "sha256": "d08f7dc365e899cb33d25a68a855a1eae7af62fe74bc9c6fd514d7e254a39db8"
+        }
+      ],
+      "license": "CC0-1.0 / Poly Haven; upstream provenance retained in original asset records",
+      "comparisonInput": "artifacts/star-tide-upgrade/potted-plant-01-draco.glb",
+      "comparisonScope": "Draco export intermediate to final (not original glTF binary)",
+      "comparisonInputBytes": 1487220,
+      "originalSourceAssetBytes": 5601339
+    },
+    {
+      "file": "brass-lantern.glb",
+      "source": "public/models/garden/details/brass-lantern.glb",
+      "bytes": 2541740,
+      "sha256": "cd19a5b616e99e293035bcc05291b7761983b00c8744baaea60af9f11b3487c4",
+      "geometryByteIdenticalToInput": true,
+      "imagePixelsIdentical": true,
+      "resolutionChanged": false,
+      "materialsAndNodeNamesUnchanged": true,
+      "images": [
+        {
+          "name": "brass_diya_lantern_nor_gl_1k",
+          "size": [
+            1024,
+            1024
+          ],
+          "beforeBytes": 263044,
+          "afterBytes": 263044,
+          "codecChanged": false,
+          "decodedPixelsIdentical": true,
+          "alphaPreserved": true
+        },
+        {
+          "name": "brass_diya_lantern_diff_1k",
+          "size": [
+            1024,
+            1024
+          ],
+          "beforeBytes": 536573,
+          "afterBytes": 536573,
+          "codecChanged": false,
+          "decodedPixelsIdentical": true,
+          "alphaPreserved": true
+        },
+        {
+          "name": "brass_diya_lantern_arm_1k",
+          "size": [
+            1024,
+            1024
+          ],
+          "beforeBytes": 704276,
+          "afterBytes": 704276,
+          "codecChanged": false,
+          "decodedPixelsIdentical": true,
+          "alphaPreserved": true
+        },
+        {
+          "name": "brass_diya_lantern_diff-opacity",
+          "size": [
+            1024,
+            1024
+          ],
+          "beforeBytes": 1419707,
+          "afterBytes": 796164,
+          "codecChanged": true,
+          "decodedPixelsIdentical": true,
+          "alphaPreserved": true
+        }
+      ],
+      "geometry": [
+        {
+          "bufferView": 0,
+          "bytes": 49776,
+          "sha256": "a6baca9f9e04f310a057412a3e3b98f98e4629284af620c2b1de2e2a97e4cfb9"
+        },
+        {
+          "bufferView": 1,
+          "bytes": 49776,
+          "sha256": "7c949b106dfccdfa4a8cbc8afae184ec836820a2eee821ea84c5a1e08905bb1e"
+        },
+        {
+          "bufferView": 2,
+          "bytes": 33184,
+          "sha256": "98a89eaae242c51c42fe90546b265e444d9afd1a357e0a8541819b61a21b8523"
+        },
+        {
+          "bufferView": 3,
+          "bytes": 49776,
+          "sha256": "f80310aa27bf2b1876514aeae992ccc0a79675c9507b75207a6052526eeae767"
+        },
+        {
+          "bufferView": 4,
+          "bytes": 23544,
+          "sha256": "57695a32f5135aaea74d686c0d5d399755084c1776f91e67f4da5594dc4dc81d"
+        },
+        {
+          "bufferView": 8,
+          "bytes": 2124,
+          "sha256": "6bbda576a5ad94a2a80d3e0b0f09d4b998e4eeb473e10d5a465e1fc297ab3a3d"
+        },
+        {
+          "bufferView": 9,
+          "bytes": 2124,
+          "sha256": "625d36b5afacdcb279b1ae014e4cf28b8a0f27ab7d1a873afabba379b48a133e"
+        },
+        {
+          "bufferView": 10,
+          "bytes": 1416,
+          "sha256": "908d095abad9b67159b3751f1f49d9d44e5b744f917d4979965c4cffb76e7471"
+        },
+        {
+          "bufferView": 11,
+          "bytes": 2124,
+          "sha256": "7513607ce89b2531ee599a7dfc82eca0ae322da92ecd3d090d78c75e40510883"
+        },
+        {
+          "bufferView": 12,
+          "bytes": 624,
+          "sha256": "c5b6a922925d93a0d182bf4eadac05deef23fffa3d91a4659d10e36c7c6e84ec"
+        },
+        {
+          "bufferView": 14,
+          "bytes": 1728,
+          "sha256": "334d537b1a3f7a38a9498c80c4aa9fa7d560a809f6ca420d65cd5f8e8cfb73fe"
+        },
+        {
+          "bufferView": 15,
+          "bytes": 1728,
+          "sha256": "0f184edbcd6b2007f0d9c18d2097c80b543c5767ddbe86ed81c850313ab02cec"
+        },
+        {
+          "bufferView": 16,
+          "bytes": 1152,
+          "sha256": "b592d58c84fd4ed24069d02e58645b09caac08bce5220b918112a6ecdba06b20"
+        },
+        {
+          "bufferView": 17,
+          "bytes": 1728,
+          "sha256": "0ea47d33ef3e8d0d7838045b87de63fbfe65ce211faf6d5802fe7a7384718d7f"
+        },
+        {
+          "bufferView": 18,
+          "bytes": 432,
+          "sha256": "184cb0be08061427b28ce6e2b71949feb32d4531213b951be7103b1610ee895d"
+        },
+        {
+          "bufferView": 19,
+          "bytes": 4200,
+          "sha256": "3ac070e084742d736bb0d3355aa3019c492f8dd434d251c19a873e9b0028c4a8"
+        },
+        {
+          "bufferView": 20,
+          "bytes": 4200,
+          "sha256": "2b9c3b49b9c8ba9ab1e5a6c9fc9e1b2c3933d10517ee9dbf7762798d1456575c"
+        },
+        {
+          "bufferView": 21,
+          "bytes": 2800,
+          "sha256": "224b00e02bf61f5d6015173607cc37b16dba0fd2afe5710a48e8eefb566f7e0d"
+        },
+        {
+          "bufferView": 22,
+          "bytes": 3528,
+          "sha256": "96687e85693e18b7893fdd0954ed9332aa0300e62aead7f25208876dadedc715"
+        }
+      ],
+      "license": "CC0-1.0 / Poly Haven; upstream provenance retained in original asset records",
+      "comparisonInput": "public/models/garden/details/brass-lantern.glb",
+      "comparisonScope": "Original GLB to final",
+      "comparisonInputBytes": 3165132,
+      "originalSourceAssetBytes": 3165132
+    },
+    {
+      "file": "flowers.glb",
+      "source": "public/models/garden/flowers.glb",
+      "bytes": 2063700,
+      "sha256": "495994d5ec87bd3269df27593858b830cf70da51f46e36e9d8aecf0284f217e4",
+      "geometryByteIdenticalToInput": true,
+      "imagePixelsIdentical": true,
+      "resolutionChanged": false,
+      "materialsAndNodeNamesUnchanged": true,
+      "images": [
+        {
+          "name": "flower_heliophila_nor_gl_1k",
+          "size": [
+            1024,
+            1024
+          ],
+          "beforeBytes": 501286,
+          "afterBytes": 501286,
+          "codecChanged": false,
+          "decodedPixelsIdentical": true,
+          "alphaPreserved": true
+        },
+        {
+          "name": "flower_heliophila_diff-flower_heliophila_alpha-alpha",
+          "size": [
+            1024,
+            1024
+          ],
+          "beforeBytes": 1302582,
+          "afterBytes": 682500,
+          "codecChanged": true,
+          "decodedPixelsIdentical": true,
+          "alphaPreserved": true
+        },
+        {
+          "name": "flower_heliophila_arm_1k",
+          "size": [
+            1024,
+            1024
+          ],
+          "beforeBytes": 444561,
+          "afterBytes": 444561,
+          "codecChanged": false,
+          "decodedPixelsIdentical": true,
+          "alphaPreserved": true
+        }
+      ],
+      "geometry": [
+        {
+          "bufferView": 0,
+          "bytes": 122892,
+          "sha256": "ee42ca0d2496d6d2ed9eba80211e7d9f85d15cbe46e94323944980687e69be5c"
+        },
+        {
+          "bufferView": 1,
+          "bytes": 122892,
+          "sha256": "163f49063f81186f7ca3f31dd0af31e220575fc168e61eb4e7fdda1f5e9bd7a2"
+        },
+        {
+          "bufferView": 2,
+          "bytes": 81928,
+          "sha256": "b9e296d9261e835c25536344c1ec4df0bd8bdb9dd44c0ae14618029e8249ab5e"
+        },
+        {
+          "bufferView": 3,
+          "bytes": 105558,
+          "sha256": "86325c29c87a3c96b210282817f89779ba96a867f46b3feb45874c24c72ccf86"
+        }
+      ],
+      "license": "CC0-1.0 / Poly Haven; upstream provenance retained in original asset records",
+      "comparisonInput": "public/models/garden/flowers.glb",
+      "comparisonScope": "Original GLB to final",
+      "comparisonInputBytes": 2683668,
+      "originalSourceAssetBytes": 2683668
+    }
+  ],
+  "route": "observatory only",
+  "generatedBy": "scripts/prepare-observatory-runtime.py",
+  "notes": "Potted plant geometry uses Draco without decimation; all images retain exact decoded pixels and native resolution. Original inputs remain untouched."
+}

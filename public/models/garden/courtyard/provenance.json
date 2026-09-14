@@ -1,0 +1,81 @@
+{
+  "name": "Star Tide Courtyard / 星潮庭院",
+  "created": "2026-09-14",
+  "author": "Wanderwise project — authored for this implementation",
+  "source": [
+    "src/components/observatory/gardenPerimeterGeometry.ts",
+    "src/components/observatory/gardenPerimeterLayout.ts",
+    "scripts/export-garden-perimeter.ts"
+  ],
+  "license": "Project-authored geometry; no third-party geometry or textures are embedded in these GLB files.",
+  "runtime": "The browser uses the same parameterized geometry builder, combined with the already-credited observatory PBR material library. Exported GLB is an editable exchange asset, not downloaded by the scene.",
+  "processing": "Swept bevel profiles, carved tube corbels, small folded leaf instances, merged material batches. Export carries instanced geometry with EXT_mesh_gpu_instancing; no lights, cameras or videos are embedded.",
+  "beds": [
+    {
+      "id": "reading-shore",
+      "start": 0.55,
+      "end": 1.35,
+      "inner": 10.05,
+      "outer": 11.55,
+      "height": 0.56
+    },
+    {
+      "id": "home-garden",
+      "start": 1.98,
+      "end": 2.52,
+      "inner": 10.05,
+      "outer": 11.55,
+      "height": 0.56
+    },
+    {
+      "id": "woodland-crescent",
+      "start": 3.15,
+      "end": 6.02,
+      "inner": 10.05,
+      "outer": 11.55,
+      "height": 0.56
+    }
+  ],
+  "pergolas": [
+    {
+      "start": 1.98,
+      "end": 2.52,
+      "inner": 9.84,
+      "outer": 11.38,
+      "height": 3.82,
+      "bays": 2
+    },
+    {
+      "start": 3.15,
+      "end": 4.86,
+      "inner": 9.84,
+      "outer": 11.38,
+      "height": 3.82,
+      "bays": 6
+    }
+  ],
+  "reports": [
+    {
+      "tier": "fine",
+      "file": "star-tide-courtyard-fine.glb",
+      "bytes": 2602668,
+      "staticTriangles": 65420,
+      "plantTriangles": 81594,
+      "shrubs": 5258,
+      "fernPinnae": 4690,
+      "petals": 3651,
+      "drawCalls": 12
+    },
+    {
+      "tier": "smooth",
+      "file": "star-tide-courtyard-smooth.glb",
+      "bytes": 2211996,
+      "staticTriangles": 60228,
+      "plantTriangles": 54990,
+      "shrubs": 3115,
+      "fernPinnae": 3500,
+      "petals": 2550,
+      "drawCalls": 12
+    }
+  ]
+}

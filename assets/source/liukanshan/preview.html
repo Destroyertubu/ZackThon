@@ -1,0 +1,20 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><link rel="icon" href="/favicon.svg"><title>刘看山 · 立体模型验收</title>
+<style>html,body,#root{margin:0;width:100%;height:100%;background:#dcdedc;font:14px system-ui;color:#293337}header{position:absolute;z-index:2;left:28px;top:22px}h1{font-size:23px;font-weight:500;margin:0 0 7px}p{font-size:12px;margin:0;opacity:.68}nav{position:absolute;z-index:3;left:28px;bottom:24px;display:flex;gap:8px}button{padding:10px 17px;border:1px solid #abb2ae;background:#eef0ed;border-radius:6px;color:inherit;cursor:pointer}button.active{background:#293e3b;color:white}</style>
+<div id="root"></div><header><h1>刘看山</h1><p>原生立体模型 · 可拖动查看 360° · 实际 GLB 与组件</p></header>
+<script type="module">
+import React,{useState,useEffect} from 'react';import{createRoot}from'react-dom/client';
+import{Canvas,useThree}from'@react-three/fiber';import{OrbitControls,ContactShadows}from'@react-three/drei';
+import Liukanshan from '/src/components/home/mascot/Liukanshan.tsx';
+const h=React.createElement;
+function Probe(){const scene=useThree(s=>s.scene);useEffect(()=>{window.__liukanshanReview=scene;return()=>delete window.__liukanshanReview},[scene]);return null}
+const modes=[['idle','待机'],['greeting','打招呼'],['searching','查资料'],['reading','打盹'],['collected','收藏点头']];
+function Preview(){const query=new URLSearchParams(location.search);const[state,setState]=useState(query.get('state')||'idle');const[animated,setAnimated]=useState(query.get('animated')!=='false');return h(React.Fragment,null,
+ h(Canvas,{shadows:true,camera:{position:[1.15,.80,2.1],fov:32,near:.01,far:20},dpr:1,gl:{antialias:true}},
+ h(Probe),h('color',{attach:'background',args:['#dcdedc']}),h('hemisphereLight',{args:['#e6f0ff','#a09584',1.4]}),
+ h('directionalLight',{position:[-2,4,3],intensity:2.4,castShadow:false,'shadow-mapSize':[1024,1024],'shadow-camera-left':-1,'shadow-camera-right':1,'shadow-camera-top':1,'shadow-camera-bottom':-1,'shadow-bias':-.0001}),
+ h('directionalLight',{position:[2,2,-2],intensity:1.6,color:'#d8e8ff'}),
+ h(React.Suspense,{fallback:null},h(Liukanshan,{position:[0,0,0],state,animated}),h(ContactShadows,{position:[0,-.001,0],opacity:.52,scale:3,blur:1.35,far:1.5,resolution:512})),
+ h(OrbitControls,{target:[0,.40,.05],minDistance:1,maxDistance:4,maxPolarAngle:Math.PI*.48})),
+ h('nav',null,...modes.map(([value,label])=>h('button',{key:value,className:state===value?'active':'',onClick:()=>setState(value),'data-state':value},label)),h('button',{onClick:()=>setAnimated(value=>!value),'data-motion':animated?'on':'off'},animated?'动态：开':'动态：关')))}
+createRoot(document.getElementById('root')).render(h(Preview));
+</script></html>

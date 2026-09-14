@@ -167,3 +167,16 @@
   .garden-recipe-card h3 { font-size: 22px; }
   .garden-recipe-prompt { font-size: 12px; }
 }
+
+.garden-personal-input{display:flex;flex-direction:column;gap:9px;margin:20px 0;color:#cbbc99;font-size:12px}.garden-personal-input textarea{width:100%;min-height:84px;resize:vertical;background:#07131c80;border:1px solid #c5a97445;border-radius:8px;padding:12px;color:#eaddc9;line-height:1.7}.garden-personal-materials{font-size:12px;margin:15px 0;max-height:150px;overflow:auto;color:#cabf9f}.garden-personal-materials summary{cursor:pointer;padding:10px 0}.garden-personal-materials label{display:flex;align-items:center;gap:8px;padding:8px}.garden-workshop button:disabled{opacity:.55;cursor:wait}.garden-workshop{max-height:92dvh;overflow:auto}.garden-workshop-controls{min-width:0}
+
+.ms-hot-panel{width:min(760px,92vw);max-height:88dvh;overflow:auto;background:#14242bf5;border:1px solid #d0b97950;border-radius:16px;padding:28px;color:#e7ddc7}.ms-hot-panel h2{font:28px Georgia,"Songti SC",serif;margin:18px 0}.ms-hot-panel>p{font-size:12px;line-height:1.8;margin:15px 0}
+.tide-seed-label{min-width:86px;padding:9px 14px;border:1px solid #bca67a77;border-radius:18px;color:#f3e6c8;background:#17282cea;text-align:center;font-family:serif;font-size:14px;box-shadow:0 6px 24px #0005;white-space:nowrap}
+.tide-seed-label small{display:block;margin-top:4px;color:#b3c4bc;font-size:10px;letter-spacing:.12em}
+.tide-call-button{gap:8px;color:#c3e9de;border-color:#79b7ae55;background:#15322e99}
+.tide-response-notice{position:absolute;bottom:113px;left:50%;transform:translateX(-50%);max-width:calc(100% - 36px);padding:11px 21px;border:1px solid #8ecbc244;border-radius:24px;background:#122c2ddd;backdrop-filter:blur(12px);color:#cee6df;font-size:13px;text-align:center;pointer-events:none;z-index:30}
+@media(max-width:680px){.tide-call-button span{display:none}.tide-call-button{min-width:44px;min-height:44px;padding:10px}.tide-response-notice{bottom:145px;font-size:12px;width:280px}}
+.observatory-page.is-collection-tree > .observatory-header,
+.observatory-page.is-collection-tree > .observatory-footer {
+  visibility: hidden;
+}

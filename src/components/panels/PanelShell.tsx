@@ -44,7 +44,7 @@ export default function PanelShell({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8">
       <div
         aria-hidden
-        className="absolute inset-0 bg-[#0a0c10]/70 backdrop-blur-sm"
+        className="ww-open-backdrop absolute inset-0"
         onClick={closePanel}
       />
       <section
@@ -52,7 +52,7 @@ export default function PanelShell({
         aria-modal="true"
         aria-label={title}
         className={cn(
-          'relative flex max-h-full w-full max-w-3xl flex-col overflow-hidden rounded-xl border border-[#c9973f]/30 bg-black/60 shadow-[0_0_80px_rgba(201,151,63,0.12)] backdrop-blur-md',
+          'ww-open-surface relative flex max-h-full w-full max-w-3xl flex-col overflow-hidden rounded-xl border border-[#c9973f]/30 bg-black/60 shadow-[0_0_80px_rgba(201,151,63,0.12)] backdrop-blur-md',
           className
         )}
       >

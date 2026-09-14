@@ -1,0 +1,47 @@
+[
+  {
+    "id": "01-mirror-sea-world",
+    "title": "概念图 1 · 镜海群岛：整体世界",
+    "source": "/Users/gauss/.codex/generated_images/01a0951a-0243-7973-91db-91f59b73ca41/exec-7311c62c-38f8-4597-81dd-995159083281.png",
+    "destination": "/Users/gauss/Desktop/Kimi_Agent_小屋真实感建模/app/docs/design/mirror-sea-world/images/01-mirror-sea-world.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 3195916
+  },
+  {
+    "id": "02-personal-cabin",
+    "title": "概念图 2 · 小屋：我的思想与收藏",
+    "source": "/Users/gauss/.codex/generated_images/01a0951a-0243-7973-91db-91f59b73ca41/exec-630cae69-76f3-4197-81e8-a13396a01bf4.png",
+    "destination": "/Users/gauss/Desktop/Kimi_Agent_小屋真实感建模/app/docs/design/mirror-sea-world/images/02-personal-cabin.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 2905630
+  },
+  {
+    "id": "03-observatory-thought-window",
+    "title": "概念图 3 · 观星台：思想与外界相遇",
+    "source": "/Users/gauss/.codex/generated_images/01a0951a-0243-7973-91db-91f59b73ca41/exec-16752a0c-a8d6-4c01-86f0-9a05a8c519df.png",
+    "destination": "/Users/gauss/Desktop/Kimi_Agent_小屋真实感建模/app/docs/design/mirror-sea-world/images/03-observatory-thought-window.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 3069526
+  },
+  {
+    "id": "04-sunset-boulevard",
+    "title": "概念图 4 · 落日大道：走进一杯思想调酒",
+    "source": "/Users/gauss/.codex/generated_images/01a0951a-0243-7973-91db-91f59b73ca41/exec-e624dbb6-d047-480a-bea4-d9d6fbcea068.png",
+    "destination": "/Users/gauss/Desktop/Kimi_Agent_小屋真实感建模/app/docs/design/mirror-sea-world/images/04-sunset-boulevard.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 2897029
+  },
+  {
+    "id": "05-landscape-meaning",
+    "title": "概念图 5 · 陆地：在山林湖海中经历问题",
+    "source": "/Users/gauss/.codex/generated_images/01a0951a-0243-7973-91db-91f59b73ca41/exec-c6ad7959-b0ea-47b7-aeda-fd94c61981df.png",
+    "destination": "/Users/gauss/Desktop/Kimi_Agent_小屋真实感建模/app/docs/design/mirror-sea-world/images/05-landscape-meaning.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 3189257
+  }
+]

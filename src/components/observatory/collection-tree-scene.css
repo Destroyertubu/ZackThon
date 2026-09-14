@@ -1,0 +1,79 @@
+.collection-tree-words {
+  width: var(--collection-word-width, 220px);
+  color: #f2e6c7;
+  font-family: 'Songti SC', 'Noto Serif SC', 'STSong', Georgia, serif;
+  text-align: center;
+  pointer-events: auto;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  animation: collection-words-arrive .85s both;
+  animation-delay: var(--collection-word-delay, 0s);
+}
+.collection-tree-words button {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 4px 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  text-shadow: 0 2px 4px #09130ff2, 0 0 13px #081712c4, 0 0 26px #ddc17b35;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.collection-tree-words button:hover,
+.collection-tree-words button:focus-visible {
+  color: #fff3cd;
+  text-shadow: 0 2px 5px #09120f, 0 0 13px #f3d99c8c;
+  outline: none;
+}
+.collection-tree-words button:focus-visible strong {
+  text-decoration: underline;
+  text-underline-offset: .35em;
+}
+.collection-tree-words strong { font-weight: 500; overflow-wrap: anywhere; }
+.collection-tree-entry strong { font-size: 24px; letter-spacing: .2em; }
+.collection-tree-entry small { font-size: 10px; letter-spacing: .1em; color: #d1d1b2; }
+.collection-tree-entry-star { font-size: 25px; line-height: .8; color: #eacf8b; }
+.collection-tree-topic strong { font-size: 23px; line-height: 1.38; letter-spacing: .12em; }
+.collection-tree-topic small { font-family: 'PingFang SC', sans-serif; font-size: 10px; letter-spacing: .15em; color: #c0cbb0; }
+.collection-tree-topic[aria-pressed='true'] strong { color: #e9f4bd; }
+.collection-tree-leaf strong { font-size: 18px; line-height: 1.55; letter-spacing: .035em; }
+.collection-tree-leaf-kind { color: #c8d9bb; font-family: 'PingFang SC', sans-serif; font-size: 9px; line-height: 1.4; letter-spacing: .16em; }
+.collection-tree-leaf-excerpt { font-size: 12px; line-height: 1.65; color: #cdd6c3; letter-spacing: .02em; }
+.collection-tree-topic strong,
+.collection-tree-leaf strong,
+.collection-tree-leaf-excerpt {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.collection-tree-empty strong { display: block; font-size: 25px; line-height: 1.6; letter-spacing: .12em; margin-bottom: 17px; }
+.collection-tree-empty span { font-size: 13px; line-height: 2; color: #cfdbc7; }
+.collection-tree-words.is-compact .collection-tree-topic strong { font-size: 17px; letter-spacing: .07em; }
+.collection-tree-words.is-compact .collection-tree-leaf strong { font-size: 14px; line-height: 1.45; }
+.collection-tree-words.is-compact .collection-tree-leaf-excerpt { font-size: 11px; line-height: 1.5; }
+.collection-tree-words.is-compact button { gap: 4px; }
+.collection-tree-words.is-short .collection-tree-topic strong { font-size: 17px; }
+.collection-tree-words.is-short .collection-tree-topic strong { -webkit-line-clamp: 1; }
+.collection-tree-words.is-short .collection-tree-leaf strong { font-size: 14px; line-height: 1.35; -webkit-line-clamp: 1; }
+.collection-tree-words.is-short .collection-tree-leaf-excerpt { -webkit-line-clamp: 1; font-size: 10px; }
+.collection-tree-words.is-short button { gap: 3px; }
+.collection-tree-words.is-landscape .collection-tree-topic strong { font-size: 13px; letter-spacing: .025em; }
+.collection-tree-words.is-landscape .collection-tree-topic small { font-size: 8px; }
+.collection-tree-words.is-still { animation: none; }
+@keyframes collection-words-arrive {
+  from { opacity: 0; filter: blur(3px); }
+  to { opacity: 1; filter: blur(0); }
+}
+@media (prefers-reduced-motion: reduce) { .collection-tree-words { animation: none; } }

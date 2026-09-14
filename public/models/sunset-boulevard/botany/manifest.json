@@ -1,0 +1,720 @@
+{
+  "license": "CC0-1.0",
+  "authors": [
+    "Rico Cilliers",
+    "Rob Tuytel"
+  ],
+  "publisher": "Poly Haven",
+  "sourcePages": [
+    "https://polyhaven.com/a/tree_small_02",
+    "https://polyhaven.com/a/shrub_01",
+    "https://polyhaven.com/a/fern_02"
+  ],
+  "generatedBy": "scripts/prepare-sunset-botany.py",
+  "coordinateSystem": "glTF Y-up, metres; true low root at local [0,0,0]",
+  "originalTree": {
+    "file": "public/models/garden/tree-small-02-cards.glb",
+    "bytes": 16202124,
+    "md5": "f263c7e159a9db563609af91909860ff",
+    "sha256": "0d66c1f1919b6903fbf4adf8b878ff243504988f8262caf36d33bf06ae045a54"
+  },
+  "originalFern": {
+    "file": "public/models/garden/fern-02.glb",
+    "bytes": 1859992,
+    "md5": "0d642c6ab26405d0c56425c749626921",
+    "sha256": "8c0987993e455d07fee456792ec8671fa5f40a27425ed001b1b853fa9d7b61e8"
+  },
+  "officialShrubDownloads": [
+    {
+      "file": "assets/source/sunset-botany/shrub-01/shrub_01_1k.gltf",
+      "bytes": 2895,
+      "md5": "4ac1312e5ea687b321b78382f5f209c8",
+      "sha256": "c3bb3340687d46c684b9dab82f5b2f92b7b0fe761842423d3c9e19f59a839393",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/shrub_01/shrub_01_1k.gltf",
+      "officialMd5": "4ac1312e5ea687b321b78382f5f209c8"
+    },
+    {
+      "file": "assets/source/sunset-botany/shrub-01/textures/shrub_01_nor_gl_1k.jpg",
+      "bytes": 746497,
+      "md5": "985fa065ed411dc49e07d564330555ac",
+      "sha256": "076870a39a4e21a364cf94566e6dd1852a29045fdf1f23393637235b19d1c2e8",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/shrub_01/shrub_01_nor_gl_1k.jpg",
+      "officialMd5": "985fa065ed411dc49e07d564330555ac"
+    },
+    {
+      "file": "assets/source/sunset-botany/shrub-01/shrub_01.bin",
+      "bytes": 5239664,
+      "md5": "baf77d162f397f43fa4737b545d73e1a",
+      "sha256": "a8646f51386c84b12a6be8324dd0c2357c393c9108aac911847a203cf490b426",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/4k/shrub_01/shrub_01.bin",
+      "officialMd5": "baf77d162f397f43fa4737b545d73e1a"
+    },
+    {
+      "file": "assets/source/sunset-botany/shrub-01/textures/shrub_01_arm_1k.jpg",
+      "bytes": 386309,
+      "md5": "1682705926a9fc60ab34d079564f1a9e",
+      "sha256": "8faecdc28d8f03ba0ac139be16e617e8bfd0778780ec1d7850812230378b89be",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/shrub_01/shrub_01_arm_1k.jpg",
+      "officialMd5": "1682705926a9fc60ab34d079564f1a9e"
+    },
+    {
+      "file": "assets/source/sunset-botany/shrub-01/textures/shrub_01_diff_1k.jpg",
+      "bytes": 502162,
+      "md5": "c5ac2665a0e2b4f11fd20b3296d62fe2",
+      "sha256": "fe60e639d694e1807c0a3ae97dd1d5a7e7b3f84e5fc32d0610b868ce48f36331",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/shrub_01/shrub_01_diff_1k.jpg",
+      "officialMd5": "c5ac2665a0e2b4f11fd20b3296d62fe2"
+    },
+    {
+      "file": "assets/source/sunset-botany/shrub-01/textures/shrub_01_alpha_1k.png",
+      "bytes": 132597,
+      "md5": "5ed0301c1bf12c291f183563a2b8c370",
+      "sha256": "eb693835205913dfc705a08fb45f3e8d1c338332bd0097e9837773765b421603",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/png/1k/shrub_01/shrub_01_alpha_1k.png",
+      "officialMd5": "5ed0301c1bf12c291f183563a2b8c370"
+    }
+  ],
+  "assets": [
+    {
+      "name": "street-tree",
+      "source": "public/models/garden/tree-small-02-cards.glb",
+      "sourceAllTriangles": 190999,
+      "selectedTriangles": 190999,
+      "decimated": false,
+      "animationCount": 0,
+      "relativeBranchLeafPlacementPreserved": true,
+      "sourceBoundsYUp": {
+        "min": [
+          -1.8895070552825928,
+          0.0,
+          -2.785615921020508
+        ],
+        "max": [
+          1.8895070552825928,
+          4.556864261627197,
+          2.785615921020508
+        ],
+        "size": [
+          3.7790141105651855,
+          4.556864261627197,
+          5.571231842041016
+        ]
+      },
+      "boundsYUp": {
+        "min": [
+          -1.6947373151779175,
+          0.0,
+          -1.7948559522628784
+        ],
+        "max": [
+          2.0842766761779785,
+          4.556864261627197,
+          3.7763757705688477
+        ],
+        "size": [
+          3.779013991355896,
+          4.556864261627197,
+          5.571231722831726
+        ]
+      },
+      "rootAnchorInSourceWorldYUp": [
+        -0.1947697252035141,
+        0.0,
+        -0.9907599687576294
+      ],
+      "rootAnchorLocalYUp": [
+        0,
+        0,
+        0
+      ],
+      "rootBandMeters": 0.03712034702301025,
+      "rootSampleCount": 66,
+      "parts": [
+        {
+          "name": "star_tree_branches",
+          "triangles": 45000,
+          "boundsYUp": {
+            "min": [
+              -1.425909161567688,
+              1.6417769193649292,
+              -1.6486541032791138
+            ],
+            "max": [
+              1.844885230064392,
+              4.410075664520264,
+              3.6292529106140137
+            ],
+            "size": [
+              3.27079439163208,
+              2.7682987451553345,
+              5.277907013893127
+            ]
+          }
+        },
+        {
+          "name": "star_tree_leaves",
+          "triangles": 121000,
+          "boundsYUp": {
+            "min": [
+              -1.6947373151779175,
+              1.4826356172561646,
+              -1.7948559522628784
+            ],
+            "max": [
+              2.0842766761779785,
+              4.556864261627197,
+              3.7763757705688477
+            ],
+            "size": [
+              3.779013991355896,
+              3.0742286443710327,
+              5.571231722831726
+            ]
+          }
+        },
+        {
+          "name": "star_tree_trunk",
+          "triangles": 24999,
+          "boundsYUp": {
+            "min": [
+              -1.0273116827011108,
+              0.0,
+              -0.5247437953948975
+            ],
+            "max": [
+              1.212729811668396,
+              3.7120347023010254,
+              2.510404586791992
+            ],
+            "size": [
+              2.240041494369507,
+              3.7120347023010254,
+              3.0351483821868896
+            ]
+          }
+        }
+      ],
+      "positionQuantizationBits": 16,
+      "normalQuantizationBits": 12,
+      "uvQuantizationBits": 14,
+      "editableSource": "assets/source/sunset-botany/street-tree.blend",
+      "clearance": {
+        "leafMinimumY": 1.4826356172561646,
+        "crownBoundsCenterXZOffsetFromRoot": [
+          0.19476968050003052,
+          0.9907599091529846
+        ],
+        "woodRadiusBelowLocalY": {
+          "1.5": 0.4950986190416919,
+          "1.9": 1.2510629986873896
+        },
+        "placementByTargetHeight": [
+          {
+            "targetHeight": 6.6,
+            "uniformScale": 1.4483644061065855,
+            "leafMinimumY": 2.1473966552596955,
+            "woodRadiusBelowWorldY": {
+              "1.5": 0.36574931558931534,
+              "1.9": 0.5765173676392858
+            }
+          },
+          {
+            "targetHeight": 6.9,
+            "uniformScale": 1.5141991518387032,
+            "leafMinimumY": 2.2450055941351366,
+            "woodRadiusBelowWorldY": {
+              "1.5": 0.36429220084965996,
+              "1.9": 0.5481567221337367
+            }
+          },
+          {
+            "targetHeight": 7.2,
+            "uniformScale": 1.5800338975708206,
+            "leafMinimumY": 2.3426145330105768,
+            "woodRadiusBelowWorldY": {
+              "1.5": 0.36743846249567874,
+              "1.9": 0.52841325213443
+            }
+          }
+        ],
+        "method": "All original trunk+branch vertices transformed to world space then the single shared root anchor subtracted; no canopy-centre proxy."
+      },
+      "file": "public/models/sunset-boulevard/botany/street-tree.glb",
+      "bytes": 2897192,
+      "md5": "c78a75650e711c91653ce05a6c576177",
+      "sha256": "a7892328b02baa17b443145025208dfbc65661a691bfbfd6f0ca1edd80503099",
+      "images": [
+        {
+          "name": "tree_small_02_branch_nor_gl_1k",
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "kind": "normal",
+          "beforeBytes": 581596,
+          "bytes": 137674,
+          "codec": "WebP",
+          "rgbQuality": 88,
+          "rgbLossless": false,
+          "alphaPixelExact": false,
+          "alphaExtrema": null
+        },
+        {
+          "name": "tree_small_02_branch_diff_1k",
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "kind": "color",
+          "beforeBytes": 449977,
+          "bytes": 75302,
+          "codec": "WebP",
+          "rgbQuality": 84,
+          "rgbLossless": false,
+          "alphaPixelExact": false,
+          "alphaExtrema": null
+        },
+        {
+          "name": "tree_small_02_branch_arm_1k",
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "kind": "roughness",
+          "beforeBytes": 375732,
+          "bytes": 35460,
+          "codec": "WebP",
+          "rgbQuality": 82,
+          "rgbLossless": false,
+          "alphaPixelExact": false,
+          "alphaExtrema": null
+        },
+        {
+          "name": "tree_small_02_leaves_nor_gl_1k",
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "kind": "normal",
+          "beforeBytes": 681604,
+          "bytes": 132022,
+          "codec": "WebP",
+          "rgbQuality": 88,
+          "rgbLossless": false,
+          "alphaPixelExact": false,
+          "alphaExtrema": null
+        },
+        {
+          "name": "tree_small_02_leaves_diff-tree_small_02_leaves_alpha-alpha",
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "kind": "color",
+          "beforeBytes": 1047075,
+          "bytes": 150544,
+          "codec": "WebP",
+          "rgbQuality": 84,
+          "rgbLossless": false,
+          "alphaPixelExact": true,
+          "alphaExtrema": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "tree_small_02_leaves_arm_1k",
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "kind": "roughness",
+          "beforeBytes": 633698,
+          "bytes": 65128,
+          "codec": "WebP",
+          "rgbQuality": 82,
+          "rgbLossless": false,
+          "alphaPixelExact": false,
+          "alphaExtrema": null
+        },
+        {
+          "name": "tree_small_02_nor_gl_1k",
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "kind": "normal",
+          "beforeBytes": 1228646,
+          "bytes": 428094,
+          "codec": "WebP",
+          "rgbQuality": 88,
+          "rgbLossless": false,
+          "alphaPixelExact": false,
+          "alphaExtrema": null
+        },
+        {
+          "name": "tree_small_02_diff_1k",
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "kind": "color",
+          "beforeBytes": 863246,
+          "bytes": 229602,
+          "codec": "WebP",
+          "rgbQuality": 84,
+          "rgbLossless": false,
+          "alphaPixelExact": false,
+          "alphaExtrema": null
+        },
+        {
+          "name": "tree_small_02_arm_1k",
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "kind": "roughness",
+          "beforeBytes": 708242,
+          "bytes": 80292,
+          "codec": "WebP",
+          "rgbQuality": 82,
+          "rgbLossless": false,
+          "alphaPixelExact": false,
+          "alphaExtrema": null
+        }
+      ],
+      "geometryStreamsByteIdenticalToDracoIntermediate": true,
+      "editable": {
+        "file": "assets/source/sunset-botany/street-tree.blend",
+        "bytes": 14087247,
+        "md5": "1ece56eacaf250b52ca90debea381cca",
+        "sha256": "17d73b57624584790efc02b4ecbc8906f49a229dc9b06e571edbb6878e5b6655"
+      },
+      "extensionsRequired": [
+        "KHR_draco_mesh_compression",
+        "KHR_texture_transform",
+        "EXT_texture_webp"
+      ]
+    },
+    {
+      "name": "rooted-shrub",
+      "source": "assets/source/sunset-botany/shrub-01/shrub_01_alpha_prepared.gltf",
+      "sourceAllTriangles": 156012,
+      "selectedTriangles": 36199,
+      "decimated": false,
+      "animationCount": 0,
+      "relativeBranchLeafPlacementPreserved": true,
+      "sourceBoundsYUp": {
+        "min": [
+          -1.8545849323272705,
+          1.4901161193847656e-07,
+          -0.08655783534049988
+        ],
+        "max": [
+          -1.6780762672424316,
+          0.34601330757141113,
+          0.0884968489408493
+        ],
+        "size": [
+          0.17650866508483887,
+          0.3460131585597992,
+          0.17505468428134918
+        ]
+      },
+      "boundsYUp": {
+        "min": [
+          -0.0822134017944336,
+          0.0,
+          -0.08650294691324234
+        ],
+        "max": [
+          0.09429526329040527,
+          0.3460131585597992,
+          0.08855173736810684
+        ],
+        "size": [
+          0.17650866508483887,
+          0.3460131585597992,
+          0.17505468428134918
+        ]
+      },
+      "rootAnchorInSourceWorldYUp": [
+        -1.772371530532837,
+        1.4901161193847656e-07,
+        -5.4888521844986826e-05
+      ],
+      "rootAnchorLocalYUp": [
+        0,
+        0,
+        0
+      ],
+      "rootBandMeters": 0.003460131585597992,
+      "rootSampleCount": 10,
+      "parts": [
+        {
+          "name": "shrub_01_complete_rooted_a",
+          "triangles": 36199,
+          "boundsYUp": {
+            "min": [
+              -0.0822134017944336,
+              0.0,
+              -0.08650294691324234
+            ],
+            "max": [
+              0.09429526329040527,
+              0.3460131585597992,
+              0.08855173736810684
+            ],
+            "size": [
+              0.17650866508483887,
+              0.3460131585597992,
+              0.17505468428134918
+            ]
+          }
+        }
+      ],
+      "positionQuantizationBits": 16,
+      "normalQuantizationBits": 12,
+      "uvQuantizationBits": 14,
+      "editableSource": "assets/source/sunset-botany/rooted-shrub.blend",
+      "selection": {
+        "sourceLocalXLessThan": -2.190749764442444,
+        "sourcePlantCount": 9,
+        "selectedWholePlantCount": 1,
+        "selectionCutsFaces": false,
+        "description": "Leftmost complete high-detail rooted plant; other eight whole plants removed."
+      },
+      "file": "public/models/sunset-boulevard/botany/rooted-shrub.glb",
+      "bytes": 611768,
+      "md5": "4688bbe5b01b9899fea016c470767454",
+      "sha256": "7f79c1e10f2aa24ddff0ab6017813eaa09430e39b51d7d8aa8dc11dd728a3203",
+      "images": [
+        {
+          "name": "shrub_01_nor_gl_1k",
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "kind": "normal",
+          "beforeBytes": 746497,
+          "bytes": 242242,
+          "codec": "WebP",
+          "rgbQuality": 92,
+          "rgbLossless": false,
+          "alphaPixelExact": false,
+          "alphaExtrema": null
+        },
+        {
+          "name": "shrub_01_diff_rgba_1k",
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "kind": "color",
+          "beforeBytes": 1338420,
+          "bytes": 112750,
+          "codec": "WebP",
+          "rgbQuality": 88,
+          "rgbLossless": false,
+          "alphaPixelExact": true,
+          "alphaExtrema": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "shrub_01_arm_1k",
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "kind": "roughness",
+          "beforeBytes": 386309,
+          "bytes": 55100,
+          "codec": "WebP",
+          "rgbQuality": 86,
+          "rgbLossless": false,
+          "alphaPixelExact": false,
+          "alphaExtrema": null
+        }
+      ],
+      "geometryStreamsByteIdenticalToDracoIntermediate": true,
+      "editable": {
+        "file": "assets/source/sunset-botany/rooted-shrub.blend",
+        "bytes": 3697193,
+        "md5": "d6c3837f8ba3320f0d81f9da25d3bfca",
+        "sha256": "b0ed1190079f991adaec0168d7994b632a5e5b980f0f02637ea1c7e6f424b9e9"
+      },
+      "extensionsRequired": [
+        "KHR_draco_mesh_compression",
+        "EXT_texture_webp"
+      ]
+    },
+    {
+      "name": "fern",
+      "source": "public/models/garden/fern-02.glb",
+      "sourceAllTriangles": 2248,
+      "selectedTriangles": 2248,
+      "decimated": false,
+      "animationCount": 0,
+      "relativeBranchLeafPlacementPreserved": true,
+      "sourceBoundsYUp": {
+        "min": [
+          -0.43716293573379517,
+          0.0,
+          -0.38261282444000244
+        ],
+        "max": [
+          0.4371628761291504,
+          0.3490203619003296,
+          0.38261282444000244
+        ],
+        "size": [
+          0.8743258118629456,
+          0.3490203619003296,
+          0.7652256488800049
+        ]
+      },
+      "boundsYUp": {
+        "min": [
+          -0.44783011078834534,
+          0.0,
+          -0.3855268657207489
+        ],
+        "max": [
+          0.4264957010746002,
+          0.3490203619003296,
+          0.379698783159256
+        ],
+        "size": [
+          0.8743258118629456,
+          0.3490203619003296,
+          0.7652256488800049
+        ]
+      },
+      "rootAnchorInSourceWorldYUp": [
+        0.01066717877984047,
+        0.0,
+        0.002914033830165863
+      ],
+      "rootAnchorLocalYUp": [
+        0,
+        0,
+        0
+      ],
+      "rootBandMeters": 0.003490203619003296,
+      "rootSampleCount": 1,
+      "parts": [
+        {
+          "name": "fern_02_c",
+          "triangles": 2248,
+          "boundsYUp": {
+            "min": [
+              -0.44783011078834534,
+              0.0,
+              -0.3855268657207489
+            ],
+            "max": [
+              0.4264957010746002,
+              0.3490203619003296,
+              0.379698783159256
+            ],
+            "size": [
+              0.8743258118629456,
+              0.3490203619003296,
+              0.7652256488800049
+            ]
+          }
+        }
+      ],
+      "positionQuantizationBits": 16,
+      "normalQuantizationBits": 12,
+      "uvQuantizationBits": 14,
+      "editableSource": "assets/source/sunset-botany/fern.blend",
+      "placement": {
+        "targetHeight": 0.28,
+        "uniformScale": 0.802245457759167,
+        "widthAtTargetHeight": 0.701423911168644,
+        "depthAtTargetHeight": 0.6138988009747951
+      },
+      "authors": [
+        "Rico Cilliers",
+        "Rob Tuytel"
+      ],
+      "sourcePage": "https://polyhaven.com/a/fern_02",
+      "license": "CC0-1.0",
+      "file": "public/models/sunset-boulevard/botany/fern.glb",
+      "bytes": 277804,
+      "md5": "6bfdce891fb021e9dd961743f124d052",
+      "sha256": "72e0622fd0fc122c81f55bf3b223d5808f7aa3fd65384f1f435e72d7d27ac404",
+      "images": [
+        {
+          "name": "fern_02_nor_gl_1k",
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "kind": "normal",
+          "beforeBytes": 367222,
+          "bytes": 100148,
+          "codec": "WebP",
+          "rgbQuality": 92,
+          "rgbLossless": false,
+          "alphaPixelExact": false,
+          "alphaExtrema": null
+        },
+        {
+          "name": "fern_02_diff-fern_02_alpha-alpha",
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "kind": "color",
+          "beforeBytes": 1146221,
+          "bytes": 106932,
+          "codec": "WebP",
+          "rgbQuality": 88,
+          "rgbLossless": false,
+          "alphaPixelExact": true,
+          "alphaExtrema": [
+            0,
+            255
+          ]
+        },
+        {
+          "name": "fern_02_arm_1k",
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "kind": "roughness",
+          "beforeBytes": 280359,
+          "bytes": 53292,
+          "codec": "WebP",
+          "rgbQuality": 86,
+          "rgbLossless": false,
+          "alphaPixelExact": false,
+          "alphaExtrema": null
+        }
+      ],
+      "geometryStreamsByteIdenticalToDracoIntermediate": true,
+      "editable": {
+        "file": "assets/source/sunset-botany/fern.blend",
+        "bytes": 1959108,
+        "md5": "6756381b5ce58a298becbd61ac5cf5cb",
+        "sha256": "fd0f8b6e610cd7decc16e40c8eefc23fd0532e261f817f5b42a097def64bc822"
+      },
+      "extensionsRequired": [
+        "KHR_draco_mesh_compression",
+        "EXT_texture_webp"
+      ]
+    }
+  ],
+  "modifications": [
+    "Tree: original three meshes and 190,999 triangles retained; bake original transforms; one shared root translation.",
+    "Shrub: retain one complete 36,199-triangle original plant; remove eight whole neighbouring variants; restore official alpha.",
+    "Fern: complete existing fern_02_c plant retained, 2,248 triangles; bake original transform and align its lowest root to local origin.",
+    "No decimation, no scattered/recentered leaves; static transforms and no animations.",
+    "Draco geometry compression, native 1024px WebP images with high-quality lossy RGB and exact leaf alpha."
+  ]
+}

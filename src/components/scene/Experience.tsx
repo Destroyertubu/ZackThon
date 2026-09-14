@@ -1,7 +1,9 @@
+import { MaterialCaustics } from '@/features/typography/LightVfx'
+import SpatialWords from '@/features/typography/SpatialWords'
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import * as THREE from 'three'
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Environment, Html, useProgress } from '@react-three/drei'
+import { Canvas } from '@react-three/fiber'
+import { Environment, useProgress } from '@react-three/drei'
 import { EffectComposer, N8AO, Bloom, Vignette, SMAA } from '@react-three/postprocessing'
 import HomePlayer from '@/components/home/player/HomePlayer'
 import HomeControls from '@/components/home/player/HomeControls'
@@ -21,88 +23,25 @@ import Lighting from './Lighting'
 import Atmosphere from './Atmosphere'
 import Balcony from './Balcony'
 import Backdrop from './Backdrop'
+import CompanionAtHome from '@/components/home/mascot/CompanionAtHome'
+import { usePersonalStore } from '@/features/personal/store'
 
-/* ---------- hotspot markers (drei Html, throttled raycast occlusion) ---------- */
-
-const hotspotCss = `
-.ww-hotspot { display: flex; align-items: center; gap: 7px; padding: 0; border: none; background: none; cursor: pointer; appearance: none; transition: transform 0.25s ease; }
-.ww-hotspot:hover { transform: scale(1.14); }
-.ww-hotspot-dot { width: 10px; height: 10px; border-radius: 9999px; background: #c9973f; box-shadow: 0 0 10px 3px rgba(201, 151, 63, 0.75); animation: ww-breathe 2.6s ease-in-out infinite; }
-.ww-hotspot-label { font-family: ui-serif, Georgia, "Songti SC", "SimSun", serif; font-size: 11px; letter-spacing: 0.18em; color: #e8dcc0; white-space: nowrap; padding: 3px 10px; border-radius: 10px; border: 1px solid rgba(201, 151, 63, 0.4); background: rgba(0, 0, 0, 0.55); backdrop-filter: blur(6px); }
-@keyframes ww-breathe { 0%, 100% { opacity: 0.55; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.12); } }
-`
-
-const occRay = new THREE.Raycaster()
-
-function Hotspot({
-  position,
-  label,
-  onClick,
-}: {
-  position: [number, number, number]
-  label: string
-  onClick: () => void
-}) {
-  const { camera, scene } = useThree()
-  const [occluded, setOccluded] = useState(false)
-  const timer = useRef(Math.abs(position[0] * 0.037 + position[2] * 0.021) % 0.18) // desync the markers' raycasts
-  const target = useMemo(() => new THREE.Vector3(...position), [position])
-  const dir = useMemo(() => new THREE.Vector3(), [])
-  useFrame((_, delta) => {
-    timer.current += delta
-    if (timer.current < 0.18) return
-    timer.current = 0
-    dir.copy(target).sub(camera.position)
-    const dist = dir.length()
-    occRay.set(camera.position, dir.normalize())
-    occRay.far = dist - 0.4
-    const hit = occRay
-      .intersectObjects(scene.children, true)
-      .some((h) => (h.object as THREE.Mesh).isMesh)
-    setOccluded(hit)
-  })
-  return (
-    <Html
-      position={position}
-      center
-      distanceFactor={10}
-      zIndexRange={[9, 0]}
-      style={{
-        opacity: occluded ? 0 : 1,
-        pointerEvents: occluded ? 'none' : 'auto',
-        transition: 'opacity 0.3s ease',
-      }}
-    >
-      <button
-        type="button"
-        className="ww-hotspot"
-        onClick={(e) => {
-          e.stopPropagation()
-          onClick()
-        }}
-      >
-        <span className="ww-hotspot-dot" />
-        <span className="ww-hotspot-label">{label}</span>
-      </button>
-    </Html>
-  )
-}
-
-function HotspotLayer() {
+function HotspotLayer({onLand}:{onLand:()=>void}) {
   const openPanel = useGameStore((s) => s.openPanel)
-  const navigate = useNavigate()
+  const mascotHints = usePersonalStore(s => s.data.settings.mascotHints)
   return (
     <group>
       {/* 展示柜 → 想法收纳柜 */}
-      <Hotspot position={[4.3, 2.95, -4.2]} label="想法收纳柜" onClick={() => openPanel('cabinet')} />
+      <SpatialWords position={[4.3, 2.34, -4.01]} text="我的收藏" material width={1.7} onActivate={() => openPanel('cabinet')} />
       {/* 圆桌中央水晶 → 思维合成台 */}
-      <Hotspot position={[0, 2.0, 0]} label="思维合成台" onClick={() => openPanel('synth')} />
+      <SpatialWords position={[0, .971, 1.15]} text="新的想法" material width={1.65} rotation={[-Math.PI/2,0,0]} onActivate={() => openPanel('synth')} />
       {/* 左侧书桌 → 漫行者日志 */}
-      <Hotspot position={[-4.2, 1.85, 1.7]} label="漫行者日志" onClick={() => openPanel('journal')} />
+      <SpatialWords position={[-4.2, 1.85, 1.7]} text="继续阅读" width={1.3} billboard onActivate={() => openPanel('journal')} />
       {/* 电话亭 → 同频电话亭 */}
-      <Hotspot position={[4.75, 3.1, -0.7]} label="同频电话亭" onClick={() => openPanel('phone')} />
-      {/* 房间门口 → 启程探索 */}
-      <Hotspot position={[3.65, 2.1, 4.75]} label="启程探索" onClick={() => navigate('/world')} />
+      <SpatialWords position={[4.75, 3.1, -0.7]} text="同频电话亭" width={1.5} billboard onActivate={() => openPanel('phone')} />
+      {mascotHints && <SpatialWords position={[-2.95, 1.3, -3.2]} text="刘看山" width={.95} billboard onActivate={() => openPanel('mascot')} />}
+      {/* 房间门口 → 镜海群岛 */}
+      <SpatialWords position={[3.65, 2.1, 4.75]} text="走进镜海群岛" width={1.7} billboard onActivate={onLand} />
     </group>
   )
 }
@@ -112,7 +51,7 @@ function LoaderOverlay() {
   if (!active) return null
   return (
     <div className="absolute inset-0 z-20 flex items-center justify-center bg-[#0a0c10]">
-      <div className="rounded-xl border border-[#c9973f]/30 bg-white/5 px-8 py-5 text-center backdrop-blur-md">
+      <div className="px-8 py-5 text-center">
         <p className="font-serif text-lg tracking-widest text-[#d8c9a3]">Wanderwise</p>
         <p className="mt-2 text-xs tracking-wider text-[#8a8f9c]">
           正在点亮烛火 … {Math.round(progress)}%
@@ -131,6 +70,7 @@ export default function Experience() {
   const input = useMemo<HomeInput>(() => ({ keys: new Set() }), [])
   const [nearby, setNearby] = useState<HomeInteraction | null>(null)
   const [transitioning, setTransitioning] = useState(false)
+  const [destination, setDestination] = useState('observatory')
   const transitionTimer = useRef<number | null>(null)
   useEffect(() => () => {
     if (transitionTimer.current !== null) window.clearTimeout(transitionTimer.current)
@@ -138,35 +78,40 @@ export default function Experience() {
   const enterObservatory = useCallback(() => {
     if (transitioning) return
     setTransitioning(true)
+    setDestination('observatory')
     input.keys.clear()
     useGameStore.getState().closePanel()
     transitionTimer.current = window.setTimeout(() => {
       navigate('/observatory', { state: { spawn: 'balcony-observatory' } })
     }, 1200)
   }, [input, navigate, transitioning])
+  const enterLand = useCallback(() => {
+    if (transitioning) return
+    setDestination('land'); setTransitioning(true); input.keys.clear(); useGameStore.getState().closePanel()
+    transitionTimer.current = window.setTimeout(() => navigate('/land'), 700)
+  }, [input, navigate, transitioning])
   const interact = useCallback((spot: HomeInteraction) => {
     if (transitioning) return
     input.keys.clear()
-    if (spot.id === 'world') navigate('/world')
+    if (spot.id === 'world') enterLand()
     else if (spot.id === 'observatory') enterObservatory()
     else useGameStore.getState().openPanel(spot.id)
-  }, [navigate, input, enterObservatory, transitioning])
+  }, [input, enterLand, enterObservatory, transitioning])
   return (
     <div className="relative h-[100dvh] w-full overflow-hidden bg-[#0a0c10]">
-      <style>{hotspotCss}</style>
       <LoaderOverlay />
       <Canvas
         shadows
         dpr={quality.dprMax === 1 ? 1 : [1, quality.dprMax]}
         gl={{ antialias: true }}
-        camera={{ position: [HOME_SPAWN[0], 1.85, 4.3], fov: homeCameraTuning().fov, near: 0.05, far: 120 }}
+        camera={{ position: [HOME_SPAWN[0], 1.85, 4.3], fov: homeCameraTuning().fov, near: 0.05, far: 240 }}
         onCreated={({ gl }) => {
           gl.toneMapping = THREE.ACESFilmicToneMapping
           gl.toneMappingExposure = 1.25
         }}
       >
         <color attach="background" args={['#9aaeb4']} />
-        <fog attach="fog" args={['#c8b99a', 38, 105]} />
+        <fog attach="fog" args={['#a4a7bb', 55, 210]} />
         <Suspense fallback={null}>
           {/* Match the room IBL to the Kiara valley panorama used outside. */}
           <Environment files="/textures/kiara_7_late-afternoon_1k.hdr" environmentIntensity={0.35} />
@@ -175,12 +120,14 @@ export default function Experience() {
           <Room />
           <Balcony onObservatory={enterObservatory} />
           <RoundTable />
+          <MaterialCaustics position={[.3,.973,.5]} scale={2.1}/>
           <DeskArea />
           <DisplayCabinet />
           <PhoneBooth position={[4.75, 0, -0.7]} rotation={-1.32} />
           <Decor />
           <Atmosphere />
-          <HotspotLayer />
+          <CompanionAtHome />
+          <HotspotLayer onLand={enterLand} />
           <HomePlayer input={input} initialSpawn={initialSpawn} onNearby={setNearby} onInteract={interact} />
         </Suspense>
         {quality.postprocessing && (
@@ -198,8 +145,8 @@ export default function Experience() {
         <div className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center bg-[#05070f]/75 opacity-100 transition-opacity duration-700">
           <div className="text-center">
             <div className="mx-auto mb-5 h-20 w-20 animate-pulse rounded-full border border-[#9ed7dc]/70 bg-[#9ed7dc]/10 shadow-[0_0_50px_rgba(126,216,220,0.45)]" />
-            <p className="font-serif text-sm tracking-[0.35em] text-[#d8c9a3]">星光之门已开启</p>
-            <p className="mt-2 text-xs tracking-widest text-[#9ed7dc]/80">正在前往屋顶观测台</p>
+            <p className="font-serif text-sm tracking-[0.35em] text-[#d8c9a3]">{destination === 'land' ? '镜海的风，正穿过门廊' : '星光之门已开启'}</p>
+            <p className="mt-2 text-xs tracking-widest text-[#9ed7dc]/80">{destination === 'land' ? '正在走进镜海群岛' : '正在前往屋顶观测台'}</p>
           </div>
         </div>
       )}

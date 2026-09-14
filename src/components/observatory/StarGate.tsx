@@ -1,3 +1,4 @@
+import SpatialWords from '@/features/typography/SpatialWords'
 import { useEffect, useMemo } from 'react'
 import { Html, useTexture } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
@@ -109,8 +110,8 @@ function buildStars() {
 }
 
 /** The visible M51 is credited source artwork; activation still opens the user's existing world. */
-export default function StarGate({ materials: m, reducedMotion, onActivate }: {
-  materials: ObservatoryMaterials; reducedMotion: boolean; onActivate: () => void
+export default function StarGate({ materials: m, reducedMotion, onActivate, showLabel = true }: {
+  materials: ObservatoryMaterials; reducedMotion: boolean; onActivate: () => void; showLabel?: boolean
 }) {
   const image = useTexture('/textures/portal/m51-hubble-2048.jpg')
   const galaxy = useMemo(() => {
@@ -172,13 +173,9 @@ export default function StarGate({ materials: m, reducedMotion, onActivate }: {
     </group>)}
     <pointLight position={[0, 2.5, .85]} color="#9cbafa" intensity={7} distance={8} decay={2} />
     <pointLight position={[0, 4.4, .32]} color="#ffc976" intensity={4} distance={5} decay={2} />
-    <Html position={[0, 5.86, .12]} center occlude distanceFactor={11} zIndexRange={[12, 0]}>
-      <button type="button" className="garden-world-sign" onClick={event => { event.stopPropagation(); onActivate() }}>
-        <small>穿过枝头的星光</small><span>前往星系 <b>↗</b></span>
-      </button>
-    </Html>
+    {showLabel && <SpatialWords text="进入星系" position={[0, 1.4, .72]} width={2.8} distance={9} onActivate={onActivate}/>}
     <Html position={[0, -.02, .55]} center distanceFactor={8} zIndexRange={[9, 0]}>
-      <div style={{ width: 330, padding: '5px 8px', fontSize: 9, lineHeight: 1.45, color: '#c6c1ac', background: 'rgba(13,22,24,.76)', border: '1px solid #ab95644d', borderRadius: 3, textAlign: 'center', pointerEvents: 'auto' }}>
+      <div style={{ width: 330, padding: '5px 8px', fontSize: 9, lineHeight: 1.45, color: '#c6c1ac', background: 'transparent', border: 'none', borderRadius: 3, textAlign: 'center', pointerEvents: 'auto' }}>
         <a href="https://esahubble.org/images/heic0506a/" target="_blank" rel="noreferrer" style={{ color: '#e2c995', textDecoration: 'none' }} onClick={event => event.stopPropagation()}>M51 · NASA, ESA, S. Beckwith (STScI), and The Hubble Heritage Team (STScI/AURA)</a>
         <span style={{ display: 'block', fontSize: 8 }}>旋转与色彩为艺术演绎 · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer" style={{ color: '#b2bed2' }} onClick={event => event.stopPropagation()}>CC BY 4.0</a></span>
       </div>

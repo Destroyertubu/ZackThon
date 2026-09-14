@@ -1,0 +1,75 @@
+/* Scoped from Wood3307/Wanderwise 229e4bd. See UPSTREAM.md. */
+.galaxy-page .cosmic-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  isolation: isolate;
+  pointer-events: none;
+  background: #08111c;
+  --cosmic-x: 0px;
+  --cosmic-y: 0px;
+}
+.galaxy-page .cosmic-parallax {
+  position: absolute;
+  inset: -12px;
+  transform: translate3d(var(--cosmic-x), var(--cosmic-y), 0);
+  transition: transform 1.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.galaxy-page .cosmic-picture {
+  position: absolute;
+  inset: 0;
+  background: url("/galaxy/textures/cosmic-observatory-v3.webp") 56% 50% / cover
+    no-repeat;
+  opacity: var(--cosmic-opacity);
+  filter: saturate(0.72) brightness(0.82);
+  transition: opacity 1.4s ease;
+}
+.galaxy-page .cosmic-ambient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 3% 54%, #32697d16, transparent 44%),
+    radial-gradient(ellipse at 78% 98%, #56608e12, transparent 40%),
+    linear-gradient(
+      180deg,
+      #050d1766,
+      transparent 19%,
+      transparent 79%,
+      #06101b4d
+    );
+}
+.galaxy-page .cosmic-reading-veil {
+  position: absolute;
+  inset: 0;
+  opacity: var(--cosmic-reading-veil);
+  background: radial-gradient(ellipse at 50% 48%, #030a13bb, transparent 45%),
+    radial-gradient(ellipse at 19% 38%, #020a14e0, transparent 29%),
+    radial-gradient(ellipse at 81% 38%, #020a14db, transparent 29%),
+    radial-gradient(ellipse at 19% 72%, #020a14ba, transparent 24%),
+    radial-gradient(ellipse at 81% 72%, #020a14ba, transparent 24%);
+  transition: opacity 1.4s ease;
+}
+.galaxy-page .cosmic-still .cosmic-parallax,.galaxy-page 
+.cosmic-still .cosmic-picture,.galaxy-page 
+.cosmic-still .cosmic-reading-veil {
+  transition: none;
+}
+@media (max-width: 760px) {
+  .galaxy-page .cosmic-picture {
+    background-position: 89% 50%;
+  }
+  .galaxy-page .cosmic-reading-veil {
+    background: radial-gradient(ellipse at 50% 34%, #030b17cc, transparent 44%),
+      radial-gradient(ellipse at 50% 68%, #030b17ee, transparent 58%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .galaxy-page .cosmic-parallax {
+    transform: none;
+  }
+  .galaxy-page .cosmic-parallax,.galaxy-page 
+  .cosmic-picture,.galaxy-page 
+  .cosmic-reading-veil {
+    transition: none;
+  }
+}

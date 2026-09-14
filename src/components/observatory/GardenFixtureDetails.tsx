@@ -28,6 +28,3 @@ export function FixtureScan({ asset, height, position = [0, 0, 0], rotation = 0 
   useEffect(() => () => owned.materials.forEach(material => material.dispose()), [owned])
   return <group position={position} rotation={[0, rotation, 0]} scale={owned.scale}><primitive object={owned.object} dispose={null} /></group>
 }
-
-useGLTF.preload('/models/garden-fixtures/bar-stool.glb')
-useGLTF.preload('/models/garden-fixtures/brass-goblet.glb')

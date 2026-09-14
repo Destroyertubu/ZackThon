@@ -11,7 +11,7 @@ import { READING_CHAIR_ROTATION, READING_CORNER_POSITION } from './gardenDetailL
 
 const ROCK_URL = '/models/garden/details/moss-rocks.glb'
 const PLANT_URL = '/models/garden/details/periwinkle.glb'
-const LANTERN_URL = '/models/garden/details/brass-lantern.glb'
+const LANTERN_URL = '/models/garden/optimized/brass-lantern.glb'
 
 type DetailInstance = { position: Point; size: number; rotation?: Point; stretch?: Point }
 type DetailPart = { geometry: THREE.BufferGeometry; material: THREE.Material | THREE.Material[] }
@@ -214,7 +214,3 @@ export function DetailedGardenLantern({ position = [0, 0, 0], rotation = 0, heig
     {lightIntensity > 0 && <pointLight position={[0, height * .42, 0]} color="#ffd095" intensity={lightIntensity} distance={2.25} decay={2} />}
   </group>
 }
-
-useGLTF.preload(ROCK_URL)
-useGLTF.preload(PLANT_URL)
-useGLTF.preload(LANTERN_URL)

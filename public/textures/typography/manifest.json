@@ -1,0 +1,26 @@
+[
+  {
+    "file": "starlight.png",
+    "source": "PNG (Transparent)/star_04.png",
+    "pack": "kenney-particle-pack",
+    "license": "CC0-1.0",
+    "sha256": "6485ac16c773663bd39346f3bedae04465ac14c661eb47cc5cfa935cdbf6c2ec",
+    "bytes": 30613
+  },
+  {
+    "file": "mist.png",
+    "source": "PNG (Transparent)/smoke_01.png",
+    "pack": "kenney-particle-pack",
+    "license": "CC0-1.0",
+    "sha256": "e8724c219e8d35859167fc0a7e207e13c72ccf0c29704909b9bb3d3dc71c6cf7",
+    "bytes": 97452
+  },
+  {
+    "file": "caustics.png",
+    "source": "Default/water_caustics_a.png",
+    "pack": "kenney-light-masks",
+    "license": "CC0-1.0",
+    "sha256": "cc4aa3cc6cb91d7f1ade94e1fae37feaaedc81f3ff01981d13c447deb3b03126",
+    "bytes": 22338
+  }
+]

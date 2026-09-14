@@ -1,0 +1,240 @@
+[
+  {
+    "id": "curated-walden",
+    "title": "Walden, and On The Duty Of Civil Disobedience",
+    "author": "Henry David Thoreau",
+    "summary": "梭罗记录在瓦尔登湖畔生活的观察与思考。阅读时可以对照自然细节、日常行动和作者对生活方式的判断。",
+    "url": "https://www.gutenberg.org/ebooks/205",
+    "source": "Project Gutenberg",
+    "kind": "curated",
+    "fetchedAt": "2026-09-13T09:00:00Z",
+    "tags": [
+      "literature"
+    ],
+    "readingGuide": "选一个有声音、光线或植物的场景，分别标出观察与解释。尝试把解释拿走，看看细节本身能传达什么。"
+  },
+  {
+    "id": "curated-dickinson",
+    "title": "Poems by Emily Dickinson, Three Series, Complete",
+    "author": "Emily Dickinson",
+    "summary": "狄金森诗歌集，收录关于生命、自然、爱与时间的诗作。此处提供阅读导引，原作通过来源链接阅读。",
+    "url": "https://www.gutenberg.org/ebooks/12242",
+    "source": "Project Gutenberg",
+    "kind": "curated",
+    "fetchedAt": "2026-09-13T09:00:00Z",
+    "tags": [
+      "literature"
+    ],
+    "readingGuide": "选一首短诗，观察标点和停顿。把同一个意象改写成三句，再比较情绪如何改变。"
+  },
+  {
+    "id": "curated-emerson",
+    "title": "Essays by Ralph Waldo Emerson",
+    "author": "Ralph Waldo Emerson",
+    "summary": "这部文集收录 Self-reliance、Nature、Circles 等文章，为讨论自我、自然与变化提供不同的出发点。",
+    "url": "https://www.gutenberg.org/ebooks/16643",
+    "source": "Project Gutenberg",
+    "kind": "curated",
+    "fetchedAt": "2026-09-13T09:00:00Z",
+    "tags": [
+      "literature"
+    ],
+    "readingGuide": "从 Self-reliance 或 Circles 中选择一个判断，写一封支持它的信，再写一封提出反例的回信。"
+  },
+  {
+    "id": "curated-macro",
+    "title": "Introduction to Macro Photography",
+    "author": "Cambridge in Colour",
+    "summary": "微距摄影把熟悉的事物带到不同尺度，放大倍率增加时，对焦位置和景深的选择尤其重要。",
+    "url": "https://www.cambridgeincolour.com/tutorials/macro-photography-intro.htm",
+    "source": "Cambridge in Colour",
+    "kind": "curated",
+    "fetchedAt": "2026-09-13T09:00:00Z",
+    "tags": [
+      "photography"
+    ],
+    "readingGuide": "为同一片叶子安排远景、近景和微距。每次只保留一个视觉重点，记录因此失去的环境信息。"
+  },
+  {
+    "id": "curated-depth",
+    "title": "Understanding Depth of Field in Photography",
+    "author": "Cambridge in Colour",
+    "summary": "景深讨论照片中显得清晰的距离范围。光圈、拍摄距离与画面放大程度共同影响清晰和模糊的关系。",
+    "url": "https://www.cambridgeincolour.com/tutorials/depth-of-field.htm",
+    "source": "Cambridge in Colour",
+    "kind": "curated",
+    "fetchedAt": "2026-09-13T09:00:00Z",
+    "tags": [
+      "photography"
+    ],
+    "readingGuide": "想象前景是一封信，远处是一扇门。分别让它们清晰一次，比较观众会先追问哪一个故事。"
+  },
+  {
+    "id": "curated-wide",
+    "title": "Using Wide Angle Lenses",
+    "author": "Cambridge in Colour",
+    "summary": "广角镜头可强化画面深度与相对大小；观看位置会影响前景和背景之间的视觉关系。",
+    "url": "https://www.cambridgeincolour.com/tutorials/wide-angle-lenses.htm",
+    "source": "Cambridge in Colour",
+    "kind": "curated",
+    "fetchedAt": "2026-09-13T09:00:00Z",
+    "tags": [
+      "photography"
+    ],
+    "readingGuide": "保持主体不变，分别靠近和后退。说明哪一处变化来自观察位置，哪一处来自取景范围。"
+  },
+  {
+    "id": "curated-identity",
+    "title": "Identity",
+    "author": "Stanford Encyclopedia of Philosophy",
+    "summary": "同一性问题要求区分“具有相同性质”和“是同一个事物”，并进一步讨论事物在变化中如何持续存在。",
+    "url": "https://plato.stanford.edu/entries/identity/",
+    "source": "Stanford Encyclopedia of Philosophy",
+    "kind": "curated",
+    "fetchedAt": "2026-09-13T09:00:00Z",
+    "tags": [
+      "philosophy"
+    ],
+    "readingGuide": "把一段旋律或一棵树当作例子，写出你的同一性标准，再找一个使这个标准困难的变化。"
+  },
+  {
+    "id": "curated-time",
+    "title": "Time",
+    "author": "Stanford Encyclopedia of Philosophy",
+    "summary": "时间哲学讨论过去、现在与未来，以及时间流逝等问题。不同理论并不必然对这些概念给出同样的解释。",
+    "url": "https://plato.stanford.edu/entries/time/",
+    "source": "Stanford Encyclopedia of Philosophy",
+    "kind": "curated",
+    "fetchedAt": "2026-09-13T09:00:00Z",
+    "tags": [
+      "philosophy"
+    ],
+    "readingGuide": "分别用钟表、树叶和个人记忆描述一天。标明其中哪些是测量，哪些是体验或比喻。"
+  },
+  {
+    "id": "curated-music-philosophy",
+    "title": "The Philosophy of Music",
+    "author": "Stanford Encyclopedia of Philosophy",
+    "summary": "音乐哲学涉及音乐的定义、音乐作品是什么，以及音乐与情感之间的关系。",
+    "url": "https://plato.stanford.edu/entries/music/",
+    "source": "Stanford Encyclopedia of Philosophy",
+    "kind": "curated",
+    "fetchedAt": "2026-09-13T09:00:00Z",
+    "tags": [
+      "philosophy"
+    ],
+    "readingGuide": "改变速度、音色或一个音高，比较你何时认为作品已改变。保留不确定的地方。"
+  },
+  {
+    "id": "curated-environment",
+    "title": "Environmental Aesthetics",
+    "author": "Stanford Encyclopedia of Philosophy",
+    "summary": "环境美学把审美关注扩展到自然与日常环境，讨论我们如何欣赏环境，以及知识如何参与这种体验。",
+    "url": "https://plato.stanford.edu/entries/environmental-aesthetics/",
+    "source": "Stanford Encyclopedia of Philosophy",
+    "kind": "curated",
+    "fetchedAt": "2026-09-13T09:00:00Z",
+    "tags": [
+      "philosophy"
+    ],
+    "readingGuide": "先描述一处风景，再加入关于它的生态知识。你的审美判断有没有改变？用具体细节解释。"
+  },
+  {
+    "id": "curated-soundscape",
+    "title": "Natural Sounds — A Symphony of Sounds",
+    "author": "U.S. National Park Service",
+    "summary": "国家公园拥有不同的自然与文化声景。声音也是环境的一部分，能够帮助人认识一个地方的特征。",
+    "url": "https://www.nps.gov/subjects/sound/index.htm",
+    "source": "National Park Service",
+    "kind": "curated",
+    "fetchedAt": "2026-09-13T09:00:00Z",
+    "tags": [
+      "nature"
+    ],
+    "readingGuide": "把听到或想象到的声音分为生物、天气和人类活动。留出一段安静，观察它如何改变其他声音。"
+  },
+  {
+    "id": "curated-phenology",
+    "title": "Why phenology?",
+    "author": "USA National Phenology Network",
+    "summary": "物候观察关注生命活动的季节性时间，例如展叶、开花和迁徙。持续记录能够帮助识别环境变化。",
+    "url": "https://www.usanpn.org/about/phenology",
+    "source": "USA National Phenology Network",
+    "kind": "curated",
+    "fetchedAt": "2026-09-13T09:00:00Z",
+    "tags": [
+      "nature"
+    ],
+    "readingGuide": "挑选一株植物，记录日期、地点和可见状态。把观察写成可重复的记录，暂时不推断变化原因。"
+  },
+  {
+    "id": "curated-climate-evidence",
+    "title": "Evidence — Climate Change",
+    "author": "NASA Science",
+    "summary": "NASA 汇集气候变化的多类观测证据，包括温度、冰体和海洋变化。不同证据涉及不同的时间尺度。",
+    "url": "https://science.nasa.gov/climate-change/evidence/",
+    "source": "NASA Science",
+    "kind": "curated",
+    "fetchedAt": "2026-09-13T09:00:00Z",
+    "tags": [
+      "nature"
+    ],
+    "readingGuide": "比较一个季节中的变化与多年趋势。说明为什么一次观察不能独自支撑长期结论。"
+  },
+  {
+    "id": "curated-rhythm",
+    "title": "Notating Rhythm",
+    "author": "Mark Gotham, Chelsey Hamm, Bryn Hughes",
+    "summary": "介绍音符时值、休止符、附点和连音线。时值之间的相对关系让声音与停顿能够被记录和重现。",
+    "url": "https://viva.pressbooks.pub/openmusictheory/chapter/notating-rhythm/",
+    "source": "Open Music Theory",
+    "kind": "curated",
+    "fetchedAt": "2026-09-13T09:00:00Z",
+    "tags": [
+      "music"
+    ],
+    "readingGuide": "给三句话分配长短不同的时值，并在其中安排休止。默读和拍手都可以完成这项练习。"
+  },
+  {
+    "id": "curated-meter",
+    "title": "Simple Meter and Time Signatures",
+    "author": "Mark Gotham, Chelsey Hamm, Kris Shaffer",
+    "summary": "介绍节拍、单拍子与拍号；二拍、三拍和四拍把重复脉冲组织成不同的分组。",
+    "url": "https://viva.pressbooks.pub/openmusictheory/chapter/simple-meter-and-time-signatures/",
+    "source": "Open Music Theory",
+    "kind": "curated",
+    "fetchedAt": "2026-09-13T09:00:00Z",
+    "tags": [
+      "music"
+    ],
+    "readingGuide": "让脚步重复八次，分别强调每第二拍和第四拍。用视觉标记比较两种分组。"
+  },
+  {
+    "id": "curated-phrase",
+    "title": "The Phrase, Archetypes, and Unique Forms",
+    "author": "John Peterson",
+    "summary": "讨论乐句、常见乐句形式和独特形式，帮助辨认音乐如何组织成相对完整的想法。",
+    "url": "https://viva.pressbooks.pub/openmusictheory/chapter/phrase-archetypes-unique-forms/",
+    "source": "Open Music Theory",
+    "kind": "curated",
+    "fetchedAt": "2026-09-13T09:00:00Z",
+    "tags": [
+      "music"
+    ],
+    "readingGuide": "安排一个开头、一次重复和一个结尾。把它映射成三张画面，比较顺序改变后的感觉。"
+  },
+  {
+    "id": "curated-natural-light",
+    "title": "Natural Light Photography: A Complete Guide to Shooting with Available Light",
+    "author": "The School of Photography",
+    "summary": "自然光的方向、强弱与一天中的时间会改变画面。侧光可以突出纹理，逆光可以形成轮廓；日落与蓝调时刻带来不同的颜色。",
+    "url": "https://www.theschoolofphotography.com/tutorials/natural-light-photography",
+    "source": "The School of Photography",
+    "kind": "curated",
+    "fetchedAt": "2026-09-13T09:00:00Z",
+    "tags": [
+      "photography"
+    ],
+    "readingGuide": "沿着同一条岸边改变观察方向。选择一处侧光和一处逆光，记录阴影如何改变你想讲的故事。"
+  }
+]

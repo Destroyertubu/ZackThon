@@ -18,18 +18,32 @@ export interface QualityProfile {
   dprMax: number
   shadowMapSize: 1024 | 2048
   postprocessing: boolean
+  waterWaves: 4 | 6
+  waterSegments: number
+  reflectionHz: 0 | 15 | 30
+  reflectionScale: number
+  cloud: boolean
 }
 
-/** Resolve the user-facing quality mode to renderer settings once per render. */
-export function getQualityProfile(mode: QualityMode): QualityProfile {
-  if (mode === 'fine') return { dprMax: 1.5, shadowMapSize: 2048, postprocessing: true }
-  if (mode === 'smooth') return { dprMax: 1, shadowMapSize: 1024, postprocessing: false }
-  // Auto keeps desktop detail while avoiding high DPR/post effects on touch devices.
-  const isTouch = typeof navigator !== 'undefined'
+/** Explicit launch marker survives client-side navigation; it never inspects the browser brand. */
+export function isCloudRuntime(): boolean {
+  if (typeof window === 'undefined') return false
+  try {
+    const marker = new URLSearchParams(window.location.search).get('renderRuntime')
+    if (marker === 'rtx' || marker === 'browser') sessionStorage.setItem('wanderwise-render-runtime', marker)
+    return sessionStorage.getItem('wanderwise-render-runtime') === 'rtx'
+  } catch { return false }
+}
+
+/** User preference is preserved: explicit smooth still wins in the cloud. */
+export function getQualityProfile(mode: QualityMode, cloud = isCloudRuntime()): QualityProfile {
+  if(typeof window!=='undefined'){const q=new URLSearchParams(window.location.search);const value=q.get('visualQuality');if(q.get('visualReview')==='1'&&(value==='fine'||value==='smooth'))mode=value}
+  const touch = typeof navigator !== 'undefined'
     && (navigator.maxTouchPoints > 0 || /Android|iPhone|iPad|Mobile/i.test(navigator.userAgent))
-  return isTouch
-    ? { dprMax: 1, shadowMapSize: 1024, postprocessing: false }
-    : { dprMax: 1.5, shadowMapSize: 2048, postprocessing: true }
+  const smooth = mode === 'smooth' || (mode === 'auto' && touch && !cloud)
+  return smooth
+    ? { dprMax: 1, shadowMapSize: 1024, postprocessing: false, waterWaves: 4, waterSegments: 128, reflectionHz: 0, reflectionScale: .5, cloud }
+    : { dprMax: cloud ? 1 : 1.5, shadowMapSize: 2048, postprocessing: true, waterWaves: 6, waterSegments: 192, reflectionHz: cloud ? 30 : 15, reflectionScale: .5, cloud }
 }
 
 /* ---------- 内置同频人（漫行者） ---------- */

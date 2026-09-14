@@ -8,6 +8,7 @@ type BoxObstacle = FloorObstacle
 const box = (x: number, z: number, halfX: number, halfZ: number, height: number, yaw = 0): BoxObstacle =>
   ({ x, z, halfX, halfZ, height, yaw })
 export const FURNITURE = [
+  box(-2.95, -3.2, .57, .57, 1.05), // Liu Kanshan reading cushion
   box(-4.2, 1.7, 1.17, 0.52, 0.95, 0.35), // desk
   box(-3.85, 2.62, 0.36, 0.38, 1, 0.35),
   box(-4.1, -2.5, 0.58, 0.54, 1.05, 0.7),
@@ -95,7 +96,8 @@ export const HOME_INTERACTIONS = [
   { id: 'cabinet', label: '想法收纳柜', x: 4.3, z: -4.1, radius: 1.9 },
   { id: 'journal', label: '漫行者日志', x: -4.2, z: 1.7, radius: 2.0 },
   { id: 'phone', label: '同频电话亭', x: 4.75, z: -0.7, radius: 1.7 },
-  { id: 'world', label: '启程探索', x: 3.65, z: 5, radius: 1.45 },
+  { id: 'mascot', label: '刘看山 · 阅读伙伴', x: -2.95, z: -3.2, radius: 1.65 },
+  { id: 'world', label: '走进镜海群岛', x: 3.65, z: 5, radius: 1.45 },
   { id: 'observatory', label: '前往观星台', x: 1.6, z: -7.2, radius: 0.86 },
 ] as const
 export type HomeInteraction = (typeof HOME_INTERACTIONS)[number]

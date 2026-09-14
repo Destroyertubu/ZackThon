@@ -1,0 +1,26 @@
+[
+  {
+    "model": "bookshop.glb",
+    "bytes": 399272,
+    "triangles": 55512,
+    "editableSource": "assets/source/sunset-boulevard/sunset-architecture.blend",
+    "generatedBy": "scripts/build-sunset-architecture.py",
+    "license": "Project-authored geometry"
+  },
+  {
+    "model": "atelier.glb",
+    "bytes": 222756,
+    "triangles": 26520,
+    "editableSource": "assets/source/sunset-boulevard/sunset-architecture.blend",
+    "generatedBy": "scripts/build-sunset-architecture.py",
+    "license": "Project-authored geometry"
+  },
+  {
+    "model": "gallery.glb",
+    "bytes": 126632,
+    "triangles": 13992,
+    "editableSource": "assets/source/sunset-boulevard/sunset-architecture.blend",
+    "generatedBy": "scripts/build-sunset-architecture.py",
+    "license": "Project-authored geometry"
+  }
+]

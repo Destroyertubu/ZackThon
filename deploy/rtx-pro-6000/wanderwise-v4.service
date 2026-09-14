@@ -1,0 +1,23 @@
+[Unit]
+Description=Wanderwise v4 production web and content service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/code/Wanderwise-v4
+Environment=NODE_ENV=production
+Environment=HOST=127.0.0.1
+Environment=PORT=4187
+Environment=PATH=%h/.nvm/versions/node/v24.12.0/bin:%h/.local/bin:/usr/local/bin:/usr/bin:/bin
+EnvironmentFile=-%h/code/Wanderwise-v4/.env.server
+ExecStart=%h/.nvm/versions/node/v24.12.0/bin/node --import tsx server/index.ts
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=15
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=default.target

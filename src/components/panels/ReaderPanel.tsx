@@ -7,6 +7,9 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import PanelShell from './PanelShell'
+import { usePersonalStore } from '@/features/personal/store'
+import SourceCard from '@/features/personal/SourceCard'
+import '@/features/personal/personal.css'
 
 export default function ReaderPanel() {
   const readerWorkId = useGameStore((s) => s.readerWorkId)
@@ -16,12 +19,13 @@ export default function ReaderPanel() {
   const collect = useGameStore((s) => s.collect)
   const enterRealm = useGameStore((s) => s.enterRealm)
   const closePanel = useGameStore((s) => s.closePanel)
+  const source = usePersonalStore(s=>Object.values(s.data.sources).find(item=>item.id===readerWorkId||item.legacyWorkId===readerWorkId))
 
   const work = readerWorkId ? works.find((w) => w.workId === readerWorkId) : undefined
 
   // 兜底：若打开面板时作品尚未载入（如从持久化的行囊直接「读原文」），自行拉取
   useEffect(() => {
-    if (!readerWorkId || works.length > 0) return
+    if (!readerWorkId || source || works.length > 0) return
     let alive = true
     getWorks()
       .then((list) => {
@@ -31,7 +35,7 @@ export default function ReaderPanel() {
     return () => {
       alive = false
     }
-  }, [readerWorkId, works.length, setWorks])
+  }, [readerWorkId, works.length, setWorks, source])
 
   const collectedTexts = new Set(
     backpack.filter((b) => b.workId === readerWorkId).map((b) => b.text)
@@ -44,6 +48,8 @@ export default function ReaderPanel() {
     .filter(Boolean)
 
   const kindLabel = work?.kind === 'story' ? '知乎故事' : '知乎知识'
+
+  if(!work&&source)return <PanelShell title="来源阅读" icon={BookOpen} subtitle="摘要与原文分开保存，原文请通过来源链接阅读。" className="max-w-3xl"><div className="overflow-y-auto p-6"><SourceCard source={source}/></div></PanelShell>
 
   return (
     <PanelShell

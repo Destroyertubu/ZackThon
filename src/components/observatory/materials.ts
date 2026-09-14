@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import { pbrMaps, SETS, stoneMaterial, timberMaterial, walnutMaterial } from '../scene/pbr'
 import { DECK_LIGHT_POOLS } from './gardenLightLayout'
 import { GARDEN_DECK_TEXTURE_SPAN } from './gardenDeckLayout'
+import type { TideSignal } from '@/features/journeys/scene/atmosphereMotion'
 
 function random(seed: number) {
   let value = seed
@@ -73,7 +74,7 @@ function atlasTexture() {
   return texture
 }
 
-export function createObservatoryMaterials() {
+export function createObservatoryMaterials(signal?: TideSignal) {
   const chart = atlasTexture()
   const deck = new THREE.MeshStandardMaterial({
     ...pbrMaps(SETS.floorDeck, 1, 1), color: '#a6b4ba', roughness: .9,
@@ -82,6 +83,9 @@ export function createObservatoryMaterials() {
   // The scan contains twelve boards. Its tile matches the physical board width,
   // independent of the instanced box's length; top faces share a continuous grain.
   deck.onBeforeCompile = (shader) => {
+    shader.uniforms.tideTime = signal?.time ?? { value: 0 }
+    shader.uniforms.tidePulse = signal?.pulse ?? { value: 0 }
+    shader.uniforms.tideAccent = signal?.color ?? { value: new THREE.Color('#87d8d0') }
     shader.vertexShader = 'varying vec3 gardenFloorPosition;\n' + shader.vertexShader
     shader.vertexShader = shader.vertexShader.replace('#include <uv_vertex>', `
       #include <uv_vertex>
@@ -96,7 +100,7 @@ export function createObservatoryMaterials() {
         }
       #endif
     `)
-    shader.fragmentShader = 'varying vec3 gardenFloorPosition;\n' + shader.fragmentShader
+    shader.fragmentShader = 'varying vec3 gardenFloorPosition;uniform float tideTime,tidePulse;uniform vec3 tideAccent;\n' + shader.fragmentShader
     const poolCode = DECK_LIGHT_POOLS.map(p => `{
       vec2 d = gardenFloorPosition.xz - vec2(${p.x.toFixed(3)}, ${p.z.toFixed(3)});
       gardenWarm += exp(-dot(d,d)*1.15)*${p.power.toFixed(3)};
@@ -109,13 +113,19 @@ export function createObservatoryMaterials() {
       float topSurface=smoothstep(-.03,.015,gardenFloorPosition.y);
       reflectedLight.indirectDiffuse += diffuseColor.rgb*vec3(1.,.49,.14)*gardenWarm*1.1*topSurface;
       reflectedLight.indirectSpecular += vec3(1.,.64,.25)*gardenSheen*.32*topSurface;
+      vec2 tideFloor=gardenFloorPosition.xz-vec2(-2.,-2.);
+      float tideBand=exp(-pow((length(tideFloor)-3.6)/.95,2.))*smoothstep(-.1,.8,tideFloor.y);
+      float caustic=pow(max(0.,sin(gardenFloorPosition.x*13.+sin(gardenFloorPosition.z*8.+tideTime*.7)*1.4)
+        *sin(gardenFloorPosition.z*12.-tideTime*.6)),5.);
+      reflectedLight.indirectDiffuse += tideAccent*tideBand*(.035+caustic*.065+tidePulse*.13)*topSurface;
+      reflectedLight.indirectSpecular += tideAccent*tideBand*caustic*.10*topSurface;
     `)
     shader.fragmentShader = shader.fragmentShader.replace('#include <roughnessmap_fragment>', `
       #include <roughnessmap_fragment>
       roughnessFactor=clamp(roughnessFactor,.3,.63);
     `)
   }
-  deck.customProgramCacheKey = () => 'garden-deck-fixture-pools-v2'
+  deck.customProgramCacheKey = () => 'garden-deck-fixture-pools-v3-tide'
   const brass = new THREE.MeshStandardMaterial({
     ...pbrMaps({ nor: SETS.rock.nor }, 3, 2),
     color: '#bd9756', metalness: 0.83, roughness: 0.43,

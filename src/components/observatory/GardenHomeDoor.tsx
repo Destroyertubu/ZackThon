@@ -1,7 +1,7 @@
+import SpatialWords from '@/features/typography/SpatialWords'
 import { useEffect, useMemo, useState } from 'react'
-import { Html, RoundedBox, useTexture } from '@react-three/drei'
+import { RoundedBox, useTexture } from '@react-three/drei'
 import type { ThreeEvent } from '@react-three/fiber'
-import { House } from 'lucide-react'
 import * as THREE from 'three'
 import type { ObservatoryMaterials } from './materials'
 import { RETURN_GATE_POSITION } from './layout'
@@ -38,8 +38,8 @@ function archTrim(width: number, bottom: number, spring: number, top: number, ra
 }
 
 /** A solid freestanding timber door; its small inset window only hints at the cabin. */
-export default function GardenHomeDoor({ materials: m, onActivate }: {
-  materials: ObservatoryMaterials; onActivate: () => void
+export default function GardenHomeDoor({ materials: m, onActivate, showLabel = true }: {
+  materials: ObservatoryMaterials; onActivate: () => void; showLabel?: boolean
 }) {
   const source = useTexture('/textures/travel/home-window.jpg')
   const [hovered, setHovered] = useState(false)
@@ -113,13 +113,7 @@ export default function GardenHomeDoor({ materials: m, onActivate }: {
       </group>)}
       <mesh position={[0, 2.314, 0.159]} material={m.brass}><torusGeometry args={[0.037, 0.008, 7, 24]} /></mesh>
     </group>
-    <Html position={[0, 2.62, 0.18]} center occlude distanceFactor={6} zIndexRange={[10, 0]}>
-      <button type="button" className="travel-gateway-label to-home" onClick={event => { event.stopPropagation(); onActivate() }}
-        style={{ minHeight: 37, padding: '6px 9px', gap: 7, fontSize: 12, borderColor: hovered ? '#e4c28b' : '#a98b5c99', background: '#30271feb' }}>
-        <House size={15} strokeWidth={1.5} />
-        <span>返回小屋<small style={{ marginTop: 3, fontSize: 8 }}>靠近 E · 点击归家</small></span>
-      </button>
-    </Html>
+    {showLabel && <SpatialWords text="回家" position={[0, 2.08, .17]} width={.85} material onActivate={onActivate}/>}
     <pointLight position={[0, 1.34, 0.23]} color="#ffbd70" intensity={hovered ? 1.4 : 1.1} distance={2.5} decay={2} />
   </group>
 }
