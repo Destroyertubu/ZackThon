@@ -9,7 +9,7 @@ import HomePlayer from '@/components/home/player/HomePlayer'
 import HomeControls from '@/components/home/player/HomeControls'
 import type { HomeInput } from '@/components/home/player/HomePlayer'
 import type { HomeInteraction } from '@/components/home/player/navigation'
-import { BALCONY_SPAWN, HOME_SPAWN, homeCameraTuning } from '@/components/home/player/config'
+import { BALCONY_SPAWN, BALCONY_YAW, HOME_SPAWN, HOME_YAW, homeCameraTuning } from '@/components/home/player/config'
 import { useLocation, useNavigate } from 'react-router'
 import { useGameStore } from '@/state/gameStore'
 import { getQualityProfile } from '@/state/gameStore'
@@ -68,7 +68,9 @@ function LoaderOverlay() {
 export default function Experience() {
   const navigate = useNavigate()
   const location = useLocation()
-  const initialSpawn = (location.state as { spawn?: string } | null)?.spawn === 'balcony-observatory' ? BALCONY_SPAWN : HOME_SPAWN
+  const returningFromObservatory = (location.state as { spawn?: string } | null)?.spawn === 'balcony-observatory'
+  const initialSpawn = returningFromObservatory ? BALCONY_SPAWN : HOME_SPAWN
+  const initialYaw = returningFromObservatory ? BALCONY_YAW : HOME_YAW
   const qualityMode = useGameStore((s) => s.qualityMode)
   const quality = useMemo(() => getQualityProfile(qualityMode), [qualityMode])
   const input = useMemo<HomeInput>(() => ({ keys: new Set() }), [])
@@ -132,7 +134,7 @@ export default function Experience() {
           <Atmosphere />
           <CompanionAtHome />
           <HotspotLayer onLand={enterLand} />
-          <HomePlayer input={input} initialSpawn={initialSpawn} onNearby={setNearby} onInteract={interact} />
+          <HomePlayer input={input} initialSpawn={initialSpawn} initialYaw={initialYaw} onNearby={setNearby} onInteract={interact} />
         </Suspense>
         {quality.postprocessing && (
           <EffectComposer multisampling={0}>

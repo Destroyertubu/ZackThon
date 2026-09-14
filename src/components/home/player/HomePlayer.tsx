@@ -5,9 +5,8 @@ import type { WebGLRenderer } from 'three'
 import { useGameStore } from '@/state/gameStore'
 import { HOME_SPAWN, HOME_YAW, homeCameraTuning, RUN_SPEED, WALK_SPEED } from './config'
 import { bindSceneLook } from '../../scene/controls/bindSceneLook'
-import { moveOnFloor, nearestInteraction } from './navigation'
+import { moveFirstPersonOnFloor, nearestInteraction } from './navigation'
 import type { HomeInteraction } from './navigation'
-import { clampToHome, constrainHomeCamera } from '../../scene/roomEnvelope'
 
 export interface HomeInput { keys: Set<string> }
 const MOVE_KEYS = ['KeyW', 'KeyA', 'KeyS', 'KeyD', 'ArrowUp', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ShiftLeft', 'ShiftRight']
@@ -19,24 +18,23 @@ function setFrameInfoReset(renderer: WebGLRenderer, enabled: boolean) {
   renderer.info.autoReset = enabled
 }
 
-export default function HomePlayer({ input, onNearby, onInteract, initialSpawn = HOME_SPAWN }: {
+export default function HomePlayer({ input, onNearby, onInteract, initialSpawn = HOME_SPAWN, initialYaw = HOME_YAW }: {
   input: HomeInput
   onNearby: (spot: HomeInteraction | null) => void
   onInteract: (spot: HomeInteraction) => void
   initialSpawn?: [number, number, number]
+  initialYaw?: number
 }) {
   const { camera, gl, size } = useThree()
   const panel = useGameStore((s) => s.panel)
   const player = useRef<Group>(null)
   const position = useRef(new Vector3(...initialSpawn))
-  const heading = useRef(HOME_YAW + Math.PI)
+  const heading = useRef(initialYaw + Math.PI)
   const tuning = useMemo(() => homeCameraTuning(), [])
-  const view = useRef({ yaw: HOME_YAW, pitch: tuning.pitch })
+  const view = useRef({ yaw: initialYaw, pitch: tuning.pitch })
   const nearby = useRef<HomeInteraction | null>(null)
   const frameRef = useRef({
-    eye: new Vector3(...initialSpawn).add(new Vector3(0, tuning.eyeHeight, 0)),
-    desired: new Vector3(), lookAt: new Vector3(), direction: new Vector3(), previousCamera: new Vector3(),
-    initialized: false, diagnosticTimer: 0,
+    lookAt: new Vector3(), direction: new Vector3(), diagnosticTimer: 0,
   })
 
   useEffect(() => {
@@ -123,22 +121,11 @@ export default function HomePlayer({ input, onNearby, onInteract, initialSpawn =
     const dx = (Math.cos(viewState.yaw) * right - Math.sin(viewState.yaw) * forward) / length * speed * dt
     const dz = (-Math.sin(viewState.yaw) * right - Math.cos(viewState.yaw) * forward) / length * speed * dt
     const oldX = p.x, oldZ = p.z
-    moveOnFloor(p, dx, dz)
+    moveFirstPersonOnFloor(p, camera.position, dx, dz, tuning.eyeHeight)
     const moved = Math.hypot(p.x - oldX, p.z - oldZ) > 0.0001
     if (moved) heading.current = Math.atan2(p.x - oldX, p.z - oldZ)
     player.current?.position.copy(p)
 
-    // First-person camera: keep the eye on the collision-constrained player position.
-    frame.eye.copy(p).y += tuning.eyeHeight
-    frame.desired.copy(frame.eye)
-    frame.previousCamera.copy(camera.position)
-    if (!frame.initialized) {
-      clampToHome(frame.desired)
-      camera.position.copy(frame.desired)
-    } else {
-      constrainHomeCamera(frame.previousCamera, frame.desired, undefined, dt * 8)
-      camera.position.copy(frame.desired)
-    }
     // Positive pitch tilts the view downward, matching the previous drag gesture.
     const cosPitch = Math.cos(viewState.pitch)
     frame.direction.set(
@@ -148,7 +135,6 @@ export default function HomePlayer({ input, onNearby, onInteract, initialSpawn =
     )
     frame.lookAt.copy(camera.position).add(frame.direction)
     camera.lookAt(frame.lookAt)
-    frame.initialized = true
 
     const spot = panel ? null : nearestInteraction(p)
     if (spot?.id !== nearby.current?.id) { nearby.current = spot; onNearby(spot) }
@@ -157,7 +143,7 @@ export default function HomePlayer({ input, onNearby, onInteract, initialSpawn =
       if (frame.diagnosticTimer > 0.15) {
         frame.diagnosticTimer = 0
         gl.domElement.setAttribute('data-home-player', JSON.stringify({
-          position: p.toArray(), camera: camera.position.toArray(), eye: frame.eye.toArray(),
+          position: p.toArray(), camera: camera.position.toArray(), eye: [p.x, p.y + tuning.eyeHeight, p.z],
           yaw: viewState.yaw, pitch: viewState.pitch, nearby: spot?.id ?? null, paused: !!panel,
           render: { calls: gl.info.render.calls, triangles: gl.info.render.triangles, geometries: gl.info.memory.geometries, textures: gl.info.memory.textures },
         }))

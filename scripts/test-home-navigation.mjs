@@ -10,8 +10,8 @@ const result = await build({
   bundle: true, platform: 'node', format: 'esm', write: false,
 })
 const {
-  canStandAt, moveOnFloor, nearestInteraction, cameraSafeDistance,
-  HOME_INTERACTIONS, HOME_SPAWN, PLAYER_RADIUS, homeCameraTuning,
+  canStandAt, moveOnFloor, moveFirstPersonOnFloor, nearestInteraction, cameraSafeDistance,
+  HOME_INTERACTIONS, HOME_SPAWN, BALCONY_SPAWN, BALCONY_YAW, PLAYER_RADIUS, WALK_SPEED, RUN_SPEED, homeCameraTuning,
   Vector3, Group, Mesh, BoxGeometry, MeshBasicMaterial, Raycaster, DoubleSide,
   ROOM, BALCONY, BALCONY_PORTAL, WALL_PANELS, CLOSED_DOOR, WINDOW_GLAZING,
   BALCONY_PORTAL_FRAME, BALCONY_RAILS, createGableGeometry, createRoofGeometry, ROOF_ANGLE,
@@ -140,6 +140,60 @@ function clearSegment(from, to, label) {
   const hits = ray.intersectObjects(cameraShell.children)
   assert.equal(hits.length, 0, `${label} crosses physical ${hits[0]?.object.name}: ${from.toArray()} -> ${to.toArray()}`)
 }
+
+// Exercise the SAME first-person step used by HomePlayer. The old camera sweep
+// strands the eye at z=-4.65 for x=±0.74 even while the player reaches z=-7.2.
+// Physical shell rays are independent of the legacy shoulder-camera inset.
+let firstPersonFrames = 0
+const eyeHeight = homeCameraTuning().eyeHeight
+function firstPersonStep(player, eye, dx, dz) {
+  const previousEye = eye.clone()
+  moveFirstPersonOnFloor(player, eye, dx, dz, eyeHeight)
+  assert.ok(canStandAt(player.x, player.z), 'first-person step must retain player collision')
+  assert.ok(eye.distanceTo(new Vector3(player.x, player.y + eyeHeight, player.z)) < epsilon,
+    'the first-person eye must never lag behind the collision capsule')
+  clearSegment(previousEye, eye, 'first-person movement')
+  // A 10 cm cube encloses the near plane, even with portrait FOV and camera pitch.
+  for (const x of [-.1, .1]) for (const y of [-.1, .1]) for (const z of [-.1, .1]) {
+    clearSegment(eye, eye.clone().add(new Vector3(x, y, z)), 'first-person near plane')
+  }
+  firstPersonFrames++
+}
+const doorwayRoutes = [-.76, -.74, 0, .74, .76].map(x => [
+  [x, -4.2], [x, -7.2], [x, -4.2],
+])
+for (const side of [-1, 1]) doorwayRoutes.push([
+  [side * 1.5, -4.2], [side * .74, -4.58], [side * .74, -5.39],
+  [side * 1.5, -5.75], [side * .74, -5.39], [side * .74, -4.58], [side * 1.5, -4.2],
+])
+for (const route of [...doorwayRoutes, ...balconyRoutes.map(path =>
+  [...path, ...path.slice().reverse()].map(cell => [cell.x, cell.z]))]) {
+  for (const speed of [WALK_SPEED, RUN_SPEED]) for (const dt of [1 / 60, .05]) {
+    const player = new Vector3(route[0][0], HOME_SPAWN[1], route[0][1])
+    const eye = player.clone().add(new Vector3(0, eyeHeight, 0))
+    for (const [x, z] of route.slice(1)) {
+      let ticks = 0
+      while (Math.hypot(player.x - x, player.z - z) > epsilon && ticks++ < 600) {
+        const dx = x - player.x, dz = z - player.z
+        const fraction = Math.min(1, speed * dt / Math.hypot(dx, dz))
+        firstPersonStep(player, eye, dx * fraction, dz * fraction)
+      }
+      assert.ok(ticks < 600, `first-person route stuck near ${x},${z}`)
+    }
+  }
+}
+assert.ok(canStandAt(BALCONY_SPAWN[0], BALCONY_SPAWN[2]), 'observatory return must spawn on clear floor')
+assert.notEqual(nearestInteraction(new Vector3(...BALCONY_SPAWN))?.id, 'observatory',
+  'return must not drop the player back into the star-gate interaction')
+const returningPlayer = new Vector3(...BALCONY_SPAWN)
+const returningEye = returningPlayer.clone().add(new Vector3(0, eyeHeight, 0))
+for (let tick = 0; tick < 100; tick++) {
+  firstPersonStep(returningPlayer, returningEye, -Math.sin(BALCONY_YAW) * WALK_SPEED / 60,
+    -Math.cos(BALCONY_YAW) * WALK_SPEED / 60)
+}
+assert.ok(returningPlayer.z > -3.6, 'holding forward after returning must enter the room through the doorway')
+console.log(`Home first-person passed: ${firstPersonFrames} frames, doorway edges/corners and full round trips at walk/run speeds; return faces indoors; physical glass and near-plane clearance.`)
+
 // Independent physical bounds mean weakening the production predicate cannot make the tests pass.
 function cameraPositionIsSafe(p, label) {
   assert.ok(isCameraInsideHome(p), `${label} is outside camera navigation regions: ${p.toArray()}`)

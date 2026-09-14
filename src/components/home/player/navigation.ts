@@ -64,6 +64,15 @@ export function moveOnFloor(position: Vector3, dx: number, dz: number): void {
   }
 }
 
+/** The capsule owns first-person collision. A second camera sweep can strand the
+ * eye at the doorway: the old shoulder camera has a wider inset than the player.
+ * The 28 cm capsule already keeps the 5 cm camera near plane clear of the shell.
+ */
+export function moveFirstPersonOnFloor(position: Vector3, eye: Vector3, dx: number, dz: number, eyeHeight: number): void {
+  moveOnFloor(position, dx, dz)
+  eye.copy(position).y += eyeHeight
+}
+
 function cameraBox(b: BoxObstacle): Box3 {
   const c = Math.abs(Math.cos(b.yaw)), s = Math.abs(Math.sin(b.yaw))
   const x = c * b.halfX + s * b.halfZ, z = s * b.halfX + c * b.halfZ

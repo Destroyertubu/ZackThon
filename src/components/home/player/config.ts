@@ -28,7 +28,9 @@ export function homeCameraTuning(): HomeCameraTuning {
 }
 
 export const HOME_SPAWN: [number, number, number] = [3.4, 0.015, 1.9]
-export const BALCONY_SPAWN: [number, number, number] = [1.6, 0.015, -6.45]
+// Return on the doorway centreline, facing indoors and clear of the star gate.
+export const BALCONY_SPAWN: [number, number, number] = [0, 0.015, -6.45]
+export const BALCONY_YAW = Math.PI
 export const HOME_YAW = 0.16
 export const PLAYER_RADIUS = 0.28
 export const WALK_SPEED = 1.8
