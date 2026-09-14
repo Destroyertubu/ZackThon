@@ -20,18 +20,6 @@ export function hashString(s: string): number {
   return h >>> 0
 }
 
-/** 从用户输入提取话题词：逗号/空格/顿号分隔，或对长句取 2~4 字滑窗中的常见双字词 */
-export function extractTopics(raw: string, works: WorkItem[]): string[] {
-  const tokens = raw
-    .split(/[,，、;；\s\n!?？?。]+/)
-    .map((t) => t.trim())
-    .filter((t) => t.length >= 2 && t.length <= 8)
-  const topics = [...new Set(tokens)].slice(0, 6)
-  if (topics.length > 0) return topics
-  // 无有效输入：从内容标签中挑热门
-  return pickRandomLabels(works, 5, hashString(raw || String(Date.now())))
-}
-
 export function pickRandomLabels(works: WorkItem[], n: number, seedNum: number): string[] {
   const freq = new Map<string, number>()
   for (const w of works) for (const l of w.labels) freq.set(l, (freq.get(l) ?? 0) + 1)
@@ -64,35 +52,6 @@ function worksForWord(word: string, works: WorkItem[], rnd: () => number, max = 
     }
   }
   return picked
-}
-
-/**
- * 生成词云大世界：
- * - 每个种子词一个悬浮岛屿集群，环形分布在主世界
- * - 每个词节点带关联作品
- * - 节点位置确定性生成（同一种子同一世界）
- */
-export function generateWorld(seedTopics: string[], works: WorkItem[]): TopicNode[] {
-  const seedNum = hashString(seedTopics.join('|'))
-  const rnd = seededRandom(seedNum)
-  const nodes: TopicNode[] = []
-  const n = seedTopics.length
-  const R = 46 // 集群环半径
-  seedTopics.forEach((word, i) => {
-    const angle = (i / n) * Math.PI * 2 + rnd() * 0.5
-    const r = R * (0.85 + rnd() * 0.3)
-    const workIds = worksForWord(word, works, rnd)
-    nodes.push({
-      id: `seed-${i}`,
-      word,
-      position: [Math.cos(angle) * r, 6 + rnd() * 14, Math.sin(angle) * r],
-      workIds,
-      weight: 0.7 + rnd() * 0.3,
-      isSeed: true,
-      expanded: false,
-    })
-  })
-  return nodes
 }
 
 /** 展开一个话题词：从它的关联作品标签中生成新的关联词节点，散布在该词周围远处 */

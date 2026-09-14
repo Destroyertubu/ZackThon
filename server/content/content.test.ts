@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, rmSync } from 'node:fs';
+import { mkdtempSync, rmSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { ContentStore } from './store.js';
 import { ContentService, normalizeItems } from './service.js';
-import { AccessService } from './access.js';
+import { AccessService, loadAccessConfig } from './access.js';
 import { SynthesisService } from './synthesis.js';
 import { createApp } from '../galaxy/app.js';
 import { ZhihuService } from '../galaxy/zhihu.js';
@@ -14,7 +14,7 @@ import { DatabaseSync } from 'node:sqlite';
 
 const payload = { Code: 0, Data: { Items: [{ Title: '如何观察植物？', Url: 'https://www.zhihu.com/question/123/answer/456', AuthorName: '真实作者', ContentText: '<p>这是上游摘要。</p>', ContentType: 'Answer' }] } };
 const context = { visitorId: 'visitor-a' };
-const config = { version: 1 as const, cookieSecret: 'a'.repeat(64), inviteCodes: ['a-test-invite-code-with-entropy'] };
+const config = { version: 1 as const, cookieSecret: 'a'.repeat(64) };
 
 test('cache survives restart, source identities remain stable, and explicit refresh consumes a new attempt', async () => {
   const dir = mkdtempSync(join(tmpdir(), 'mirror-content-'));
@@ -94,59 +94,79 @@ test('malicious shell text stays in one query argument and cannot choose CLI com
   store.close();
 });
 
-test('invite sessions expire, cannot be invented, and cannot be replaced by a local visitor identity', () => {
-  let now = 1000;
-  const store = new ContentStore(':memory:', () => now);
-  const access = new AccessService(store, config, () => now);
-  const visitor = access.visitor();
-  assert.equal(access.visitor(visitor.cookie).id, visitor.id);
-  assert.notEqual(access.visitor(`${visitor.id}.wrong`).id, visitor.id);
-  assert.throws(() => access.authorize(visitor.id), /访问码/);
-  assert.throws(() => access.exchange('127.0.0.1'), /访问码/);
-  const session = access.exchange(config.inviteCodes[0]);
-  assert.ok(access.authorize(session.token));
-  now = session.expiresAt;
-  assert.throws(() => access.authorize(session.token), /过期/);
-  store.close();
+test('anonymous visitors keep signed identities across restart without requiring or generating invite codes', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'mirror-visitor-'));
+  const file = join(dir, '.env.access.local');
+  try {
+    const legacy = JSON.stringify({ ...config, inviteCodes: ['legacy-code-unused'] });
+    writeFileSync(file, legacy);
+    const loaded = loadAccessConfig(file);
+    assert.deepEqual(loaded, config);
+    assert.equal(readFileSync(file, 'utf8'), legacy);
+    const access = new AccessService(loaded);
+    const visitor = access.visitor();
+    assert.equal(new AccessService(loadAccessConfig(file)).visitor(visitor.cookie).id, visitor.id);
+    assert.notEqual(access.visitor(`${visitor.id}.wrong`).id, visitor.id);
+    const fresh = join(dir, '.env.fresh.local');
+    assert.equal(loadAccessConfig(fresh).cookieSecret.length, 64);
+    assert.equal(JSON.parse(readFileSync(fresh, 'utf8')).inviteCodes, undefined);
+  } finally { rmSync(dir, { recursive: true }); }
 });
 
-test('AI uses validated sources, rejects invented citations, keeps drafts out of public DB and shares per-code budgets', async () => {
+test('AI uses validated sources, rejects invented citations, keeps drafts out of public DB and shares per-visitor budgets', async () => {
   const store = new ContentStore(':memory:');
   const item = normalizeItems(payload, 'zhihu', 'search_summary', new Date().toISOString());
   store.put('seed', item);
   let invented = false;
   const content = new ContentService({ store, runner: async () => ({ choices: [{ message: { content: JSON.stringify({ text: '新的观察计划。', sourceIds: [invented ? 'answer-fake' : 'answer-456'] }) } }] }) });
-  const synthesis = new SynthesisService(content, { global: 3, perCode: 2 });
+  const synthesis = new SynthesisService(content, { global: 3, perVisitor: 2 });
   const input = { mode: 'idea', prompt: '两个材料能产生什么想法', sourceIds: ['answer-456'], personalText: '我的私人笔记' };
-  assert.equal((await synthesis.generate(input, 'same-code')).draft.sources[0].id, 'answer-456');
+  assert.equal((await synthesis.generate(input, 'same-visitor')).draft.sources[0].id, 'answer-456');
   assert.equal(store.db.prepare('SELECT COUNT(*) AS n FROM public_cache').get()?.n, 1);
   invented = true;
-  await assert.rejects(synthesis.generate(input, 'same-code'), /未提供/);
-  await assert.rejects(synthesis.generate(input, 'same-code'), /预算/);
-  await assert.rejects(synthesis.generate({ ...input, sourceIds: ['fake'] }, 'another-code'), /来源/);
+  await assert.rejects(synthesis.generate(input, 'same-visitor'), /未提供/);
+  await assert.rejects(synthesis.generate(input, 'same-visitor'), /预算/);
+  await assert.rejects(synthesis.generate({ ...input, sourceIds: ['fake'] }, 'another-visitor'), /来源/);
   store.close();
 });
 
-test('HTTP validates access, malformed JSON, search provider and keeps private CLI commands unavailable', async () => {
+test('HTTP permits anonymous AI with stable visitor budgets and rejects cross-origin writes and private routes', async () => {
   const store = new ContentStore(':memory:');
-  const content = new ContentService({ store, runner: async () => payload });
-  const access = new AccessService(store, config);
+  let aiCalls = 0;
+  const content = new ContentService({ store, runner: async args => {
+    if (args[0] !== 'answer') return payload;
+    aiCalls++;
+    return { choices: [{ message: { content: JSON.stringify({ text: '新的观察计划。', sourceIds: [] }) } }] };
+  } });
+  const access = new AccessService(config);
   const service = new ZhihuService({ content, snapshot: { fetchedAt: new Date().toISOString(), sourceUrl: '', items: [], details: {} } });
-  const app = createApp(service, { access, synthesis: new SynthesisService(content), refreshPublic: false });
+  const app = createApp(service, { access, synthesis: new SynthesisService(content, { global: 2, perVisitor: 1 }), refreshPublic: false });
   const server = app.listen(0, '127.0.0.1');
   await once(server, 'listening');
-  const port = (server.address() as { port: number }).port;
-  const url = `http://127.0.0.1:${port}`;
+  const url = `http://127.0.0.1:${(server.address() as { port: number }).port}`;
+  const body = JSON.stringify({ mode: 'idea', prompt: 'hello' });
+  const headers = { 'Content-Type': 'application/json' };
   try {
+    assert.equal((await (await fetch(`${url}/api/health`)).json()).synthesis.accessRequired, false);
     assert.equal((await fetch(`${url}/api/search?q=植物&provider=me`)).status, 400);
     assert.equal((await fetch(`${url}/api/me/favorites`)).status, 404);
-    assert.equal((await fetch(`${url}/api/synthesis`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ mode: 'idea', prompt: 'hello' }) })).status, 401);
-    assert.equal((await fetch(`${url}/api/access`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{' })).status, 400);
-    assert.equal((await fetch(`${url}/api/access`, { method: 'POST', headers: { 'Content-Type': 'application/json', Origin: 'https://attacker.invalid' }, body: JSON.stringify({ code: config.inviteCodes[0] }) })).status, 403);
-    const grant = await fetch(`${url}/api/access`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: config.inviteCodes[0] }) });
-    assert.equal(grant.status, 200);
-    assert.match(grant.headers.get('set-cookie') ?? '', /HttpOnly/);
-    assert.equal((await grant.json()).token, undefined);
+    assert.equal((await fetch(`${url}/api/access`, { method: 'POST', headers, body: '{}' })).status, 404);
+    assert.equal((await fetch(`${url}/api/synthesis`, { method: 'POST', headers, body: '{' })).status, 400);
+    assert.equal((await fetch(`${url}/api/synthesis`, { method: 'POST', headers: { ...headers, Origin: 'https://attacker.invalid' }, body })).status, 403);
+    assert.equal(aiCalls, 0);
+    const first = await fetch(`${url}/api/synthesis`, { method: 'POST', headers, body });
+    assert.equal(first.status, 200);
+    assert.equal((await first.json()).draft.text, '新的观察计划。');
+    const cookie = first.headers.get('set-cookie') ?? '';
+    assert.match(cookie, /mirror_visitor=/);
+    assert.match(cookie, /HttpOnly/);
+    assert.ok(!cookie.includes('mirror_access'));
+    const second = await fetch(`${url}/api/synthesis`, { method: 'POST', headers: { ...headers, Cookie: cookie.split(';')[0] }, body });
+    assert.equal(second.status, 429);
+    assert.equal(aiCalls, 1);
+    assert.equal((await fetch(`${url}/api/synthesis`, { method: 'POST', headers, body })).status, 200);
+    assert.equal((await fetch(`${url}/api/synthesis`, { method: 'POST', headers, body })).status, 429);
+    assert.equal(aiCalls, 2);
     const search = await fetch(`${url}/api/search?q=植物`);
     assert.equal(search.status, 200);
     assert.equal((await search.json()).items[0].kind, 'search_summary');

@@ -1,12 +1,10 @@
-import { Routes, Route } from 'react-router'
-import Onboarding from './pages/Onboarding'
+import { Navigate, Routes, Route } from 'react-router'
 import CanvasPage from './pages/CanvasPage'
 import { lazy, Suspense, useEffect } from 'react'
 import { initializePersonalSpace, usePersonalStore } from './features/personal/store'
 import { connectLegacyInventory } from './features/personal/legacyBridge'
 
 const HomePage = lazy(() => import('./pages/HomePage'))
-const WorldPage = lazy(() => import('./pages/WorldPage'))
 const ObservatoryPage = lazy(() => import('./pages/ObservatoryPage'))
 const JourneyPage = lazy(() => import('./features/journeys/JourneyPage'))
 const LandPage = lazy(() => import('./features/journeys/LandPage'))
@@ -18,8 +16,8 @@ export default function App() {
   if (!ready) return <main className="grid min-h-screen place-items-center bg-[#101b25] text-[#e8dcc0]" role="status">正在打开你的思想家园…</main>
   return (
     <Suspense fallback={<main className="grid min-h-screen place-items-center bg-[#101b25] text-[#e8dcc0]" role="status">正在展开这片风景…</main>}><Routes>
-      <Route path="/" element={<Onboarding />} />
-      <Route path="/world" element={<WorldPage />} />
+      <Route path="/" element={<Navigate to="/home" replace />} />
+      <Route path="/world" element={<Navigate to="/land" replace />} />
       <Route path="/home" element={<HomePage />} />
       <Route path="/land" element={<Suspense fallback={<main className="grid min-h-screen place-items-center bg-[#192832] text-[#e8dcc0]">正在展开镜海群岛…</main>}><LandPage /></Suspense>} />
       <Route path="/journey/:realmId" element={<Suspense fallback={<main className="grid min-h-screen place-items-center bg-[#192832] text-[#e8dcc0]">杯中的风景正在展开…</main>}><JourneyPage /></Suspense>} />

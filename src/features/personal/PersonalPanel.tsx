@@ -181,18 +181,14 @@ function SynthesisView() {
   const [draftKind, setDraftKind] = useState<'manual' | 'ai'>('manual')
   const [workId, setWorkId] = useState<string>()
   const [busy, setBusy] = useState(false)
-  const [accessBusy, setAccessBusy] = useState(false)
-  const [accessCode, setAccessCode] = useState('')
-  const [accessNotice, setAccessNotice] = useState('')
   const [error, setError] = useState('')
   const [notice, setNotice] = useState('')
-  const [health, setHealth] = useState<{ configured: boolean; accessRequired: boolean } | null>(null)
+  const [health, setHealth] = useState<{ configured: boolean } | null>(null)
   const request = useRef<AbortController | null>(null)
-  const accessRequest = useRef<AbortController | null>(null)
   useEffect(() => {
     const controller = new AbortController()
-    api<{ synthesis?: { configured: boolean; accessRequired: boolean } }>('/api/health', { signal: controller.signal }).then(result => { if (!controller.signal.aborted) setHealth(result.synthesis ?? { configured: false, accessRequired: true }) }).catch(() => { if (!controller.signal.aborted) setHealth({ configured: false, accessRequired: true }) })
-    return () => { controller.abort(); request.current?.abort(); accessRequest.current?.abort() }
+    api<{ synthesis?: { configured: boolean } }>('/api/health', { signal: controller.signal }).then(result => { if (!controller.signal.aborted) setHealth(result.synthesis ?? { configured: false }) }).catch(() => { if (!controller.signal.aborted) setHealth({ configured: false }) })
+    return () => { controller.abort(); request.current?.abort() }
   }, [])
   const materials = [...data.notes.map(note => ({ key: `note:${note.id}`, title: note.title, text: note.text, kind: '手记' })), ...data.works.map(work => ({ key: `work:${work.id}`, title: work.title, text: work.text, kind: '作品' }))]
   const personalText = materials.filter(item => personal.includes(item.key)).map(item => `【${item.kind}：${item.title}】\n${item.text}`).join('\n\n')
@@ -217,13 +213,6 @@ function SynthesisView() {
     } catch (error) { if (!controller.signal.aborted) setError(errorText(error)) }
     finally { if (!controller.signal.aborted) setBusy(false) }
   }
-  async function unlock(event: FormEvent) {
-    event.preventDefault(); accessRequest.current?.abort(); const controller = new AbortController(); accessRequest.current = controller
-    setAccessBusy(true); setAccessNotice('')
-    try { await api('/api/access', { method: 'POST', signal: controller.signal, body: JSON.stringify({ code: accessCode.trim() }) }); if (!controller.signal.aborted) { setAccessCode(''); setAccessNotice('访问码已验证，本次会话可以使用 AI 合成。') } }
-    catch (error) { if (!controller.signal.aborted) setAccessNotice(errorText(error)) }
-    finally { if (!controller.signal.aborted) setAccessBusy(false) }
-  }
   return <div className="ms-stack">
     <div className="ms-letter"><span>一次思想的小实验</span><p>选择最多四份收藏，让它们围绕一个问题相遇。手记和作品只在你勾选后加入 AI 请求；生成的草稿由你编辑、采纳。</p></div>
     <fieldset className="ms-materials"><legend>01 · 选择材料 <span>{selected.length} / 4</span></legend>{sources.length ? sources.map(source => <label key={source.id} className="ms-choice"><input type="checkbox" checked={selected.includes(source.id)} disabled={busy || !selected.includes(source.id) && selected.length >= 4} onChange={event => setSelected(event.target.checked ? [...selected, source.id] : selected.filter(id => id !== source.id))}/><span><strong>{source.title}</strong><small>{source.author || source.source}</small></span></label>) : <p className="ms-muted">还没有收藏，可以先写下自己的问题。</p>}</fieldset>
@@ -231,8 +220,7 @@ function SynthesisView() {
     {personal.length > 0 && <p className={personalText.length > 8000 ? 'ms-error' : 'ms-muted'}>将发送已勾选的个人材料 {personalText.length} / 8000 字{personalText.length > 8000 ? '，请减少所选材料。' : '。'}</p>}
     <label className="ms-field">02 · 这次想追问<textarea rows={3} value={prompt} maxLength={2000} disabled={busy} onChange={event => setPrompt(event.target.value)} placeholder="比如：照片里的留白，能否帮助我理解音乐里的停顿？"/></label>
     <div className="ms-inline"><button className="ms-button ms-button-primary" type="button" onClick={manual}><Feather size={16}/> 从手工模板开始</button><button className="ms-button" type="button" disabled={!health?.configured || busy || !prompt.trim() || personalText.length > 8000} onClick={generate}>{busy ? <LoaderCircle className="ms-spin" size={16}/> : <Sparkles size={16}/>} {busy ? '正在合成草稿' : '请 AI 帮我连接'}</button>{busy && <button className="ms-button" onClick={() => { request.current?.abort(); setBusy(false); setNotice('已停止等待草稿；已发送的服务请求可能仍消耗额度。') }}>停止</button>}</div>
-    <p className="ms-muted">{health === null ? '正在查看 AI 服务状态……' : health.configured ? 'AI 合成受访问码和每日额度限制；手工创作随时可用。' : 'AI 服务暂未连接，手工创作完整可用。'}</p>
-    {health?.configured && health.accessRequired && <details className="ms-details"><summary>我有 AI 访问码</summary><form className="ms-inline" onSubmit={unlock}><label className="ms-field ms-grow">访问码<input type="password" autoComplete="off" value={accessCode} maxLength={200} onChange={event => setAccessCode(event.target.value)} placeholder="仅用于开启本次 AI 会话"/></label><button className="ms-button" disabled={!accessCode.trim() || accessBusy}>{accessBusy ? '验证中' : '验证访问码'}</button></form>{accessNotice && <p className="ms-notice" role="status">{accessNotice}</p>}</details>}
+    <p className="ms-muted">{health === null ? '正在查看 AI 服务状态……' : health.configured ? 'AI 合成可直接使用，每日额度有限；手工创作随时可用。' : 'AI 服务暂未连接，手工创作完整可用。'}</p>
     {error && <p className="ms-error" role="alert">{error}</p>}{notice && <p className="ms-notice" role="status">{notice}</p>}
     {!!draft && <div className="ms-editor ms-stack"><div className="ms-inline"><span className="ms-eyebrow">03 · {draftKind === 'ai' ? 'AI 创作草稿 · 请核对并编辑' : '手工创作模板 · 由你亲自完成'}</span></div><label className="ms-field">作品标题<input maxLength={120} value={draftTitle} onChange={event => setDraftTitle(event.target.value)}/></label><label className="ms-field">让它成为你的表达<textarea rows={13} maxLength={10000} value={draft} onChange={event => { setDraft(event.target.value); setNotice('') }}/></label><button className="ms-button ms-button-primary ms-fit" disabled={!draft.trim() || busy} onClick={() => { const id = usePersonalStore.getState().saveWork({ id: workId, title: draftTitle.trim() || '材料相遇之后', text: draft, sourceIds: draftSources, kind: 'idea' }); setWorkId(id); setNotice('作品已保存在「我的作品」，材料来源会一同保留。') }}><Check size={16}/>{workId ? '保存作品修改' : '采纳为我的作品'}</button></div>}
   </div>

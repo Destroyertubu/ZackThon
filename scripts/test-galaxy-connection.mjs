@@ -94,7 +94,7 @@ async function componentModule(path, realDependencies = []) {
     'react/jsx-runtime': `export const jsx=(type,props)=>({type,props}),jsxs=jsx,Fragment='Fragment';`,
     'react-router': `export const useNavigate=()=>globalThis.__galaxyConnectionHarness.navigate;
       export const useLocation=()=>globalThis.__galaxyConnectionHarness.location;
-      export const Routes='Routes',Route='Route';`,
+      export const Routes='Routes',Route='Route',Navigate='Navigate';`,
     '@react-three/fiber': `export const Canvas='Canvas';`,
     '@react-three/drei': `export const useProgress=(fn)=>fn({progress:100});`,
     'lucide-react': icons.map(name => `export const ${name}=${JSON.stringify(name)};`).join('\n'),
@@ -191,6 +191,12 @@ try {
   }
   host()
   const registeredRoutes = elements(app.default()).filter(element => element.type === 'Route')
+  for (const [path, destination] of [['/', '/home'], ['/world', '/land']]) {
+    const redirect = registeredRoutes.find(element => element.props.path === path)?.props.element
+    assert.equal(redirect?.type, 'Navigate')
+    assert.equal(redirect.props.to, destination)
+    assert.equal(redirect.props.replace, true, 'retired generator URLs cannot trap browser Back')
+  }
   for (const [path, target] of [['/galaxy', './features/galaxy'], ['/land', './features/journeys/LandPage'], ['/journey/:realmId', './features/journeys/JourneyPage']]) {
     const route = registeredRoutes.find(element => element.props.path === path)
     assert.ok(route, `main app must register ${path}`)

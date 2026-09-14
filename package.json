@@ -14,6 +14,7 @@
     "preview": "npm run start",
     "test:observatory": "node scripts/test-observatory-navigation.mjs",
     "test:look": "node scripts/test-scene-look.mjs",
+    "test:jump": "tsx --test scripts/test-jump.ts",
     "test:garden": "node scripts/test-garden-recipes.mjs",
     "test:galaxy": "tsx --test server/galaxy/*.test.ts src/features/galaxy/lib/*.test.ts src/features/galaxy/components/space/*.test.ts",
     "test:galaxy-connection": "node scripts/test-galaxy-connection.mjs",

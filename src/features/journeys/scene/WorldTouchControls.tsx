@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react'
 import type { PointerEvent as ReactPointerEvent } from 'react'
 import DirectionIcon from '@/features/presentation/DirectionIcon'
+import JumpButton from '@/features/presentation/JumpButton'
 
 type MoveCode = 'KeyW' | 'KeyA' | 'KeyS' | 'KeyD'
 const DIRECTIONS: readonly { code: MoveCode; label: string; arrow: string; column: number; row: number }[] = [
@@ -9,7 +10,7 @@ const DIRECTIONS: readonly { code: MoveCode; label: string; arrow: string; colum
   { code: 'KeyS', label: '后退', arrow: '↓', column: 2, row: 2 },
   { code: 'KeyD', label: '向右移动', arrow: '→', column: 3, row: 2 },
 ]
-function emit(code: MoveCode, active: boolean) { window.dispatchEvent(new CustomEvent('wanderwise:world-move', { detail: { code, active } })) }
+function emit(code: MoveCode | 'Space', active: boolean) { window.dispatchEvent(new CustomEvent('wanderwise:world-move', { detail: { code, active } })) }
 
 /** DOM sibling of Canvas. Only sends movement state; it never invokes a scene action. */
 export default function WorldTouchControls({ disabled = false }: { disabled?: boolean }) {
@@ -47,7 +48,7 @@ export default function WorldTouchControls({ disabled = false }: { disabled?: bo
     if (!alreadyHeld) emit(code, true)
   }
   const release = (event: ReactPointerEvent<HTMLButtonElement>) => { event.preventDefault(); event.stopPropagation(); releasePointer(event.pointerId) }
-  return <div className="world-touch-controls" role="group" aria-label="行走方向" style={{
+  return <><JumpButton disabled={disabled} onJump={() => emit('Space', true)}/><div className="world-touch-controls" role="group" aria-label="行走方向" style={{
     position: 'absolute', left: 'max(18px, env(safe-area-inset-left))', bottom: 'max(20px, env(safe-area-inset-bottom))',
     display: 'grid', gridTemplateColumns: 'repeat(3, 48px)', gridTemplateRows: 'repeat(2, 48px)', gap: 6,
     zIndex: 20, touchAction: 'none', userSelect: 'none', opacity: disabled ? .35 : 1,
@@ -60,5 +61,5 @@ export default function WorldTouchControls({ disabled = false }: { disabled?: bo
         background: 'rgba(30,42,47,.65)', color: '#f1dfc4', fontSize: 24, lineHeight: 1,
         boxShadow: '0 3px 12px rgba(0,0,0,.17)', backdropFilter: 'blur(8px)', touchAction: 'none', WebkitTapHighlightColor: 'transparent',
       }}><DirectionIcon code={code}/></button>)}
-  </div>
+  </div></>
 }

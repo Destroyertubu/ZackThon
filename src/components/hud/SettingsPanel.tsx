@@ -98,7 +98,7 @@ export default function SettingsPanel() {
         </div>
         {error && <p role="alert" className="text-xs leading-relaxed text-red-400/90">{error}</p>}
         <p className="rounded-md border border-[#c9973f]/20 bg-[#c9973f]/5 p-3 text-sm leading-relaxed text-[#e8dcc0]">
-          AI 在小屋合成台用访问码解锁。
+          AI 可在小屋合成台直接使用。
           <span className="mt-1 block text-xs text-[#8a8f9c]">精选旅程和手工创作可直接使用。</span>
         </p>
       </section>

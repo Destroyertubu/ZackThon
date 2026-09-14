@@ -38,7 +38,7 @@ npm start
 - 返回旅程时恢复相同 `journeyId`、`stationId` 和 `pose`，继续使用 `/journey/:realmId?trip=...`；普通入口返回 `/observatory` 或已登记的陆地位置。
 - 搜索更新 URL 时保留 `window.history.state`，不丢失宿主路由键与进入状态；输入、IME、阅读和弹层期间不得被返回快捷键打断。
 
-旧 `/world` 及其存档继续保留。星系按路由懒加载，使用宿主 React/Three，不创建第二个 React root，也不在观星台 Canvas 内再嵌套星系渲染器。
+2026-09-14 已按要求移除首页“生成我的世界”与旧词云场景。`/` 直接进入 `/home`，旧 `/world` 链接以 replace 方式转到 `/land`；旧收藏、笔记和历史记录继续保留。星系按路由懒加载，使用宿主 React/Three，不创建第二个 React root，也不在观星台 Canvas 内再嵌套星系渲染器。
 
 ## 内容与共享存储
 
