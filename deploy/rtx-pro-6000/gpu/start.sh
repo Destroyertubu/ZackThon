@@ -25,4 +25,4 @@ docker run -d --name wanderwise-v4-gpu --restart unless-stopped --init \
   --mount "type=bind,src=$task_state/ipc,dst=/run/wanderwise" \
   --mount type=volume,src=wanderwise-v4-gpu-profile,dst=/home/ubuntu/wanderwise-profile \
   --log-opt max-size=10m --log-opt max-file=3 \
-  wanderwise-gpu:20260913
+  wanderwise-gpu:20260914-latency

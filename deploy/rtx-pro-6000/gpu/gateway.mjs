@@ -4,6 +4,7 @@ import { chmod, mkdir, unlink, readFile } from 'node:fs/promises';
 import { createHash, randomBytes, timingSafeEqual } from 'node:crypto';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 // Only these two Unix sockets cross the renderer's network namespace.
 const ipc = process.env.WANDERWISE_GPU_IPC || join(homedir(), '.local/state/wanderwise-gpu/ipc');
@@ -62,8 +63,22 @@ setInterval(() => {
 }, 60_000).unref();
 await unlink(originPath).catch(error => { if (error.code !== 'ENOENT') throw error; });
 
-function proxy(request, response, target) {
-  const upstream = http.request({ ...target, path: request.url, method: request.method, headers: request.headers }, reply => {
+function proxy(request, response, target, decorate = false) {
+  const headers = { ...request.headers, ...(decorate ? { 'accept-encoding': 'identity' } : {}) };
+  if (decorate) { delete headers['if-none-match']; delete headers['if-modified-since']; }
+  const upstream = http.request({ ...target, path: request.url, method: request.method, headers }, reply => {
+    if (decorate && reply.statusCode === 200 && reply.headers['content-type']?.includes('text/html')) {
+      const chunks = [];
+      reply.on('data', chunk => chunks.push(chunk));
+      reply.on('end', () => {
+        const body = Buffer.from(Buffer.concat(chunks).toString('utf8').replace('</body>', '<script src="/cloud/client.js"></script></body>'));
+        const outgoing = { ...reply.headers, 'content-length': body.length, 'cache-control': 'no-store' };
+        for (const key of ['etag', 'last-modified', 'transfer-encoding']) delete outgoing[key];
+        response.writeHead(reply.statusCode, outgoing); response.end(body);
+      });
+      reply.on('error', () => response.destroy());
+      return;
+    }
     response.writeHead(reply.statusCode, reply.headers);
     reply.pipe(response);
     reply.on('error', () => response.destroy());
@@ -82,7 +97,20 @@ await new Promise((resolve, reject) => origin.once('error', reject).listen(origi
 await chmod(originPath, 0o660);
 
 const stream = http.createServer(async (req, res) => {
-  try { if (await authorize(req, res)) proxy(req, res, { socketPath: streamPath }); }
+  try {
+    if (!await authorize(req, res)) return;
+    if (req.method === 'GET' && req.url === '/cloud/client.js') {
+      const body = await readFile(fileURLToPath(new URL('./stream-client.js', import.meta.url)));
+      res.writeHead(200, { 'Content-Type': 'text/javascript; charset=utf-8', 'Cache-Control': 'no-store' });
+      res.end(body); return;
+    }
+    if (req.method === 'GET' && req.url === '/cloud/status') {
+      const body = await readFile(join(ipc, 'metrics.json')).catch(() => Buffer.from('{}'));
+      res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' });
+      res.end(body); return;
+    }
+    proxy(req, res, { socketPath: streamPath }, req.method === 'GET' && req.url.split('?')[0] === '/');
+  }
   catch { if (!res.headersSent) res.writeHead(400); res.end(); }
 });
 stream.on('upgrade', (request, socket, head) => {
@@ -90,6 +118,7 @@ stream.on('upgrade', (request, socket, head) => {
   if (!session) { socket.end('HTTP/1.1 401 Unauthorized\r\nConnection: close\r\n\r\n'); return; }
   if (!sameOrigin(request)) { socket.end('HTTP/1.1 403 Forbidden\r\nConnection: close\r\n\r\n'); return; }
   session.sockets.add(socket);
+  socket.setNoDelay(true);
   const upstream = net.connect(streamPath);
   upstream.on('connect', () => {
     const headers = [];

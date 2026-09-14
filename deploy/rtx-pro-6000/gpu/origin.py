@@ -1,6 +1,7 @@
 """Expose only the existing app inside the otherwise networkless renderer."""
 import http.client
 import http.server
+import hashlib
 import json
 import pathlib
 import socket
@@ -18,11 +19,30 @@ class Handler(http.server.BaseHTTPRequestHandler):
 
     def forward(self):
         length = int(self.headers.get('Content-Length', '0'))
+        if self.path == '/__cloud/version' and self.command == 'GET':
+            connection = OriginConnection('127.0.0.1', 4187, timeout=5)
+            try:
+                connection.request('GET', '/', headers={'Accept-Encoding': 'identity', 'Cache-Control': 'no-cache'})
+                response = connection.getresponse()
+                if response.status != 200 or 'text/html' not in response.getheader('Content-Type', ''):
+                    self.send_error(503)
+                    return
+                body = json.dumps({'build': hashlib.sha256(response.read()).hexdigest()}).encode()
+                self.send_response(200)
+                self.send_header('Content-Type', 'application/json')
+                self.send_header('Content-Length', str(len(body)))
+                self.send_header('Cache-Control', 'no-store')
+                self.end_headers()
+                self.wfile.write(body)
+            finally:
+                connection.close()
+            return
         if self.path == '/__cloud/status.js' and self.command == 'GET':
             body = pathlib.Path('/opt/wanderwise/cloud-status.js').read_bytes()
             self.send_response(200)
             self.send_header('Content-Type', 'text/javascript; charset=utf-8')
             self.send_header('Content-Length', str(len(body)))
+            self.send_header('Cache-Control', 'no-store')
             self.end_headers()
             self.wfile.write(body)
             return
@@ -32,9 +52,13 @@ class Handler(http.server.BaseHTTPRequestHandler):
                 return
             try:
                 data = json.loads(self.rfile.read(length))
-                allowed = ('renderer', 'fps', 'triangles', 'drawCalls', 'path', 'at')
+                allowed = ('renderer', 'fps', 'p95Ms', 'triangles', 'drawCalls', 'path', 'at',
+                           'build', 'landscape', 'islandCount', 'pointerLocked', 'lookAllowed', 'width', 'height')
                 data = {key: data[key] for key in allowed if isinstance(data.get(key), (str, int, float))}
-                pathlib.Path('/run/wanderwise/metrics.json').write_text(json.dumps(data))
+                target = pathlib.Path('/run/wanderwise/metrics.json')
+                temporary = target.with_suffix('.tmp')
+                temporary.write_text(json.dumps(data))
+                temporary.replace(target)
             except (ValueError, TypeError, AttributeError):
                 self.send_error(400)
                 return
@@ -49,12 +73,18 @@ class Handler(http.server.BaseHTTPRequestHandler):
         document = self.headers.get('Sec-Fetch-Dest') == 'document'
         if document:
             headers = {k: v for k, v in headers.items() if k.lower() not in ('if-none-match', 'if-modified-since')}
+            headers['Accept-Encoding'] = 'identity'
         connection = OriginConnection('127.0.0.1', 4187, timeout=90)
         try:
             connection.request(self.command, self.path, body, headers)
             response = connection.getresponse()
             decorate = document and response.status == 200 and 'text/html' in response.getheader('Content-Type', '')
-            page = response.read().replace(b'</body>', b'<script src="/__cloud/status.js"></script></body>') if decorate else None
+            page = None
+            if decorate:
+                page = response.read()
+                build = hashlib.sha256(page).hexdigest()
+                script = f'<script data-cloud-build="{build}" src="/__cloud/status.js"></script></body>'.encode()
+                page = page.replace(b'</body>', script)
             self.send_response(response.status)
             for key, value in response.getheaders():
                 blocked = ('connection', 'transfer-encoding', 'keep-alive') + (('content-length', 'etag', 'cache-control', 'last-modified') if decorate else ())
@@ -83,4 +113,5 @@ class Handler(http.server.BaseHTTPRequestHandler):
         pass
 
 
-http.server.ThreadingHTTPServer(('127.0.0.1', 4187), Handler).serve_forever()
+if __name__ == '__main__':
+    http.server.ThreadingHTTPServer(('127.0.0.1', 4187), Handler).serve_forever()
