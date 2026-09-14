@@ -14,14 +14,14 @@
 
 容器 `wanderwise-v4-gpu` 使用 `--network none`、非 root 用户、`cap-drop ALL`、`no-new-privileges`，只挂载专用 IPC 目录和浏览器数据卷，不挂载代码、SSH、宿主桌面或 Docker socket。浏览器保持默认沙箱设置，未添加禁用沙箱参数。容器没有独立外网访问；原文外链可在普通网页入口阅读。
 
-两个 Unix socket 连接云浏览器与项目及视频网关。网关仅监听宿主 `127.0.0.1:4190`；Cloudflare 隧道提供公网 HTTPS。云渲染登录要求独立访问码；服务器检查来源，登录错误限流，使用有效期两小时的 HttpOnly / SameSite=Strict / Secure Cookie。匿名 HTTP API 和 WebSocket 均拒绝访问。访问码重启后保留；网关重启会要求重新登录。
+两个 Unix socket 连接云浏览器与项目及视频网关。网关仅监听宿主 `127.0.0.1:4190`；Cloudflare 隧道提供公网 HTTPS。云渲染网址打开即用，HTTP 页面、API 和同源 WebSocket 无需访问码或登录 Cookie。HTTP 请求若携带外部 Origin 则拒绝；WebSocket 必须携带匹配的同源 Origin。Selkies 服务凭据仅由后端注入到 Unix socket 上游，不发送给访问者。旧 `/cloud/login` 链接直接跳回首页。
 
-这是单人预览会话，持有访问码的人控制同一云端浏览器。普通网页访客各自的本机数据相互独立。未来多人云渲染应为每位玩家分配独立容器与数据卷，不能把本会话作为多人隔离实现。
+这是公开的单人预览会话，访问云渲染网址的人控制同一云端浏览器。普通网页访客各自的本机数据相互独立。未来多人云渲染应为每位玩家分配独立容器与数据卷，不能把本会话作为多人隔离实现。
 
 - 项目公共数据：`artifacts/content-service/content.sqlite3`。
 - 云浏览器个人数据：Docker 卷 `wanderwise-v4-gpu-profile`；不要用 `docker volume rm` 清理它。
-- 云渲染访问码：`~/.local/state/wanderwise-gpu/session.env`，权限 `0600`。
-- 私有运行指标：`~/.local/state/wanderwise-gpu/ipc/metrics.json`，只记录绘图设备、帧率、绘制量和当前路由。没有指标的场景不沿用上一个场景的 FPS。
+- 内部 Selkies 服务凭据：`~/.local/state/wanderwise-gpu/session.env`，权限 `0600`，仅供容器与网关使用，不是访客访问码。
+- 运行指标文件：`~/.local/state/wanderwise-gpu/ipc/metrics.json`，只记录绘图设备、帧率、绘制量和当前路由。没有指标的场景不沿用上一个场景的 FPS。
 - 原本 Mac 的浏览器 IndexedDB 不会自动同步到云端。可使用项目已有的个人数据导入导出。
 - 知乎官方 CLI 的 macOS 钥匙串认证未迁移；服务器当前能用精选资料和已迁移 SQLite 缓存，实时知乎检索、直答及 AI 合成尚未配置。
 
@@ -45,6 +45,8 @@ journalctl --user -u wanderwise-v4-gpu-gateway -n 30 --no-pager
 ```
 
 只重启网页/API：`systemctl --user restart wanderwise-v4`。
+
+只更新网关后：`systemctl --user restart wanderwise-v4-gpu-gateway`。串流短暂重连，不需要登录，也不需要重启浏览器容器或隧道。
 
 暂停 GPU 会话：`docker stop wanderwise-v4-gpu`；恢复：`docker start wanderwise-v4-gpu`。容器设置 `unless-stopped` 自动重启策略。停止时保留浏览器卷。
 
@@ -70,10 +72,10 @@ bash deploy/rtx-pro-6000/gpu/start.sh
 
 `start.sh` 依赖本机已核验的 GPU UUID、DRM 节点与用户组。迁到其他主机时须重新核验，不能原样使用设备索引。
 
-HTTP 访问隔离检查（不会打印凭据）：
+匿名 HTTP 与 WebSocket 握手、跨源隔离检查（无需凭据文件或 Cookie）：
 
 ```sh
-/usr/bin/python3 deploy/rtx-pro-6000/gpu/verify.py https://CURRENT-GPU-URL.trycloudflare.com ~/.local/state/wanderwise-gpu/session.env
+/usr/bin/python3 deploy/rtx-pro-6000/gpu/verify.py https://CURRENT-GPU-URL.trycloudflare.com
 ```
 
 ## 2026-09-14：云页面更新与视角延迟修复
@@ -81,7 +83,7 @@ HTTP 访问隔离检查（不会打印凭据）：
 网页部署和云浏览器加载是两个独立环节。原容器持续运行约 21 小时，部署新的 `dist` 不会替换 Firefox 已加载的 JavaScript。
 
 - 内部代理在页面中注入实际 HTML 的 SHA-256，并提供仅容器内可用的 `/__cloud/version`。每 15 秒检查发布变化；没有按键、阅读或编辑面板且闲置 5 秒后才刷新，沿用原网址和浏览器个人数据。
-- 登录后的 `/cloud/status` 返回当前浏览器的版本、GPU、帧率、浮岛数量、鼠标状态和路由。与 `/cloud/client.js` 一样受原访问码认证保护。状态不包含个人内容，写入指标采用原子替换。
+- `/cloud/status` 返回当前浏览器的版本、GPU、帧率、浮岛数量、鼠标状态和路由。与 `/cloud/client.js` 一样可匿名访问。状态不包含个人内容，写入指标采用原子替换。
 - 固定 Selkies 版本用覆盖视频的 `overlayInput` 搜索输入接收游戏按键。适配器将其视作串流输入，普通设置输入仍保留正常行为。观看端取得鼠标锁定后，再向云端发送 F，复用 Selkies 的 `m2` 相对位移和每帧合并；无需改动供应商代码。
 - 一次 Esc 释放两端鼠标。E/H 和远端面板打开时释放观看端，避免额外 Esc 关闭刚打开的阅读或调酒界面。云端新场景不自行锁定鼠标，解锁时忽略绝对悬停位置；仍允许转发的触屏拖动。普通浏览器保持原有自然鼠标视角。
 - E/H 在云端游戏也直接释放鼠标锁，即使附近没有可交互物件，也不会遗留只有服务器锁定的状态；此操作不发送 Esc、不关闭面板。
@@ -89,7 +91,7 @@ HTTP 访问隔离检查（不会打印凭据）：
 - 默认为 1920×1080、目标 60 FPS、NVENC H.264 CBR 8 Mbps，提供 16 Mbps 精细档；关闭 4:4:4 并开启持续视频模式。按键和鼠标继续使用原独立输入通道。网关显式关闭 TCP Nagle 延迟。
 - 健康检查同时检查应用 HTTP 和实际的 Unix 视频 socket；容器没有开放 TCP 8080，不能用它判断串流健康。
 
-GPU 更新前后的配置、镜像记录保存在服务器 `artifacts/deploy-backups/gpu-latency-20260914/`；旧容器保留为 `wanderwise-v4-gpu-before-latency-20260914`。浏览器数据卷、原访问码和两个公网隧道均保留。网关重启会使原登录 Cookie 失效，需要使用原访问码重新登录。
+GPU 更新前后的配置、镜像记录保存在服务器 `artifacts/deploy-backups/gpu-latency-20260914/`；旧容器保留为 `wanderwise-v4-gpu-before-latency-20260914`。浏览器数据卷、内部服务凭据和两个公网隧道均保留。2026-09-15 起取消访客访问码与登录 Cookie，网关重启仅需串流重连。
 
 最新完整花园的 10 次采样：实际渲染平均 54.6 FPS，视频平均 59.4 FPS，各窗口的 p95 帧时指标平均 24.8 ms；公网往返平均 407 ms，范围约 394–419 ms。测试来自本机 Chrome 连接当前 Cloudflare 入口，不能代表所有网络。码率减半和输入修复不能消除这条网络路径的往返时间。当前仍采用 WebSocket + HTTP/2 隧道；进一步降低延迟需要测试就近入口及 WebRTC 直连/中继的网络条件，而非仅增加 GPU 预算。Selkies 的可选 WebRTC 传输见[官方说明](https://github.com/selkies-project/selkies)。
 

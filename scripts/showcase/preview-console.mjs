@@ -1,13 +1,13 @@
 // Read-only browser acceptance of a completed console video in a fresh profile.
-// Credentials are read over SSH into memory and are never printed or saved.
-import { spawn, execFileSync } from 'node:child_process';
+// No login or stored browser session is required.
+import { spawn } from 'node:child_process';
 import { mkdtemp, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import assert from 'node:assert/strict';
 
 const [base, expectedJob, screenshot] = process.argv.slice(2);
-if (!base?.startsWith('https://') || !/^[a-f0-9-]{36}$/.test(expectedJob || '')) throw new Error('Expected console HTTPS origin and completed job UUID');
+if (!/^https?:\/\//.test(base || '') || !/^[a-f0-9-]{36}$/.test(expectedJob || '')) throw new Error('Expected console origin and completed job UUID');
 const profile = await mkdtemp(join(tmpdir(), 'showcase-console-preview-'));
 const browser = spawn('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', ['--headless=new', '--no-first-run', '--no-default-browser-check', '--disable-sync', '--remote-debugging-address=127.0.0.1', '--remote-debugging-port=0', '--window-size=1440,1100', `--user-data-dir=${profile}`, 'about:blank'], { stdio: 'ignore' });
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -49,10 +49,10 @@ try {
   };
   await rpc('Page.enable', {}, sessionId);
   await rpc('Page.navigate', { url: base.replace(/\/$/, '') + '/showcase' }, sessionId);
-  await wait('Boolean(document.querySelector("input[name=code]"))');
-  const code = execFileSync('ssh', ['RTX-PRO-6000', "python3 -c 'from pathlib import Path; print(next(x.split(\"=\",1)[1] for x in (Path.home()/\".local/state/wanderwise-gpu/session.env\").read_text().splitlines() if x.startswith(\"SELKIES_BASIC_AUTH_PASSWORD=\")), end=\"\")'"], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
-  await evaluate(`document.querySelector('input[name=code]').value = ${JSON.stringify(code)}; document.querySelector('form').requestSubmit(); true`);
   await wait('Boolean(document.getElementById("console") && !document.getElementById("console").hidden)');
+  assert(await evaluate('!document.querySelector("input[type=password], form[action*=login]")'));
+  const cookies = await rpc('Network.getCookies', { urls: [base.replace(/\/$/, '') + '/showcase'] }, sessionId);
+  assert(!cookies.cookies.some(cookie => cookie.name === 'wanderwise_showcase'));
   await wait('Boolean(document.querySelector("video")?.readyState >= 3)');
   const before = await evaluate('(()=>{const v=document.querySelector("video");return {src:v.getAttribute("src"),width:v.videoWidth,height:v.videoHeight,duration:v.duration,readyState:v.readyState,visible:!v.hidden}})()');
   assert(before.src.includes(expectedJob));
@@ -65,7 +65,7 @@ try {
     const result = await rpc('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true }, sessionId);
     await writeFile(screenshot, Buffer.from(result.data, 'base64'));
   }
-  console.log(JSON.stringify({ preview: 'passed', jobId: expectedJob, browser: version.Browser, ...before, ...after }));
+  console.log(JSON.stringify({ anonymousPreview: 'passed', jobId: expectedJob, browser: version.Browser, ...before, ...after }));
 } finally {
   socket?.close(); browser.kill('SIGTERM');
   for (let i = 0; i < 50 && browser.exitCode === null; i++) await delay(100);

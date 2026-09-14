@@ -2,7 +2,7 @@
 
 本目录只服务 `Wanderwise-showcase`。不会重启或操控旧的 `wanderwise-v4-gpu`、其浏览器卷、网关或隧道。
 
-控制台为新服务的 `/showcase`，仅绑定宿主 `127.0.0.1:4192`，由独立 `wanderwise-showcase-tunnel.service` 暴露 HTTPS。登录在后端读取原 GPU 访问码文件，使用独立、两小时有效的 HttpOnly Cookie；不会把访问码注入页面、容器环境、日志或产物。
+控制台为新服务的 `/showcase`，仅绑定宿主 `127.0.0.1:4192`，由独立 `wanderwise-showcase-tunnel.service` 暴露 HTTPS。直接打开网址即可使用页面、任务控制和历史产物下载，不需要访问码、登录 Cookie 或密钥文件。启动与取消仍检查请求同源，私有 viewer 控制通道不对公网开放。
 
 录制任务互斥。每次创建新的无网络 GPU 容器、Xvfb `:30`、Firefox profile、IPC 和输出目录，持续使用这个 profile 完成八镜。GPU 仍与其他进程共享算力；独立输入和存档不代表零性能影响。新镜像从已验证的 `wanderwise-gpu:20260914-latency` 派生，保留 EGL/DRI3 启动但移除 Selkies 及 TURN，不再编码公网串流。
 
@@ -34,13 +34,13 @@ FFmpeg 整页采集包括 DOM 与 WebGL，1920×1080、30 FPS、`-draw_mouse 0`�
 SHOWCASE_LOCAL_VIEWER=4193 SHOWCASE_STATE=/tmp/wanderwise-showcase-qa node --import tsx server/showcase/index.ts
 ```
 
-访问 `http://127.0.0.1:4193/observatory?showcase=1&renderRuntime=rtx`，使用单独浏览器 profile。该端口不需要云访问码，只绑定 loopback，并且只在明确设置环境变量时启动。没有访问码文件时控制台会采用不可见的随机口令。
+访问 `http://127.0.0.1:4193/observatory?showcase=1&renderRuntime=rtx`，使用单独浏览器 profile。该端口只绑定 loopback，并且只在明确设置环境变量时启动。控制台同样直接通过 `http://127.0.0.1:4192/showcase` 访问。
 
-校验工具会在服务器私下读取访问码，不打印它：
+匿名校验工具不读取任何凭据：
 
 ```sh
 node --test scripts/showcase/server-tests.mjs
-python3 scripts/showcase/verify-console.py http://127.0.0.1:4192 ~/.local/state/wanderwise-gpu/session.env --start-smoke
+python3 scripts/showcase/verify-console.py http://127.0.0.1:4192 --start-smoke
 ```
 
 任务产物：`~/.local/state/wanderwise-showcase/jobs/<id>/output/output.mp4`。取消或服务重启只清理同时匹配 `com.wanderwise.showcase=recording` 标签和 `wanderwise-showcase-` 名称前缀的录制容器；历史产物保留，不删除现有云游戏容器。

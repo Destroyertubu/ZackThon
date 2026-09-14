@@ -51,14 +51,14 @@ export function createApp(service: ZhihuService, options: { distDir?: string; re
     next();
   });
   app.get('/api/health', (_request, response) => {
-    response.json({ ok: true, configured: service.configured, publicCount: service.publicCount, model: getModelStatus(), content: { configured: Boolean(service.content?.configured), cache: service.content ? 'sqlite' : 'memory' }, synthesis: { configured: Boolean(options.synthesis && service.content?.configured), accessRequired: true } });
+    response.json({ ok: true, configured: service.configured, publicCount: service.publicCount, model: getModelStatus(), content: { configured: Boolean(service.content?.configured), cache: service.content ? 'sqlite' : 'memory' }, synthesis: { configured: Boolean(options.synthesis && service.content?.configured), accessRequired: false } });
   });
   const context = (response: express.Response, refresh: unknown): SearchContext => {
     if (refresh !== undefined && refresh !== 'true' && refresh !== 'false') throw new ApiError(400, 'INVALID_REFRESH', 'refresh 仅支持 true 或 false。');
     return { visitorId: response.locals.visitorId, refresh: refresh === 'true' };
   };
   const mutationOrigin = (request: express.Request) => {
-    // Proxy loopback never grants owner privileges. Session exchange is same-origin only.
+    // Public access does not allow a different site to trigger a paid operation.
     const origin = request.get('origin');
     let sameHost = true;
     if (origin) { try { sameHost = new URL(origin).host === request.get('host'); } catch { sameHost = false; } }
@@ -78,20 +78,11 @@ export function createApp(service: ZhihuService, options: { distDir?: string; re
       response.json(await service.content.hot(context(response, request.query.refresh)));
     } catch (error) { next(error); }
   });
-  app.post('/api/access', (request, response, next) => {
-    try {
-      mutationOrigin(request);
-      if (!options.access) throw new ApiError(503, 'ACCESS_UNAVAILABLE', '访问码服务尚未连接。');
-      const session = options.access.exchange(request.body?.code);
-      response.cookie('mirror_access', session.token, { httpOnly: true, sameSite: 'strict', secure: request.secure || request.get('x-forwarded-proto') === 'https', maxAge: 2 * 60 * 60_000, path: '/api' });
-      response.json({ ok: true, expiresAt: new Date(session.expiresAt).toISOString() });
-    } catch (error) { next(error); }
-  });
   app.post('/api/synthesis', async (request, response, next) => {
     try {
       mutationOrigin(request);
-      if (!options.access || !options.synthesis) throw new ApiError(503, 'AI_UNAVAILABLE', 'AI 服务暂未连接。');
-      const actor = options.access.authorize(cookies(request.headers.cookie).mirror_access);
+      if (!options.synthesis) throw new ApiError(503, 'AI_UNAVAILABLE', 'AI 服务暂未连接。');
+      const actor = response.locals.visitorId as string;
       response.json(await options.synthesis.generate(request.body, actor));
     } catch (error) { next(error); }
   });
@@ -112,7 +103,7 @@ export function createApp(service: ZhihuService, options: { distDir?: string; re
       const questionId = request.query.questionId;
       if (typeof questionId !== 'string') throw new ApiError(400, 'INVALID_QUESTION_ID', '请选择文章所属的问题。');
       const answer = await service.findAnswer(request.params.answerId, questionId, query, context(response, undefined));
-      // Public reading remains free of AI consumption; invited generation has a separate budgeted endpoint.
+      // Public reading remains free of AI consumption; explicit generation has a separate budgeted endpoint.
       response.json(options.synthesis ? { answerId: answer.id, highlights: extractHighlights(answer, query), method: 'extractive' } : await enrichHighlights(answer, query));
     } catch (error) { next(error); }
   });

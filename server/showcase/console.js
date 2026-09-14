@@ -5,10 +5,8 @@
   const shots = { opening: '观星台序幕', explore: '探索星海', annotate: '阅读、收藏与批注', footprints: '足迹重访', home: '回到小屋', mix: '思想调酒', montage: '多场景漫游', finale: '星海定格' };
   async function refresh() {
     const response = await fetch('/showcase/api/status', { cache: 'no-store' });
-    if (response.status === 401) return;
     if (!response.ok) throw new Error('任务状态暂时不可用');
     const data = await response.json();
-    el('login').hidden = true; el('console').hidden = false;
     job = data.job;
     const running = job && !['completed', 'failed', 'cancelled'].includes(job.status);
     el('start').disabled = Boolean(running); el('cancel').disabled = !running;

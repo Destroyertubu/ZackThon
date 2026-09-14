@@ -4,19 +4,14 @@ import { readFile, mkdir, chmod, unlink } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { join, resolve } from 'node:path';
 import { homedir } from 'node:os';
-import { randomBytes } from 'node:crypto';
-import { createAuth, sameOrigin } from './auth.mjs';
+import { sameOrigin } from './auth.mjs';
 import { JobManager, type Runtime } from './jobs.mjs';
 import { createFixtureApp } from './fixtures.js';
 
 const root = resolve(fileURLToPath(new URL('../../', import.meta.url)));
 const state = process.env.SHOWCASE_STATE || join(homedir(), '.local/state/wanderwise-showcase');
-const passwordPath = process.env.SHOWCASE_ACCESS_FILE || join(homedir(), '.local/state/wanderwise-gpu/session.env');
 const localViewerPort = Number(process.env.SHOWCASE_LOCAL_VIEWER || 0);
 if (localViewerPort && (!Number.isInteger(localViewerPort) || localViewerPort < 1024 || localViewerPort > 65535)) throw new Error('SHOWCASE_LOCAL_VIEWER must be a valid loopback port');
-const values = (await readFile(passwordPath, 'utf8').catch(error => { if (localViewerPort) return ''; throw error; })).split('\n');
-const password = values.find(line => line.startsWith('SELKIES_BASIC_AUTH_PASSWORD='))?.slice('SELKIES_BASIC_AUTH_PASSWORD='.length) || (localViewerPort ? randomBytes(32).toString('base64url') : undefined);
-const auth = createAuth(password);
 await mkdir(state, { recursive: true, mode: 0o700 });
 const controller = await readFile(join(root, 'server/showcase/controller.js'));
 const consoleHtml = await readFile(join(root, 'server/showcase/console.html'));
@@ -76,22 +71,12 @@ if (localViewerPort) {
 }
 const app = express();
 app.disable('x-powered-by');
-app.use(express.urlencoded({ extended: false, limit: '4kb' }));
 app.use(express.json({ limit: '8kb' }));
 app.use((_req, res, next) => { res.setHeader('X-Content-Type-Options', 'nosniff'); res.setHeader('Cache-Control', 'no-store'); res.setHeader('Referrer-Policy', 'same-origin'); next(); });
 app.get('/', (_req, res) => res.redirect('/showcase'));
 app.get('/showcase', (_req, res) => res.type('html').send(consoleHtml));
 app.get('/showcase/console.js', (_req, res) => res.sendFile(join(root, 'server/showcase/console.js')));
-app.post('/showcase/login', (req, res) => {
-  if (!sameOrigin(req)) { res.sendStatus(403); return; }
-  const result = auth.login(req.body?.code || '', req.get('cf-connecting-ip') || req.ip || 'local');
-  if (result.status !== 200) { res.status(result.status).type('html').send(consoleHtml.toString().replace('<section id="login">', '<p role="alert">访问码错误或尝试次数过多。</p><section id="login">')); return; }
-  const secure = req.get('x-forwarded-proto') === 'https';
-  res.cookie('wanderwise_showcase', result.token, { path: '/showcase', httpOnly: true, sameSite: 'strict', secure, maxAge: 7_200_000 });
-  res.redirect(303, '/showcase');
-});
 app.use('/showcase/api', (req, res, next) => {
-  if (!auth.authorized(req.headers.cookie)) { res.status(401).json({ error: '请先输入云端访问码。' }); return; }
   if (req.method !== 'GET' && !sameOrigin(req)) { res.status(403).json({ error: '请从当前展示页面操作。' }); return; }
   next();
 });
@@ -120,7 +105,6 @@ app.use((_req, res) => res.sendStatus(404));
 const errorHandler: ErrorRequestHandler = (error, _req, res, _next) => res.status(error.status || 500).json({ error: error.status ? error.message : '展示服务无法完成请求。' });
 app.use(errorHandler);
 const server = app.listen(Number(process.env.SHOWCASE_PORT || 4192), '127.0.0.1', () => console.info('Wanderwise showcase console is ready on loopback.'));
-setInterval(() => auth.sweep(), 60_000).unref();
 for (const signal of ['SIGTERM', 'SIGINT']) process.on(signal, () => {
   void (async () => {
     if (manager.active) await manager.cancel(manager.active.job.id);

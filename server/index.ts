@@ -22,8 +22,8 @@ const store = new ContentStore(resolve(contentDir, 'content.sqlite3'));
 const content = new ContentService({ store, globalLimit: budget('CONTENT_DAILY_GLOBAL', 200), visitorLimit: budget('CONTENT_DAILY_VISITOR', 20) });
 content.registerCurated(JSON.parse(readFileSync(new URL('../src/features/journeys/curatedSources.json', import.meta.url), 'utf8')));
 // The .env prefix also falls under Vite's default fs.deny rules during local development.
-const access = new AccessService(store, loadAccessConfig(resolve(contentDir, '.env.access.local')));
-const synthesis = new SynthesisService(content, { global: budget('AI_DAILY_GLOBAL', 50), perCode: budget('AI_DAILY_CODE', 10) });
+const access = new AccessService(loadAccessConfig(resolve(contentDir, '.env.access.local')));
+const synthesis = new SynthesisService(content, { global: budget('AI_DAILY_GLOBAL', 50), perVisitor: budget('AI_DAILY_VISITOR', budget('AI_DAILY_CODE', 10)) });
 if (process.env.LEGACY_ZHIHU_DB) content.importLegacy(process.env.LEGACY_ZHIHU_DB);
 const service = new ZhihuService({ secret: process.env.ZHIHU_ACCESS_SECRET, snapshot: await loadSnapshot(), content });
 const app = createApp(service, { distDir: fileURLToPath(new URL('../dist', import.meta.url)), access, synthesis });

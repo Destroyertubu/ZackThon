@@ -1,22 +1,59 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createAuth, parseStoryboard, sameOrigin } from '../../server/showcase/auth.mjs';
+import { parseStoryboard, sameOrigin } from '../../server/showcase/auth.mjs';
 import { JobManager, writeWorkerManifest } from '../../server/showcase/jobs.mjs';
-import { mkdtemp, stat, rm, readFile } from 'node:fs/promises';
+import { mkdtemp, stat, rm, readFile, mkdir, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { runInNewContext } from 'node:vm';
+import { spawn } from 'node:child_process';
+import { createServer } from 'node:net';
+import { once } from 'node:events';
 
-test('access code is not a session cookie, sessions expire and brute force is bounded', () => {
-  let now = 1000;
-  const auth = createAuth('private-test-access-code-not-production', () => now);
-  assert.equal(auth.authorized('wanderwise_showcase=private-test-access-code-not-production'), false);
-  const accepted = auth.login('private-test-access-code-not-production', 'a');
-  assert.equal(auth.authorized(`wanderwise_showcase=${accepted.token}`), true);
-  now += 7_200_001;
-  assert.equal(auth.authorized(`wanderwise_showcase=${accepted.token}`), false);
-  for (let i = 0; i < 10; i++) assert.equal(auth.login('wrong', 'b').status, 401);
-  assert.equal(auth.login('private-test-access-code-not-production', 'b').status, 429);
+test('console and saved downloads work anonymously without a secret file; mutations retain origin checks', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'showcase-anonymous-'));
+  const listener = createServer();
+  listener.listen(0, '127.0.0.1'); await once(listener, 'listening');
+  const port = listener.address().port;
+  await new Promise(resolve => listener.close(resolve));
+  // Unit-level HTTP verification must never reclaim or launch real containers.
+  const bin = join(directory, 'bin'); await mkdir(bin);
+  await writeFile(join(bin, 'docker'), '#!/bin/sh\nexit 0\n', { mode: 0o755 });
+  const id = '00000000-0000-0000-0000-000000000001';
+  const jobPath = join(directory, 'jobs', id);
+  await mkdir(join(jobPath, 'output'), { recursive: true });
+  await writeFile(join(jobPath, 'job.json'), JSON.stringify({ id, status: 'completed', mode: 'full', createdAt: new Date().toISOString() }));
+  await writeFile(join(jobPath, 'output', 'output.mp4'), 'unit-test-media');
+  const child = spawn(process.execPath, ['--import', 'tsx', 'server/showcase/index.ts'], {
+    cwd: new URL('../../', import.meta.url), stdio: ['ignore', 'pipe', 'pipe'],
+    env: { ...process.env, PATH: bin, SHOWCASE_PORT: String(port), SHOWCASE_STATE: directory, SHOWCASE_LOCAL_VIEWER: '', SHOWCASE_ACCESS_FILE: join(directory, 'absent-secret-file') },
+  });
+  let output = ''; child.stdout.on('data', value => { output += value; }); child.stderr.on('data', value => { output += value; });
+  const base = `http://127.0.0.1:${port}`;
+  try {
+    for (let i = 0; !output.includes('console is ready') && i < 100; i++) {
+      assert.equal(child.exitCode, null, output);
+      await new Promise(resolve => setTimeout(resolve, 50));
+    }
+    const page = await fetch(base + '/showcase');
+    assert.equal(page.status, 200); assert.equal(page.headers.get('set-cookie'), null);
+    assert.doesNotMatch(await page.text(), /type="password"|id="login"/);
+    const status = await fetch(base + '/showcase/api/status');
+    assert.equal(status.status, 200); assert.equal((await status.json()).job.id, id);
+    const download = await fetch(base + `/showcase/api/jobs/${id}/download`, { headers: { Range: 'bytes=0-3' } });
+    assert.equal(download.status, 206); assert.equal(await download.text(), 'unit');
+    assert.equal(download.headers.get('set-cookie'), null);
+    const post = (path, origin, body = {}) => fetch(base + path, { method: 'POST', headers: { ...(origin ? { Origin: origin } : {}), 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    for (const origin of [undefined, 'https://invalid.example']) assert.equal((await post('/showcase/api/start', origin)).status, 403);
+    assert.equal((await post('/showcase/api/start', base, { mode: 'invalid' })).status, 400);
+    assert.equal((await post('/showcase/api/jobs/absent/cancel', base)).status, 409);
+    assert.equal((await post('/showcase/login', base)).status, 404);
+    assert.equal((await fetch(base + '/__showcase/next')).status, 404);
+  } finally {
+    child.kill('SIGTERM');
+    if (child.exitCode === null) await once(child, 'exit');
+    await rm(directory, { recursive: true, force: true });
+  }
 });
 test('mutations require the actual page origin', () => {
   assert.equal(sameOrigin({ headers: { host: 'example.test', origin: 'https://example.test', 'x-forwarded-proto': 'https' } }), true);

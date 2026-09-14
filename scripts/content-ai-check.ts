@@ -2,7 +2,6 @@ import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { ContentStore } from '../server/content/store.js';
 import { ContentService } from '../server/content/service.js';
 import { SynthesisService } from '../server/content/synthesis.js';
-import { AccessService, loadAccessConfig } from '../server/content/access.js';
 
 const reportPath = 'artifacts/content-service/ai-check.json';
 if (!process.argv.includes('--live')) {
@@ -12,12 +11,9 @@ if (!process.argv.includes('--live')) {
   const content = new ContentService({ store });
   const manifest = JSON.parse(readFileSync('src/features/journeys/curatedSources.json', 'utf8'));
   content.registerCurated(manifest);
-  const config = loadAccessConfig('artifacts/content-service/.env.access.local');
-  const access = new AccessService(store, config);
-  const session = access.exchange(config.inviteCodes[0]);
   const report: Record<string, unknown> = { at: new Date().toISOString(), publicMaterialsOnly: true };
   try {
-    const result = await new SynthesisService(content).generate({ mode: 'idea', prompt: '根据这份来源，设计一个文学与摄影结合的观察练习，用中文简短回答。', sourceIds: [manifest[0].id] }, access.authorize(session.token));
+    const result = await new SynthesisService(content).generate({ mode: 'idea', prompt: '根据这份来源，设计一个文学与摄影结合的观察练习，用中文简短回答。', sourceIds: [manifest[0].id] }, 'local-content-ai-check');
     report.ok = true;
     report.provider = result.provider;
     report.textLength = result.draft.text.length;
