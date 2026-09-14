@@ -102,6 +102,18 @@ test('reflection cadence is bounded and all owned GPU resources dispose exactly 
   }
 })
 
+test('only explicitly opted-in island particles enter the water reflection', () => {
+  const { reflection, scene, camera, water, particles, gl } = reflectionFixture()
+  const island = new THREE.Points(); island.userData.reflectInWater = true; scene.add(island)
+  reflection.reflector.onBeforeRender = () => {
+    assert.equal(island.visible, true)
+    assert.equal(particles.visible, false)
+  }
+  reflection.capture(gl, scene, camera, water)
+  assert.equal(island.visible, true); assert.equal(particles.visible, true)
+  reflection.dispose(); island.geometry.dispose(); (island.material as THREE.Material).dispose()
+})
+
 test('reflection budget requires sustained load, degrades in order and never oscillates within a scene', () => {
   const { reflection, scene, camera, water, gl } = reflectionFixture(30)
   reflection.reflector.onBeforeRender = () => undefined

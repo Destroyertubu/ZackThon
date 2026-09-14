@@ -74,9 +74,9 @@ export class WaterReflection {
     if (this.cacheAge >= 2) {
       this.excluded.length = 0
       scene.traverse(object => {
-        const skip = object === water || object instanceof THREE.Points || object.userData.excludeWaterReflection === true
+        const skip = object === water || (object instanceof THREE.Points && object.userData.reflectInWater !== true) || object.userData.excludeWaterReflection === true
           || /moonwater-rill|cocktail-vision|star-glass-preview|cloud-rivers-between|island-water-reflections/.test(object.name)
-          || (this.stage >= 3 && /mirror-sea-distant-landscape|cloudfall-archipelago/.test(object.name))
+          || (this.stage >= 3 && /mirror-sea-distant-landscape|cloudfall-archipelago|particle-floating-archipelago/.test(object.name))
           || (object instanceof THREE.Mesh && (object.geometry.index?.count ?? object.geometry.attributes.position?.count ?? 0) > 450_000)
         if (skip) this.excluded.push({ object, visible: object.visible })
       })
